@@ -89,7 +89,6 @@ directories:
   .
   ./docs
   ./tools
-  ./third_party
   -conf
   -.vscode
   -.idea

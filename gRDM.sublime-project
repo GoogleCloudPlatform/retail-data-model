@@ -26,10 +26,6 @@
 			"name": "Build Tools"
 		},
 		{
-			"path": "third_party",
-			"name": "Third Party"
-		},
-		{
 			"path": ".",
 			"name": "Project Root",
 			"folder_exclude_patterns": [".github", ".idea", ".ijwb", "bazel-*"],

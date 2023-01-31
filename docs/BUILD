@@ -23,12 +23,6 @@ hugo_theme(
     theme_name = "hugo-geekdoc",
 )
 
-copy_file_groups(
-    name = "copy_icons",
-    srcs = ["//third_party/icons:google_material_icons"],
-    prefix = "assets/sprites",
-)
-
 genrule(
     name = "copy_gen_files",
     srcs = ["//api:api_documents_tar"],
@@ -40,7 +34,7 @@ hugo_site(
     name = "docs",
     assets = glob(["assets/**"]),
     config_dir = glob(["config/**"]),
-    content = glob(["content/**"]) + [":copy_icons"] + [":copy_gen_files"],
+    content = glob(["content/**"]) + [":copy_gen_files"],
     data = glob(["data/**"]),
     images = glob(["images/**"]),
     layouts = glob(["layouts/**"]),

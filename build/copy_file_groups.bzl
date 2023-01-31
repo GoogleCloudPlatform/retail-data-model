@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-    This common has been added to extend the filegroup from function by allowing
+    This common has been added to extend the file group from function by allowing
     one or more file group content be copied between packages. This is especially
     useful when using "third_party" files.
 """

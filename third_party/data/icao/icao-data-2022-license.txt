@@ -1,3 +1,0 @@
-ICAO Data may be obtained from weathergraphics.com/identifiers. This requires a commercial contract with Weathergraphics.
-Please visit: http://www.weathergraphics.com/identifiers/ for additional information.
-
