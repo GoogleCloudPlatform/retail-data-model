@@ -1,0 +1,277 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.enums.countries;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/enums";
+
+// Java Options
+option java_package = "com.google.retail.enums";
+option java_multiple_files = true;
+
+/*
+ * Country are used to identify a country consistently across sites and
+ * logistic locations.
+ */
+enum Country {
+  UNKNOWN = 0;  // UNKNOWN
+  AFG = 1;      // AFGHANISTAN
+  ALB = 2;      // ALBANIA
+  DZA = 3;      // ALGERIA
+  ASM = 4;      // AMERICAN SAMOA
+  AND = 5;      // ANDORRA
+  AGO = 6;      // ANGOLA
+  AIA = 7;      // ANGUILLA
+  ATA = 8;      // ANTARCTICA
+  ATG = 9;      // ANTIGUA AND BARBUDA
+  ARG = 10;     // ARGENTINA
+  ARM = 11;     // ARMENIA
+  ABW = 12;     // ARUBA
+  AUS = 13;     // AUSTRALIA
+  AUT = 14;     // AUSTRIA
+  AZE = 15;     // AZERBAIJAN
+  BHS = 16;     // BAHAMAS (THE)
+  BHR = 17;     // BAHRAIN
+  BGD = 18;     // BANGLADESH
+  BRB = 19;     // BARBADOS
+  BLR = 20;     // BELARUS
+  BEL = 21;     // BELGIUM
+  BLZ = 22;     // BELIZE
+  BEN = 23;     // BENIN
+  BMU = 24;     // BERMUDA
+  BTN = 25;     // BHUTAN
+  BOL = 26;     // BOLIVIA (PLURINATIONAL STATE OF)
+  BIH = 28;     // BOSNIA AND HERZEGOVINA
+  BWA = 29;     // BOTSWANA
+  BVT = 30;     // BOUVET ISLAND
+  BRA = 31;     // BRAZIL
+  IOT = 32;     // BRITISH INDIAN OCEAN TERRITORY (THE)
+  BRN = 33;     // BRUNEI DARUSSALAM
+  BGR = 34;     // BULGARIA
+  BFA = 35;     // BURKINA FASO
+  BDI = 36;     // BURUNDI
+  CPV = 37;     // CABO VERDE
+  KHM = 38;     // CAMBODIA
+  CMR = 39;     // CAMEROON
+  CAN = 40;     // CANADA
+  CYM = 41;     // CAYMAN ISLANDS (THE)
+  CAF = 42;     // CENTRAL AFRICAN REPUBLIC (THE)
+  TCD = 43;     // CHAD
+  CHL = 44;     // CHILE
+  CHN = 45;     // CHINA
+  CXR = 46;     // CHRISTMAS ISLAND
+  CCK = 47;     // COCOS (KEELING) ISLANDS (THE)
+  COL = 48;     // COLOMBIA
+  COM = 49;     // COMOROS (THE)
+  COD = 50;     // CONGO (THE DEMOCRATIC REPUBLIC OF THE)
+  COG = 51;     // CONGO (THE)
+  COK = 52;     // COOK ISLANDS (THE)
+  CRI = 53;     // COSTA RICA
+  HRV = 54;     // CROATIA
+  CUB = 55;     // CUBA
+  CUW = 56;     // CURAÇAO
+  CYP = 57;     // CYPRUS
+  CZE = 58;     // CZECHIA
+  CIV = 59;     // CÔTE D'IVOIRE
+  DNK = 60;     // DENMARK
+  DJI = 61;     // DJIBOUTI
+  DMA = 62;     // DOMINICA
+  DOM = 63;     // DOMINICAN REPUBLIC (THE)
+  ECU = 64;     // ECUADOR
+  EGY = 65;     // EGYPT
+  SLV = 66;     // EL SALVADOR
+  GNQ = 67;     // EQUATORIAL GUINEA
+  ERI = 68;     // ERITREA
+  EST = 69;     // ESTONIA
+  SWZ = 70;     // ESWATINI
+  ETH = 71;     // ETHIOPIA
+  FLK = 72;     // FALKLAND ISLANDS (THE) [MALVINAS]
+  FRO = 73;     // FAROE ISLANDS (THE)
+  FJI = 74;     // FIJI
+  FIN = 75;     // FINLAND
+  FRA = 76;     // FRANCE
+  GUF = 77;     // FRENCH GUIANA
+  PYF = 78;     // FRENCH POLYNESIA
+  ATF = 79;     // FRENCH SOUTHERN TERRITORIES (THE)
+  GAB = 80;     // GABON
+  GMB = 81;     // GAMBIA (THE)
+  GEO = 82;     // GEORGIA
+  DEU = 83;     // GERMANY
+  GHA = 84;     // GHANA
+  GIB = 85;     // GIBRALTAR
+  GRC = 86;     // GREECE
+  GRL = 87;     // GREENLAND
+  GRD = 88;     // GRENADA
+  GLP = 89;     // GUADELOUPE
+  GUM = 90;     // GUAM
+  GTM = 91;     // GUATEMALA
+  GGY = 92;     // GUERNSEY
+  GIN = 93;     // GUINEA
+  GNB = 94;     // GUINEA-BISSAU
+  GUY = 95;     // GUYANA
+  HTI = 96;     // HAITI
+  HMD = 97;     // HEARD ISLAND AND MCDONALD ISLANDS
+  VAT = 98;     // HOLY SEE (THE)
+  HND = 99;     // HONDURAS
+  HKG = 100;    // HONG KONG
+  HUN = 101;    // HUNGARY
+  ISL = 102;    // ICELAND
+  IND = 103;    // INDIA
+  IDN = 104;    // INDONESIA
+  IRN = 105;    // IRAN (ISLAMIC REPUBLIC OF)
+  IRQ = 106;    // IRAQ
+  IRL = 107;    // IRELAND
+  IMN = 108;    // ISLE OF MAN
+  ISR = 109;    // ISRAEL
+  ITA = 110;    // ITALY
+  JAM = 111;    // JAMAICA
+  JPN = 112;    // JAPAN
+  JEY = 113;    // JERSEY
+  JOR = 114;    // JORDAN
+  KAZ = 115;    // KAZAKHSTAN
+  KEN = 116;    // KENYA
+  KIR = 117;    // KIRIBATI
+  PRK = 118;    // KOREA (THE DEMOCRATIC PEOPLE'S REPUBLIC OF)
+  KOR = 119;    // KOREA (THE REPUBLIC OF)
+  KWT = 120;    // KUWAIT
+  KGZ = 121;    // KYRGYZSTAN
+  LAO = 122;    // LAO PEOPLE'S DEMOCRATIC REPUBLIC (THE)
+  LVA = 123;    // LATVIA
+  LBN = 124;    // LEBANON
+  LSO = 125;    // LESOTHO
+  LBR = 126;    // LIBERIA
+  LBY = 127;    // LIBYA
+  LIE = 128;    // LIECHTENSTEIN
+  LTU = 129;    // LITHUANIA
+  LUX = 130;    // LUXEMBOURG
+  MAC = 131;    // MACAO
+  MDG = 132;    // MADAGASCAR
+  MWI = 133;    // MALAWI
+  MYS = 134;    // MALAYSIA
+  MDV = 135;    // MALDIVES
+  MLI = 136;    // MALI
+  MLT = 137;    // MALTA
+  MHL = 138;    // MARSHALL ISLANDS (THE)
+  MTQ = 139;    // MARTINIQUE
+  MRT = 140;    // MAURITANIA
+  MUS = 141;    // MAURITIUS
+  MYT = 142;    // MAYOTTE
+  MEX = 143;    // MEXICO
+  FSM = 144;    // MICRONESIA (FEDERATED STATES OF)
+  MDA = 145;    // MOLDOVA (THE REPUBLIC OF)
+  MCO = 146;    // MONACO
+  MNG = 147;    // MONGOLIA
+  MNE = 148;    // MONTENEGRO
+  MSR = 149;    // MONTSERRAT
+  MAR = 150;    // MOROCCO
+  MOZ = 151;    // MOZAMBIQUE
+  MMR = 152;    // MYANMAR
+  NAM = 153;    // NAMIBIA
+  NRU = 154;    // NAURU
+  NPL = 155;    // NEPAL
+  NLD = 156;    // NETHERLANDS (THE)
+  NCL = 157;    // NEW CALEDONIA
+  NZL = 158;    // NEW ZEALAND
+  NIC = 159;    // NICARAGUA
+  NER = 160;    // NIGER (THE)
+  NGA = 161;    // NIGERIA
+  NIU = 162;    // NIUE
+  NFK = 163;    // NORFOLK ISLAND
+  MNP = 164;    // NORTHERN MARIANA ISLANDS (THE)
+  NOR = 165;    // NORWAY
+  OMN = 166;    // OMAN
+  PAK = 167;    // PAKISTAN
+  PLW = 168;    // PALAU
+  PAN = 170;    // PANAMA
+  PNG = 171;    // PAPUA NEW GUINEA
+  PRY = 172;    // PARAGUAY
+  PER = 173;    // PERU
+  PHL = 174;    // PHILIPPINES (THE)
+  PCN = 175;    // PITCAIRN
+  POL = 176;    // POLAND
+  PRT = 177;    // PORTUGAL
+  PRI = 178;    // PUERTO RICO
+  QAT = 179;    // QATAR
+  MKD = 180;    // REPUBLIC OF NORTH MACEDONIA
+  ROU = 181;    // ROMANIA
+  RUS = 182;    // RUSSIAN FEDERATION (THE)
+  RWA = 183;    // RWANDA
+  REU = 184;    // RÉUNION
+  BLM = 185;    // SAINT BARTHÉLEMY
+  KNA = 187;    // SAINT KITTS AND NEVIS
+  LCA = 188;    // SAINT LUCIA
+  MAF = 189;    // SAINT MARTIN (FRENCH PART)
+  SPM = 190;    // SAINT PIERRE AND MIQUELON
+  VCT = 191;    // SAINT VINCENT AND THE GRENADINES
+  WSM = 192;    // SAMOA
+  SMR = 193;    // SAN MARINO
+  STP = 194;    // SAO TOME AND PRINCIPE
+  SAU = 195;    // SAUDI ARABIA
+  SEN = 196;    // SENEGAL
+  SRB = 197;    // SERBIA
+  SYC = 198;    // SEYCHELLES
+  SLE = 199;    // SIERRA LEONE
+  SGP = 200;    // SINGAPORE
+  SXM = 201;    // SINT MAARTEN (DUTCH PART)
+  SVK = 202;    // SLOVAKIA
+  SVN = 203;    // SLOVENIA
+  SLB = 204;    // SOLOMON ISLANDS
+  SOM = 205;    // SOMALIA
+  ZAF = 206;    // SOUTH AFRICA
+  SGS = 207;    // SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS
+  SSD = 208;    // SOUTH SUDAN
+  ESP = 209;    // SPAIN
+  LKA = 210;    // SRI LANKA
+  SDN = 211;    // SUDAN (THE)
+  SUR = 212;    // SURINAME
+  SJM = 213;    // SVALBARD AND JAN MAYEN
+  SWE = 214;    // SWEDEN
+  CHE = 215;    // SWITZERLAND
+  SYR = 216;    // SYRIAN ARAB REPUBLIC
+  TWN = 217;    // TAIWAN (PROVINCE OF CHINA)
+  TJK = 218;    // TAJIKISTAN
+  THA = 220;    // THAILAND
+  TLS = 221;    // TIMOR-LESTE
+  TGO = 222;    // TOGO
+  TKL = 223;    // TOKELAU
+  TON = 224;    // TONGA
+  TTO = 225;    // TRINIDAD AND TOBAGO
+  TUN = 226;    // TUNISIA
+  TUR = 227;    // TURKEY
+  TKM = 228;    // TURKMENISTAN
+  TCA = 229;    // TURKS AND CAICOS ISLANDS (THE)
+  TUV = 230;    // TUVALU
+  UGA = 231;    // UGANDA
+  UKR = 232;    // UKRAINE
+  ARE = 233;    // UNITED ARAB EMIRATES (THE)
+  GBR = 234;    // UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN IRELAND
+  UMI = 235;    // UNITED STATES MINOR OUTLYING ISLANDS (THE)
+  USA = 236;    // UNITED STATES OF AMERICA (THE)
+  URY = 237;    // URUGUAY
+  UZB = 238;    // UZBEKISTAN
+  VUT = 239;    // VANUATU
+  VEN = 240;    // VENEZUELA (BOLIVARIAN REPUBLIC OF)
+  VNM = 241;    // VIET NAM
+  VGB = 242;    // VIRGIN ISLANDS (BRITISH)
+  VIR = 243;    // VIRGIN ISLANDS (U.S.)
+  WLF = 244;    // WALLIS AND FUTUNA
+  ESH = 245;    // WESTERN SAHARA
+  YEM = 246;    // YEMEN
+  ZMB = 247;    // ZAMBIA
+  ZWE = 248;    // ZIMBABWE
+  ALA = 249;    // ÅLAND ISLANDS
+}

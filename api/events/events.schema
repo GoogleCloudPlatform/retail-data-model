@@ -1,0 +1,99 @@
+[
+  {
+    "name": "tx_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The id of the transaction",
+    "maxLength": "36"
+  },
+  {
+    "name": "emit_ts",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "The time the event was created on the client side"
+  },
+  {
+    "name": "observe_ts",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "The time the event was observed on the server side"
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The name of the event, recommend dotted identifiers",
+    "maxLength": "256"
+  },
+  {
+    "name": "event_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The customer assigned event id.",
+    "maxLength": "128"
+  },
+  {
+    "name": "event_parent_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "the customer assigned parent id",
+    "maxLength": "128"
+  },
+  {
+    "name": "traits",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "The traits of the event",
+    "fields": [
+      {
+        "name": "name",
+        "type": "STRING",
+        "mode": "REQUIRED",
+        "description": "The name of the trait",
+        "maxLength": "256"
+      },
+      {
+        "name": "numeric_values",
+        "type": "RECORD",
+        "mode": "NULLABLE",
+        "description": "Populated if numeric values are observed.",
+        "fields": [
+          {
+            "name": "value",
+            "type": "FLOAT",
+            "mode": "REPEATED"
+          }
+        ]
+      },
+      {
+        "name": "string_values",
+        "type": "RECORD",
+        "mode": "NULLABLE",
+        "description": "Populated if string values are observed",
+        "fields": [
+          {
+            "name": "value",
+            "type": "STRING",
+            "mode": "REPEATED",
+            "description": "One or more string values",
+            "maxLength": "256"
+          }
+        ]
+      },
+      {
+        "name": "object_values",
+        "type": "RECORD",
+        "mode": "NULLABLE",
+        "description": "Populated if JSON is observed as the payload",
+        "fields": [
+          {
+            "name": "object",
+            "type": "JSON",
+            "mode": "REPEATED",
+            "description": "The JSON, if it is an array, it will be split into rows"
+          }
+        ]
+      }
+    ]
+  }
+]

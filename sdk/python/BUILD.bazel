@@ -1,0 +1,49 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+load("@rules_proto_grpc//python:defs.bzl", "python_grpc_library", "python_proto_library")
+
+package(default_visibility = [
+    "//examples/python:__subpackages__",
+])
+
+ENUMS = [
+    "//api/enums",
+]
+
+PROTOS = [
+    "//api/common:model_proto",
+    "//api/customer:model_proto",
+    "//api/enterprise:model_proto",
+    "//api/events:model_proto",
+    "//api/location:model_proto",
+    "//api/merchandise:model_proto",
+    "//api/party:model_proto",
+    "//api/promotions:model_proto",
+]
+
+GRPCS = [
+    "//api/common:service_proto",
+    "//api/events:service_proto",
+    "//api/location:service_proto",
+]
+
+python_proto_library(
+    name = "python_proto_library",
+    protos = ENUMS + PROTOS,
+)
+
+python_grpc_library(
+    name = "python_grpc_library",
+    protos = ENUMS + PROTOS + GRPCS,
+)

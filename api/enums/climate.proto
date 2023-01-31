@@ -1,0 +1,62 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.enums.climate;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/enums";
+
+// Java Options
+option java_package = "com.google.retail.enums";
+option java_multiple_files = true;
+
+/*
+ * Climate are used as grouping identifiers for sites. This attribute when
+ * added to a site and assortment provides additional insights into which
+ * products are more relevant to a climate.
+ */
+enum Climate {
+  CLIMATE_UNKNOWN = 0;  // UNKNOWN
+  A = 5;        // Tropical Humid Climates
+  AF = 10;      // Rain Throughout Year
+  AM = 15;      // Short Dry Season; Heavy Rains in Other Months
+  AW = 20;      // Winter (Low-Sun) Dry Season
+  B = 25;       // Dry Climates
+  BSK = 30;     // Midlatitude (Cold) Semiarid
+  BWH = 35;     // Low-Latitude (Hot) Desert
+  BWK = 40;     // Midlatitude (Cold) Desert
+  C = 45;       // Mild Midlatitude Climates
+  CFA = 50;     // No Dry Season; Hot Summer
+  CFB = 55;     // No Dry Season; Warm Summer
+  CFC = 60;     // No Dry Season; Cool Summer
+  CSA = 65;     // Dry, Hot Summer
+  CSB = 70;     // Dry, Warm Summer
+  CWA = 75;     // Dry Winter; Hot Summer
+  D = 80;       // Severe Midlatitude Climates
+  DFA = 85;     // Winter; No Dry Season; Hot Summer
+  DFB = 90;     // Winter; No Dry Season; Warm Summer
+  DFC = 95;     // Severe Winter; No Dry Season; Cool Summer
+  DFD = 100;    // Very Cold Winter; No Dry Season
+  DWA = 105;    // Winter; Dry Winter; Hot Summer
+  DWB = 110;    // Severe Winter; Dry Winter; Warm Summer
+  DWC = 115;    // Dry Winter; Cool Summer
+  DWD = 120;    // Dry Winter; Very Cold Winter
+  E = 125;      // Polar Climates
+  EF = 130;     // Polar Ice Cap
+  ET = 135;     // Polar Tundra With No True Summer
+  H = 140;      // High Elevation Climates
+  WSH = 145;    // Low-Latitude (Hot) Semiarid
+}

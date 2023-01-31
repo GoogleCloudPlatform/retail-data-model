@@ -1,0 +1,10 @@
+{
+  "project_id": "rmcguinness",
+  "name": "retail",
+  "env": "test",
+  "enabled": true,
+  "log_level": "DEBUG",
+  "labels": {
+    "team": "google_rdb"
+  }
+}

@@ -1,0 +1,188 @@
+/**
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.events.pb;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/events/pb";
+
+// Java Options
+option java_package = "com.google.retail.events.pb";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+/*
+ * An EventDescription is used to create an in-memory and persistent object
+ * used to describe and override how given event types are handled.
+ */
+message EventDescription {
+  string name = 1;
+  string description = 2;
+  message TraitDescription {
+    // The name of the event
+    string name = 1;
+    // A description for the event to help discoverability.
+    string description = 2;
+    // A flag to enable machine interpretation the event type, if not numeric,
+    // then it's considered to be a string.
+    bool is_numeric = 3;
+    // A flag enabling machine interpolation of values, 1 or length.
+    bool is_list = 4;
+    // A flag intended for SRE validation.
+    bool is_accepted= 5;
+    // A flag that allows SRE to change or update a description. This is only
+    // true if is_numeric, is_list is changed.
+    bool user_override = 6;
+    //Reserved for internal use
+    reserved 7 to 99;
+  }
+  /*
+  A way for tracking change observations over time
+
+  Example: \sum_sample = 10  => \sum_change = 1 (initial truth)
+           20 samples => 11 changes (the truth has changed significantly and is
+           greater than the change_threshold commit percent, accept the changes as truth.
+           mark the traits as accepted
+   */
+  message SampleCount {
+    // The timestamp of the sample.
+    google.protobuf.Timestamp ts = 1;
+    // The machine or human source identifier.
+    string producer_id = 2;
+    // The total number of samples taken over a time period.
+    int64 sample_count = 3;
+    // The total number of changes encountered during the sample set.
+    int64 change_count = 4;
+    //Reserved for internal use
+    reserved 5 to 99;
+  }
+
+  /*
+   A way to observe trait change states over time.
+   */
+  message TraitChangeRecord {
+    // The time a trait record changed.
+    google.protobuf.Timestamp ts = 1;
+    // A record for the change state.
+    repeated TraitDescription trait_descriptions = 2;
+    //Reserved for internal use
+    reserved 3 to 99;
+  }
+
+  /*
+  The total number of observed events
+   */
+  int64 total_observed = 3;
+  /*
+   The percentage of change, when the definition should be updated.
+   */
+  float change_threshold_commit = 4;
+  /*
+  The history of changes observed over time.
+   */
+  repeated SampleCount sample_counts = 5;
+
+  // Always current, equivalent to HEAD
+  repeated TraitDescription trait_descriptions = 6;
+
+  // Trait changes over time.
+  repeated TraitChangeRecord trait_change_records = 7;
+
+  //Reserved for internal use
+  reserved 8 to 99;
+}
+
+/*
+ * An EventRecord represents the persisted state of an Event. It is decorated
+ * with a system generated time stamp, this is the time the event is observed,
+ * and transaction id, a unique identifier assigned to the event.
+ */
+message EventRecord {
+  // An event record transaction identifier, should be a UUID string.
+  string tx_id = 1 [json_name = 'tx_id'];
+  // The time when the event was emitted.
+  google.protobuf.Timestamp emit_ts = 2 [json_name = 'ts_emt'];
+  // The timestamp for when the event was ecorded. This is used for measuring
+  // slowness in the ingestion process.
+  google.protobuf.Timestamp observe_ts = 3 [json_name = 'ts_obs'];
+
+  // The name of the event
+  string name = 4 [json_name = 'name'];
+
+  // The client created event id.
+  string event_id = 5 [json_name = 'ev_id'];
+
+  // The client created parent identifier, this allows for event embedding
+  // and complex event hierarchies.
+  string event_parent_id = 6 [json_name = 'evp_id'];
+
+  // A trait is unique attribute of an event having either a set of strings,
+  // or a set of numbers captured by the name.
+  message Trait {
+    // The name of the trait
+    string name = 1 [json_name = 'nm'];
+    // A repeatable number
+    message Number {
+      repeated double value = 1 [json_name = 'v'];
+    }
+    // A repeatable string
+    message String {
+      repeated string value = 1 [json_name = 'v'];
+    }
+    // An or clause noting only string or number applies
+    oneof values {
+      // A set of one or more number values
+      Number numeric = 2 [json_name = 'num'];
+      // A set of one or more string values
+      String string = 3 [json_name = 'str'];
+      // A dynamic structure
+      google.protobuf.Struct object = 4 [json_name = 'obj'];
+    }
+  }
+  // A list of traits observed by the event.
+  repeated Trait traits = 7 [json_name = 'trts'];
+  // Reserved for internal use
+  reserved 8 to 99;
+}
+
+/*
+ * An Event is a transport level record used to capture an event.
+ */
+message Event {
+  // The time the event was created (client generated
+  google.protobuf.Timestamp created = 1 [json_name = 'cr_dt'];
+  // The name of the event such as: cart.add, cart.remove, etc.
+  string name = 2 [json_name = 'nm'];
+  // A client side generated identifier
+  string event_id = 3 [json_name = 'ev_id'];
+  // A client side assigned correlation identifier
+  string event_parent_id = 4 [json_name = 'evp_id'];
+  // A key value property assigned to the event
+  message Trait {
+    // The name of the trait such as: quantity, sku, web.referrer
+    string name = 1 [json_name = 'nm'];
+    // A repeatable string value, string or number is ultimately evaluated
+    // by the server, and assigned to the appropriate type based on observations.
+    repeated string values = 2 [json_name = 'vls'];
+  }
+  // A list of repeatable traits, allowing an event to change over time.
+  repeated Trait traits = 5  [json_name = 'trts'];
+  // Reserved for internal use
+  reserved 6 to 99;
+}

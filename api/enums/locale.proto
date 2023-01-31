@@ -1,0 +1,189 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.enums.locale;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/enums";
+
+// Java Options
+option java_package = "com.google.retail.enums";
+option java_multiple_files = true;
+
+/*
+ * Locale are ISO-3166 compliant locales/
+ */
+enum Locale {
+  UNKNOWN = 0;       // UNKNOWN
+  SQ = 1;            // ALBANIAN
+  AM = 2;            // AMHARIC
+  AR_DZ = 3;         // ARABIC - ALGERIA
+  AR_BH = 4;         // ARABIC - BAHRAIN
+  AR_EG = 5;         // ARABIC - EGYPT
+  AR_IQ = 6;         // ARABIC - IRAQ
+  AR_JO = 7;         // ARABIC - JORDAN
+  AR_KW = 8;         // ARABIC - KUWAIT
+  AR_LB = 9;         // ARABIC - LEBANON
+  AR_LY = 10;        // ARABIC - LIBYA
+  AR_MA = 11;        // ARABIC - MOROCCO
+  AR_OM = 12;        // ARABIC - OMAN
+  AR_QA = 13;        // ARABIC - QATAR
+  AR_SA = 14;        // ARABIC - SAUDI ARABIA
+  AR_SY = 15;        // ARABIC - SYRIA
+  AR_TN = 16;        // ARABIC - TUNISIA
+  AR_AE = 17;        // ARABIC - UNITED ARAB EMIRATES
+  AR_YE = 18;        // ARABIC - YEMEN
+  HY = 19;           // ARMENIAN
+  AS = 20;           // ASSAMESE
+  AZ_AZ = 22;        // AZERI - LATIN
+  EU = 23;           // BASQUE
+  BE = 24;           // BELARUSIAN
+  BN = 26;           // BENGALI - INDIA
+  BS = 27;           // BOSNIAN
+  BG = 28;           // BULGARIAN
+  MY = 29;           // BURMESE
+  CA = 30;           // CATALAN
+  ZH_CN = 31;        // CHINESE - CHINA
+  ZH_HK = 32;        // CHINESE - HONG KONG SAR
+  ZH_MO = 33;        // CHINESE - MACAU SAR
+  ZH_SG = 34;        // CHINESE - SINGAPORE
+  ZH_TW = 35;        // CHINESE - TAIWAN
+  HR = 36;           // CROATIAN
+  CS = 37;           // CZECH
+  DA = 38;           // DANISH
+  MALDIVIAN = 39;    // DIVEHI
+  NL_BE = 40;        // DUTCH - BELGIUM
+  NL_NL = 41;        // DUTCH - NETHERLANDS
+  EN_AU = 43;        // ENGLISH - AUSTRALIA
+  EN_BZ = 44;        // ENGLISH - BELIZE
+  EN_CA = 45;        // ENGLISH - CANADA
+  EN_CB = 46;        // ENGLISH - CARIBBEAN
+  EN_GB = 47;        // ENGLISH - GREAT BRITAIN
+  EN_IN = 48;        // ENGLISH - INDIA
+  EN_IE = 49;        // ENGLISH - IRELAND
+  EN_JM = 50;        // ENGLISH - JAMAICA
+  EN_NZ = 51;        // ENGLISH - NEW ZEALAND
+  EN_PH = 52;        // ENGLISH - PHILIPPINES
+  EN_ZA = 53;        // ENGLISH - SOUTHERN AFRICA
+  EN_TT = 54;        // ENGLISH - TRINIDAD
+  EN_US = 55;        // ENGLISH - UNITED STATES
+  ET = 57;           // ESTONIAN
+  MK = 58;           // FYRO MACEDONIA
+  FO = 59;           // FAROESE
+  FA = 60;           // FARSI - PERSIAN
+  FI = 62;           // FINNISH
+  FR_BE = 63;        // FRENCH - BELGIUM
+  FR_CA = 65;        // FRENCH - CANADA
+  FR_FR = 68;        // FRENCH - FRANCE
+  FR_LU = 69;        // FRENCH - LUXEMBOURG
+  FR_CH = 74;        // FRENCH - SWITZERLAND
+  GD_IE = 77;        // GAELIC - IRELAND
+  GD = 78;           // GAELIC - SCOTLAND
+  DE_AT = 81;        // GERMAN - AUSTRIA
+  DE_DE = 82;        // GERMAN - GERMANY
+  DE_LI = 83;        // GERMAN - LIECHTENSTEIN
+  DE_LU = 84;        // GERMAN - LUXEMBOURG
+  DE_CH = 85;        // GERMAN - SWITZERLAND
+  EL = 86;           // GREEK
+  GN = 87;           // GUARANI - PARAGUAY
+  GU = 88;           // GUJARATI
+  HE = 90;           // HEBREW
+  HI = 91;           // HINDI
+  HU = 92;           // HUNGARIAN
+  IS = 93;           // ICELANDIC
+  ID = 95;           // INDONESIAN
+  IT_IT = 96;        // ITALIAN - ITALY
+  IT_CH = 97;        // ITALIAN - SWITZERLAND
+  JA = 98;           // JAPANESE
+  KN = 99;           // KANNADA
+  KS = 100;          // KASHMIRI
+  KK = 101;          // KAZAKH
+  KM = 102;          // KHMER
+  KO = 104;          // KOREAN
+  LO = 106;          // LAO
+  LA = 107;          // LATIN
+  LV = 108;          // LATVIAN
+  LT = 109;          // LITHUANIAN
+  MS_BN = 110;       // MALAY - BRUNEI
+  MS_MY = 111;       // MALAY - MALAYSIA
+  ML = 112;          // MALAYALAM
+  MT = 113;          // MALTESE
+  MI = 115;          // MAORI
+  MR = 116;          // MARATHI
+  MN = 118;          // MONGOLIAN
+  NE = 119;          // NEPALI
+  NO_NO = 121;       // NORWEGIAN - NYNORSK
+  OR = 122;          // ORIYA
+  PL = 123;          // POLISH
+  PT_BR = 124;       // PORTUGUESE - BRAZIL
+  PT_PT = 125;       // PORTUGUESE - PORTUGAL
+  PA = 126;          // PUNJABI
+  RM = 127;          // RAETO-ROMANCE
+  RO_MO = 128;       // ROMANIAN - MOLDOVA
+  RO = 129;          // ROMANIAN - ROMANIA
+  RU = 130;          // RUSSIAN
+  RU_MO = 131;       // RUSSIAN - MOLDOVA
+  SA = 133;          // SANSKRIT
+  SR_SP = 135;       // SERBIAN - LATIN
+  TN = 137;          // SETSUANA
+  SD = 138;          // SINDHI
+  SI = 139;          // SINHALA
+  SK = 140;          // SLOVAK
+  SL = 141;          // SLOVENIAN
+  SO = 142;          // SOMALI
+  SB = 143;          // SORBIAN
+  ES_AR = 144;       // SPANISH - ARGENTINA
+  ES_BO = 145;       // SPANISH - BOLIVIA
+  ES_CL = 146;       // SPANISH - CHILE
+  ES_CO = 147;       // SPANISH - COLOMBIA
+  ES_CR = 148;       // SPANISH - COSTA RICA
+  ES_DO = 149;       // SPANISH - DOMINICAN REPUBLIC
+  ES_EC = 150;       // SPANISH - ECUADOR
+  ES_SV = 151;       // SPANISH - EL SALVADOR
+  ES_GT = 152;       // SPANISH - GUATEMALA
+  ES_HN = 153;       // SPANISH - HONDURAS
+  ES_MX = 154;       // SPANISH - MEXICO
+  ES_NI = 155;       // SPANISH - NICARAGUA
+  ES_PA = 156;       // SPANISH - PANAMA
+  ES_PY = 157;       // SPANISH - PARAGUAY
+  ES_PE = 158;       // SPANISH - PERU
+  ES_PR = 159;       // SPANISH - PUERTO RICO
+  ES_ES = 160;       // SPANISH - SPAIN (TRADITIONAL)
+  ES_UY = 161;       // SPANISH - URUGUAY
+  ES_VE = 162;       // SPANISH - VENEZUELA
+  SW = 163;          // SWAHILI
+  SV_FI = 164;       // SWEDISH - FINLAND
+  SV_SE = 165;       // SWEDISH - SWEDEN
+  TG = 166;          // TAJIK
+  TA = 167;          // TAMIL
+  TT = 168;          // TATAR
+  TE = 169;          // TELUGU
+  TH = 170;          // THAI
+  BO = 171;          // TIBETAN
+  TS = 172;          // TSONGA
+  TR = 173;          // TURKISH
+  TK = 174;          // TURKMEN
+  UK = 175;          // UKRAINIAN
+  UTF_8 = 176;       // UNICODE
+  UR = 177;          // URDU
+  UZ_UZ = 179;       // UZBEK - LATIN
+  VI = 180;          // VIETNAMESE
+  CY = 181;          // WELSH
+  XH = 182;          // XHOSA
+  YI = 183;          // YIDDISH
+  ZU = 184;          // ZULU
+  LOCALE_ANY = 500;  // ANY
+}

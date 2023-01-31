@@ -1,0 +1,49 @@
+{
+  "$id": "https://github.com/rrmcguinness/retail-data-model/project.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GCP Retail Configuration",
+  "type": "object",
+  "required": ["project_id", "name", "env", "enabled", "dataset", "topics", "log"],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "The GCP Project ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the module, this is used as the asset prefix"
+    },
+    "env": {
+      "type": "string",
+      "description": "The environment such as dev|qa|stage|prod, this will be used as an asset suffix"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "If the module is enabled"
+    },
+    "log_level": {
+      "type": "string",
+      "description": "Your GCP Project ID"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/key_value_pair"
+      }
+    }
+  },
+  "$defs": {
+    "key_value_pair": {
+      "type": "object",
+      "required": ["key", "value"],
+      "properties": {
+        "key": {
+          "type":"string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

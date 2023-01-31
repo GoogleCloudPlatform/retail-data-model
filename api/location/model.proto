@@ -1,0 +1,286 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.location.pb;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/location/pb";
+
+// Java Options
+option java_package = "com.google.retail.location.pb";
+option java_multiple_files = true;
+
+import "api/enums/uom.proto";
+
+import "api/enums/geo.proto";
+
+import "api/enums/time_zone.proto";
+
+import "api/enums/climate.proto";
+
+import "api/common/model.proto";
+
+import "google/protobuf/timestamp.proto";
+
+/***********************************************************************
+ * Site
+ ***********************************************************************/
+
+
+message Site {
+  /* Designates and identifies the lowest level of decomposition a retailer uses
+   * to assign customers, suppliers, selling locations, administrative locations,
+   * distribution centers, etc. to a geographic area (or point).
+   *
+   * This level may be associated with a specific physical point (longitude and
+   * latitude) or a named area.  Its purpose is to provide an entry point into a
+   * hierarchy of geographic locations to be used for data aggregation and drill
+   * down analysis related to geography.
+   */
+  message PhysicalLocation {
+    google.retail.common.pb.Address address = 1  [json_name = 'address'];
+    google.retail.enums.climate.Climate climate = 2 [json_name = 'climate'];
+    int32 longitude_degrees = 3 [json_name = 'lng_d'];
+    int32 longitude_minutes = 4  [json_name = 'lng_m'];
+    int32 longitude_seconds = 5  [json_name = 'lng_s'];
+    int32 latitude_degrees = 6  [json_name = 'lat_d'];
+    int32 latitude_minutes = 7  [json_name = 'lat_m'];
+    int32 latitude_seconds = 8  [json_name = 'lat_s'];
+    string latitude_direction_code = 9  [json_name = 'lat_dir_code'];
+    double altitude_meters = 10  [json_name = 'alt_m'];
+  }
+
+  google.retail.common.pb.VersionID id = 1 [json_name = "id"];
+  // Site type specifies STORE, WAREHOUSE, CALL_CENTER, etc.
+  string site_type = 2  [json_name = "site_t"];
+  // The physical location of the site
+  PhysicalLocation location = 3  [json_name = "loc"];
+  // The party identifier for who is responsible for operating the site
+  // Examples are peoples or businesses that may be partnered with.
+  string operational_party_id = 4 [json_name = "op_prty_id"];
+  /*
+   * The degree offset representing the angular orientation of NORTH with
+   * respect to the Site's local coordinate system.  A perfectly aligned site
+   * will have an offset value of 0.  A site that is oriented perpendicular to
+   * NORTH will have an offset of 90 (counter clockwise).
+   *
+   * The degrees are measured in a COUNTER CLOCKWISE direction from NORTH which
+   * is assumed to be 0 degrees.
+   *
+   * In most scenarios the site will be viewed on a XY axis that represents a
+   * local cartesian space.  This offset documents the angular difference from
+   * the location's orientation from NORTH.
+   *
+   * Supports transformation of site plan coordinates from NORTH orientation.
+   * double north_angle_offset = 5;
+   * International code used to designate airport/weather reporting stations.
+   * This is the closest thing to an international standard for designating
+   * weather forecasting/current condition reporting areas.
+   *  ICAO = International Civil Aviation Organization"
+   */
+  string icao_code = 6  [json_name = "icao_cd"];
+  // Time Zone of the site, this may be derived from location
+  google.retail.enums.time.TimeZone time_zone = 7  [json_name = "tz"];
+  // The contacts associated to the site, store manager, shipping manager,
+  // department phones, etc.
+  repeated google.retail.common.pb.Contact contacts = 8  [json_name = "cntcts"];
+  // Locations internal to the site, such as shelves, public areas,
+  // end caps, etc. These are strings and not version pinned.
+  repeated string location_ids = 9  [json_name = "loc_ids"];
+}
+
+/***********************************************************************
+ * Location
+ ***********************************************************************/
+
+/*
+   * NamedMeasure provides an avenue for supporting multiple measurement types
+   * Such as:
+   * * Total Square Feet
+   * * Available Shelf Square Feet
+   * * Available Shelf Cubic Feet
+   */
+message LocationMeasure {
+  string name = 1  [json_name = "nm"];
+  oneof uom {
+    google.retail.enums.uom.Distance distance = 2  [json_name = "dist"];
+    google.retail.enums.uom.Count count = 3  [json_name = "cnt"];
+    google.retail.enums.uom.Capacity capacity = 4  [json_name = "cap"];
+    google.retail.enums.uom.Area area = 5  [json_name = "ara"];
+    google.retail.enums.uom.Weight weight = 6 [json_name = "wgt"];
+  }
+  reserved 7 to 19;
+  double value = 20 [json_name = "val"];
+}
+
+/*
+ * A physical place the retailer conducts business. It may be any or all of the
+ * defined sub-types: WorkLocation, SellingLocation, InventoryLocation.
+ *
+ * Location is intended to reflect non-movable spaces
+ * within a Site (and a Site typically represents a building).
+ *
+ * A Fixture, is treated as a separate MOVABLE space that merchandise is stored
+ * and/or displayed on.
+ */
+message Location {
+  google.retail.common.pb.VersionID id = 1  [json_name = "id"];
+  /*
+ * Designates the location category such as: FIXTURE, FLOOR, SECTION, STORE
+ * WINDOW, End Cap, etc.
+ */
+  string location_type = 2  [json_name = "loc_t"];
+  /*
+   * A code that describes what business activities and functions are performed
+   * in a specific location: Admin, Display, Customer Service, Returns &
+   * OVERFLOW, OVERHEAD_MANAGEMENT, STOCK_POINT, RECEIVING, etc.
+   */
+  string location_function_type = 3  [json_name = "loc_func"];
+
+  // Additional security measures for the location such as KEYED_ACCESS,
+  // or REQUIRES_MANAGER, etc.
+  string inventory_location_security_type = 4 [json_name = "inv_loc_sec"];
+
+  // Does the space stock items, and is it ledger controlled.
+  bool stock_ledger_control_flag = 5  [json_name = "stk_ldgr_ctl"];
+
+  // The available measurements for the location, This may be volume, or area
+  // weight limits, etc.
+  repeated LocationMeasure measures = 6 [json_name = "measures"];
+
+  // A merchandise group represents the intended use of the location to an
+  // attributed merchandise hierarchy
+  message MerchGroup {
+    // The merchandise hierarchy id
+    string merchandise_hierarchy_id = 1  [json_name = "merch_hrchy_id"];
+    // The date merchandise from this group was used in this location
+    google.protobuf.Timestamp effective_date = 2 [json_name = "eff_date"];
+    // A performance perspective continually updated to evaluate how a
+    // merch hierarchy is performing or has performed in this location
+    double performance_score = 3 [json_name = "score"];
+  }
+
+  // A list of historical merchandise hierarchies used in this location.
+  repeated MerchGroup merchandise_groups = 7 [json_name = "merch_grps"];
+
+  /*
+   * Outrigger entity to temporarily represent location coordinates.
+   *
+   * Location is a named area within a Site or within a Location.  Location
+   * Coordinate defines the insertion point of a location within a site or
+   * location's local coordinate system.  It provides a way to position the
+   * origin of a location (which is the back left corner of a location).
+   */
+  message LocationCoordinate {
+    /*
+     * The degree offset representing the angular orientation of a LOCATION's
+     * ORIGIN with respect to the Location.
+     *
+     * The degrees are measured in a COUNTER CLOCKWISE direction from back left
+     * corner which is assumed to be 0 degrees.
+     *
+     * In most scenarios the location will be viewed on a XYZ axis that
+     * represents a local cartesian space.  This offset documents the angular
+     * difference from the location's orientation from its parent orientation.
+     * Used as a basis for transforming coordinate systems between a parent site
+     * and the locations it contains OR between a parent location and its
+     * children.
+     */
+    double angle_offset_degrees = 1 [json_name = "a"];
+    /*
+     * The X coordinate for the location insertion point within a Site or parent
+     * location.  Places the left back corner of a location.  From this point
+     * the vertex points are measured to define the shape of the location
+     * relative to 0,0,0 local coordinate system (i.e. local to the location).
+     */
+    string coordinate_x = 2 [json_name = "x"];
+    /*
+     * The Y coordinate for the location insertion point within a Site or parent
+     * location.  Places the left back corner of a location.  From this point
+     * the vertex points are measured to define the shape of the location
+     * relative to 0,0,0 local coordinate system (i.e. local to the location).
+     */
+    string coordinate_y = 3 [json_name = "y"];
+    /*
+     * The Z coordinate for the location insertion point within a Site or parent
+     * location.  Places the left back corner of a location.  From this point
+     * the vertex points are measured to define the shape of the location
+     * relative to 0,0,0 local coordinate system (i.e. local to the location).
+     */
+    string coordinate_z = 4 [json_name = "z"];
+
+    /*
+     * Describes the shape of the location as repeatable points as related
+     * to the UOM of the parent location
+     */
+    message LocationVertex {
+      // The order of the vertex
+      int32 ordinal = 1 [json_name = "ord"];
+      /*
+       * The X-coordinate of this LocationVertex within a given location local
+       * coordinate system.
+       */
+      string coordinate_x = 2 [json_name = "x"];
+      /*
+       * The Y-coordinate of this LocationVertex within a given location local
+       * coordinate system.
+       */
+      string coordinate_y = 3 [json_name = "y"];
+      /*
+       * The Z-coordinate of this LocationVertex within a given location local
+       * coordinate system.
+       */
+      string coordinate_z = 4 [json_name = "z"];
+    }
+    repeated LocationVertex location_vertices = 5 [json_name = "vertices"];
+  }
+  // Coordinates of the location
+  LocationCoordinate location_coordinate = 8;
+  // Children locations, as a location may be hierarchical
+  repeated Location children = 9 [json_name = "children"];
+}
+
+/*
+ * A macro grouping for a GeoSegments, ideally without overlap.
+ */
+message GeoSegmentGroup {
+  google.retail.common.pb.VersionID id = 1 [json_name = "id"];
+  google.retail.enums.geo.GeoSegmentGroup type = 2 [json_name = "t"];
+  // A set of IDs always pointing to the latest revisions
+  repeated string geo_segment_ids = 3 [json_name = "segment_ids"];
+}
+
+/*
+ * A customer grouping based on common GeographicSegment. A GeographicSegment
+ * is an AREA and it  can be a large area composed of lower level areas or a low
+ * level composed of a single location.  Retailers will decide how to use
+ * geographic hierarchies and locations to segment customers.  ARTS provides a
+ * very flexible schema so retailers have wide latitude to choose their
+ * geographic customer segmentation strategy.
+ *
+ * As a rule, retailers should choose a the LOWEST level geographic segment
+ * their systems and data will support because it is possible to aggregate up to
+ * higher levels.  But it is very difficult to decompose higher level geographic
+ * areas to lower levels if  those level segments are not defined.
+ */
+message GeoSegment {
+  google.retail.common.pb.VersionID id = 1 [json_name = "id"];
+  google.retail.enums.geo.GeoSegment type = 2 [json_name = "t"];
+  string abbreviation = 3 [json_name = 'abbr'];
+  string description = 4 [json_name = "desc"];
+  repeated Site sites = 5 [json_name = "sites"];
+  repeated GeoSegment children = 6 [json_name = "children"];
+}

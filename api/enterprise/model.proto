@@ -1,0 +1,187 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.enterprise.pb;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/enterprise/pb";
+
+// Java Options
+option java_package = "com.google.retail.enterprise.pb";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+import "api/common/model.proto";
+import "api/enums/lang.proto";
+import "api/enums/currency.proto";
+import "api/enums/country.proto";
+import "api/party/model.proto";
+
+message BusinessUnitGroup {
+  google.retail.common.pb.VersionID id = 1;
+  google.retail.enums.lang.Language primary_language = 2;
+  repeated google.retail.enums.lang.Language supported_languages = 3;
+  repeated string business_unit_ids = 4;
+}
+
+message BusinessUnit {
+  /*
+   * A retail outlet that sells merchandise and services through either a
+   * physical location, catalog, web page or other channel. It may or may not be
+   * identical to a Site. It may be co-located at the same Site as a
+   * DistributionCenter, InventoryLocation or AdministrativeCenter.
+   *
+   * TODO - Add departments and hours
+   */
+  message RetailStore {
+    google.protobuf.Timestamp open_date = 1;
+    google.protobuf.Timestamp close_date = 2;
+    google.protobuf.Timestamp last_remodeled_date = 3;
+    repeated google.retail.common.pb.NamedMeasure named_measures = 4;
+  }
+
+  /*
+   * A warehouse or other storage facility that receives merchandise in bulk
+   * from Suppliers and supplies merchandise to RetailStores.  It may be
+   * co-located at the same Site as a RetailStore or AdministrativeCenter.
+   */
+  message DistributionCenter {
+    google.protobuf.Timestamp open_date = 1;
+    google.protobuf.Timestamp close_date = 2;
+    google.protobuf.Timestamp last_remodeled_date = 3;
+    repeated google.retail.common.pb.NamedMeasure named_measures = 4;
+  }
+
+  /*
+   * A group of offices at which the retail enterprise conducts administrative
+   * (non-selling) operations. May be co-located at a Site with RetailStore,
+   * DistributionCenter, or InventoryLocation.
+   */
+  message AdministrationCenter {
+    google.protobuf.Timestamp open_date = 1;
+    google.protobuf.Timestamp close_date = 2;
+    google.protobuf.Timestamp last_remodeled_date = 3;
+    repeated google.retail.common.pb.NamedMeasure named_measures = 4;
+  }
+
+  google.retail.common.pb.VersionID id = 1;
+  string status = 2;
+  google.retail.enums.currency.Currency primary_currency = 3;
+  repeated google.retail.enums.currency.Currency supported_currencies = 4;
+  google.retail.party.pb.OperationalParty operational_party = 5;
+  int32 operational_capacity = 6;
+  oneof detail {
+    RetailStore store = 7;
+    DistributionCenter distribution_center = 8;
+    AdministrationCenter administration_center = 9;
+  }
+}
+
+
+/*
+ * import "google/protobuf/timestamp.proto";
+ *
+ * An aggregation level for rolling ITEM sales and units for reporting purposes
+ * and for mapping item-level activity into the retailer's merchandise
+ * structure.
+ */
+message MerchandiseHierarchy {
+  string id = 1 [json_name = 'id'];
+  string parent_id = 2 [json_name = 'prnt_id'];
+  string name = 3 [json_name = 'nm'];
+  string description = 4 [json_name = 'dscr'];
+  /*
+   * Code used to identify a collection of weather characteristics that are
+   * important to a retailer in tracking sales and operations.
+   */
+  string climate_id = 5 [json_name = 'clmt_id'];
+  /*
+   * A unique system assigned identifier for the ItemSellingPrices.
+   */
+  string selling_rule_id = 6 [json_name = 'sllg_rl_id'];
+  /*
+   * The name ofr the Holiday instance
+   */
+  string occasion_name = 7 [json_name = 'occ_nm'];
+  /*
+   * A lookup value that designates a valid activity or interest code used to
+   * segment customers.
+   * The code list must be defined by the retailer.
+   */
+  string activity_interest_id = 8 [json_name = 'act_int_id'];
+
+  /*
+   * Child Hierarchies
+   */
+  repeated MerchandiseHierarchy children = 9 [json_name = 'chldrn'];
+}
+
+/*
+ * A tax code is a fundamental structure for defining tax for various
+ * segments of the tax hierarchy. Example
+ * USA - Colorado
+ * - SALES_TAX, 0.07 [ ALL ]
+ * USA - Colorado - Parker
+ * - FOOD_TAX, 0.005, [ FOOD, BEVERAGE ]
+ * - CLEAN_AIR_ACT, 0.001 [ TOBACCO ]
+ * In this case, if a customer buys a beverage in Parker COLORADO, they will
+ * pay an additional 0.071 % tax on their purchase.
+ * If a category lowers a base tax rate, then it MUST override it.
+ */
+message TaxCode {
+  message Rate {
+    message HierarchyGroupRate {
+      string merchandise_hierarchy_id = 1 [json_name = 'mrch_hrchy_id'];
+      google.protobuf.Timestamp effective = 2 [json_name = 'eff_dt'];
+      double rate = 3 [json_name = 'rt'];
+    }
+    message MunicipalRate {
+      string municipality = 1 [json_name = 'mncpl'];
+      google.protobuf.Timestamp effective = 2 [json_name = 'eff_dt'];
+      repeated HierarchyGroupRate hierarchy_group_rate = 3;
+    }
+    string name = 1 [json_name = 'nm'];
+    google.protobuf.Timestamp deleted = 2 [json_name = 'dl_dt'];
+    repeated string categories= 3 [json_name = 'cats'];
+    repeated HierarchyGroupRate base_rates = 4 [json_name = 'bs_rts'];
+    repeated MunicipalRate municipal_rates = 5 [json_name = 'mncpl_rts'];
+  }
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  google.protobuf.Timestamp deleted = 2 [json_name = 'dl_dt'];
+  string name = 3 [json_name = 'nm'];
+  string description = 4  [json_name = 'desc'];
+  google.retail.enums.countries.Country country = 5 [json_name = 'cntry'];
+  repeated Rate rates = 6 [json_name = 'rts'];
+}
+
+// {
+//   "id": { <UUID>, 0, 01/01/2022, 01/01/2022 },
+//   "dl_dt": null,
+//   "nm": "US Sales Tax",
+//   "dscr": "Tax for US Sales",
+//   "cntry": "USA",
+//   "rts" : [
+//      {
+//        "name": "Colorado",
+//        "categories": [ "SALES" ],
+//
+// Colorado, SALES
+// hierarchy_rates [ { ALL, 0.07 } ]
+// municipal_rates [ { Parker, [ FOOD & BEVERAGE, 0.001 ] }, { Denver, [FOOD & BEVERAGE, 0.005] } ]
+// Colorado, SERVICES
+// ... }
+

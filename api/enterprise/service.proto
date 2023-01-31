@@ -1,0 +1,263 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.enterprise.grpc;
+
+/*
+ * Go Lang Options
+ */
+option go_package = "github.com/rrmcguinness/retail-data-model/enterprise/grpc";
+
+/*
+ * Java Options
+ */
+option java_package = "com.google.retail.enterprise.grpc";
+option java_multiple_files = true;
+
+import "google/api/annotations.proto";
+
+import "google/protobuf/empty.proto";
+
+import "api/common/model.proto";
+
+import "api/enterprise/model.proto";
+
+import "google/protobuf/field_mask.proto";
+
+service BusinessUnits {
+  rpc Create(google.retail.enterprise.pb.BusinessUnit)
+    returns (google.retail.enterprise.pb.BusinessUnit) {
+    option (google.api.http) = {
+      post: "/business_units"
+      body: "model"
+    };
+  }
+
+  rpc Update(google.retail.enterprise.pb.BusinessUnit)
+    returns (google.retail.enterprise.pb.BusinessUnit) {
+    option (google.api.http) = {
+      put: "/business_units"
+      body: "model"
+    };
+  }
+
+  rpc GetBusinessModel(google.retail.common.pb.IDRequest)
+    returns (google.retail.enterprise.pb.BusinessUnit) {
+    option (google.api.http) = {
+      get: "/business_units/{id}"
+    };
+  }
+
+  rpc GetBusinessModelVersion(google.retail.common.pb.VersionIDRequest)
+    returns (google.retail.enterprise.pb.BusinessUnit) {
+    option (google.api.http) = {
+      get: "/business_units/{id}/{version}"
+    };
+  }
+
+  rpc GetBusinessModelVersionHistory(google.retail.common.pb.IDRequest)
+    returns (stream google.retail.enterprise.pb.BusinessUnit) {
+    option (google.api.http) = {
+      get: "/business_units/history/{id}"
+    };
+  }
+
+  rpc Delete(google.retail.enterprise.pb.BusinessUnit)
+    returns (google.retail.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/business_units"
+      body: "model"
+    };
+  }
+}
+
+service MerchandiseHierarchies {
+  rpc Create(google.retail.enterprise.pb.MerchandiseHierarchy)
+    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      post: "/merchandise_hierarchies"
+      body: "model"
+    };
+  }
+
+  rpc Update(google.retail.enterprise.pb.MerchandiseHierarchy)
+    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      put: "/merchandise_hierarchies"
+      body: "merchandise_hierarchy"
+    };
+  }
+
+  rpc CreateChild(google.retail.enterprise.pb.MerchandiseHierarchy)
+    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      post: "/merchandise_hierarchies/children"
+      body: "model"
+    };
+  }
+
+  rpc UpdateChild(google.retail.enterprise.pb.MerchandiseHierarchy)
+    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      put: "/merchandise_hierarchies/children"
+      body: "model"
+    };
+  }
+
+  /*
+   * List - Finds a hierarchy by id
+   */
+  rpc GetMerchandiseHierarchy(google.retail.common.pb.IDRequest)
+    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      get: "/merchandise_hierarchies/{id}"
+    };
+  }
+
+  /*
+   * List - Provides a stream / ordered list of hierarchies.
+   */
+  rpc FindMerchandiseHierarchy(google.protobuf.FieldMask)
+    returns (stream google.retail.enterprise.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      get: "/merchandise_hierarchies"
+    };
+  }
+
+  rpc Delete(google.retail.enterprise.pb.MerchandiseHierarchy)
+    returns (google.retail.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/merchandise_hierarchies"
+      body: "model"
+    };
+  }
+
+}
+
+service TaxCodes {
+  /*
+   * List - Provides a stream / ordered list of tax rates.
+   */
+  rpc GetTaxCodes(google.protobuf.Empty)
+    returns (stream google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes"
+    };
+  }
+
+  /*
+  List - Provides a stream / ordered list of active tax rates.
+   */
+  rpc GetTaxCode(google.retail.common.pb.IDRequest)
+    returns (google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes/active/{id}"
+    };
+  }
+
+  /*
+  List - Provides a stream / tax code histories.
+   */
+  rpc GetTaxCodeVersionHistory(google.retail.common.pb.IDRequest)
+    returns (stream google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes/history/{id}"
+    };
+  }
+
+  /*
+  List - Provides a stream / ordered list of countries.
+   */
+  rpc GetTaxCodeVersion(google.retail.common.pb.VersionIDRequest)
+    returns (google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes/{id}/{version}"
+    };
+  }
+
+  /*
+  Create - Adds a tax to the data store
+   */
+  rpc Create(google.retail.enterprise.pb.TaxCode)
+    returns (google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      post: "/tax_codes"
+      body: "model"
+    };
+  }
+
+  /*
+  Create - Adds a country to the data store
+   */
+  rpc CreateRate(google.retail.enterprise.pb.TaxCode.Rate)
+    returns (google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      post: "/tax_codes/rates"
+      body: "tax_code_rate"
+    };
+  }
+
+  /*
+  Update - Updates an existing tax code, and MUST increment the version
+  and effective dates
+   */
+  rpc Update(google.retail.enterprise.pb.TaxCode)
+    returns (google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      put: "/tax_codes"
+      body: "model"
+    };
+  }
+
+  /*
+  Update - Updates an existing tax code rate, and MUST increment the version
+  and effective dates
+   */
+  rpc UpdateRate(google.retail.enterprise.pb.TaxCode.Rate)
+    returns (google.retail.enterprise.pb.TaxCode) {
+    option (google.api.http) = {
+      put: "/tax_codes/rates"
+      body: "model"
+    };
+  }
+
+  /*
+  Delete - removes a country from the backing store, the implementation
+  defines the strategy.
+   */
+  rpc Delete(google.retail.enterprise.pb.TaxCode)
+    returns (google.retail.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/tax_codes"
+      body: "model"
+    };
+  }
+
+  /*
+  Delete - removes a country from the backing store, the implementation
+  defines the strategy.
+   */
+  rpc DeleteRate(google.retail.enterprise.pb.TaxCode.Rate)
+    returns (google.retail.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/tax_codes/{tax_code_id}/rates"
+      body: "model"
+    };
+  }
+}
+
+
+

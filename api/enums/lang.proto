@@ -1,0 +1,157 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.enums.lang;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/enums";
+
+// Java Options
+option java_package = "com.google.retail.enums";
+option java_multiple_files = true;
+
+/*
+ *
+ */
+enum Language {
+  UNKNOWN = 0;  // UNKNOWN
+  AA = 2;       // AFAR
+  AF = 3;       // AFRIKAANS
+  AK = 4;       // AKAN
+  SQ = 5;       // ALBANIAN
+  AM = 6;       // AMHARIC
+  AR = 7;       // ARABIC
+  AN = 8;       // ARAGONESE
+  HY = 9;       // ARMENIAN
+  AS = 10;      // ASSAMESE
+  AE = 12;      // AVESTAN
+  AY = 13;      // AYMARA
+  BM = 15;      // BAMBARA
+  BA = 16;      // BASHKIR
+  BE = 18;      // BELARUSIAN
+  BN = 19;      // BENGALI
+  BI = 20;      // BISLAMA
+  BS = 21;      // BOSNIAN
+  BR = 22;      // BRETON
+  BG = 23;      // BULGARIAN
+  MY = 24;      // BURMESE
+  CH = 26;      // CHAMORRO
+  CE = 27;      // CHECHEN
+  CV = 30;      // CHUVASH
+  KW = 31;      // CORNISH
+  CR = 33;      // CREE
+  HR = 34;      // CROATIAN
+  DA = 36;      // DANISH
+  DZ = 39;      // DZONGKHA
+  EN = 40;      // ENGLISH
+  EO = 41;      // ESPERANTO
+  EE = 43;      // EWE
+  FO = 44;      // FAROESE
+  FJ = 45;      // FIJIAN
+  FR = 47;      // FRENCH
+  GL = 49;      // GALICIAN
+  KA = 50;      // GEORGIAN
+  DE = 51;      // GERMAN
+  GN = 53;      // GUARANI
+  GU = 54;      // GUJARATI
+  HA = 56;      // HAUSA
+  HE = 57;      // HEBREW
+  HZ = 58;      // HERERO
+  HO = 60;      // HIRI MOTU
+  HU = 61;      // HUNGARIAN
+  IA = 62;      // INTERLINGUA (INTERNATIONAL AUXILIARY LANGUAGE ASSOCIATION)
+  ID = 63;      // INDONESIAN
+  GA = 65;      // IRISH
+  IG = 66;      // IGBO
+  IO = 68;      // IDO
+  IS = 69;      // ICELANDIC
+  IT = 70;      // ITALIAN
+  IU = 71;      // INUKTITUT
+  JA = 72;      // JAPANESE
+  KN = 75;      // KANNADA
+  KR = 76;      // KANURI
+  KK = 78;      // KAZAKH
+  RW = 81;      // KINYARWANDA
+  KV = 83;      // KOMI
+  KG = 84;      // KONGO
+  KO = 85;      // KOREAN
+  LG = 90;      // GANDA
+  LN = 92;      // LINGALA
+  LO = 93;      // LAO
+  LT = 94;      // LITHUANIAN
+  LU = 95;      // LUBA-KATANGA
+  LV = 96;      // LATVIAN
+  MK = 98;      // MACEDONIAN
+  MG = 99;      // MALAGASY
+  ML = 101;     // MALAYALAM
+  MT = 102;     // MALTESE
+  MI = 103;     // MAORI
+  MR = 104;     // MARATHI
+  MH = 105;     // MARSHALLESE
+  MN = 106;     // MONGOLIAN
+  NA = 107;     // NAURU
+  ND = 109;     // NORTH NDEBELE
+  NE = 110;     // NEPALI
+  NG = 111;     // NDONGA
+  NB = 112;     // NORWEGIAN BOKMÅL
+  NN = 113;     // NORWEGIAN NYNORSK
+  NO = 114;     // NORWEGIAN
+  NR = 116;     // SOUTH NDEBELE
+  OJ = 118;     // OJIBWA
+  OM = 120;     // OROMO
+  OR = 121;     // ORIYA
+  FA = 125;     // PERSIAN
+  PT = 128;     // PORTUGUESE
+  RM = 130;     // ROMANSH
+  RN = 131;     // RUNDI
+  RU = 133;     // RUSSIAN
+  SC = 135;     // SARDINIAN
+  SE = 137;     // NORTHERN SAMI
+  SM = 138;     // SAMOAN
+  SG = 139;     // SANGO
+  SR = 140;     // SERBIAN
+  SN = 142;     // SHONA
+  ST = 147;     // SOUTHERN SOTHO
+  SU = 149;     // SUNDANESE
+  SW = 150;     // SWAHILI
+  SS = 151;     // SWATI
+  SV = 152;     // SWEDISH
+  TA = 153;     // TAMIL
+  TE = 154;     // TELUGU
+  TH = 156;     // THAI
+  TI = 157;     // TIGRINYA
+  BO = 158;     // TIBETAN
+  TL = 160;     // TAGALOG
+  TN = 161;     // TSWANA
+  TO = 162;     // TONGA (TONGA ISLANDS)
+  TR = 163;     // TURKISH
+  TS = 164;     // TSONGA
+  TW = 166;     // TWI
+  TY = 167;     // TAHITIAN
+  UK = 169;     // UKRAINIAN
+  UR = 170;     // URDU
+  VE = 172;     // VENDA
+  VI = 173;     // VIETNAMESE
+  VO = 174;     // VOLAPÜK
+  WA = 175;     // WALLOON
+  CY = 176;     // WELSH
+  WO = 177;     // WOLOF
+  FY = 178;     // WESTERN FRISIAN
+  XH = 179;     // XHOSA
+  YI = 180;     // YIDDISH
+  YO = 181;     // YORUBA
+  ZU = 183;     // ZULU
+}

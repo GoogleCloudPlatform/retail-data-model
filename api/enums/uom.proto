@@ -1,0 +1,175 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.enums.uom;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/enums";
+
+// Java Options
+option java_package = "com.google.retail.enums";
+option java_multiple_files = true;
+
+enum Area {
+  AREA_OTHER = 0;                // AREA OTHER
+  SQUARE_INCH = 11;              // SQUARE INCH
+  ACRE = 12;                     // ACRE
+  HECTARE = 13;                  // HECTARE
+  SQR_CM = 14;                   // SQUARE CENTIMETER
+  SQR_FOOT = 15;                 // SQUARE FOOT
+  SQR_METER = 16;                // SQUARE METER
+  SQR_MILE = 17;                 // SQUARE MILE
+  SQR_ROD = 18;                  // SQUARE ROD
+  SQR_YARD = 19;                 // SQUARE YARD
+  SQR_KILOMETER = 20;            // SQUARE KILOMETER
+}
+
+enum Capacity {
+  CAPACITY_OTHER = 0;        // CAPACITY OTHER
+  CUBIC_INCH = 101;          // CUBIC INCH
+  ACRE_FOOT = 102;           // ACRE FOOT
+  BOARD_FOOT = 103;          // BOARD FOOT
+  BUSHEL = 104;              // BUSHEL
+  CENTILITER = 105;          // CENTILITER
+  CORD = 106;                // CORD
+  CUBIC_CENTIMETER = 107;    // CUBIC CENTIMETER
+  CUBIC_FOOT = 108;          // CUBIC FOOT
+  CUBIC_YARD = 109;          // CUBIC YARD
+  DECALITER = 110;           // DECALITER
+  DECILITER = 111;           // DECILITER
+  FLUID_DRAM = 112;          // FLUID DRAM
+  FLUID_OUNCE = 113;         // FLUID OUNCE
+  GALLON = 114;              // GALLON
+  GILL = 115;                // GILL
+  HECTOLITER = 116;          // HECTOLITER
+  KILOLITER = 117;           // KILOLITER
+  LITER = 118;               // LITER
+  MILLLITER = 119;           // MILLITER
+  MINIM = 120;               // MINUM
+  PECK = 121;                // PECK
+  PINT = 122;                // PINT
+  QUART = 123;               // QUART
+}
+
+enum Count {
+  COUNT_OTHER = 0;              // COUNT OTHER
+  EACH = 201;                   // EACH
+  BAG = 202;                    // BAG
+  BOWL = 203;                   // BOWL
+  BOX = 204;                    // BOX
+  BUCKET = 205;                 // BUCKET
+  BUNDLE = 206;                 // BUNDLE
+  CARTON = 207;                 // CARTON
+  CASE = 208;                   // CASE
+  DOZEN = 209;                  // DOZEN
+  KIT = 210;                    // KIT
+  LOT = 211;                    // LOT
+  PACK = 212;                   // PACK
+  PAIR = 213;                   // PAIR
+  PEICE = 214;                  // PEICE
+  PERSON = 215;                 // PERSON
+  PLATE = 216;                  // PLATE
+  ROLL = 217;                   // ROLL
+  SET_2 = 218;                  // SET
+  SET_3 = 219;                  // SET OF 3
+  SET_4 = 220;                  // SET OF 4
+  SET_5 = 221;                  // SET OF 5
+  SET_6 = 222;                  // SET OF 6
+  SET_7 = 223;                  // SET OF 7
+  SET_8 = 224;                  // SET OF 8
+  SET_9 = 225;                  // SET OF 9
+  SET_10 = 226;                 // SET OF 10
+  SHEET = 227;                  // SHEET
+  SINGLE = 228;                 // SINGLE
+  TUBE = 229;                   // TUBE
+}
+
+enum Distance {
+  DISTANCE_OTHER = 0;        // OTHER
+  INCH = 301;                // INCH
+  CENTIMETER = 302;          // CENTIMETER
+  DECAMETER = 303;           // DECAMETER
+  DECIMETER = 304;           // DECIMETER
+  FATHOM = 305;              // FATHOM
+  FOOT = 306;                // FOOT
+  FURLONG = 307;             // FURLONG
+  HECTOMETER = 308;          // HECOMETER
+  KILOMETER = 309;           // KILOMETER
+  METER = 310;               // METER
+  MILE = 311;                // MILE
+  MILLIMETER = 312;          // MILLIMETER
+  NAUTICAL_MILE = 313;       // NAUTICAL MILE
+  ROD = 314;                 // ROD
+  YARD = 315;                // YARD
+}
+
+enum Screen {
+  SCREEN_OTHER = 0;  // OTHER
+  PX = 401;          // PIXEL
+  PT = 402;          // POINT
+  EM = 403;          // EM DASH
+  PCT = 404;         // PERCENT
+  IN = 405;          // INCH
+}
+
+enum Weight {
+  WEIGHT_OTHER = 0;            // OTHER
+  OUNCE = 501;                 // OUNCE
+  CENTIGRAM = 502;             // CENTIGRAM
+  DECAGRAM = 503;              // DECAGRAM
+  DECIGRAM = 504;              // DECIGRAM
+  DRAM = 505;                  // DRAM
+  DRAM_APOTHECARY = 506;       // DRAM (APOTHECARY)
+  GRAIN = 507;                 // GRAIN
+  GRAIN_APOTHECARY = 508;      // GRAIN (APOTHECARY)
+  GRAIN_TROY = 509;            // TROY GRAIN
+  GRAM = 510;                  // GRAM
+  HECTOGRAM = 511;             // HECTOGRAM
+  HUNDRED_WEIGHT_LONG = 512;   // HUNDRED WEIGHT LONG
+  HUNDRED_WEIGHT_SHORT = 513;  // HUNDRED WEIGHT SHORT
+  KILOGRAM = 514;              // KILOGRAM
+  MILLIGRAM = 515;             // MILLIGRAM
+  OUNCE_APOTHECARY = 516;      // OUNCE (APOTHECARY)
+  OUNCE_TROY = 517;            // TROY OUNCE
+  PENNY_WEIGHT_TROY = 518;     // TROY PENNY WEIGHT
+  POUND = 519;                 // POUND
+  POUND_APOTHECARY = 520;      // POUND (APOTHECARY)
+  POUND_TROY = 521;            // TROY POUND
+  SCRUPLE_APOTHECARY = 522;    // SCRUPLE (APOTHECARY)
+  STONE = 523;                 // STONE
+  TON = 524;                   // TON
+  TON_LONG = 525;              // TON LONG
+  TON_SHORT = 526;             // TON SHORT
+  TONNE = 527;                 // TONNE
+}
+
+enum Packaging {
+  PACKAGE_OTHER = 0;      // PACKAGE OTHER
+  PACKAGE_BOX = 600;      // BOX
+  PACKAGE_CYLINDER = 601; // CYLINDER
+  PACKAGE_ENVELOPE = 602; // ENVELOP
+}
+
+enum Time {
+  TIME_OTHER = 0;
+  SECONDS = 701;
+  MINUTES = 702;
+  HOURS = 703;
+  DAYS = 704;
+  WEEKS = 705;
+  MONTHS = 706;
+  YEARS = 707;
+}

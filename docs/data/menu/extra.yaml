@@ -1,0 +1,6 @@
+---
+header:
+  - name: GitHub
+    ref: https://github.com/rrmcguinness/retail-data-model
+    icon: github
+    external: true

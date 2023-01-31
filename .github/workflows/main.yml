@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Bazel Setup
+        uses: bazelbuild/setup-bazelisk@v2
+
+      - name: Mount bazel cache
+        uses: actions/cache@v3
+        with:
+          path: "/home/runner/.cache/bazel"
+          key: bazel
+
+      - name: "Build"
+        run: bazel build //...
+
+      - name: Checkout Go Branch
+        if: github.ref == 'refs/heads/main'
+        uses: actions/checkout@v3
+        with:
+          ref: 'go'
+          clean: 'false'
+
+      - name: Expand Go Module Library
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Unzipping Build Updates"
+          tar -zxf "${GITHUB_WORKSPACE}/bazel-bin/sdk/go/go_api_archive.tar.gz" -C ./
+
+      - name: Check-in Latest Go Changes
+        if: github.ref == 'refs/heads/main'
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "Build Robot"

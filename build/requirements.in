@@ -1,0 +1,13 @@
+Cython
+
+# Scipy and Numpy for examples
+scipy
+numpy
+
+# Required Google and Protobuf APIs
+google-api-python-client
+gcloud
+
+protobuf
+
+grpcio

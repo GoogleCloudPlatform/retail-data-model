@@ -1,0 +1,51 @@
+{
+	"folders": [
+		{
+			"path": "api",
+			"name": "API",
+			"follow_symlinks": true
+		},
+		{
+			"path": "docs",
+			"name": "Documentation"
+		},
+		{
+			"path": "examples",
+			"name": "Examples"
+		},
+		{
+			"path": "sdk",
+			"name": "SDK Libraries"
+		},
+		{
+			"path": "build",
+			"name": "Build Support"
+		},
+		{
+			"path": "tools",
+			"name": "Build Tools"
+		},
+		{
+			"path": "third_party",
+			"name": "Third Party"
+		},
+		{
+			"path": ".",
+			"name": "Project Root",
+			"folder_exclude_patterns": [".github", ".idea", ".ijwb", "bazel-*"],
+		}
+	],
+	"settings": {
+		"tab_size": 2
+	},
+	"build_systems": [
+		{
+			"name": "Build - All",
+			"shell_cmd": "bazel build //..."
+		},
+		{
+			"name": "Test - All",
+			"shell_cmd": "bazel test //..."
+		}
+	]
+}

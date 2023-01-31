@@ -1,0 +1,138 @@
+{
+  "folders": [
+    {
+      "name": "Google Retail Data Models",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.exclude": {
+      "**/.trunk": true,
+      "**/.markdownlint.yaml": true,
+      "**/.editorconfig": true,
+      "**/.shellcheckrc": true,
+      "**/svgo.config.js": true,
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true
+    },
+    "go.useLanguageServer": true,
+    "gopls": {
+      "formatting.gofumpt": true,
+      "formatting.local": "github.com/bazelbuild/rules_go",
+      "ui.completion.usePlaceholders": true,
+      "ui.semanticTokens": true,
+      "ui.codelenses": {
+        "gc_details": false,
+        "regenerate_cgo": false,
+        "generate": false,
+        "test": false,
+        "tidy": false,
+        "upgrade_dependency": false,
+        "vendor": false
+      },
+      "go.toolsEnvVars": {
+        "GOPACKAGESDRIVER": "/opt/projects/vscode_bazel_tutorial/tools/gopackagesdriver.sh"
+      },
+      "go.enableCodeLens": {
+        "references": false,
+        "runtest": false
+      },
+      "go.buildOnSave": "off",
+      "go.lintOnSave": "off",
+      "go.vetOnSave": "off",
+      "[go]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.rulers": [
+          100
+        ],
+        "editor.wordWrapColumn": 100,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "trunk.io"
+      },
+      "[java]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.rulers": [
+          100
+        ],
+        "editor.wordWrapColumn": 100,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "trunk.io"
+      },
+      "[starlark]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.rulers": [
+          100
+        ],
+        "editor.wordWrapColumn": 100,
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "trunk.io"
+      },
+      "[markdown]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.rulers": [
+          100
+        ],
+        "editor.wordWrapColumn": 100,
+        "editor.wordWrap": "bounded",
+        "editor.formatOnSave": false,
+        "editor.formatOnPaste": true,
+        "editor.defaultFormatter": "trunk.io"
+      },
+      "licenser.license": "AL2",
+      "licenser.author": "Google, LLC",
+      "licenser.projectName": "Google Retail Data Model",
+      "java.dependency.packagePresentation": "hierarchical",
+      "java.dependency.syncWithFolderExplorer": true
+    }
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build All",
+        "type": "shell",
+        "command": "bazel build //...",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      },
+      {
+        "label": "Test All",
+        "type": "shell",
+        "command": "bazel test //...",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        }
+      },
+      {
+        "label": "Build Docs",
+        "type": "shell",
+        "command": "bazel build //docs",
+        "group": {
+            "kind": "build",
+        }
+      },
+      {
+        "label": "Run Document Site Locally",
+        "type": "shell",
+        "command": "bazel run //docs:serve.",
+        "group": {
+            "kind": "none",
+        }
+      }
+    ]
+  }
+}

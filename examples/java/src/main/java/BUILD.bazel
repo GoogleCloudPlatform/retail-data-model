@@ -1,0 +1,16 @@
+package(
+    default_visibility = ["//examples/java:__subpackages__"],
+)
+
+java_binary(
+    name = "java_sample_code",
+    srcs = glob([
+        "com/google/retail/CountriesClient.java",
+        "com/google/retail/CountriesService.java",
+    ]),
+    deps = [
+        "//sdk/java:common_java_grpc",
+        "//sdk/java:common_java_proto",
+        "//sdk/java:enums_java_proto",
+    ],
+)

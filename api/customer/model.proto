@@ -1,0 +1,217 @@
+/**
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.customer.pb;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/customer/pb";
+
+// Java Options
+option java_package = "com.google.retail.customer.pb";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+message Consumer {
+  string id = 1;
+  string party_id = 2;
+  string party_role_assignment_id = 3;
+}
+
+/*
+ * An association between a Consumer and a retailer defined ConversionState that
+ * tracks the state change of parties as they convert from one conversion  state
+ * to another. Specific states to be tracked are defined by each retailer based
+ * on their business requirements.
+ *
+ * Examples of states include:
+ *
+ * General Population (null and undefined)
+ * AUDIENCE - part of a group that is receiving retailer messages
+ * PROSPECT - An audience with assumed needs, wants and pref.
+ * VISITOR - an individual who comes into a store or web site
+ * SHOPPER - a visitor that browses through the products and services offered at
+ * a retailer business unit (web or physical store) CUSTOMER - a shopper that
+ * purchases a product
+ *
+ * These are examples.  As noted, retailers need to define their own
+ * ConversionStates.
+ */
+message ConsumerConversionState {
+  // A Consumer MAY BE IN ONLY ONE ACTIVE STATE at any given time.
+  enum State {
+    POPULATION = 0;  // everyone
+    PROSPECT = 1;    // targeted ad group
+    VISITOR = 2;     // shows up on site
+    SHOPPER = 3;     // adds an item to a cart
+    CUSTOMER = 4;    // purchases an item
+    INACTIVE_CUSTOMER = 5;
+    EXCUSTOMER = 6;
+  }
+  string id = 1;
+  string consumer_id = 2;
+  string channel_id = 3;
+  State state = 4;
+  google.protobuf.Timestamp effective_date = 5;
+  google.protobuf.Timestamp expiration_date = 6;
+  reserved 7 to 98;
+  map<string, string> additional_attributes = 99;
+}
+
+// "An individual (person or web crawler or other agent) that accesses the web
+// site and initiates one or more sessions.
+//
+// Visitors will have to register or log in to become identifiable parties
+// (typically customers, suppliers, workers, etc.).  Visitor as used here is an
+// anonymous entity that tells us someone (or something) has issued an HTTP
+// request to our website.
+//
+// Visitor can also theoretically be used to identify individuals who show up in
+// a retail store and then leave.  Like the web site, visitors stop in but do
+// not browse or purchase anything.  As a practical matter tracking visitors in
+// a bricks and mortar store is more difficult than tracking visitors to the
+// retailer's web site.  Retailers with the appropriate retail format and
+// technology may be able to track visitors in their store which is why we've
+// modeled Visitor for web or bricks and mortar scenarios.
+message Visitor {
+  string id = 1;
+  string user_name = 2;
+  string email_address = 3;
+  string consumer_conversion_state_id = 4;
+}
+
+// A PartyRoleAssignment type that represents the association between a
+// retailer on one hand and an individual or organization (Party) on the other
+// hand where the party is a Consumer that has completed at least one purchase
+// and whose associated ConsumerConversionState indicates their status as a
+// CUSTOMER.
+//
+// We are using the term "Consumer" to reflect the idea that this
+// PartyRoleAssignment represents parties that retailers are SELLING TO (or
+// trying to sell to).  In other entities we differentiate between parties that
+// are in a pre-sale state (typically they're in the customer acquisition
+// funnel), an active state (they have purchased items and are ActiveCustomers)
+// , an inactive state (InactiveCustomers) or a ""dead"" state (ExCustomers).
+message Customer {
+  string id = 1;
+  string consumer_conversion_state_id = 2;
+  string party_id = 3;
+  bool anonymous = 4;
+}
+
+// A customer that has registered with the retailer and in addition to a unique
+// identifier has provided name, address, phone, email and other personal
+// contact information.
+//
+// KeyCustomer is the basis for establishing an account relationship between a
+// customer and the retailer.  It can be thought of  as the registration (i.e.
+// personal contact information) part of setting up an account relationship.
+message KeyCustomer {
+  string customer_id = 1;
+  string consumer_registration_state_id = 2;
+  // A two character retailer assigned code denoting which forms of contact the
+  // Customer has chosen to opt out of.
+  repeated string privacy_opt_out = 3;
+}
+
+/*
+ * A categorization of customer groups based on their uses.
+ * For instance, customers may be grouped for tax, promotional, or other
+ * reasons.
+ */
+message CustomerGroupType {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// A group of customers based on specific demographic and marketing attributes
+// and properties.  Examples include over 65 year old customers, students,
+// unions, and other associations.
+//
+// Note this entity is different from PartyAffiliation which captures
+// relationships between specific parties and classifies those relationships.
+// PartyAffiliation involves linking two identifiable parties together.
+// CustomerGroup is a kind of global category that customers are assigned to for
+// marketing, accounting or administrative purposes.
+//
+// Also used to classify customer's known taxability; eg: Hospital, Charity,
+// etc.
+message CustomerGroup {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string require_identity_verification = 4;
+}
+
+message KeyCustomerGroupAffiliation {
+  enum Status {
+    INACTIVE = 0;
+    ACTIVE = 1;
+  }
+  string id = 1;
+  string customer_group_id = 2;
+  string key_customer_id = 3;
+  Status status = 4;
+  bool require_identity_verification = 5;
+  google.protobuf.Timestamp effective_date = 6;
+  google.protobuf.Timestamp expiration_date = 7;
+}
+
+/* An identified, named collection of balances and cumulative totals used to
+ * summarize customer transaction-related activity over a designated period of
+ * time.
+ *
+ * CustomerAccount is subtyped into a number of different kinds of accounts such
+ * as loyalty account, installment account, etc.  Each has additional attributes
+ * required to describe the responsibilities and obligations associated with
+ * each account type.
+ *
+ * A charge account or other accounting relationship a customer has with the
+ * store or enterprise.  An account exists to allow the store to record a series
+ * of transactions with the same customer and keep an ongoing record of monies
+ * owed by the customer and monies due to the customer.
+ */
+message KeyCustomerAccount {
+  enum Status {
+    INACTIVE = 0;
+    ACTIVE = 1;
+  }
+  enum Type {
+    REVOLVING_CHARGE = 0;
+    TRADE = 1;
+    LAYAWAY = 3;
+    INSTALLMENT = 4;
+    BACK_ORDER = 5;
+    REWARD_ACCOUNT = 6;
+    SERVICE_WORK_ACCOUNT = 7;
+    RENTAL_ACCOUNT = 8;
+    DONATION_ACCOUNT = 9;
+    CONSIGNMENT_ACCOUNT = 10;
+    OTHER_ACCOUNT = 11;
+  }
+  string id = 1;
+  string key_customer_id = 2;
+  string financial_ledger_account_id = 3;
+  Type customer_account_type = 4;
+  Status status = 5;
+  string name = 6;
+  google.protobuf.Timestamp effective_date = 7;
+  google.protobuf.Timestamp expiration_date = 8;
+  double unpaid_balance_interest_rate_percent = 9;
+  int32 grace_period_in_days = 10;
+}

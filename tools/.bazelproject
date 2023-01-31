@@ -1,0 +1,38 @@
+directories:
+  # Add the directories you want added as source here
+  # By default, we've added your entire workspace ('.')
+  .
+  -.github
+  -.ijwb
+  -third_party
+  -tools
+  -google-retail-cloud-api.code-workspace
+  -owners.txt
+  -.gitignore
+  -.bazelrc
+
+# Automatically includes all relevant targets under the 'directories' above
+derive_targets_from_directories: true
+
+java_language_level: 11
+
+test_sources:
+  /java/src/test/java
+  /go/test
+  /python/test
+
+targets:
+  # If source code isn't resolving, add additional targets that compile it here
+
+additional_languages:
+  go
+  python
+  # Uncomment any additional languages you want supported
+  # android
+  # dart
+  # go
+  # javascript
+  # kotlin
+  # python
+  # scala
+  # typescript

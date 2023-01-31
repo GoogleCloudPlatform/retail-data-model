@@ -1,0 +1,39 @@
+load("@rules_python//python:defs.bzl", "py_library")
+load("@rules_proto_grpc//python:python_proto_library.bzl", PY_PROTO_DEPS = "PROTO_DEPS")
+load("@python_deps//:requirements.bzl", "requirement")
+
+package(default_visibility = [
+    "//examples/python:__subpackages__",
+])
+
+py_library(
+    name = "py_country_client",
+    srcs = glob([
+        "google_retail_common_client/__init__.py",
+        "google_retail_common_client/country_client.py",
+    ]),
+    imports = ["google_retail_common_client"],
+    deps = [
+        requirement("google-api-python-client"),
+        requirement("grpcio"),
+        requirement("protobuf"),
+        requirement("google-api-core"),
+        "//sdk/python:python_grpc_library",
+    ] + PY_PROTO_DEPS,
+)
+
+py_library(
+    name = "py_country_service",
+    srcs = glob([
+        "google_retail_common_service/__init__.py",
+        "google_retail_common_service/country_service.py",
+    ]),
+    imports = ["google_retail_common_service"],
+    deps = [
+        requirement("google-api-python-client"),
+        requirement("grpcio"),
+        requirement("protobuf"),
+        requirement("google-api-core"),
+        "//sdk/python:python_grpc_library",
+    ] + PY_PROTO_DEPS,
+)

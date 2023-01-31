@@ -1,0 +1,51 @@
+load("//:build/junit.bzl", "java_junit5_test")
+
+package(
+    default_visibility = ["//examples/java/test:__subpackages__"],
+)
+
+java_junit5_test(
+    name = "enum_test",
+    srcs = glob([
+        "com/google/retail/EnumTests.java",
+    ]),
+    test_package = "com.google.retail",
+    deps = [
+        "//sdk/java:common_java_grpc",
+        "//sdk/java:common_java_proto",
+        "//sdk/java:enums_java_proto",
+        "@maven//:io_grpc_grpc_core",
+        "@maven//:io_grpc_grpc_testing",
+    ],
+)
+
+java_junit5_test(
+    name = "model_test",
+    srcs = [
+        "com/google/retail/ModelTests.java",
+    ],
+    test_package = "com.google.retail",
+    deps = [
+        "//sdk/java:common_java_grpc",
+        "//sdk/java:common_java_proto",
+        "//sdk/java:enums_java_proto",
+        "@io_grpc_grpc_java//core:inprocess",
+        "@maven//:io_grpc_grpc_testing",
+    ],
+)
+
+java_junit5_test(
+    name = "service_test",
+    srcs = glob([
+        "com/google/retail/ServiceTests.java",
+    ]),
+    test_package = "com.google.retail",
+    deps = [
+        "//examples/java/src/main/java:java_sample_code",
+        "//sdk/java:common_java_grpc",
+        "//sdk/java:common_java_proto",
+        "//sdk/java:enums_java_proto",
+        "@io_grpc_grpc_java//core:inprocess",
+        "@maven//:io_grpc_grpc_testing",
+    ],
+)

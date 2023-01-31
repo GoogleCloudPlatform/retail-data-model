@@ -1,0 +1,13 @@
+---
+more:
+  - name: News
+    ref: "/posts"
+    icon: "notification"
+  - name: Releases
+    ref: "https://github.com/rrmcguinness/retail-data-model/releases"
+    external: true
+    icon: "download"
+  - name: View Source
+    ref: "https://github.com/rrmcguinness/retail-data-model"
+    external: true
+    icon: "github"

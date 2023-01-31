@@ -1,0 +1,132 @@
+## Java Targets
+load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library", "java_proto_library")
+load("@rules_proto_grpc//java:defs.bzl", "java_grpc_compile")
+
+package(default_visibility = [
+    "//visibility:public",
+])
+
+java_proto_library(
+    name = "enums_java_proto",
+    importpath = "com.google.retail.enums",
+    protos = [
+        "//api/enums",
+    ],
+)
+
+# Common
+java_proto_library(
+    name = "common_java_proto",
+    importpath = "com.google.retail.common.pb",
+    protos = ["//api/common:model_proto"],
+    deps = [
+        ":enums_java_proto",
+    ],
+)
+
+java_grpc_library(
+    name = "common_java_grpc",
+    importpath = "com.google.retail.common.grpc",
+    protos = ["//api/common:service_proto"],
+    deps = [
+        ":common_java_proto",
+        "@maven//:com_google_api_grpc_proto_google_common_protos",
+    ],
+)
+
+# Customer
+java_proto_library(
+    name = "customer_java_proto",
+    importpath = "com.google.retail.customer.pb",
+    protos = ["//api/customer:model_proto"],
+)
+
+# Enterprise
+
+java_proto_library(
+    name = "enterprise_java_proto",
+    importpath = "com.google.retail.enterprise.pb",
+    protos = ["//api/enterprise:model_proto"],
+    deps = [
+        ":common_java_proto",
+        ":enums_java_proto",
+        ":party_java_proto",
+    ],
+)
+
+# Events
+java_proto_library(
+    name = "events_java_proto",
+    importpath = "com.google.retail.events.pb",
+    protos = ["//api/events:model_proto"],
+    deps = [
+        ":common_java_proto",
+    ],
+)
+
+java_grpc_library(
+    name = "events_java_grpc",
+    importpath = "com.google.retail.events.grpc",
+    protos = ["//api/events:service_proto"],
+    deps = [
+        ":common_java_proto",
+        ":events_java_proto",
+        "@maven//:com_google_api_grpc_proto_google_common_protos",
+    ],
+)
+
+# Location
+java_proto_library(
+    name = "location_java_proto",
+    importpath = "com.google.retail.location.pb",
+    protos = ["//api/location:model_proto"],
+    deps = [
+        ":common_java_proto",
+        ":enums_java_proto",
+    ],
+)
+
+java_grpc_library(
+    name = "location_java_grpc",
+    importpath = "com.google.retail.location.grpc",
+    protos = ["//api/location:service_proto"],
+    deps = [
+        ":common_java_proto",
+        ":enums_java_proto",
+        ":location_java_proto",
+        "@maven//:com_google_api_grpc_proto_google_common_protos",
+    ],
+)
+
+# Merchandise
+java_proto_library(
+    name = "merchandise_java_proto",
+    importpath = "com.google.retail.merchandise.pb",
+    protos = ["//api/merchandise:model_proto"],
+    deps = [
+        ":common_java_proto",
+        ":enterprise_java_proto",
+        ":enums_java_proto",
+    ],
+)
+
+# Party
+java_proto_library(
+    name = "party_java_proto",
+    importpath = "com.google.retail.party.pb",
+    protos = ["//api/party:model_proto"],
+    deps = [
+        ":common_java_proto",
+        ":enums_java_proto",
+    ],
+)
+
+# Promotions
+java_proto_library(
+    name = "promotions_java_proto",
+    importpath = "com.google.retail.promotions.pb",
+    protos = ["//api/promotions:model_proto"],
+    deps = [
+        ":enums_java_proto",
+    ],
+)

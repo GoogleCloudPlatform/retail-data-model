@@ -1,0 +1,207 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_path", "go_source")
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+load("//:build/go_deps.bzl", "COMMON_API_PROTOS", "WELL_KNOWN_TYPES")
+load("@io_bazel_rules_go//proto:def.bzl", "go_grpc_library", "go_proto_library")
+
+package(default_visibility = [
+    "//visibility:public",
+])
+
+# Enums Module
+go_proto_library(
+    name = "enums_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/enums",
+    proto = "//api/enums",
+)
+
+# Common Module
+go_proto_library(
+    name = "common_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/common/pb",
+    proto = "//api/common:model_proto",
+    deps = [
+        ":enums_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+go_grpc_library(
+    name = "common_go_grpc",
+    importpath = "github.com/rrmcguinness/retail-data-model/common/grpc",
+    protos = [
+        "//api/common:service_proto",
+    ],
+    deps = [
+        ":common_go_proto",
+        ":enums_go_proto",
+        "@go_googleapis//google/api:annotations_go_proto",
+    ],
+)
+
+# Customer Module
+go_proto_library(
+    name = "customer_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/customer/pb",
+    proto = "//api/customer:model_proto",
+    deps = WELL_KNOWN_TYPES,
+)
+
+# Enterprise Module
+go_proto_library(
+    name = "enterprise_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/enterprise/pb",
+    proto = "//api/enterprise:model_proto",
+    deps = [
+        ":enums_go_proto",
+        ":party_go_proto",
+        ":common_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+go_grpc_library(
+    name = "enterprise_go_grpc",
+    importpath = "github.com/rrmcguinness/retail-data-model/enterprise/grpc",
+    protos = [
+        "//api/enterprise:service_proto",
+    ],
+    deps = [
+        ":common_go_proto",
+        ":enterprise_go_proto",
+        "@go_googleapis//google/api:annotations_go_proto",
+    ],
+)
+
+#Events Module
+go_proto_library(
+    name = "events_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/events/pb",
+    proto = "//api/events:model_proto",
+    deps = [
+        ":common_go_proto",
+        "@go_googleapis//google/api:annotations_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+go_grpc_library(
+    name = "events_go_grpc",
+    importpath = "github.com/rrmcguinness/retail-data-model/events/grpc",
+    protos = [
+        "//api/events:service_proto",
+    ],
+    deps = [
+        ":common_go_proto",
+        ":events_go_proto",
+        "@go_googleapis//google/api:annotations_go_proto",
+    ],
+)
+
+# Location Module
+go_proto_library(
+    name = "location_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/location/pb",
+    proto = "//api/location:model_proto",
+    deps = [
+        ":enums_go_proto",
+        ":common_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+go_grpc_library(
+    name = "location_go_grpc",
+    importpath = "github.com/rrmcguinness/retail-data-model/location/grpc",
+    protos = [
+        "//api/location:service_proto",
+    ],
+    deps = [
+        ":common_go_proto",
+        ":enums_go_proto",
+        ":location_go_proto",
+        "@go_googleapis//google/api:annotations_go_proto",
+    ],
+)
+
+# Merchandise Module
+go_proto_library(
+    name = "merchandise_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/merchandise/pb",
+    proto = "//api/merchandise:model_proto",
+    deps = [
+        ":enums_go_proto",
+        ":common_go_proto",
+        ":enterprise_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+# Party Module
+go_proto_library(
+    name = "party_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/party/pb",
+    proto = "//api/party:model_proto",
+    deps = [
+        ":common_go_proto",
+        ":enums_go_proto",
+        "@go_googleapis//google/api:annotations_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+# Payments Module
+
+# Promotions Module
+go_proto_library(
+    name = "promotions_go_proto",
+    importpath = "github.com/rrmcguinness/retail-data-model/promotions/pb",
+    proto = "//api/promotions:model_proto",
+    deps = [
+        ":enums_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+# A consolidated source code group
+go_source(
+    name = "api_go_source",
+    embed = [
+        ":enums_go_proto",
+        ":common_go_proto",
+        ":customer_go_proto",
+        ":enterprise_go_proto",
+        ":events_go_proto",
+        ":location_go_proto",
+        ":merchandise_go_proto",
+        ":party_go_proto",
+        ":promotions_go_proto",
+        ":common_go_grpc",
+        ":location_go_grpc",
+        ":events_go_grpc",
+    ],
+)
+
+# A tar package used to archive the revision on build.
+# The 'remap' section is used to strip the Bazel prefix of the file group
+# to ensure the archive is a valid Go Module
+pkg_tar(
+    name = "go_api_archive",
+    srcs = [
+        "README.md",
+        "go.mod",
+        "go.sum",
+        ":api_go_source",
+    ],
+    extension = "tar.gz",
+    remap_paths = {
+        "sdk/go/README.md": "README.md",
+        "sdk/go/go.mod": "go.mod",
+        "sdk/go/go.sum": "go.sum",
+        "sdk/go/common_go_grpc_/github.com/rrmcguinness/retail-data-model/": "",
+        "sdk/go/common_go_proto_/github.com/rrmcguinness/retail-data-model/": "",
+        "sdk/go/customer_go_proto_/github.com/rrmcguinness/retail-data-model/": "",
+        "sdk/go/enterprise_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/enums_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/events_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/events_go_grpc_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/location_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/location_go_grpc_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/merchandise_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/party_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/promotions_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+    },
+    strip_prefix = "/",
+)

@@ -1,0 +1,179 @@
+/**
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.promotions.pb;
+
+// Go Lang Options
+option go_package = "github.com/rrmcguinness/retail-data-model/promotions/pb";
+
+// Java Options
+option java_package = "com.google.retail.promotions.model";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+/*
+ * A planned set of offers and activities designed to refund cash, merchandise
+ * credit, voucher , stored value instrument, etc.  to customers who purchase
+ * products and services and in so doing satisfy a set of rules defined by
+ * the RebateSponsor.
+ *
+ * Rebate programs may be sponsored by manufacturers, suppliers, utility
+ * companies, healthcare companies and public agencies or the retailer itself.
+ *
+ * Rebate programs may be designed to achieve different outcomes such as
+ * increasing sales volume, decreasing the use of electricity, gas, oil and
+ * other kinds of energy, promoting healthy living habits, etc.
+ *
+ * Rebate programs may or may not require customers to be enrolled in retailer
+ * customer membership programs (hence the optional FK to
+ * CustomerMembershipProgram).
+ *
+ */
+message RebateProgram {
+  message Sponsor {
+    string party_id = 2;
+  }
+  message Processor {
+    string party_id = 2;
+  }
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp effective_date = 3;
+  google.protobuf.Timestamp expiration_date = 4;
+  Sponsor sponsor = 5;
+  Processor processor = 6;
+}
+
+/*
+ * Optional entity that allows a given CustomerRebateAccount to be associated
+ * with more than one RebateProgram.
+ *
+ * An example of using this entity is where a manufacturer maintains a rebate
+ * program that is supplemented by a separate retailer sponsored program.
+ */
+message CustomerRebateAccountProgram {}
+
+/*
+ * A type of CustomerAccount used to accumulate purchases and other activity
+ * that determines if a customer is eligible to receive a rebate.  Retailers may
+ * establish incentive programs that track customer purchases over a designated
+ * period of time (e.g annual, quarterly, etc.) and based on meeting minimum
+ * cumulative quantity and/or monetary value, issue a rebate. This is a common
+ * incentive used in membership based retailers that require customers to pay a
+ * fee to join.  The programs may be tiered based on membership level (which
+ * varies based on periodic fees to join).  Typically this kind of program
+ * stipulates that a customer must buy some minimum value of items over a
+ * designated period of time to receive a rebate that is calculated as a
+ * percentage of the total purchase value.  In this scenario, the
+ * CustomerRebateAccount is the "container" used to accumulate the period sum of
+ * purchases. The rebate cumulative values are reset at the end of the
+ * designated rebate period (e.g. a year). As noted, this is commonly used in
+ * membership based programs and the rebate period is synchronized with the
+ * membership period (usually a year).
+ */
+message CustomerRebateAccount {
+  string id = 1;
+  string customer_id = 2;
+  repeated string rebate_program_id = 3;
+}
+
+/*
+ * A paper or electronic document or other evidence of purchase along with a set
+ * of supporting data used to substantiate a customer request for payment based
+ * on the terms and conditions offered by the rebate sponsor.  Rebate claims are
+ * submitted to a RebateProcessor to be validated, adjudicated and paid.
+ *
+ * Typically a rebate claim for a consumer is accompanied by the UPC from the
+ * product package, a copy of the retailer receipt and customer contact data
+ * (for check mailing purposes).
+ *
+ * Typically a retailer will not capture a customer-prepared rebate claim. That
+ * should be acceptable since a vendor-paid and processed rebate lies outside
+ * the retailer's accounting and financial reporting scope.  Instant rebates
+ * that involve the payment of tender to a customer by the retailer requires a
+ * claim to connect the retailer-sponsor billback, discount (or whatever vehicle
+ * used to recognize the vendor liability and expense) to a rebate program and
+ * retail transaction.
+ */
+message CustomerRebateClaim {}
+
+/*
+ * A type of CustomerRewardLineItem used to record the earning, redemption and
+ * adjustment of REBATES. CUSTOMER REBATES are rewards that a customer earns and
+ * may claim after a purchase is completed. Customer rebates may be INSTANT
+ * REBATES or DEFERRABLE REBATES.
+ *
+ * Instant rebates are earned and redeemed within the same transaction.
+ * The earning part of an instant rebate is represented by an earn activity code
+ * in the parent CustomerRewardLineItem. Instant rebates are subtracted from a
+ * purchase price after it is recorded. The rebate value is represented by a
+ * redemption/settlement CustomerRewardLineItem.
+ *
+ * An INSTANT REBATE always has two CustomerRewardLineItem and
+ * CustomerRewardRebateLineItem instances for any rebate captured as part of a
+ * retail transaction.  The first covers the earning of the rebate (which is a
+ * rebate claim).  The second is a rebate redemption/settlement which is the
+ * payment of the rebate value to the customer.  To the customer instant rebates
+ * are nearly indistinguishable from a discount.  Within the ARTS ODM instant
+ * rebates and discounts are very different concepts (see the ODM Narrative
+ * Section: Understanding Rebates for a detailed explanation).
+ *
+ * Customer Rebates may be DEFERRABLE rewards.  This means that a rebate is
+ * earned in a transaction, added to a rebate payable balance and paid to the
+ * customer at a future time through a separate transaction.
+ *
+ * Deferrable rebates will be recorded as two CustomerRewardLineItem -
+ * CustomerRewardRebateLineItem entity type instances.  The first captures the
+ * earning of a rebate.  The second captures the posting of the liability
+ * established for the future return of the rebate value to the customer.
+ */
+message CustomerRewardRebateLineItem {}
+
+/*
+ * A RebateClaim document that is issued when earned and may be redeemed in the
+ * current (as in an instant rebate) or subsequent retail transactions. This
+ * entity is a subtype of RetailTransactionDocument and represents the
+ * instantiation of a CustomerRebateClaim that is presented to a customer for
+ * their records.
+ */
+message RebateClaimDocument {}
+
+/*
+ * A person or organization that administers a rebate program on behalf of a
+ * RebateSponsor. There are many third party firms that specialize in rebate
+ * processing. They serve as the intermediary between the retailer the consumer,
+ * and the RebateSponsor.
+ */
+message RebateProcessor {}
+
+/*
+ * A person or organization that is funding a rebate program.  A RebateSponsor
+ * may be a vendor/supplier, a manufacturer or some third party like a utility
+ * or public enterprise.
+ *
+ * Examples of rebate sponsors include:
+ *
+ * Consumer product manufacturers
+ * Electric utilities
+ * Automobile manufacturers
+ * Wholesaler/suppliers
+ * The Retail Enterprise itself (note that when retailers are sponsoring rebates
+ * the accounting treatment changes since they own the liability and payment to
+ * end consumers).
+ */
+message RebateSponsor {}

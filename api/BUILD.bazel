@@ -1,0 +1,34 @@
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+
+filegroup(
+    name = "api_documents",
+    srcs = [
+        "//api/common:doc_common_model",
+        "//api/common:doc_common_service",
+        "//api/customer:doc_customer_model",
+        "//api/enterprise:doc_enterprise_model",
+        "//api/enterprise:doc_enterprise_service",
+        "//api/enums:doc_enums",
+        "//api/events:doc_events_model",
+        "//api/events:doc_events_service",
+        "//api/location:doc_location_model",
+        "//api/location:doc_location_service",
+        "//api/merchandise:doc_merchandise_model",
+        "//api/merchandise:doc_merchandise_service",
+        "//api/party:doc_party_model",
+        "//api/promotions:doc_promotions_model",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+pkg_tar(
+    name = "api_documents_tar",
+    srcs = [
+        ":api_documents",
+    ],
+    extension = ".tgz",
+    remap_paths = {
+        "/doc_": "",
+    },
+    visibility = ["//docs:__subpackages__"],
+)
