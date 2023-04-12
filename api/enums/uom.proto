@@ -173,3 +173,15 @@ enum Time {
   MONTHS = 706;
   YEARS = 707;
 }
+
+enum Clothing {
+  XXS = 0;
+  XS = 1;
+  S = 2;
+  M = 3;
+  XL = 4;
+  XXL = 5;
+  XXXL = 6;
+  XXXXL = 7;
+  XXXXXL = 8;
+}

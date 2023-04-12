@@ -81,8 +81,9 @@ message NamedMeasure {
     google.retail.enums.uom.Count count = 6;
     google.retail.enums.uom.Packaging package = 7;
     google.retail.enums.uom.Time time = 8;
+    google.retail.enums.uom.Clothing clothing = 9;
   }
-  reserved 9 to 19;
+  reserved 10 to 19;
   double size = 20;
 }
 
