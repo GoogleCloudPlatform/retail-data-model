@@ -1,0 +1,89 @@
+# gazelle:ignore
+
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+package(default_visibility = [
+    "//modules/common:__subpackages__",
+])
+
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//doc:defs.bzl", "doc_markdown_compile")
+load("//:build/go_deps.bzl", "COMMON_API_PROTOS")
+
+proto_library(
+    name = "enums",
+    srcs = [
+        "enum_climate.proto",
+        "enum_communication.proto",
+        "enum_country.proto",
+        "enum_currency.proto",
+        "enum_geography.proto",
+        "enum_language.proto",
+        "enum_locale.proto",
+        "enum_party.proto",
+        "enum_payment.proto",
+        "enum_time_zone.proto",
+        "enum_unit_of_measure.proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "model_proto",
+    srcs = [
+        "model_common.proto",
+        "model_enterprise.proto",
+        "model_party.proto",
+    ],
+    deps = [
+        ":enums",
+    ] + COMMON_API_PROTOS,
+)
+
+proto_library(
+    name = "service_proto",
+    srcs = [
+        "service_common.proto",
+        "service_enterprise.proto",
+    ],
+    deps = [
+        ":enums",
+        ":model_proto",
+    ] + COMMON_API_PROTOS,
+)
+
+doc_markdown_compile(
+    name = "doc_enums",
+    output_mode = "NO_PREFIX",
+    prefix_path = "docs/enums",
+    protos = [":enums"],
+)
+
+doc_markdown_compile(
+    name = "doc_common_model",
+    output_mode = "NO_PREFIX",
+    protos = [
+        ":model_proto",
+    ],
+)
+
+doc_markdown_compile(
+    name = "doc_common_service",
+    output_mode = "NO_PREFIX",
+    prefix_path = "docs/common",
+    protos = [
+        ":service_proto",
+    ],
+)

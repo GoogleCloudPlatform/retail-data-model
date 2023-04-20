@@ -1,0 +1,258 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package gcp.rdm.common.grpc;
+
+// Go Lang Options
+option go_package = "cloud.google.com/rdm/common/grpc";
+
+// Java Options
+option java_package = "com.google.cloud.rdm.common.grpc";
+
+import "google/api/annotations.proto";
+
+import "google/protobuf/empty.proto";
+
+import "modules/common/api/model_common.proto";
+
+import "modules/common/api/model_enterprise.proto";
+
+import "google/protobuf/field_mask.proto";
+
+service BusinessUnits {
+  rpc Create(gcp.rdm.common.pb.BusinessUnit)
+    returns (gcp.rdm.common.pb.BusinessUnit) {
+    option (google.api.http) = {
+      post: "/business_units"
+      body: "model"
+    };
+  }
+
+  rpc Update(gcp.rdm.common.pb.BusinessUnit)
+    returns (gcp.rdm.common.pb.BusinessUnit) {
+    option (google.api.http) = {
+      put: "/business_units"
+      body: "model"
+    };
+  }
+
+  rpc GetBusinessModel(gcp.rdm.common.pb.IDRequest)
+    returns (gcp.rdm.common.pb.BusinessUnit) {
+    option (google.api.http) = {
+      get: "/business_units/{id}"
+    };
+  }
+
+  rpc GetBusinessModelVersion(gcp.rdm.common.pb.VersionIDRequest)
+    returns (gcp.rdm.common.pb.BusinessUnit) {
+    option (google.api.http) = {
+      get: "/business_units/{id}/{version}"
+    };
+  }
+
+  rpc GetBusinessModelVersionHistory(gcp.rdm.common.pb.IDRequest)
+    returns (stream gcp.rdm.common.pb.BusinessUnit) {
+    option (google.api.http) = {
+      get: "/business_units/history/{id}"
+    };
+  }
+
+  rpc Delete(gcp.rdm.common.pb.BusinessUnit)
+    returns (gcp.rdm.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/business_units"
+      body: "model"
+    };
+  }
+}
+
+service MerchandiseHierarchies {
+  rpc Create(gcp.rdm.common.pb.MerchandiseHierarchy)
+    returns (gcp.rdm.common.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      post: "/merchandise_hierarchies"
+      body: "model"
+    };
+  }
+
+  rpc Update(gcp.rdm.common.pb.MerchandiseHierarchy)
+    returns (gcp.rdm.common.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      put: "/merchandise_hierarchies"
+      body: "merchandise_hierarchy"
+    };
+  }
+
+  rpc CreateChild(gcp.rdm.common.pb.MerchandiseHierarchy)
+    returns (gcp.rdm.common.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      post: "/merchandise_hierarchies/children"
+      body: "model"
+    };
+  }
+
+  rpc UpdateChild(gcp.rdm.common.pb.MerchandiseHierarchy)
+    returns (gcp.rdm.common.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      put: "/merchandise_hierarchies/children"
+      body: "model"
+    };
+  }
+
+  /*
+   * List - Finds a hierarchy by id
+   */
+  rpc GetMerchandiseHierarchy(gcp.rdm.common.pb.IDRequest)
+    returns (gcp.rdm.common.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      get: "/merchandise_hierarchies/{id}"
+    };
+  }
+
+  /*
+   * List - Provides a stream / ordered list of hierarchies.
+   */
+  rpc FindMerchandiseHierarchy(google.protobuf.FieldMask)
+    returns (stream gcp.rdm.common.pb.MerchandiseHierarchy) {
+    option (google.api.http) = {
+      get: "/merchandise_hierarchies"
+    };
+  }
+
+  rpc Delete(gcp.rdm.common.pb.MerchandiseHierarchy)
+    returns (gcp.rdm.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/merchandise_hierarchies"
+      body: "model"
+    };
+  }
+
+}
+
+service TaxCodes {
+  /*
+   * List - Provides a stream / ordered list of tax rates.
+   */
+  rpc GetTaxCodes(google.protobuf.Empty)
+    returns (stream gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes"
+    };
+  }
+
+  /*
+  List - Provides a stream / ordered list of active tax rates.
+   */
+  rpc GetTaxCode(gcp.rdm.common.pb.IDRequest)
+    returns (gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes/active/{id}"
+    };
+  }
+
+  /*
+  List - Provides a stream / tax code histories.
+   */
+  rpc GetTaxCodeVersionHistory(gcp.rdm.common.pb.IDRequest)
+    returns (stream gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes/history/{id}"
+    };
+  }
+
+  /*
+  List - Provides a stream / ordered list of countries.
+   */
+  rpc GetTaxCodeVersion(gcp.rdm.common.pb.VersionIDRequest)
+    returns (gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      get: "/tax_codes/{id}/{version}"
+    };
+  }
+
+  /*
+  Create - Adds a tax to the data store
+   */
+  rpc Create(gcp.rdm.common.pb.TaxCode)
+    returns (gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      post: "/tax_codes"
+      body: "model"
+    };
+  }
+
+  /*
+  Create - Adds a country to the data store
+   */
+  rpc CreateRate(gcp.rdm.common.pb.TaxCode.Rate)
+    returns (gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      post: "/tax_codes/rates"
+      body: "tax_code_rate"
+    };
+  }
+
+  /*
+  Update - Updates an existing tax code, and MUST increment the version
+  and effective dates
+   */
+  rpc Update(gcp.rdm.common.pb.TaxCode)
+    returns (gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      put: "/tax_codes"
+      body: "model"
+    };
+  }
+
+  /*
+  Update - Updates an existing tax code rate, and MUST increment the version
+  and effective dates
+   */
+  rpc UpdateRate(gcp.rdm.common.pb.TaxCode.Rate)
+    returns (gcp.rdm.common.pb.TaxCode) {
+    option (google.api.http) = {
+      put: "/tax_codes/rates"
+      body: "model"
+    };
+  }
+
+  /*
+  Delete - removes a country from the backing store, the implementation
+  defines the strategy.
+   */
+  rpc Delete(gcp.rdm.common.pb.TaxCode)
+    returns (gcp.rdm.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/tax_codes"
+      body: "model"
+    };
+  }
+
+  /*
+  Delete - removes a country from the backing store, the implementation
+  defines the strategy.
+   */
+  rpc DeleteRate(gcp.rdm.common.pb.TaxCode.Rate)
+    returns (gcp.rdm.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/tax_codes/{tax_code_id}/rates"
+      body: "model"
+    };
+  }
+}
+
+
+

@@ -2,6 +2,7 @@ directories:
   # Add the directories you want added as source here
   # By default, we've added your entire workspace ('.')
   .
+  -.idea
   -.github
   -.ijwb
   -third_party
@@ -17,9 +18,6 @@ derive_targets_from_directories: true
 java_language_level: 11
 
 test_sources:
-  /java/src/test/java
-  /go/test
-  /python/test
 
 targets:
   # If source code isn't resolving, add additional targets that compile it here

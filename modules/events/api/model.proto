@@ -15,13 +15,13 @@
  */
 syntax = "proto3";
 
-package google.retail.events.pb;
+package google.cloud.rdm.events.pb;
 
 // Go Lang Options
-option go_package = "github.com/rrmcguinness/retail-data-model/events/pb";
+option go_package = "cloud.google.com/rdm/events/pb";
 
 // Java Options
-option java_package = "com.google.retail.events.pb";
+option java_package = "com.google.cloud.rdm.events.pb";
 option java_multiple_files = true;
 
 import "google/protobuf/timestamp.proto";

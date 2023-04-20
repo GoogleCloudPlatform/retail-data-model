@@ -1,12 +1,12 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
-# gazelle:prefix github.com/example/project
+# gazelle:prefix github.com/GoogleCloudPlatform/retail-data-model
 gazelle(name = "gazelle")
 
 gazelle(
     name = "gazelle-update-repos",
     args = [
-        "-from_file=examples/go/go.mod",
+        "-from_file=build/go.mod",
         "-to_macro=build/go_deps.bzl%go_dependencies",
         "-prune",
     ],

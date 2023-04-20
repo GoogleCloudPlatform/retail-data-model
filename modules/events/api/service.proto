@@ -14,24 +14,22 @@
  */
 syntax = "proto3";
 
-package google.retail.events.grpc;
+package google.cloud.rdm.events.grpc;
 
 /*
  * Go Lang Options
  */
-option go_package = "github.com/rrmcguinness/retail-data-model/events/grpc";
+option go_package = "cloud.google.com/rdm/events/grpc";
 
 /*
  * Java Options
  */
-option java_package = "com.google.retail.events.grpc";
+option java_package = "com.google.cloud.rdm.events.grpc";
 option java_multiple_files = true;
 
 import "google/protobuf/empty.proto";
 
-import "api/common/model.proto";
-
-import "api/events/model.proto";
+import "modules/events/api/model.proto";
 
 import "google/api/annotations.proto";
 
@@ -43,19 +41,19 @@ service EventDescriptions {
    * Lists the Baggage Definitions
    */
   rpc List(google.protobuf.Empty)
-    returns (stream google.retail.events.pb.EventDescription) {
+    returns (stream google.cloud.rdm.events.pb.EventDescription) {
     option (google.api.http) = {
-      get: "/v2/event_descriptions"
+      get: "/v1/event_descriptions"
     };
   }
 
   /*
    * Gets an event record based on its Id.
    */
-  rpc Get(google.retail.common.pb.IDRequest)
-    returns (google.retail.events.pb.EventDescription) {
+  rpc Get(google.cloud.rdm.events.pb.IDRequest)
+    returns (google.cloud.rdm.events.pb.EventDescription) {
     option (google.api.http) = {
-      get: "/v2/event_descriptions/{id}"
+      get: "/v1/event_descriptions/{id}"
     };
   }
 

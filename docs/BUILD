@@ -23,18 +23,19 @@ hugo_theme(
     theme_name = "hugo-geekdoc",
 )
 
-genrule(
-    name = "copy_gen_files",
-    srcs = ["//api:api_documents_tar"],
-    outs = ["content/en/model"],
-    cmd = "mkdir -p $(RULEDIR)/content/en/model && tar -C $(RULEDIR)/content/en/model -zxf $(SRCS)",
-)
+#genrule(
+#    name = "copy_gen_files",
+#    srcs = ["//api:api_documents_tar"],
+#    outs = ["content/en/model"],
+#    cmd = "mkdir -p $(RULEDIR)/content/en/model && tar -C $(RULEDIR)/content/en/model -zxf $(SRCS)",
+#)
+# content  + [":copy_gen_files"],
 
 hugo_site(
     name = "docs",
     assets = glob(["assets/**"]),
     config_dir = glob(["config/**"]),
-    content = glob(["content/**"]) + [":copy_gen_files"],
+    content = glob(["content/**"]),
     data = glob(["data/**"]),
     images = glob(["images/**"]),
     layouts = glob(["layouts/**"]),
