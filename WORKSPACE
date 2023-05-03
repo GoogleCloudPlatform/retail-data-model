@@ -82,6 +82,13 @@ git_repository(
     shallow_since = "1665087085 -0700",
 )
 
+git_repository(
+    name = "protoc_gen_bq_schema",
+    commit = "8772b88ca76d3bd36233c6895cc13864a45a6cb8",
+    remote = "https://github.com/rrmcguinness/protoc-gen-bq-schema-fork",
+    shallow_since = "1682988062 -0400",
+)
+
 load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
 
 switched_rules_by_language(

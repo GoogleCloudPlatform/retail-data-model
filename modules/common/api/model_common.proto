@@ -33,6 +33,10 @@ import "modules/common/api/enum_currency.proto";
 
 import "modules/common/api/enum_unit_of_measure.proto";
 
+import "api/bq_table.proto";
+
+import "api/bq_field.proto";
+
 /*******************************************************************************
  * Common Model Objects
  *******************************************************************************/
@@ -42,18 +46,27 @@ import "modules/common/api/enum_unit_of_measure.proto";
  * and MAY be extended to add additional context values.
  */
 message AuditRecord {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_audit_record";
+
   // A UUID for the unique event
-  string id = 1;
+  string id = 1 [
+    json_name = 'id',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The date the version was created
-  google.protobuf.Timestamp created = 2 [json_name = 'cr_dt'];
+  google.protobuf.Timestamp created = 2 [
+    json_name = 'cr_dt',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
   // The type of action that was executed, example: CREATE, READ, UPDATE, DELETE
-  string action = 3;
+  string action = 3 [(gen_bq_schema.bigquery) = { require: true }];
   // The context of the action, <RECORD_TYPE>, <SERVICE_CALL_TYPE>,
-  string context = 4;
+  string context = 4 [(gen_bq_schema.bigquery) = { require: true }];
   // The executor of the action, LDAP ID, Token ID, etc.
-  string principal = 5;
+  string principal = 5 [(gen_bq_schema.bigquery) = { require: true }];
   // The origin of the action, request host, system_id, etc.
-  map<string, string> context_variables = 6;
+  map<string, string> context_variables = 6 ;
 }
 
 message AuditRecordSearchRequest {
@@ -194,22 +207,53 @@ message Currency {
  * ISO 3166-1 Country
  */
 message Country {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_countries";
+
   // A surrogate key for the country
-  string id = 1[json_name = 'id'];
+  string id = 1[
+    json_name = 'id',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The common name of the country
-  string name = 2 [json_name = 'nm'];
+  string name = 2 [
+    json_name = 'nm',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The two letter code of the country
-  string alpha2 = 3 [json_name = 'a2'];
+  string alpha2 = 3 [
+    json_name = 'a2',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The three letter code of the country
-  string alpha3 = 4 [json_name = 'a3'];
+  string alpha3 = 4 [
+    json_name = 'a3',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
   // The Numeric code for the region
-  string code = 5 [json_name = 'cd'];
+  string code = 5 [
+    json_name = 'cd',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The 3166-2 two letter alpha
-  string iso2 = 6 [json_name = 'i2'];
+  string iso2 = 6 [
+    json_name = 'i2',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The region name
-  string region = 7 [json_name = 'rgn'];
+  string region = 7 [
+    json_name = 'rgn',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
   // The sub region name
-  string sub_region = 8 [json_name = 'sub_rgn'];
+  string sub_region = 8 [
+    json_name = 'sub_rgn',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
   // The intermediate region name
   string intermediate_region = 9 [json_name = 'int_reg'];
   // The region code
@@ -224,15 +268,28 @@ message Country {
  * ISO 3166-2 Country Subdivisions
  */
 message CountrySubdivision {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_country_subdivisions";
   // The id of the country sub division
-  string id = 1 [json_name = 'id'];
+  string id = 1 [
+    json_name = 'id',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
   // The two digit code for the country
-  string country_code = 2 [json_name = 'cntry_cd'];
+  string country_code = 2 [
+    json_name = 'cntry_cd',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
   // The country subdivision full name
-  string subdivision_name = 3 [json_name = 'sub_nm'];
+  string subdivision_name = 3 [
+    json_name = 'sub_nm',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
   // The numeric code, represented as a string as it's 0(zero) left padded and
   // three characters long
-  string code = 4 [json_name = 'cd'];
+  string code = 4 [
+    json_name = 'cd',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
 }
 
 /*
@@ -240,20 +297,50 @@ message CountrySubdivision {
  * Used for weather station look-up.
  */
 message ICAOCode {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_icao_codes";
+
   // The surrogate ID for the code
-  string id = 1 [json_name = 'id'];
+  string id = 1 [
+    json_name = 'id',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The iso 3166-1 country code
-  string country_id = 2 [json_name = 'cntry_cd'];
+  string country_id = 2 [
+    json_name = 'cntry_cd',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The iso 3166-2 subdivision code
-  string country_subdivision_id = 3 [json_name = 'cntry_sub_cd'];
+  string country_subdivision_id = 3 [
+    json_name = 'cntry_sub_cd',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The name of the location
-  string location_name = 4 [json_name = 'loc_nm'];
+  string location_name = 4 [
+    json_name = 'loc_nm',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The individual station name
-  string station_name = 5 [json_name = 'stn_nm'];
+  string station_name = 5 [
+    json_name = 'stn_nm',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The type of station
-  string type = 6 [json_name = 't'];
+  string type = 6 [
+    json_name = 't',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The station key identifier
-  string station_key = 7 [json_name = 'stn_ky'];
+  string station_key = 7 [
+    json_name = 'stn_ky',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The status of the station
   string status = 8 [json_name = 'stat'];
   // The icao value
@@ -267,13 +354,28 @@ message ICAOCode {
   // Additional special indicators
   string special = 13 [json_name = 'spec'];
   // The latitude of the station
-  string latitude = 14 [json_name = 'lat'];
+  string latitude = 14 [
+    json_name = 'lat',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The longitude of the station
-  string longitude = 15 [json_name = 'lng'];
+  string longitude = 15 [
+    json_name = 'lng',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The elevation of the station in meters
-  string elevation_in_meters = 16 [json_name = 'elv'];
+  string elevation_in_meters = 16 [
+    json_name = 'elv',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
+
   // The timezone code of the station
-  string time_zone = 17 [json_name = 'tz'];
+  string time_zone = 17 [
+    json_name = 'tz',
+    (gen_bq_schema.bigquery) = { require: true }
+  ];
 }
 
 /*

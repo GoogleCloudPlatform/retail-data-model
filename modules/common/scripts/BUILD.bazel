@@ -1,0 +1,8 @@
+genrule(
+    name = "copy_schema_files",
+    srcs = [
+        "//modules/common/api:schema_files_tar",
+    ],
+    outs = ["terraform/bigquery"],
+    cmd = "mkdir -p $(RULEDIR)/terraform/bigquery && tar -C $(RULEDIR)/terraform/bigquery -zxf $(SRCS)",
+)
