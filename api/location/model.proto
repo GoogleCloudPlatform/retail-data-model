@@ -56,11 +56,12 @@ message Site {
     int32 longitude_degrees = 3 [json_name = 'lng_d'];
     int32 longitude_minutes = 4  [json_name = 'lng_m'];
     int32 longitude_seconds = 5  [json_name = 'lng_s'];
-    int32 latitude_degrees = 6  [json_name = 'lat_d'];
-    int32 latitude_minutes = 7  [json_name = 'lat_m'];
-    int32 latitude_seconds = 8  [json_name = 'lat_s'];
-    string latitude_direction_code = 9  [json_name = 'lat_dir_code'];
-    double altitude_meters = 10  [json_name = 'alt_m'];
+    string longitude_direction_code = 6  [json_name = 'lng_dir_code'];
+    int32 latitude_degrees = 7  [json_name = 'lat_d'];
+    int32 latitude_minutes = 8  [json_name = 'lat_m'];
+    int32 latitude_seconds = 9  [json_name = 'lat_s'];
+    string latitude_direction_code = 10  [json_name = 'lat_dir_code'];
+    double altitude_meters = 11  [json_name = 'alt_m'];
   }
 
   google.retail.common.pb.VersionID id = 1 [json_name = "id"];
