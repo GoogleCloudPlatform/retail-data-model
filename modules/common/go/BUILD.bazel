@@ -16,6 +16,13 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("//:build/go_deps.bzl", "COMMON_API_PROTOS", "WELL_KNOWN_TYPES")
 load("@io_bazel_rules_go//proto:def.bzl", "go_grpc_library", "go_proto_library")
 
+go_proto_library(
+    name = "bq_protogen_go_proto",
+    importpath = "github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos",
+    proto = "@protoc_gen_bq_schema//api:bq_schema_proto_lib",
+    visibility = ["//modules/common:__subpackages__"],
+)
+
 # Enums
 go_proto_library(
     name = "enums_go_proto",
@@ -32,6 +39,7 @@ go_proto_library(
     visibility = ["//modules/common:__subpackages__"],
     deps = [
         ":enums_go_proto",
+        ":bq_protogen_go_proto",
     ] + WELL_KNOWN_TYPES,
 )
 

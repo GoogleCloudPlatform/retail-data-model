@@ -31,7 +31,11 @@ import "modules/common/api/enum_currency.proto";
 import "modules/common/api/enum_party.proto";
 import "modules/common/api/enum_language.proto";
 
+import "api/bq_table.proto";
+import "api/bq_field.proto";
+
 message PartyTemplate {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_party_template";
   enum Type {
     PERSON = 0;
     ORGANIZATION = 1;
@@ -62,9 +66,36 @@ message FieldValue {
  * tender and/or goods and *services with a retailer.
  */
 message Party {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_party";
   gcp.rdm.common.pb.VersionID id = 1;
   string party_template_id = 2;
   int32 path_template_version = 3;
+  PartyDemographics demographics = 4;
+}
+
+message PartyDemographics {
+  gcp.rdm.common.enums.party.Gender gender = 1;
+  gcp.rdm.common.enums.party.Pronoun pronoun = 2;
+  gcp.rdm.common.enums.party.MaritalStatus marital_status = 3;
+  gcp.rdm.common.enums.party.LifeStage life_stage = 4;
+  gcp.rdm.common.enums.party.Race race = 5;
+  gcp.rdm.common.enums.party.Ethnicity ethnicity = 6;
+  gcp.rdm.common.enums.party.ReligionGroup religion_group = 7;
+  gcp.rdm.common.enums.party.Religion religion = 8;
+  gcp.rdm.common.enums.party.EmploymentStatus employment_status = 9;
+  gcp.rdm.common.enums.party.Occupation occupation = 10;
+  gcp.rdm.common.enums.currency.Currency primary_currency = 11;
+  reserved 12 to 99;
+  string annual_income_range = 100;
+  string disability_impairment_type = 101;
+  string personality_type = 102;
+  string lifestyle_type = 103;
+  string personal_value_type = 104;
+  string value_attitude_lifestyle_type = 105;
+  string dietary_habit_type = 106;
+  string consumer_credit_score = 107;
+  string consumer_credit_rating_service_name = 108;
+  reserved 109 to 300;
 }
 
 /*
@@ -229,29 +260,7 @@ message Person {
   string sorting_name = 11;
   string mailing_name = 12;
   string official_name = 13;
-  reserved 14 to 29;
-  gcp.rdm.common.enums.party.Gender gender = 30;
-  gcp.rdm.common.enums.party.Pronoun pronoun = 31;
-  gcp.rdm.common.enums.party.MaritalStatus marital_status = 32;
-  gcp.rdm.common.enums.party.LifeStage life_stage = 33;
-  gcp.rdm.common.enums.party.Race race = 34;
-  gcp.rdm.common.enums.party.Ethnicity ethnicity = 35;
-  gcp.rdm.common.enums.party.ReligionGroup religion_group = 36;
-  gcp.rdm.common.enums.party.Religion religion = 37;
-  gcp.rdm.common.enums.party.EmploymentStatus employment_status = 38;
-  gcp.rdm.common.enums.party.Occupation occupation = 39;
-  gcp.rdm.common.enums.currency.Currency primary_currency = 40;
-  reserved 41 to 99;
-  string annual_income_range = 100;
-  string disability_impairment_type = 101;
-  string personality_type = 102;
-  string lifestyle_type = 103;
-  string personal_value_type = 104;
-  string value_attitude_lifestyle_type = 105;
-  string dietary_habit_type = 106;
-  string consumer_credit_score = 107;
-  string consumer_credit_rating_service_name = 108;
-  reserved 109 to 199;
+  reserved 14 to 199;
   map<string, string> additional_dimensions = 200;
 }
 
