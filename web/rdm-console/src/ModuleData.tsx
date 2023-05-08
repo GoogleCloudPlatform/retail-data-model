@@ -25,4 +25,14 @@ export const ModuleData: Array<RDMModule> = [
     features: [],
     terraformProperties: []
   },
+  {
+    name: "Events",
+    version: "1.0.0",
+    banner: 'assets/images/rdm-common.png',
+    bannerAlt: 'Retail Data Model Events',
+    description: "The common events ",
+    detailMarkdown: "",
+    features: [],
+    terraformProperties: []
+  },
 ];
