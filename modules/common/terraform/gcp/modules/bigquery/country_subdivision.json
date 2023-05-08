@@ -1,0 +1,30 @@
+[
+  {
+    "name": "id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The surrogate id",
+    "maxLength": "36"
+  },
+  {
+    "name": "country_code",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The code reference to the countries table.",
+    "maxLength": "10"
+  },
+  {
+    "name": "subdivision_name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "the name of the subdivision",
+    "maxLength": "64"
+  },
+  {
+    "name": "code",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Subdivision code",
+    "maxLength": "10"
+  }
+]

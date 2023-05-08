@@ -1,0 +1,86 @@
+[
+  {
+    "name": "id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "a UUID surrogate key",
+    "maxLength": "36"
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Country name",
+    "maxLength": "64"
+  },
+  {
+    "name": "alpha_2",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The alpha 2 code",
+    "maxLength": "2"
+  },
+  {
+    "name": "alpha_3",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The alpha 3 code",
+    "maxLength": "3"
+  },
+  {
+    "name": "code",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Country Code",
+    "maxLength": "10"
+  },
+  {
+    "name": "iso2",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The ISO 2 Code",
+    "maxLength": "2"
+  },
+  {
+    "name": "region",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The region name",
+    "maxLength": "64"
+  },
+  {
+    "name": "sub_region",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The subregion name",
+    "maxLength": "64"
+  },
+  {
+    "name": "intermediate_region",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "the intermediate region name",
+    "maxLength": "64"
+  },
+  {
+    "name": "region_code",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The region code",
+    "maxLength": "10"
+  },
+  {
+    "name": "sub_region_code",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The sub region code",
+    "maxLength": "10"
+  },
+  {
+    "name": "intermediate_region_code",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The intermediate region code\n",
+    "maxLength": "10"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The id of the transaction",
+    "maxLength": "36"
+  },
+  {
+    "name": "created",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "The timestamp of the event"
+  },
+  {
+    "name": "observed",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "The timestamp the event was recorded"
+  },
+  {
+    "name": "context",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The context / application id of the event",
+    "maxLength": "64"
+  },
+  {
+    "name": "principal",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The system or user surrogate identifier",
+    "maxLength": "256"
+  },
+  {
+    "name": "context_variables",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Context variables in key value format",
+    "fields": [
+      {
+        "name": "key",
+        "type": "STRING",
+        "mode": "REQUIRED",
+        "description": "The name of the key",
+        "maxLength": "128"
+      },
+      {
+        "name": "value",
+        "type": "STRING",
+        "mode": "REQUIRED",
+        "description": "value of the system defined key"
+      }
+    ]
+  }
+]

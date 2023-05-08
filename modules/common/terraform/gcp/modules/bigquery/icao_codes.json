@@ -1,0 +1,114 @@
+[
+  {
+    "name": "id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "36"
+  },
+  {
+    "name": "country_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "36"
+  },
+  {
+    "name": "country_subdivision_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "36"
+  },
+  {
+    "name": "location_name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "128"
+  },
+  {
+    "name": "type",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "station_key",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "24"
+  },
+  {
+    "name": "status",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "icao",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "national_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "wmo",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "ghnc",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "special",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "latitude",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "36"
+  },
+  {
+    "name": "longitude",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "36"
+  },
+  {
+    "name": "elevation_in_meters",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "10"
+  },
+  {
+    "name": "timezone",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Surrogate key",
+    "maxLength": "12"
+  }
+]
