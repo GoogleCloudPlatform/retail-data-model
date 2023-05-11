@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary")
+
+go_binary(
+    name = "cmd",
+    srcs = [
+        "bq_terraform_generator.go",
+        "protoc-gen-bq-terraform.go",
+    ],
+    out = "protoc-gen-bq-terraform",
+    visibility = ["//visibility:public"],
+)

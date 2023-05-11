@@ -20,9 +20,10 @@ package(default_visibility = [
 
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_proto_grpc//doc:defs.bzl", "doc_markdown_compile")
-load("@protoc_gen_bq_schema//:defs.bzl", "bq_schema_compile")
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 load("//:build/go_deps.bzl", "COMMON_API_PROTOS")
+load("@protoc_gen_bq_schema//:defs.bzl", "bq_schema_compile")
+load("//tools/protoc-gen-bq-terraform:protoc-gen-bq-terraform-rule.bzl", "gen_terraform")
 
 proto_library(
     name = "enums",
@@ -81,6 +82,24 @@ bq_schema_compile(
     ],
 )
 
+filegroup(
+    name = "schema_files",
+    srcs = [
+        ":schemas",
+    ],
+)
+
+gen_terraform(
+    name = "protoc-gen-bq-terraform",
+    srcs = [":schema_files"],
+    access_owner = "rmcguinness@google.com",
+    access_reader_domain = "google.com",
+    cmd = "//tools/protoc-gen-bq-terraform/cmd",
+    dataset_id = "ds_common",
+    debug = True,
+    time_partition_type = "DAY",
+)
+
 doc_markdown_compile(
     name = "doc_common_model",
     output_mode = "NO_PREFIX",
@@ -115,16 +134,10 @@ pkg_tar(
     visibility = ["//visibility:public"],
 )
 
-filegroup(
-    name = "schema_files",
-    srcs = [
-        ":schemas",
-    ],
-)
-
 pkg_tar(
     name = "schema_files_tar",
     srcs = [":schema_files"],
     extension = ".tgz",
+    strip_prefix = "schemas",
     visibility = ["//visibility:public"],
 )

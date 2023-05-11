@@ -89,6 +89,11 @@ git_repository(
     shallow_since = "1682988062 -0400",
 )
 
+git_repository(
+    name = "protoc-gen-parser",
+    remote = "https://github.com/rrmcguinness/protoc-gen-parser",
+)
+
 load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
 
 switched_rules_by_language(

@@ -1,0 +1,16 @@
+load(":protoc-gen-bq-terraform-rule.bzl", "gen_terraform")
+
+filegroup(
+    name = "schemas",
+    srcs = [":tbl_audit_record.schema"],
+)
+
+gen_terraform(
+    name = "protoc-gen-bq-terraform",
+    srcs = [":schemas"],
+    access_owner = "rmcguinness@google.com",
+    access_reader_domain = "google.com",
+    cmd = "//tools/protoc-gen-bq-terraform/cmd",
+    dataset_id = "ds_common",
+    time_partition_type = "DAY",
+)
