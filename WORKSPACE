@@ -22,24 +22,23 @@ workspace(name = "google_retail_cloud_api")
 ###############################################################################
 
 # Go Language Variables
-RULES_GO_VERSION = "1.19.4"
+RULES_GO_VERSION = "1.21.0"
 
 # Java Variables
-RULES_JVM_EXTERNAL_TAG = "4.2"
-
-RULES_JVM_EXTERNAL_SHA = "cd1a77b7b02e8e008439ca76fd34f5b07aecb8c752961f9640dea15e9e5ba1ca"
+RULES_JVM_EXTERNAL_TAG = "5.3"
+RULES_JVM_EXTERNAL_SHA ="d31e369b854322ca5098ea12c69d7175ded971435e55c18dd9dd5f29cc5249ac"
 
 # The maven dependencies of the project, this DOES NOT include the JUNIT 5
 # dependencies, please see the //build/junit.bzl file.
 PROJECT_MAVEN_DEPENDENCIES = [
-    "org.apache.commons:commons-lang3:3.12.0",
-    "com.google.protobuf:protobuf-java-util:3.21.7",
-    "io.grpc:grpc-core:1.49.2",
-    "io.grpc:grpc-googleapis:1.49.2",
-    "io.grpc:grpc-netty-shaded:1.49.2",
-    "io.grpc:grpc-protobuf:1.49.2",
-    "io.grpc:grpc-stub:1.49.2",
-    "io.grpc:grpc-testing:1.49.2",
+    "org.apache.commons:commons-lang3:3.13.0",
+    "com.google.protobuf:protobuf-java-util:3.24.0",
+    "io.grpc:grpc-core:1.57.1",
+    "io.grpc:grpc-googleapis:1.57.1",
+    "io.grpc:grpc-netty-shaded:1.57.1",
+    "io.grpc:grpc-protobuf:1.57.1",
+    "io.grpc:grpc-stub:1.57.1",
+    "io.grpc:grpc-testing:1.57.1",
     "org.apache.tomcat:annotations-api:6.0.53",
     "org.apache.logging.log4j:log4j-api:2.18.0",
     "org.apache.logging.log4j:log4j-core:2.18.0",
@@ -94,9 +93,9 @@ switched_rules_by_language(
 
 http_archive(
     name = "rules_proto_grpc",
-    sha256 = "bbe4db93499f5c9414926e46f9e35016999a4e9f6e3522482d3760dc61011070",
-    strip_prefix = "rules_proto_grpc-4.2.0",
-    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.2.0.tar.gz"],
+    sha256 = "b244cbede34638ad0e1aec0769f62b8348c7ed71f431a027e252a07d6adba3d6",
+    strip_prefix = "rules_proto_grpc-4.4.0",
+    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.4.0.tar.gz"],
 )
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
@@ -121,23 +120,23 @@ rules_proto_grpc_doc_repos()
 
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "099a9fb96a376ccbbb7d291ed4ecbdfd42f6bc822ab77ae6f1b5cb9e914e94fa",
+    sha256 = "278b7ff5a826f3dc10f04feaf0b70d48b68748ccd512d7f98bf442077f043fe3",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.35.0/rules_go-v0.35.0.zip",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.35.0/rules_go-v0.35.0.zip",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.41.0/rules_go-v0.41.0.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.41.0/rules_go-v0.41.0.zip",
     ],
 )
 
 http_archive(
     name = "bazel_gazelle",
-    sha256 = "efbbba6ac1a4fd342d5122cbdfdb82aeb2cf2862e35022c752eaddffada7c3f3",
+    sha256 = "29218f8e0cebe583643cbf93cae6f971be8a2484cdcfa1e45057658df8d54002",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.27.0/bazel-gazelle-v0.27.0.tar.gz",
-        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.27.0/bazel-gazelle-v0.27.0.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.32.0/bazel-gazelle-v0.32.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.32.0/bazel-gazelle-v0.32.0.tar.gz",
     ],
 )
 
-load("@rules_proto_grpc//:repositories.bzl", "bazel_gazelle", "io_bazel_rules_go")  # buildifier: disable=same-origin-load
+load("@rules_proto_grpc//:repositories.bzl", "io_bazel_rules_go")  # buildifier: disable=same-origin-load
 
 io_bazel_rules_go()
 
@@ -166,10 +165,9 @@ go_dependencies()
 # External JDK
 http_archive(
     name = "rules_jvm_external",
-    sha256 = RULES_JVM_EXTERNAL_SHA,
     strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
-    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" %
-          RULES_JVM_EXTERNAL_TAG,
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    url = "https://github.com/bazelbuild/rules_jvm_external/releases/download/%s/rules_jvm_external-%s.tar.gz" % (RULES_JVM_EXTERNAL_TAG, RULES_JVM_EXTERNAL_TAG)
 )
 
 load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")

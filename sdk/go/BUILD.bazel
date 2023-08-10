@@ -33,7 +33,6 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":enums_go_proto",
-        "@go_googleapis//google/api:annotations_go_proto",
     ],
 )
 
@@ -66,7 +65,6 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":enterprise_go_proto",
-        "@go_googleapis//google/api:annotations_go_proto",
     ],
 )
 
@@ -77,7 +75,6 @@ go_proto_library(
     proto = "//api/events:model_proto",
     deps = [
         ":common_go_proto",
-        "@go_googleapis//google/api:annotations_go_proto",
     ] + WELL_KNOWN_TYPES,
 )
 
@@ -90,7 +87,6 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":events_go_proto",
-        "@go_googleapis//google/api:annotations_go_proto",
     ],
 )
 
@@ -115,7 +111,6 @@ go_grpc_library(
         ":common_go_proto",
         ":enums_go_proto",
         ":location_go_proto",
-        "@go_googleapis//google/api:annotations_go_proto",
     ],
 )
 
@@ -139,7 +134,6 @@ go_proto_library(
     deps = [
         ":common_go_proto",
         ":enums_go_proto",
-        "@go_googleapis//google/api:annotations_go_proto",
     ] + WELL_KNOWN_TYPES,
 )
 
