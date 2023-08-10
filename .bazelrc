@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cc_toolchain_suite(
-  name = "toolchain",
-  toolchains = {
-    "compiler": "clang",
-    "compiler_version": "12.0.0",
-  },
-)
-
 try-import %workspace%/user.bazelrc
 
 build --java_language_version=11

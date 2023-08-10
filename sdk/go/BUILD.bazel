@@ -33,7 +33,7 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":enums_go_proto",
-    ],
+    ] + WELL_KNOWN_TYPES,
 )
 
 # Customer Module
@@ -65,7 +65,7 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":enterprise_go_proto",
-    ],
+    ]+ WELL_KNOWN_TYPES,
 )
 
 #Events Module
@@ -87,7 +87,7 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":events_go_proto",
-    ],
+    ]+ WELL_KNOWN_TYPES,
 )
 
 # Location Module
@@ -111,7 +111,7 @@ go_grpc_library(
         ":common_go_proto",
         ":enums_go_proto",
         ":location_go_proto",
-    ],
+    ]+ WELL_KNOWN_TYPES,
 )
 
 # Merchandise Module
