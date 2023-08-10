@@ -10,4 +10,6 @@ gcloud
 
 protobuf
 
+grpclib
 grpcio
+grpcio-tools

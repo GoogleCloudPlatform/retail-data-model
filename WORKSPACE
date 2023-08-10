@@ -47,11 +47,6 @@ PROJECT_MAVEN_DEPENDENCIES = [
     "io.netty:netty-all:4.1.79.Final",
 ]
 
-# Python Rules
-RULES_PYTHON_VERSION = "3.9"
-
-RULES_PYTHON_REVISION = "740825b7f74930c62f44af95c9a4c1bd428d2c53"
-
 # Hugo Documentation Variables
 RULES_HUGO_COMMIT = "02234789fa9f2112807c1642eacb9f9728fc179d"
 
@@ -74,11 +69,13 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 # GRPC Tool Chain
 ###############################################################################
 
-git_repository(
+http_archive(
     name = "com_google_googleapis",
-    commit = "59b73bd6f7c00dc5af895414c444b08055849bdf",
-    remote = "https://github.com/googleapis/googleapis",
-    shallow_since = "1665087085 -0700",
+    sha256 = "9d1a930e767c93c825398b8f8692eca3fe353b9aaadedfbcf1fca2282c85df88",
+    strip_prefix = "googleapis-64926d52febbf298cb82a8f472ade4a3969ba922",
+    urls = [
+        "https://github.com/googleapis/googleapis/archive/64926d52febbf298cb82a8f472ade4a3969ba922.zip",
+    ],
 )
 
 load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
@@ -93,21 +90,17 @@ switched_rules_by_language(
 
 http_archive(
     name = "rules_proto_grpc",
-    sha256 = "b244cbede34638ad0e1aec0769f62b8348c7ed71f431a027e252a07d6adba3d6",
-    strip_prefix = "rules_proto_grpc-4.4.0",
-    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.4.0.tar.gz"],
+    sha256 = "bbe4db93499f5c9414926e46f9e35016999a4e9f6e3522482d3760dc61011070",
+    strip_prefix = "rules_proto_grpc-4.2.0",
+    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.2.0.tar.gz"],
 )
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
-
 rules_proto_grpc_toolchains()
-
 rules_proto_grpc_repos()
 
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-
 rules_proto_dependencies()
-
 rules_proto_toolchains()
 
 load("@rules_proto_grpc//doc:repositories.bzl", rules_proto_grpc_doc_repos = "doc_repos")
@@ -126,6 +119,9 @@ http_archive(
         "https://github.com/bazelbuild/rules_go/releases/download/v0.41.0/rules_go-v0.41.0.zip",
     ],
 )
+load("@io_bazel_rules_go//go:deps.bzl", "go_rules_dependencies", "go_register_toolchains")
+go_rules_dependencies()
+go_register_toolchains(version = RULES_GO_VERSION)
 
 http_archive(
     name = "bazel_gazelle",
@@ -137,18 +133,12 @@ http_archive(
 )
 
 load("@rules_proto_grpc//:repositories.bzl", "io_bazel_rules_go")  # buildifier: disable=same-origin-load
-
 io_bazel_rules_go()
 
 load("@rules_proto_grpc//go:repositories.bzl", rules_proto_grpc_go_repos = "go_repos")
-
 rules_proto_grpc_go_repos()
 
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
-go_rules_dependencies()
-
-go_register_toolchains(version = RULES_GO_VERSION)
 
 ###############################################################################
 # Gazelle Dependencies
@@ -196,9 +186,7 @@ maven_install(
 )
 
 load("@maven//:compat.bzl", "compat_repositories")
-
 compat_repositories()
-
 grpc_java_repositories()
 
 ###############################################################################
@@ -217,23 +205,22 @@ junit_platform_java_repositories()
 ###############################################################################
 # Python Tool Chain
 ###############################################################################
+
 http_archive(
     name = "rules_python",
-    sha256 = "3474c5815da4cb003ff22811a36a11894927eda1c2e64bf2dac63e914bfdf30f",
-    strip_prefix = "rules_python-{}".format(RULES_PYTHON_REVISION),
-    url = "https://github.com/bazelbuild/rules_python/archive/{}.zip".format(RULES_PYTHON_REVISION),
+    sha256 = "0a8003b044294d7840ac7d9d73eef05d6ceb682d7516781a4ec62eeb34702578",
+    strip_prefix = "rules_python-0.24.0",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.24.0/rules_python-0.24.0.tar.gz",
 )
 
 load("@rules_python//python:repositories.bzl", "python_register_toolchains")
 
 python_register_toolchains(
-    name = "python_toolchain",
-    # Available versions are listed in @rules_python//python:versions.bzl.
-    # We recommend using the same version your team is already standardized on.
-    python_version = RULES_PYTHON_VERSION,
+    name = "python_3_11",
+    python_version = "3.10",
 )
 
-load("@python_toolchain//:defs.bzl", "interpreter")
+load("@python_3_11//:defs.bzl", "interpreter")
 load("@rules_python//python:pip.bzl", "pip_parse")
 
 pip_parse(
@@ -247,12 +234,16 @@ load("@python_deps//:requirements.bzl", "install_deps")
 install_deps()
 
 load("@rules_proto_grpc//python:repositories.bzl", rules_proto_grpc_python_repos = "python_repos")
-
 rules_proto_grpc_python_repos()
 
-load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+load("@com_github_grpc_grpc//bazel:grpc_python_deps.bzl", "grpc_python_deps")
+grpc_python_deps()
 
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
 grpc_deps()
+
+#load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
+#grpc_extra_deps()
 
 ###############################################################################
 # Rules Package for Tar

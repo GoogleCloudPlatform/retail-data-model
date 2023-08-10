@@ -1,6 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_path", "go_source")
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
-load("//:build/go_deps.bzl", "COMMON_API_PROTOS", "WELL_KNOWN_TYPES")
+load("//:build/go_deps.bzl", "WELL_KNOWN_TYPES")
 load("@io_bazel_rules_go//proto:def.bzl", "go_grpc_library", "go_proto_library")
 
 package(default_visibility = [
