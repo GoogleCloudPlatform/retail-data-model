@@ -43,7 +43,6 @@ PROJECT_MAVEN_DEPENDENCIES = [
     "org.apache.logging.log4j:log4j-api:2.18.0",
     "org.apache.logging.log4j:log4j-core:2.18.0",
     "com.google.protobuf:protoc:3.21.5",
-    "com.google.code.gson:gson:2.9.0",
     "io.netty:netty-all:4.1.79.Final",
 ]
 
@@ -90,12 +89,12 @@ switched_rules_by_language(
 
 http_archive(
     name = "rules_proto_grpc",
-    sha256 = "bbe4db93499f5c9414926e46f9e35016999a4e9f6e3522482d3760dc61011070",
-    strip_prefix = "rules_proto_grpc-4.2.0",
-    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.2.0.tar.gz"],
+    sha256 = "928e4205f701b7798ce32f3d2171c1918b363e9a600390a25c876f075f1efc0a",
+    strip_prefix = "rules_proto_grpc-4.4.0",
+    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/releases/download/4.4.0/rules_proto_grpc-4.4.0.tar.gz"],
 )
 
-load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
+load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_toolchains", "rules_proto_grpc_repos")
 rules_proto_grpc_toolchains()
 rules_proto_grpc_repos()
 
@@ -216,11 +215,26 @@ http_archive(
 load("@rules_python//python:repositories.bzl", "python_register_toolchains")
 
 python_register_toolchains(
-    name = "python_3_11",
-    python_version = "3.10",
+    name = "python311",
+    python_version = "3.11.4",
+    tool_versions = {
+        "3.11.4": {
+        "url": "20230726/cpython-{python_version}+20230726-{platform}-{build}.tar.gz",
+        "sha256": {
+            "aarch64-apple-darwin": "cb6d2948384a857321f2aa40fa67744cd9676a330f08b6dad7070bda0b6120a4",
+            "aarch64-unknown-linux-gnu": "2e84fc53f4e90e11963281c5c871f593abcb24fc796a50337fa516be99af02fb",
+            "ppc64le-unknown-linux-gnu": "df7b92ed9cec96b3bb658fb586be947722ecd8e420fb23cee13d2e90abcfcf25",
+            "s390x-unknown-linux-gnu": "e477f0749161f9aa7887964f089d9460a539f6b4a8fdab5166f898210e1a87a4",
+            "x86_64-apple-darwin": "47e1557d93a42585972772e82661047ca5f608293158acb2778dccf120eabb00",
+            "x86_64-pc-windows-msvc": "878614c03ea38538ae2f758e36c85d2c0eb1eaaca86cd400ff8c76693ee0b3e1",
+            "x86_64-unknown-linux-gnu": "e26247302bc8e9083a43ce9e8dd94905b40d464745b1603041f7bc9a93c65d05",
+        },
+        "strip_prefix": "python",
+    },
+    }
 )
 
-load("@python_3_11//:defs.bzl", "interpreter")
+load("@python311//:defs.bzl", "interpreter")
 load("@rules_python//python:pip.bzl", "pip_parse")
 
 pip_parse(
