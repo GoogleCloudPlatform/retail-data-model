@@ -1,4 +1,6 @@
-Cython
+Cython==0.29.20
+
+coverage
 
 # Scipy and Numpy for examples
 scipy
@@ -8,8 +10,9 @@ numpy
 google-api-python-client
 gcloud
 
-protobuf
 
 grpclib
 grpcio
 grpcio-tools
+
+wheel
