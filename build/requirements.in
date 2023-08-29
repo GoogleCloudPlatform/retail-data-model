@@ -10,8 +10,7 @@ numpy
 google-api-python-client
 gcloud
 
-
-grpclib
+grpclib==0.4.3
 grpcio
 grpcio-tools
 
