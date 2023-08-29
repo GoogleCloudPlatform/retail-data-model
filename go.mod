@@ -1,11 +1,11 @@
 module github.com/rrmcguinness/retail-data-model
 
-go 1.19
+go 1.21
 
 require (
-	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013
-	google.golang.org/grpc v1.49.0
-	google.golang.org/protobuf v1.28.1
+	google.golang.org/genproto v0.0.0-20230807174057-1744710a1577
+	google.golang.org/grpc v1.57.0
+	google.golang.org/protobuf v1.31.0
 )
 
 require (
