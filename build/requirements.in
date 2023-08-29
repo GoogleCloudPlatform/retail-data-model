@@ -1,3 +1,5 @@
+wheel
+
 Cython
 
 coverage
@@ -10,8 +12,6 @@ numpy
 google-api-python-client
 gcloud
 
-grpclib==0.4.3
+grpclib
 grpcio
 grpcio-tools
-
-wheel
