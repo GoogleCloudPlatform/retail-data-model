@@ -12,32 +12,64 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-workspace(name = "google_retail_data_model")
+workspace(name = "google_retail_cloud_api")
+
+###############################################################################
+# Begin: Build Variables
+#
+# These variable represent the major flags that MAY be changed to support
+# different environments.
+###############################################################################
+
+# Go Language Variables
+RULES_GO_VERSION = "1.21.0"
+
+# Java Variables
+RULES_JVM_EXTERNAL_TAG = "5.3"
+RULES_JVM_EXTERNAL_SHA ="d31e369b854322ca5098ea12c69d7175ded971435e55c18dd9dd5f29cc5249ac"
+
+# The maven dependencies of the project, this DOES NOT include the JUNIT 5
+# dependencies, please see the //build/junit.bzl file.
+PROJECT_MAVEN_DEPENDENCIES = [
+    "org.apache.commons:commons-lang3:3.13.0",
+    "com.google.protobuf:protobuf-java-util:3.24.0",
+    "io.grpc:grpc-core:1.57.1",
+    "io.grpc:grpc-googleapis:1.57.1",
+    "io.grpc:grpc-netty-shaded:1.57.1",
+    "io.grpc:grpc-protobuf:1.57.1",
+    "io.grpc:grpc-stub:1.57.1",
+    "io.grpc:grpc-testing:1.57.1",
+    "org.apache.tomcat:annotations-api:6.0.53",
+    "org.apache.logging.log4j:log4j-api:2.18.0",
+    "org.apache.logging.log4j:log4j-core:2.18.0",
+    "com.google.protobuf:protoc:3.21.5",
+    "io.netty:netty-all:4.1.79.Final",
+]
+
+# Hugo Documentation Variables
+RULES_HUGO_COMMIT = "02234789fa9f2112807c1642eacb9f9728fc179d"
+
+RULES_HUGO_SHA256 = "4ce20c981ad50ac0c956e85ef991e59b204778bde59d81e40be05450259ae969"
+
+RULES_HUGO_VERSION = "0.101.0"
+
+HUGO_THEME_SHA256 = "7fdd57f7d4450325a778629021c0fff5531dc8475de6c4ec70ab07e9484d400e"
+
+HUGO_THEME_URL = "https://github.com/thegeeklab/hugo-geekdoc/releases/download/v0.34.2/hugo-geekdoc.tar.gz"
+
+###############################################################################
+# End: Build Variables
+###############################################################################
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 ###############################################################################
-# Skylib Tool Chain
-###############################################################################
-http_archive(
-    name = "bazel_skylib",
-    sha256 = "66ffd9315665bfaafc96b52278f57c7e2dd09f5ede279ea6d39b2be471e7e3aa",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.4.2/bazel-skylib-1.4.2.tar.gz",
-        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.4.2/bazel-skylib-1.4.2.tar.gz",
-    ],
-)
-
-load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
-bazel_skylib_workspace()
-
-###############################################################################
-# Google APIs
+# GRPC Tool Chain
 ###############################################################################
 
 http_archive(
     name = "com_google_googleapis",
-    sha256 = "b6df9ed89f7eaa990c6a0928638cf0ef3943fbd592847c3a461c211ee502999d",
+    
     strip_prefix = "googleapis-cd13ca4fd9ae6d280d3a7c05f69ed832c2a66315",
     urls = [
         "https://github.com/googleapis/googleapis/archive/cd13ca4fd9ae6d280d3a7c05f69ed832c2a66315.zip",
@@ -45,24 +77,20 @@ http_archive(
 )
 
 load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
+
 switched_rules_by_language(
     name = "com_google_googleapis_imports",
-    cc = True,
     go = True,
     grpc = True,
     java = True,
     python = True,
 )
 
-###############################################################################
-# GRPC Tool Chain
-###############################################################################
-
 http_archive(
     name = "rules_proto_grpc",
-    sha256 = "928e4205f701b7798ce32f3d2171c1918b363e9a600390a25c876f075f1efc0a",
-    strip_prefix = "rules_proto_grpc-4.4.0",
-    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/releases/download/4.4.0/rules_proto_grpc-4.4.0.tar.gz"],
+    sha256 = "bbe4db93499f5c9414926e46f9e35016999a4e9f6e3522482d3760dc61011070",
+    strip_prefix = "rules_proto_grpc-4.2.0",
+    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/refs/tags/4.2.0.tar.gz"],
 )
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_toolchains", "rules_proto_grpc_repos")
@@ -76,99 +104,81 @@ rules_proto_toolchains()
 load("@rules_proto_grpc//doc:repositories.bzl", rules_proto_grpc_doc_repos = "doc_repos")
 rules_proto_grpc_doc_repos()
 
-load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
-grpc_deps()
-
 ###############################################################################
 # GO Tool Chain
 ###############################################################################
 
 http_archive(
-  name = "io_bazel_rules_go",
-  sha256 = "51dc53293afe317d2696d4d6433a4c33feedb7748a9e352072e2ec3c0dafd2c6",
-  urls = [
-      "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.40.1/rules_go-v0.40.1.zip",
-      "https://github.com/bazelbuild/rules_go/releases/download/v0.40.1/rules_go-v0.40.1.zip",
-  ],
+    name = "io_bazel_rules_go",
+    sha256 = "278b7ff5a826f3dc10f04feaf0b70d48b68748ccd512d7f98bf442077f043fe3",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.41.0/rules_go-v0.41.0.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.41.0/rules_go-v0.41.0.zip",
+    ],
 )
-
 load("@io_bazel_rules_go//go:deps.bzl", "go_rules_dependencies", "go_register_toolchains")
 go_rules_dependencies()
-go_register_toolchains(version = "1.20.7")
+go_register_toolchains(version = RULES_GO_VERSION)
 
 http_archive(
     name = "bazel_gazelle",
-    sha256 = "727f3e4edd96ea20c29e8c2ca9e8d2af724d8c7778e7923a854b2c80952bc405",
+    sha256 = "29218f8e0cebe583643cbf93cae6f971be8a2484cdcfa1e45057658df8d54002",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.30.0/bazel-gazelle-v0.30.0.tar.gz",
-        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.30.0/bazel-gazelle-v0.30.0.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.32.0/bazel-gazelle-v0.32.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.32.0/bazel-gazelle-v0.32.0.tar.gz",
     ],
 )
 
-# Add Go Lang Rules 
 load("@rules_proto_grpc//:repositories.bzl", "io_bazel_rules_go")  # buildifier: disable=same-origin-load
 io_bazel_rules_go()
 
 load("@rules_proto_grpc//go:repositories.bzl", rules_proto_grpc_go_repos = "go_repos")
 rules_proto_grpc_go_repos()
 
+
+
+###############################################################################
+# Gazelle Dependencies
+###############################################################################
 load("//:build/go_deps.bzl", "go_dependencies")
+
 # gazelle:repository_macro build/go_deps.bzl%go_dependencies
 go_dependencies()
-
-# load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
-# grpc_extra_deps()
 
 ###############################################################################
 # Java Tool Chain
 ###############################################################################
 
-RULES_JVM_EXTERNAL_TAG = "4.5"
-RULES_JVM_EXTERNAL_SHA = "b17d7388feb9bfa7f2fa09031b32707df529f26c91ab9e5d909eb1676badd9a6"
-
+# External JDK
 http_archive(
     name = "rules_jvm_external",
     strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
     sha256 = RULES_JVM_EXTERNAL_SHA,
-    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+    url = "https://github.com/bazelbuild/rules_jvm_external/releases/download/%s/rules_jvm_external-%s.tar.gz" % (RULES_JVM_EXTERNAL_TAG, RULES_JVM_EXTERNAL_TAG)
 )
 
-
 load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
+
 rules_jvm_external_deps()
 
-
 load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
+
 rules_jvm_external_setup()
 
-# GRPC
+# Java GRPC
 load("@rules_proto_grpc//java:repositories.bzl", rules_proto_grpc_java_repos = "java_repos")
+
 rules_proto_grpc_java_repos()
 
+load("@rules_jvm_external//:defs.bzl", "maven_install")
 load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_ARTIFACTS", "IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS", "grpc_java_repositories")
 
-load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
+    artifacts = PROJECT_MAVEN_DEPENDENCIES + IO_GRPC_GRPC_JAVA_ARTIFACTS,
     generate_compat_repositories = True,
     override_targets = IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS,
-    artifacts = [
-      "org.apache.commons:commons-lang3:3.13.0",
-      "com.google.protobuf:protobuf-java-util:3.24.2",
-      "io.grpc:grpc-core:1.57.2",
-      "io.grpc:grpc-googleapis:1.57.2",
-      "io.grpc:grpc-netty-shaded:1.57.2",
-      "io.grpc:grpc-protobuf:1.57.2",
-      "io.grpc:grpc-stub:1.57.2",
-      "io.grpc:grpc-testing:1.57.2",
-      "org.apache.tomcat:annotations-api:6.0.53",
-      "org.apache.logging.log4j:log4j-api:2.18.0",
-      "org.apache.logging.log4j:log4j-core:2.18.0",
-      "com.google.protobuf:protoc:3.24.2",
-      "io.netty:netty-all:4.1.79.Final",
-    ] + IO_GRPC_GRPC_JAVA_ARTIFACTS,
     repositories = [
-        "https://maven.google.com",
-        "https://repo1.maven.org/maven2",
+        "https://repo.maven.apache.org/maven2/",
     ],
 )
 
@@ -186,6 +196,7 @@ load(
 )
 
 junit_jupiter_java_repositories()
+
 junit_platform_java_repositories()
 
 ###############################################################################
@@ -194,9 +205,9 @@ junit_platform_java_repositories()
 
 http_archive(
     name = "rules_python",
-    sha256 = "5868e73107a8e85d8f323806e60cad7283f34b32163ea6ff1020cf27abef6036",
-    strip_prefix = "rules_python-0.25.0",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.25.0/rules_python-0.25.0.tar.gz",
+    sha256 = "0a8003b044294d7840ac7d9d73eef05d6ceb682d7516781a4ec62eeb34702578",
+    strip_prefix = "rules_python-0.24.0",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.24.0/rules_python-0.24.0.tar.gz",
 )
 
 load("@rules_python//python:repositories.bzl", "python_register_toolchains")
@@ -205,6 +216,19 @@ python_register_toolchains(
     name = "python311",
     python_version = "3.11.4",
     tool_versions = {
+        "3.9.17": {
+          "url": "20230726/cpython-{python_version}+20230726-{platform}-{build}.tar.gz",
+          "sha256": {
+              "aarch64-apple-darwin": "73dbe2d702210b566221da9265acc274ba15275c5d0d1fa327f44ad86cde9aa1",
+              "aarch64-unknown-linux-gnu": "b77012ddaf7e0673e4aa4b1c5085275a06eee2d66f33442b5c54a12b62b96cbe",
+              "ppc64le-unknown-linux-gnu": "c591a28d943dce5cf9833e916125fdfbeb3120270c4866ee214493ccb5b83c3c",
+              "s390x-unknown-linux-gnu": "01454d7cc7c9c2fccde42ba868c4f372eaaafa48049d49dd94c9cf2875f497e6",
+              "x86_64-apple-darwin": "dfe1bea92c94b9cb779288b0b06e39157c5ff7e465cdd24032ac147c2af485c0",
+              "x86_64-pc-windows-msvc": "9b9a1e21eff29dcf043cea38180cf8ca3604b90117d00062a7b31605d4157714",
+              "x86_64-unknown-linux-gnu": "26c4a712b4b8e11ed5c027db5654eb12927c02da4857b777afb98f7a930ce637",
+          },
+          "strip_prefix": "python",
+        },
         "3.11.4": {
         "url": "20230726/cpython-{python_version}+20230726-{platform}-{build}.tar.gz",
         "sha256": {
@@ -222,32 +246,29 @@ python_register_toolchains(
 )
 
 load("@python311//:defs.bzl", "interpreter")
+load("@rules_python//python:pip.bzl", "pip_parse")
+
+pip_parse(
+    name = "python_deps",
+    python_interpreter_target = interpreter,
+    requirements_lock = "//:build/requirements.txt",
+)
+
+load("@python_deps//:requirements.bzl", "install_deps")
+
+install_deps()
 
 load("@rules_proto_grpc//python:repositories.bzl", rules_proto_grpc_python_repos = "python_repos")
 rules_proto_grpc_python_repos()
 
+load("@com_github_grpc_grpc//bazel:grpc_python_deps.bzl", "grpc_python_deps")
+grpc_python_deps()
 
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+grpc_deps()
 
-
-load("@rules_python//python:pip.bzl", "pip_parse")
-
-pip_parse(
-  name="python_deps",
-  python_interpreter_target = interpreter,
-  requirements_lock = "//:build/requirements.txt",
-)
-
-# pip_parse(
-#     name = "rules_proto_grpc_py3_deps",
-#     python_interpreter = "python3",
-#     requirements_lock = "@rules_proto_grpc//python:requirements.txt",
-# )
-
-# load("@rules_proto_grpc_py3_deps//:requirements.bzl", "install_deps")
-# install_deps()
-
-load("@python_deps//:requirements.bzl", local_deps = "install_deps")
-local_deps()
+#load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
+#grpc_extra_deps()
 
 ###############################################################################
 # Rules Package for Tar
@@ -267,12 +288,9 @@ rules_pkg_dependencies()
 # Hugo Tool Chain
 ###############################################################################
 
-RULES_HUGO_COMMIT = "02234789fa9f2112807c1642eacb9f9728fc179d"
-RULES_HUGO_SHA256 = "4ce20c981ad50ac0c956e85ef991e59b204778bde59d81e40be05450259ae969"
-RULES_HUGO_VERSION = "0.101.0"
-HUGO_THEME_SHA256 = "7fdd57f7d4450325a778629021c0fff5531dc8475de6c4ec70ab07e9484d400e"
-HUGO_THEME_URL = "https://github.com/thegeeklab/hugo-geekdoc/releases/download/v0.34.2/hugo-geekdoc.tar.gz"
-
+# Update these to latest
+# Use a modified version of the popular rules_hugo, this modified version
+# allows modern Hugo themes to be used.
 http_archive(
     name = "build_stack_rules_hugo",
     sha256 = RULES_HUGO_SHA256,
@@ -282,6 +300,10 @@ http_archive(
 
 load("@build_stack_rules_hugo//hugo:rules.bzl", "hugo_repository")
 
+#
+# Load hugo binary itself
+#
+# Optionally, load a specific version of Hugo, with the 'version' argument
 hugo_repository(
     name = "hugo",
     extended = True,
@@ -302,9 +324,7 @@ filegroup(
     url = HUGO_THEME_URL,
 )
 
-###############################################################################
-# Gazelle Tool Chain (Do not move)
-###############################################################################
+# DO NOT MOVE THESE LINES
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 gazelle_dependencies()

@@ -186,6 +186,11 @@ def go_dependencies():
     )
     go_repository(
         name = "com_github_googleapis_gax_go_v2",
+        build_file_proto_mode = "disable_global",
+        build_directives = [
+            "gazelle:resolve proto go google/rpc/code.proto @org_golang_google_genproto_googleapis_rpc//code",  # keep
+            "gazelle:resolve proto proto google/rpc/code.proto @com_google_googleapis//google/rpc:code_proto",  # keep
+        ],
         importpath = "github.com/googleapis/gax-go/v2",
         sum = "h1:A+gCJKdRfqXkr+BIRGtZLibNXf0m1f9E4HG56etFpas=",
         version = "v2.12.0",
@@ -238,6 +243,7 @@ def go_dependencies():
         sum = "h1:CHQhzdot1MdAlWLw/VOa69SRZ28VQ+gbSf9lI55aSsM=",
         version = "v1.1.0",
     )
+
     go_repository(
         name = "com_github_mattn_go_isatty",
         importpath = "github.com/mattn/go-isatty",
@@ -298,6 +304,7 @@ def go_dependencies():
         sum = "h1:mKX4bl4iPYJtEIxp6CYiUuLQ/8DYMoz0PUdtGgMFRVc=",
         version = "v1.5.0",
     )
+
     go_repository(
         name = "com_github_stretchr_objx",
         importpath = "github.com/stretchr/objx",
@@ -1285,7 +1292,7 @@ COMMON_API_PROTOS = [
     "@com_google_protobuf//:empty_proto",
     "@com_google_protobuf//:field_mask_proto",
     "@com_google_protobuf//:descriptor_proto",
-    "@com_google_googleapis//google/api:annotations_proto",
+    "@com_google_googleapis//google/api:annotations_proto",  
 ]
 
 WELL_KNOWN_TYPES = [
@@ -1299,7 +1306,8 @@ WELL_KNOWN_TYPES = [
     "@org_golang_google_protobuf//types/known/timestamppb:go_default_library",
     "@org_golang_google_protobuf//types/known/typepb:go_default_library",
     "@org_golang_google_protobuf//types/known/wrapperspb:go_default_library",
-    "@go_googleapis//google/api:annotations_go_proto",
+    "@org_golang_google_genproto_googleapis_api//annotations:annotations"
+    
 ]
 # "@org_golang_google_genproto//googleapis/api/annotations:go_default_library",
 

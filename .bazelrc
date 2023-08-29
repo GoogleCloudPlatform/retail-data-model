@@ -14,6 +14,24 @@
 
 try-import %workspace%/user.bazelrc
 
-build --java_language_version=11
+# common --enable_platform_specific_config
 
-test --java_language_version=11 --test_output=all --cache_test_results=no
+# build:windows --cxxopt='/std:c++14'
+# build:windows --host_cxxopt='/std:c++14'
+# build:linux   --cxxopt='-std=c++14'
+# build:linux   --host_cxxopt='-std=c++14'
+# build:macos   --cxxopt='-std=c++14'
+# build:macos --dynamic_mode=off
+# build:macos   --host_cxxopt='-std=c++14'
+# build:freebsd   --cxxopt='-std=c++14'
+# build:freebsd   --host_cxxopt='-std=c++14'
+
+# build --client_env=CC=clang
+# build --copt=-DGRPC_BAZEL_BUILD
+# build --host_copt=-DGRPC_BAZEL_BUILD
+# build --action_env=GRPC_BAZEL_RUNTIME=1
+# build --define=use_fast_cpp_protos=true
+
+build --java_language_version=17 --cxxopt='-std=c++17' --host_cxxopt='-std=c++17'
+
+test --java_language_version=17 --test_output=all --cache_test_results=no
