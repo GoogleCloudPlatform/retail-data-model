@@ -186,10 +186,7 @@ def go_dependencies():
     )
     go_repository(
         name = "com_github_googleapis_gax_go_v2",
-        build_directives = [
-            "gazelle:resolve proto go google/rpc/code.proto @org_golang_google_genproto_googleapis_rpc//code",  # keep
-            "gazelle:resolve proto proto google/rpc/code.proto @com_google_googleapis//google/rpc:code_proto",  # keep
-        ],
+        build_file_proto_mode = "disable_global",
         importpath = "github.com/googleapis/gax-go/v2",
         sum = "h1:A+gCJKdRfqXkr+BIRGtZLibNXf0m1f9E4HG56etFpas=",
         version = "v2.12.0",
@@ -242,7 +239,6 @@ def go_dependencies():
         sum = "h1:CHQhzdot1MdAlWLw/VOa69SRZ28VQ+gbSf9lI55aSsM=",
         version = "v1.1.0",
     )
-
     go_repository(
         name = "com_github_mattn_go_isatty",
         importpath = "github.com/mattn/go-isatty",
@@ -303,7 +299,6 @@ def go_dependencies():
         sum = "h1:mKX4bl4iPYJtEIxp6CYiUuLQ/8DYMoz0PUdtGgMFRVc=",
         version = "v1.5.0",
     )
-
     go_repository(
         name = "com_github_stretchr_objx",
         importpath = "github.com/stretchr/objx",
@@ -336,6 +331,7 @@ def go_dependencies():
     )
     go_repository(
         name = "com_google_cloud_go",
+        build_file_proto_mode = "disable_global",
         importpath = "cloud.google.com/go",
         sum = "h1:8uYAkj3YHTP/1iwReuHPxLSbdcyc+dSBbzFMrVwDR6Q=",
         version = "v0.110.6",
@@ -636,6 +632,7 @@ def go_dependencies():
     )
     go_repository(
         name = "com_google_cloud_go_firestore",
+        build_file_proto_mode = "disable_global",
         importpath = "cloud.google.com/go/firestore",
         sum = "h1:PPgtwcYUOXV2jFe1bV3nda3RCrOa8cvBjTOn2MQVfW8=",
         version = "v1.11.0",
@@ -948,6 +945,7 @@ def go_dependencies():
     )
     go_repository(
         name = "com_google_cloud_go_storage",
+        build_file_proto_mode = "disable_global",
         importpath = "cloud.google.com/go/storage",
         sum = "h1:uOdMxAs8HExqBlnLtnQyP0YkvbiDpdGShGKtx6U/oNM=",
         version = "v1.30.1",
@@ -1116,6 +1114,7 @@ def go_dependencies():
     )
     go_repository(
         name = "org_golang_google_grpc",
+        build_file_proto_mode = "disable_global",
         importpath = "google.golang.org/grpc",
         sum = "h1:kfzNeI/klCGD2YPMUlaGNT3pxvYfga7smW3Vth8Zsiw=",
         version = "v1.57.0",
@@ -1291,7 +1290,7 @@ COMMON_API_PROTOS = [
     "@com_google_protobuf//:empty_proto",
     "@com_google_protobuf//:field_mask_proto",
     "@com_google_protobuf//:descriptor_proto",
-    "@com_google_googleapis//google/api:annotations_proto",  
+    "@com_google_googleapis//google/api:annotations_proto",
 ]
 
 WELL_KNOWN_TYPES = [
@@ -1305,8 +1304,7 @@ WELL_KNOWN_TYPES = [
     "@org_golang_google_protobuf//types/known/timestamppb:go_default_library",
     "@org_golang_google_protobuf//types/known/typepb:go_default_library",
     "@org_golang_google_protobuf//types/known/wrapperspb:go_default_library",
-    "@org_golang_google_genproto_googleapis_api//annotations:annotations"
-    
+    "@go_googleapis//google/api:annotations_go_proto",
 ]
 # "@org_golang_google_genproto//googleapis/api/annotations:go_default_library",
 
