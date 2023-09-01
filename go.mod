@@ -1,4 +1,4 @@
-module github.com/rrmcguinness/retail-data-model
+module github.com/GoogleCloudPlatform/retail-data-model
 
 go 1.21
 
