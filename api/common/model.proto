@@ -33,6 +33,10 @@ import "api/enums/currency.proto";
 
 import "api/enums/uom.proto";
 
+import "api/bq_table.proto";
+
+// import "api/bq_field.proto";
+
 /*******************************************************************************
  * Common Model Objects
  *******************************************************************************/
@@ -42,6 +46,7 @@ import "api/enums/uom.proto";
  * and MAY be extended to add additional context values.
  */
 message AuditRecord {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_audit";
   // A UUID for the unique event
   string id = 1;
   // The date the version was created
@@ -194,6 +199,7 @@ message Currency {
  * ISO 3166-1 Country
  */
 message Country {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_country";
   // A surrogate key for the country
   string id = 1[json_name = 'id'];
   // The common name of the country
@@ -224,6 +230,7 @@ message Country {
  * ISO 3166-2 Country Subdivisions
  */
 message CountrySubdivision {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_country_subdivision";
   // The id of the country sub division
   string id = 1 [json_name = 'id'];
   // The two digit code for the country
@@ -240,6 +247,7 @@ message CountrySubdivision {
  * Used for weather station look-up.
  */
 message ICAOCode {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_icoa_codes";
   // The surrogate ID for the code
   string id = 1 [json_name = 'id'];
   // The iso 3166-1 country code

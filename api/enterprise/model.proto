@@ -31,6 +31,10 @@ import "api/enums/currency.proto";
 import "api/enums/country.proto";
 import "api/party/model.proto";
 
+import "api/bq_table.proto";
+
+// import "api/bq_field.proto";
+
 message BusinessUnitGroup {
   google.retail.common.pb.VersionID id = 1;
   google.retail.enums.lang.Language primary_language = 2;
@@ -39,6 +43,7 @@ message BusinessUnitGroup {
 }
 
 message BusinessUnit {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_business_unit";
   /*
    * A retail outlet that sells merchandise and services through either a
    * physical location, catalog, web page or other channel. It may or may not be
@@ -100,6 +105,7 @@ message BusinessUnit {
  * structure.
  */
 message MerchandiseHierarchy {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_merch_hierarchy";
   string id = 1 [json_name = 'id'];
   string parent_id = 2 [json_name = 'prnt_id'];
   string name = 3 [json_name = 'nm'];
@@ -143,6 +149,7 @@ message MerchandiseHierarchy {
  * If a category lowers a base tax rate, then it MUST override it.
  */
 message TaxCode {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_tax_code";
   message Rate {
     message HierarchyGroupRate {
       string merchandise_hierarchy_id = 1 [json_name = 'mrch_hrchy_id'];

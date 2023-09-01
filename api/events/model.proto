@@ -27,11 +27,16 @@ option java_multiple_files = true;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
+import "api/bq_table.proto";
+
+// import "api/bq_field.proto";
+
 /*
  * An EventDescription is used to create an in-memory and persistent object
  * used to describe and override how given event types are handled.
  */
 message EventDescription {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_event_descriptor";
   string name = 1;
   string description = 2;
   message TraitDescription {
@@ -114,6 +119,7 @@ message EventDescription {
  * and transaction id, a unique identifier assigned to the event.
  */
 message EventRecord {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_event_record";
   // An event record transaction identifier, should be a UUID string.
   string tx_id = 1 [json_name = 'tx_id'];
   // The time when the event was emitted.

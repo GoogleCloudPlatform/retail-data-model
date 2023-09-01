@@ -33,6 +33,10 @@ import "api/enterprise/model.proto";
 
 import "api/enums/locale.proto";
 
+import "api/bq_table.proto";
+
+// import "api/bq_field.proto";
+
 message Supplier {
   google.retail.common.pb.VersionID id = 1;
   string general_ledger_code = 2;
@@ -44,6 +48,7 @@ message Supplier {
 // create flat views of the data automatically. Product descriptions are
 // asymmetric in nature, meaning simply one size does not fit all.
 message ProductTemplate {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_product_template";
   google.retail.common.pb.VersionID id = 1;
   string name = 2;
   string description = 3;
@@ -137,6 +142,7 @@ message I18nProductHeader {
 }
 
 message Product {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_product";
   message Detail {
     repeated I18nProductHeader headers = 1;
     repeated ProductAttribute attributes = 2;

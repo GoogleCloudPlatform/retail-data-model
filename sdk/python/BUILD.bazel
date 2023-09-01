@@ -22,6 +22,7 @@ ENUMS = [
 ]
 
 PROTOS = [
+    "@protoc_gen_bq_schema//api:bq_schema_proto_lib",
     "//api/common:model_proto",
     "//api/customer:model_proto",
     "//api/enterprise:model_proto",

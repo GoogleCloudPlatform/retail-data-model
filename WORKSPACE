@@ -32,6 +32,18 @@ load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
 
 ###############################################################################
+# Proto Gen Schema
+###############################################################################
+http_archive(
+    name = "protoc_gen_bq_schema",
+    sha256 = "98f700a6856686be10fb844ed8792cacb1db94854b4931e795e3657d46fd8c99",
+    strip_prefix="protoc-gen-bq-schema-fork-1.0.0",
+    urls = [
+      "https://github.com/rrmcguinness/protoc-gen-bq-schema-fork/archive/refs/tags/v1.0.0.tar.gz"
+    ],
+)
+
+###############################################################################
 # Google APIs
 ###############################################################################
 

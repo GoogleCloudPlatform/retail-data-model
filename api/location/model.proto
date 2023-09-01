@@ -35,12 +35,17 @@ import "api/common/model.proto";
 
 import "google/protobuf/timestamp.proto";
 
+import "api/bq_table.proto";
+
+// import "api/bq_field.proto";
+
 /***********************************************************************
  * Site
  ***********************************************************************/
 
 
 message Site {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_site";
   /* Designates and identifies the lowest level of decomposition a retailer uses
    * to assign customers, suppliers, selling locations, administrative locations,
    * distribution centers, etc. to a geographic area (or point).
@@ -138,6 +143,7 @@ message LocationMeasure {
  * and/or displayed on.
  */
 message Location {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_location";
   google.retail.common.pb.VersionID id = 1  [json_name = "id"];
   /*
  * Designates the location category such as: FIXTURE, FLOOR, SECTION, STORE
@@ -258,6 +264,7 @@ message Location {
  * A macro grouping for a GeoSegments, ideally without overlap.
  */
 message GeoSegmentGroup {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_geo_segment_group";
   google.retail.common.pb.VersionID id = 1 [json_name = "id"];
   google.retail.enums.geo.GeoSegmentGroup type = 2 [json_name = "t"];
   // A set of IDs always pointing to the latest revisions
@@ -278,6 +285,7 @@ message GeoSegmentGroup {
  * areas to lower levels if  those level segments are not defined.
  */
 message GeoSegment {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_geo_segment";
   google.retail.common.pb.VersionID id = 1 [json_name = "id"];
   google.retail.enums.geo.GeoSegment type = 2 [json_name = "t"];
   string abbreviation = 3 [json_name = 'abbr'];

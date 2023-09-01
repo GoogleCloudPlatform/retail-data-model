@@ -1277,6 +1277,10 @@ def go_dependencies():
         version = "v3.5.0",
     )
 
+BQ_PROTOS = [
+    "@protoc_gen_bq_schema//api:bq_schema_proto_lib",
+]
+
 COMMON_API_PROTOS = [
     "@com_google_protobuf//:timestamp_proto",
     "@com_google_protobuf//:struct_proto",

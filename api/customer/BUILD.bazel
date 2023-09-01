@@ -14,15 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@protoc_gen_bq_schema//:defs.bzl", "bq_schema_compile")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//doc:defs.bzl", "doc_markdown_compile")
+load("//:build/go_deps.bzl", "COMMON_API_PROTOS")
+
 package(default_visibility = [
     "//api:__subpackages__",
     "//examples:__subpackages__",
     "//sdk:__subpackages__",
 ])
-
-load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_proto_grpc//doc:defs.bzl", "doc_markdown_compile")
-load("//:build/go_deps.bzl", "COMMON_API_PROTOS")
 
 proto_library(
     name = "model_proto",
@@ -30,6 +31,13 @@ proto_library(
         "model.proto",
     ],
     deps = COMMON_API_PROTOS,
+)
+
+bq_schema_compile(
+    name = "schemas",
+    protos = [
+        ":model_proto",
+    ],
 )
 
 doc_markdown_compile(
