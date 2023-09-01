@@ -28,10 +28,10 @@ import (
 	"testing"
 	"time"
 
-	model2 "github.com/rrmcguinness/retail-data-model/common/pkg/model"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
-	clientPkg "github.com/rrmcguinness/retail-data-model/events/pkg/client"
-	"github.com/rrmcguinness/retail-data-model/events/pkg/model"
+	model2 "github.com/GoogleCloudPlatform/retail-data-model/common/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
+	clientPkg "github.com/GoogleCloudPlatform/retail-data-model/events/pkg/client"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/model"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

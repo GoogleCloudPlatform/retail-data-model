@@ -24,7 +24,7 @@ go_library(
         "event_module.go",
         "loader.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/events/pkg/module",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/events/pkg/module",
     deps = [
         "//examples/go/events/pkg/model",
         "//examples/go/events/pkg/service",

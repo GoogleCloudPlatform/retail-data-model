@@ -39,7 +39,7 @@ http_archive(
     sha256 = "98f700a6856686be10fb844ed8792cacb1db94854b4931e795e3657d46fd8c99",
     strip_prefix="protoc-gen-bq-schema-fork-1.0.0",
     urls = [
-      "https://github.com/rrmcguinness/protoc-gen-bq-schema-fork/archive/refs/tags/v1.0.0.tar.gz"
+      "https://github.com/GoogleCloudPlatform/protoc-gen-bq-schema-fork/archive/refs/tags/v1.0.0.tar.gz"
     ],
 )
 
@@ -289,7 +289,7 @@ http_archive(
     name = "build_stack_rules_hugo",
     sha256 = RULES_HUGO_SHA256,
     strip_prefix = "rules_hugo-%s" % RULES_HUGO_COMMIT,
-    url = "https://github.com/rrmcguinness/rules_hugo/archive/%s.zip" % RULES_HUGO_COMMIT,
+    url = "https://github.com/GoogleCloudPlatform/rules_hugo/archive/%s.zip" % RULES_HUGO_COMMIT,
 )
 
 load("@build_stack_rules_hugo//hugo:rules.bzl", "hugo_repository")

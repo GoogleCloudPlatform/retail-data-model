@@ -22,9 +22,9 @@ import (
 	"log"
 	"sync"
 
-	common "github.com/rrmcguinness/retail-data-model/common/pkg/model"
-	"github.com/rrmcguinness/retail-data-model/events/grpc"
-	"github.com/rrmcguinness/retail-data-model/events/pkg/model"
+	common "github.com/GoogleCloudPlatform/retail-data-model/common/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/model"
 )
 
 type EventsServerImpl struct {

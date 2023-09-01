@@ -25,7 +25,7 @@ go_library(
         "merchandise_hierarchy_server.go",
         "tax_code_server.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/enterprise/pkg/service",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/enterprise/pkg/service",
     deps = [
         "//sdk/go:common_go_proto",
         "//sdk/go:enterprise_go_grpc",

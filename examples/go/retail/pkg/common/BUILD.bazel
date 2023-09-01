@@ -29,7 +29,7 @@ go_library(
         "model.go",
         "module.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/retail/pkg/common",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common",
     deps = [
         "@com_google_cloud_go//:go_default_library",
         "@com_google_cloud_go_bigquery//:bigquery",

@@ -17,7 +17,7 @@ syntax = "proto3";
 package google.retail.common.grpc;
 
 // Go Lang Options
-option go_package = "github.com/rrmcguinness/retail-data-model/common/grpc";
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/common/grpc";
 
 // Java Options
 option java_package = "com.google.retail.common.grpc";

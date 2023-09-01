@@ -20,7 +20,7 @@ import (
 	"flag"
 	"path/filepath"
 
-	"github.com/rrmcguinness/retail-data-model/retail/pkg/common"
+	"github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common"
 )
 
 var (

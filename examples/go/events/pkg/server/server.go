@@ -22,8 +22,8 @@ import (
 	"log"
 	"net"
 
-	eventsGrpc "github.com/rrmcguinness/retail-data-model/events/grpc"
-	"github.com/rrmcguinness/retail-data-model/events/pkg/module"
+	eventsGrpc "github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/module"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

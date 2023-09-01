@@ -23,7 +23,7 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
 	ts "google.golang.org/protobuf/types/known/timestamppb"
 )
 

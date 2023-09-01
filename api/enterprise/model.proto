@@ -17,7 +17,7 @@ syntax = "proto3";
 package google.retail.enterprise.pb;
 
 // Go Lang Options
-option go_package = "github.com/rrmcguinness/retail-data-model/enterprise/pb";
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/enterprise/pb";
 
 // Java Options
 option java_package = "com.google.retail.enterprise.pb";

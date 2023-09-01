@@ -20,7 +20,7 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )

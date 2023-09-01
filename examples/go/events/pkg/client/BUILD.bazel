@@ -26,7 +26,7 @@ go_library(
         "model.go",
         "utils.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/events/pkg/client",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/events/pkg/client",
     deps = [
         "//examples/go/common/pkg/model",
         "//examples/go/events/pkg/model",

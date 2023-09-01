@@ -22,9 +22,9 @@ import (
 	"log"
 
 	"github.com/google/uuid"
-	"github.com/rrmcguinness/retail-data-model/events/grpc"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
-	"github.com/rrmcguinness/retail-data-model/events/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/model"
 	grpcCore "google.golang.org/grpc"
 )
 

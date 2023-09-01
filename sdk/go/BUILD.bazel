@@ -17,14 +17,14 @@ go_proto_library(
 # Enums Module
 go_proto_library(
     name = "enums_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/enums",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/enums",
     proto = "//api/enums",
 )
 
 # Common Module
 go_proto_library(
     name = "common_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/common/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/common/pb",
     proto = "//api/common:model_proto",
     deps = [
         ":enums_go_proto",
@@ -34,7 +34,7 @@ go_proto_library(
 
 go_grpc_library(
     name = "common_go_grpc",
-    importpath = "github.com/rrmcguinness/retail-data-model/common/grpc",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/common/grpc",
     protos = [
         "//api/common:service_proto",
     ],
@@ -47,7 +47,7 @@ go_grpc_library(
 # Customer Module
 go_proto_library(
     name = "customer_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/customer/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/customer/pb",
     proto = "//api/customer:model_proto",
     deps = WELL_KNOWN_TYPES,
 )
@@ -55,7 +55,7 @@ go_proto_library(
 # Enterprise Module
 go_proto_library(
     name = "enterprise_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/enterprise/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/enterprise/pb",
     proto = "//api/enterprise:model_proto",
     deps = [
         ":enums_go_proto",
@@ -67,7 +67,7 @@ go_proto_library(
 
 go_grpc_library(
     name = "enterprise_go_grpc",
-    importpath = "github.com/rrmcguinness/retail-data-model/enterprise/grpc",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/enterprise/grpc",
     protos = [
         "//api/enterprise:service_proto",
     ],
@@ -80,7 +80,7 @@ go_grpc_library(
 #Events Module
 go_proto_library(
     name = "events_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/events/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/events/pb",
     proto = "//api/events:model_proto",
     deps = [
         ":common_go_proto",
@@ -90,7 +90,7 @@ go_proto_library(
 
 go_grpc_library(
     name = "events_go_grpc",
-    importpath = "github.com/rrmcguinness/retail-data-model/events/grpc",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/events/grpc",
     protos = [
         "//api/events:service_proto",
     ],
@@ -103,7 +103,7 @@ go_grpc_library(
 # Location Module
 go_proto_library(
     name = "location_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/location/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/location/pb",
     proto = "//api/location:model_proto",
     deps = [
         ":enums_go_proto",
@@ -114,7 +114,7 @@ go_proto_library(
 
 go_grpc_library(
     name = "location_go_grpc",
-    importpath = "github.com/rrmcguinness/retail-data-model/location/grpc",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/location/grpc",
     protos = [
         "//api/location:service_proto",
     ],
@@ -128,7 +128,7 @@ go_grpc_library(
 # Merchandise Module
 go_proto_library(
     name = "merchandise_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/merchandise/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb",
     proto = "//api/merchandise:model_proto",
     deps = [
         ":enums_go_proto",
@@ -141,7 +141,7 @@ go_proto_library(
 # Party Module
 go_proto_library(
     name = "party_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/party/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/party/pb",
     proto = "//api/party:model_proto",
     deps = [
         ":common_go_proto",
@@ -154,7 +154,7 @@ go_proto_library(
 # Promotions Module
 go_proto_library(
     name = "promotions_go_proto",
-    importpath = "github.com/rrmcguinness/retail-data-model/promotions/pb",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/promotions/pb",
     proto = "//api/promotions:model_proto",
     deps = [
         ":enums_go_proto",
@@ -196,18 +196,18 @@ pkg_tar(
         "sdk/go/README.md": "README.md",
         "sdk/go/go.mod": "go.mod",
         "sdk/go/go.sum": "go.sum",
-        "sdk/go/common_go_grpc_/github.com/rrmcguinness/retail-data-model/": "",
-        "sdk/go/common_go_proto_/github.com/rrmcguinness/retail-data-model/": "",
-        "sdk/go/customer_go_proto_/github.com/rrmcguinness/retail-data-model/": "",
-        "sdk/go/enterprise_go_proto_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/enums_go_proto_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/events_go_proto_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/events_go_grpc_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/location_go_proto_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/location_go_grpc_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/merchandise_go_proto_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/party_go_proto_/github.com/rrmcguinness/retail-data-model": "",
-        "sdk/go/promotions_go_proto_/github.com/rrmcguinness/retail-data-model": "",
+        "sdk/go/common_go_grpc_/github.com/GoogleCloudPlatform/retail-data-model/": "",
+        "sdk/go/common_go_proto_/github.com/GoogleCloudPlatform/retail-data-model/": "",
+        "sdk/go/customer_go_proto_/github.com/GoogleCloudPlatform/retail-data-model/": "",
+        "sdk/go/enterprise_go_proto_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/enums_go_proto_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/events_go_proto_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/events_go_grpc_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/location_go_proto_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/location_go_grpc_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/merchandise_go_proto_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/party_go_proto_/github.com/GoogleCloudPlatform/retail-data-model": "",
+        "sdk/go/promotions_go_proto_/github.com/GoogleCloudPlatform/retail-data-model": "",
     },
     strip_prefix = "/",
 )

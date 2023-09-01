@@ -21,11 +21,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/rrmcguinness/retail-data-model/events/pkg/model"
-	"github.com/rrmcguinness/retail-data-model/retail/pkg/common"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common"
 
 	"cloud.google.com/go/bigquery"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
 	"google.golang.org/api/iterator"
 )
 

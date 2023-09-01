@@ -25,7 +25,7 @@ go_library(
         "country_client.go",
         "util.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/common/pkg/client",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/common/pkg/client",
     deps = [
         "//sdk/go:common_go_grpc",
         "//sdk/go:common_go_proto",
