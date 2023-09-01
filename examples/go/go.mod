@@ -1,4 +1,4 @@
-module github.com/rrmcguinness/retail-data-model/examples/go
+module github.com/GoogleCloudPlatform/retail-data-model/examples/go
 
 go 1.19
 

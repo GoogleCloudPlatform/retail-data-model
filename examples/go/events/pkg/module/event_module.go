@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/rrmcguinness/retail-data-model/events/pb"
-	"github.com/rrmcguinness/retail-data-model/events/pkg/service"
-	"github.com/rrmcguinness/retail-data-model/retail/pkg/common"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/service"
+	"github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common"
 )
 
 const (

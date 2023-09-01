@@ -24,8 +24,8 @@ import (
 	"time"
 
 	"github.com/madflojo/tasks"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
-	"github.com/rrmcguinness/retail-data-model/events/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/model"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

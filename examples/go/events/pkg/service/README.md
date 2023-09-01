@@ -11,9 +11,9 @@ Building DAOs have the following requirements:
 ```go
 import(
 "cloud.google.com/go/bigquery"
-"github.com/rrmcguinness/retail-data-services/gcp/bq"
-"github.com/rrmcguinness/retail-data-services/gcp/meta"
-"github.com/rrmcguinness/retail-data-services/gcp/utils"
+"github.com/GoogleCloudPlatform/retail-data-services/gcp/bq"
+"github.com/GoogleCloudPlatform/retail-data-services/gcp/meta"
+"github.com/GoogleCloudPlatform/retail-data-services/gcp/utils"
 "google.golang.org/api/iterator"
 )
 ```

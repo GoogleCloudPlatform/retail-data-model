@@ -32,7 +32,7 @@ to large retailers that want to do complex extension on the existing model.
 % mkdir my_project
 % cd my_project
 % go mod init mycompany.com/my_project
-% go get github.com/rrmcguinness/google-retail-cloud-api@go
+% go get github.com/GoogleCloudPlatform/google-retail-cloud-api@go
 ```
 
 ### Creating Utilities

@@ -22,8 +22,8 @@ import (
 	"time"
 
 	"cloud.google.com/go/bigquery"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
-	"github.com/rrmcguinness/retail-data-model/retail/pkg/common"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common"
 	"google.golang.org/api/iterator"
 )
 

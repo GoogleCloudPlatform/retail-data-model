@@ -21,9 +21,9 @@ import (
 	"io"
 	"testing"
 
-	pb2 "github.com/rrmcguinness/retail-data-model/common/pb"
-	"github.com/rrmcguinness/retail-data-model/events/grpc"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
+	pb2 "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

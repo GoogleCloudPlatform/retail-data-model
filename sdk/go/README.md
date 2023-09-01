@@ -12,13 +12,13 @@ To use the Go project as a dependency in your own project
 use `go get` to grab the latest from the `go` branch
 
 ```shell
-go get github.com/rrmcguinness/retail-data-model@go
+go get github.com/GoogleCloudPlatform/retail-data-model@go
 ```
 
 > Note: while the repository is private, you must execute
 > the following commands:
 > ```shell
-> go env -w GOPRIVATE=github.com/rrmcguinness/retail-data-model
+> go env -w GOPRIVATE=github.com/GoogleCloudPlatform/retail-data-model
 > git config --global --add url."git@github.com:".insteadOf "https://github.com/"
 > ```
 

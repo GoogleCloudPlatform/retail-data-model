@@ -17,7 +17,7 @@ syntax = "proto3";
 package google.retail.location.pb;
 
 // Go Lang Options
-option go_package = "github.com/rrmcguinness/retail-data-model/location/pb";
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/location/pb";
 
 // Java Options
 option java_package = "com.google.retail.location.pb";

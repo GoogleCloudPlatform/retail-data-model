@@ -20,9 +20,9 @@ import (
 	"context"
 	"sync"
 
-	common "github.com/rrmcguinness/retail-data-model/common/pb"
-	"github.com/rrmcguinness/retail-data-model/events/grpc"
-	"github.com/rrmcguinness/retail-data-model/events/pb"
+	common "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pb"
 )
 
 type EventRecordsServerImpl struct {

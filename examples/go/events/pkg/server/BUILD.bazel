@@ -23,7 +23,7 @@ go_library(
     srcs = [
         "server.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/events/pkg/server",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/events/pkg/server",
     deps = [
         "//examples/go/common/pkg/model",
         "//examples/go/events/pkg/model",

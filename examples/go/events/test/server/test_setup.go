@@ -21,8 +21,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/rrmcguinness/retail-data-model/events/grpc"
-	server2 "github.com/rrmcguinness/retail-data-model/events/pkg/server"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
+	server2 "github.com/GoogleCloudPlatform/retail-data-model/events/pkg/server"
 	grpcCore "google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )

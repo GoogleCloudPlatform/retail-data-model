@@ -18,7 +18,7 @@ package service
 
 import (
 	"cloud.google.com/go/bigquery"
-	"github.com/rrmcguinness/retail-data-model/retail/pkg/common"
+	"github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common"
 )
 
 type Dao struct {

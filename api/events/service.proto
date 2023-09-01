@@ -19,7 +19,7 @@ package google.retail.events.grpc;
 /*
  * Go Lang Options
  */
-option go_package = "github.com/rrmcguinness/retail-data-model/events/grpc";
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/events/grpc";
 
 /*
  * Java Options

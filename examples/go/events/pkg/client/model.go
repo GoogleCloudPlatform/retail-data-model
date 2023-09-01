@@ -20,9 +20,9 @@ import (
 	"io"
 
 	"github.com/google/uuid"
-	pb2 "github.com/rrmcguinness/retail-data-model/common/pb"
-	"github.com/rrmcguinness/retail-data-model/common/pkg/model"
-	"github.com/rrmcguinness/retail-data-model/events/grpc"
+	pb2 "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/common/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
 )
 
 type Callable interface {

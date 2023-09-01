@@ -21,7 +21,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/rrmcguinness/retail-data-model/events/pkg/module"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/module"
 )
 
 var eventModule *module.EventModule

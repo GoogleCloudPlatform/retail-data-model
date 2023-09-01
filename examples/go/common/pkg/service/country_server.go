@@ -35,9 +35,9 @@ import (
 	sync "sync"
 
 	"github.com/google/uuid"
-	"github.com/rrmcguinness/retail-data-model/common/grpc"
-	"github.com/rrmcguinness/retail-data-model/common/pb"
-	"github.com/rrmcguinness/retail-data-model/common/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/common/grpc"
+	"github.com/GoogleCloudPlatform/retail-data-model/common/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/common/pkg/model"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 

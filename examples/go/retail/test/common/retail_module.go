@@ -19,7 +19,7 @@ package common
 import (
 	"log"
 
-	"github.com/rrmcguinness/retail-data-model/retail/pkg/common"
+	"github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common"
 )
 
 type RetailModule struct {

@@ -19,7 +19,7 @@ package google.retail.merchandise.grpc;
 /*
  * Go Lang Options
  */
-option go_package = "github.com/rrmcguinness/retail-data-model/merchandise/grpc";
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/merchandise/grpc";
 
 /*
  * Java Options

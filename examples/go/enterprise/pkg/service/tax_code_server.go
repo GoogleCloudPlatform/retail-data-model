@@ -23,9 +23,9 @@ import (
 	"sync"
 	"time"
 
-	common "github.com/rrmcguinness/retail-data-model/common/pb"
-	"github.com/rrmcguinness/retail-data-model/enterprise/grpc"
-	"github.com/rrmcguinness/retail-data-model/enterprise/pb"
+	common "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/enterprise/grpc"
+	"github.com/GoogleCloudPlatform/retail-data-model/enterprise/pb"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 

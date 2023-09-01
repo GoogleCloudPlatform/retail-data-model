@@ -24,8 +24,8 @@ import (
 	"time"
 
 	"cloud.google.com/go/bigquery"
-	"github.com/rrmcguinness/retail-data-model/common/pb"
-	"github.com/rrmcguinness/retail-data-model/retail/pkg/common"
+	"github.com/GoogleCloudPlatform/retail-data-model/common/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/retail/pkg/common"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/api/iterator"
 	"google.golang.org/protobuf/types/known/timestamppb"

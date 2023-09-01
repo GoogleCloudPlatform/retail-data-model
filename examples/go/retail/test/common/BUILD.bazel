@@ -20,7 +20,7 @@ go_library(
     srcs = [
         "retail_module.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/retail/test/common",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/retail/test/common",
     deps = [
         "//examples/go/retail/pkg/common",
         "//sdk/go:common_go_proto",

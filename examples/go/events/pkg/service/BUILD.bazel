@@ -29,7 +29,7 @@ go_library(
         "event_records_service.go",
         "events_service.go",
     ],
-    importpath = "github.com/rrmcguinness/retail-data-model/events/pkg/service",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/events/pkg/service",
     deps = [
         "//examples/go/common/pkg/model",
         "//examples/go/events/pkg/model",

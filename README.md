@@ -89,7 +89,7 @@ graph TD
 > The documentation site is currently not published as this is a private repository.
 > This will change once public.
 
-[Documentation Site](https://rrmcguinness.github.io/retail-data-model/)
+[Documentation Site](https://GoogleCloudPlatform.github.io/retail-data-model/)
 
 ## Project Directories
 

@@ -17,7 +17,7 @@ syntax = "proto3";
 package google.retail.enums.climate;
 
 // Go Lang Options
-option go_package = "github.com/rrmcguinness/retail-data-model/enums";
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/enums";
 
 // Java Options
 option java_package = "com.google.retail.enums";

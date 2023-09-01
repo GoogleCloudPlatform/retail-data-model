@@ -24,11 +24,11 @@ import (
 	"sync"
 	"time"
 
-	commonProto "github.com/rrmcguinness/retail-data-model/common/pb"
-	common "github.com/rrmcguinness/retail-data-model/common/pkg/model"
-	"github.com/rrmcguinness/retail-data-model/events/grpc"
-	eventProto "github.com/rrmcguinness/retail-data-model/events/pb"
-	"github.com/rrmcguinness/retail-data-model/events/pkg/model"
+	commonProto "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
+	common "github.com/GoogleCloudPlatform/retail-data-model/common/pkg/model"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/grpc"
+	eventProto "github.com/GoogleCloudPlatform/retail-data-model/events/pb"
+	"github.com/GoogleCloudPlatform/retail-data-model/events/pkg/model"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
