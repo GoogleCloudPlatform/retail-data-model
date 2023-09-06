@@ -1,0 +1,277 @@
+{
+  "id": {
+    "id": "1eff684c-e5ae-4afd-b551-7b5463fb6b39",
+    "created": {
+      "seconds": 1693972791,
+      "nanos": 935353593
+    },
+    "effective": {
+      "seconds": 1693972791,
+      "nanos": 935353846
+    }
+  },
+  "location_type": "STORE",
+  "location_function_type": "SELLING_LOCATION",
+  "inventory_location_security_type": "public",
+  "location_coordinate": {
+    "unit_of_measure": 302,
+    "location_vertices": [
+      {
+        "y": -2500
+      },
+      {
+        "ordinal": 1,
+        "x": 4900,
+        "y": -2500
+      },
+      {
+        "ordinal": 2,
+        "x": 4900
+      }
+    ]
+  },
+  "locations": [
+    {
+      "id": {
+        "id": "535877d4-47a2-4af3-9f6d-a5a345e38a69",
+        "created": {
+          "seconds": 1693972791,
+          "nanos": 935355267
+        },
+        "effective": {
+          "seconds": 1693972791,
+          "nanos": 935355347
+        }
+      },
+      "location_type": "department",
+      "location_function_type": "logical",
+      "inventory_location_security_type": "public",
+      "location_coordinate": {
+        "unit_of_measure": 302,
+        "location_vertices": [
+          {
+            "x": 800
+          },
+          {
+            "ordinal": 1,
+            "x": 800,
+            "y": -600
+          },
+          {
+            "ordinal": 2,
+            "x": 1400,
+            "y": -600
+          },
+          {
+            "ordinal": 3,
+            "x": 400,
+            "y": -600
+          },
+          {
+            "ordinal": 4,
+            "x": 400,
+            "y": -1100
+          },
+          {
+            "ordinal": 5,
+            "y": -1100
+          }
+        ]
+      },
+      "meta": {
+        "name": "Dairy"
+      }
+    },
+    {
+      "id": {
+        "id": "aa1c451c-cc2d-4a05-ae96-e5484e4a7578",
+        "created": {
+          "seconds": 1693972791,
+          "nanos": 935356962
+        },
+        "effective": {
+          "seconds": 1693972791,
+          "nanos": 935357035
+        }
+      },
+      "location_type": "department",
+      "location_function_type": "logical",
+      "inventory_location_security_type": "public",
+      "location_coordinate": {
+        "unit_of_measure": 302,
+        "x": 400,
+        "y": -601,
+        "location_vertices": [
+          {
+            "x": 1400,
+            "y": -601
+          },
+          {
+            "ordinal": 1,
+            "x": 1400,
+            "y": -1500
+          },
+          {
+            "ordinal": 2,
+            "x": 400,
+            "y": -1500
+          }
+        ]
+      },
+      "meta": {
+        "name": "Frozen Food"
+      }
+    },
+    {
+      "id": {
+        "id": "1b2ada62-41a6-41df-adf7-ed89c933e44f",
+        "created": {
+          "seconds": 1693972791,
+          "nanos": 935358357
+        },
+        "effective": {
+          "seconds": 1693972791,
+          "nanos": 935358425
+        }
+      },
+      "location_type": "department",
+      "location_function_type": "logical",
+      "inventory_location_security_type": "public",
+      "location_coordinate": {
+        "unit_of_measure": 302,
+        "y": -1101,
+        "location_vertices": [
+          {
+            "x": 400,
+            "y": -1101
+          },
+          {
+            "ordinal": 1,
+            "x": 400,
+            "y": -1400
+          },
+          {
+            "ordinal": 2,
+            "y": -1400
+          }
+        ]
+      },
+      "meta": {
+        "name": "Cold Cuts"
+      }
+    },
+    {
+      "id": {
+        "id": "022fdb1d-40fe-43a7-9814-6d246c66c92c",
+        "created": {
+          "seconds": 1693972791,
+          "nanos": 935359590
+        },
+        "effective": {
+          "seconds": 1693972791,
+          "nanos": 935359660
+        }
+      },
+      "location_type": "department",
+      "location_function_type": "logical",
+      "inventory_location_security_type": "public",
+      "location_coordinate": {
+        "unit_of_measure": 302,
+        "y": -1401,
+        "location_vertices": [
+          {
+            "x": 1400,
+            "y": -1401
+          },
+          {
+            "ordinal": 1,
+            "x": 1400,
+            "y": -1900
+          },
+          {
+            "ordinal": 2,
+            "y": -1900
+          }
+        ]
+      },
+      "meta": {
+        "name": "Produce"
+      }
+    },
+    {
+      "id": {
+        "id": "2ca10547-dace-4f6d-9be1-5774a0bb3f2e",
+        "created": {
+          "seconds": 1693972791,
+          "nanos": 935361064
+        },
+        "effective": {
+          "seconds": 1693972791,
+          "nanos": 935361134
+        }
+      },
+      "location_type": "public",
+      "location_function_type": "logical",
+      "inventory_location_security_type": "public",
+      "location_coordinate": {
+        "unit_of_measure": 302,
+        "y": -1901,
+        "location_vertices": [
+          {
+            "x": 999,
+            "y": -1901
+          },
+          {
+            "ordinal": 1,
+            "x": 999,
+            "y": -2500
+          },
+          {
+            "ordinal": 2,
+            "y": -2500
+          }
+        ]
+      },
+      "meta": {
+        "name": "Public Lavatories"
+      }
+    },
+    {
+      "id": {
+        "id": "f3cba911-d72f-4538-8f2a-f05548070fde",
+        "created": {
+          "seconds": 1693972791,
+          "nanos": 935364326
+        },
+        "effective": {
+          "seconds": 1693972791,
+          "nanos": 935364400
+        }
+      },
+      "location_type": "CONTROL",
+      "location_function_type": "logical",
+      "inventory_location_security_type": "public",
+      "location_coordinate": {
+        "unit_of_measure": 302,
+        "x": 1000,
+        "y": -1901,
+        "location_vertices": [
+          {
+            "x": 3000,
+            "y": -1901
+          },
+          {
+            "ordinal": 1,
+            "x": 3000,
+            "y": -2500
+          },
+          {
+            "ordinal": 2,
+            "x": 1000,
+            "y": -2500
+          }
+        ]
+      }
+    }
+  ]
+}

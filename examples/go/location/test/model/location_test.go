@@ -1,6 +1,8 @@
 package model
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/GoogleCloudPlatform/retail-data-model/enums"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -16,6 +18,7 @@ func TestLocation(t *testing.T) {
 	cm := enums.Distance_CENTIMETER
 
 	// Places the left back corner of the site as 0,0,0
+	// Create a building 49x25 meters, with the support of 10 meter ceilings implied
 	floorCoordinates := NewLocationCoordinate(0, cm, 0, 0, 0).
 		AddVertex(0, -2500, 0).
 		AddVertex(4900, -2500, 0).
@@ -71,5 +74,10 @@ func TestLocation(t *testing.T) {
 	store0101.AddLocation(dairy, frozen, coldCuts, produce, restRooms, checkout)
 
 	assert.NotNil(t, store0101)
-	assert.Equal(t, 3, len(store0101.Locations))
+	assert.Equal(t, 6, len(store0101.Locations))
+
+	b, err := json.Marshal(store0101)
+	assert.Nil(t, err, "Error was not nil")
+	fmt.Println(string(b))
+
 }
