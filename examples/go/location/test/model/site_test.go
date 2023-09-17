@@ -34,7 +34,7 @@ func TestSite(t *testing.T) {
 	site := NewSite(
 		id,
 		"STORE",
-		pl, "OP_TEST_PARTY", "10", enums.TimeZone_UTCMinus0500EasternTime)
+		pl, "OP_TEST_PARTY", "10", enums.TimeZone_UTCMinus0500EasternTime, -24.0)
 
 	assert.NotNil(t, site)
 	b, err := json.Marshal(site)
