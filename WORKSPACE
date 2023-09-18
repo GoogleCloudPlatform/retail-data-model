@@ -17,7 +17,7 @@ workspace(name = "google_retail_data_model")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 ###############################################################################
-# Skylib Tool Chain
+# Sky lib Tool Chain
 ###############################################################################
 http_archive(
     name = "bazel_skylib",
