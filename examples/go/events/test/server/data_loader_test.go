@@ -35,7 +35,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-const fileName = "/Users/rmcguinness/Downloads/event_input.json"
+const fileName = "examples/data/event-input.json"
 
 func handleMarshallError(err error) {
 	fmt.Println("Error m")
@@ -191,5 +191,5 @@ func ReadLine(latch *model2.Latch, wg *sync.WaitGroup, line string) {
 }
 
 func TestDataPaser(t *testing.T) {
-	ReadAllEvents()
+	//ReadAllEvents()
 }

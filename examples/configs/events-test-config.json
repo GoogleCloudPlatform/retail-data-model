@@ -5,6 +5,6 @@
   "enabled": true,
   "log_level": "DEBUG",
   "labels": {
-    "team": "google_rdb"
+    "team": "google_rdm"
   }
 }

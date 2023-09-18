@@ -22,7 +22,10 @@ go_test(
         "legacy_model.go",
         "test_setup.go",
     ],
-    data = ["//examples/configs:events-test-config.json"],
+    data = [
+        "//examples/configs:events-test-config.json",
+        "//examples/data:event-input.json",
+    ],
     rundir = ".",
     deps = [
         "//examples/go/common/pkg/model",

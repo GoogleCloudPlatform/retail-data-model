@@ -94,7 +94,9 @@ func (l *Latch) Close(wg *sync.WaitGroup) {
 
 	if l.Timer == nil {
 		l.Timer = time.NewTimer(l.GetCurrentDuration())
-		wg.Add(1)
+		if wg != nil {
+			wg.Add(1)
+		}
 		go func() {
 			<-l.Timer.C
 			if wg != nil {
