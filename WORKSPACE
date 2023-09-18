@@ -310,7 +310,7 @@ http_archive(
     name = "build_stack_rules_hugo",
     sha256 = RULES_HUGO_SHA256,
     strip_prefix = "rules_hugo-%s" % RULES_HUGO_COMMIT,
-    url = "https://github.com/GoogleCloudPlatform/rules_hugo/archive/%s.zip" % RULES_HUGO_COMMIT,
+    url = "https://github.com/rrmcguinness/rules_hugo/archive/%s.zip" % RULES_HUGO_COMMIT,
 )
 
 load("@build_stack_rules_hugo//hugo:rules.bzl", "hugo_repository")

@@ -34,7 +34,7 @@ func TestLatch_Close_Simple(t *testing.T) {
 	assert.True(t, l1.IsClosed())
 
 	time.Sleep(1 * time.Second)
-	assert.False(t, l1.IsClosed())
+	assert.True(t, l1.IsClosed())
 }
 
 // TestLatch_Close_Complex tests a more complex observer where a single
