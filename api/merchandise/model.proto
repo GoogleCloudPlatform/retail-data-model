@@ -69,6 +69,8 @@ message ProductTemplateAttribute {
 // sku with the retailer SKU rules defined
 message ProductAttributeRuleGroup {
   google.retail.common.pb.VersionID id = 1;
+  string name = 2;
+  string description = 3;
   repeated ProductAttributeRule product_attribute_rules = 4;
 }
 

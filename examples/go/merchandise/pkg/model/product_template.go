@@ -13,6 +13,7 @@ func NewProductTemplate(id *VersionID, name string, description string) *Product
 		Id:          (*common.VersionID)(id),
 		Name:        name,
 		Description: description,
+		Attributes:  make([]*merchandise.ProductTemplateAttribute, 0),
 	}
 }
 
@@ -42,9 +43,11 @@ func NewProductTemplateAttributeFromRule(rule *ProductAttributeRule) *ProductTem
 
 type ProductAttributeRuleGroup merchandise.ProductAttributeRuleGroup
 
-func NewProductAttributeRuleGroup(id *VersionID) *ProductAttributeRuleGroup {
+func NewProductAttributeRuleGroup(id *VersionID, name string, description string) *ProductAttributeRuleGroup {
 	return &ProductAttributeRuleGroup{
 		Id:                    (*common.VersionID)(id),
+		Name:                  name,
+		Description:           description,
 		ProductAttributeRules: make([]*merchandise.ProductAttributeRule, 0),
 	}
 }
@@ -56,11 +59,10 @@ func (group *ProductAttributeRuleGroup) AddProductAttributeRule(rule *ProductAtt
 // Template Attribute Rules
 
 type ProductAttributeRule merchandise.ProductAttributeRule
-type ProductAttributeRuleType merchandise.ProductAttributeRule_Type
 
-func NewProductAttributeRule(t ProductAttributeRuleType, ordinal int32, required bool, allowOverride bool, validationRegEx string) *ProductAttributeRule {
+func NewProductAttributeRule(t merchandise.ProductAttributeRule_Type, ordinal int32, required bool, allowOverride bool, validationRegEx string) *ProductAttributeRule {
 	return &ProductAttributeRule{
-		Type:            (merchandise.ProductAttributeRule_Type)(t),
+		Type:            t,
 		Ordinal:         ordinal,
 		Required:        required,
 		AllowOverride:   allowOverride,
@@ -69,8 +71,9 @@ func NewProductAttributeRule(t ProductAttributeRuleType, ordinal int32, required
 	}
 }
 
-func (rule *ProductAttributeRule) AddAttributeLabel(label *AttributeLabel) {
+func (rule *ProductAttributeRule) AddAttributeLabel(label *AttributeLabel) *ProductAttributeRule {
 	rule.Labels = append(rule.Labels, (*merchandise.AttributeLabel)(label))
+	return rule
 }
 
 type AttributeLabel merchandise.AttributeLabel
