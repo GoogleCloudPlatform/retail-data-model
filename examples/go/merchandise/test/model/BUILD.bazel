@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("//:build/go_deps.bzl", "WELL_KNOWN_TYPES")
+
+go_test(
+    name = "supplier_test",
+    srcs = [
+        "supplier_test.go",
+    ],
+    embed = ["//examples/go/merchandise/pkg/model"],
+    rundir = ".",
+    deps = [
+        "@com_github_stretchr_testify//assert",
+    ],
+)
+
+go_test(
+    name = "product_template_test",
+    srcs = [
+        "product_template_test.go",
+    ],
+    embed = ["//examples/go/merchandise/pkg/model"],
+    rundir = ".",
+    deps = [
+        "@com_github_stretchr_testify//assert",
+    ],
+)

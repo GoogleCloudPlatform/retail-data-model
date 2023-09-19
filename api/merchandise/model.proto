@@ -148,7 +148,7 @@ message Product {
     repeated ProductAttribute attributes = 2;
   }
   message Variant {
-    repeated Detail details = 1;
+    Detail details = 1;
   }
   google.retail.common.pb.VersionID id = 1;
   // A set of business keys used for identifying the product,
