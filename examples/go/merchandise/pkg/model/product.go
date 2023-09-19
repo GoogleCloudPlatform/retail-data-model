@@ -6,6 +6,9 @@ import (
 	merchandise "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb"
 )
 
+type Product merchandise.Product
+type ProductAttribute merchandise.ProductAttribute
+type Variant merchandise.Product_Variant
 type I18nProductHeader merchandise.I18NProductHeader
 
 func NewI18nProductHeader(locale Locale, brand string, name string, shortDescription string, longDescription string) *I18nProductHeader {
@@ -27,10 +30,6 @@ func (n *I18nProductHeader) AddSearchTerm(val string) {
 func (n *I18nProductHeader) AddImage(image *Image) {
 	n.Images = append(n.Images, (*common.Image)(image))
 }
-
-type Product merchandise.Product
-
-type Variant merchandise.Product_Variant
 
 func NewProductDetails() *merchandise.Product_Detail {
 	return &merchandise.Product_Detail{

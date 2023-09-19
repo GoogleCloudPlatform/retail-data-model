@@ -4,7 +4,6 @@ import (
 	common "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
 	"github.com/GoogleCloudPlatform/retail-data-model/enums"
 	merchandise "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb"
-	"log"
 )
 
 type ProductTemplate merchandise.ProductTemplate
@@ -80,8 +79,6 @@ func NewAttributeLabel(locale enums.Locale, name string, description string) *At
 	return &AttributeLabel{Locale: locale, Name: name, Description: description}
 }
 
-type ProductAttribute merchandise.ProductAttribute
-
 type ProductAttributeRuleGroupValue merchandise.ProductAttributeRuleGroupValue
 
 type ProductAttributeRuleValue merchandise.ProductAttributeRuleValue
@@ -94,8 +91,6 @@ func (n *ProductAttributeRuleValue) AddStringOrNumber(num float64, str string) {
 	case *merchandise.ProductAttributeRuleValue_StringValue:
 		v.StringValue.Value = append(v.StringValue.Value, str)
 		break
-	default:
-		log.Print("invalid value for product attribute rule")
 	}
 }
 
