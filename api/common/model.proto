@@ -35,6 +35,8 @@ import "api/enums/uom.proto";
 
 import "api/bq_table.proto";
 
+import "api/bq_field.proto";
+
 // import "api/bq_field.proto";
 
 /*******************************************************************************
@@ -48,24 +50,24 @@ import "api/bq_table.proto";
 message AuditRecord {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_audit";
   // A UUID for the unique event
-  string id = 1;
+  string id = 1 [json_name = "id", (gen_bq_schema.bigquery).require = true];
   // The date the version was created
-  google.protobuf.Timestamp created = 2 [json_name = 'cr_dt'];
+  google.protobuf.Timestamp created = 2 [json_name = 'created', (gen_bq_schema.bigquery).require = true];
   // The type of action that was executed, example: CREATE, READ, UPDATE, DELETE
-  string action = 3;
+  string action = 3 [json_name = "action", (gen_bq_schema.bigquery).require = true];
   // The context of the action, <RECORD_TYPE>, <SERVICE_CALL_TYPE>,
-  string context = 4;
+  string context = 4 [json_name = "context", (gen_bq_schema.bigquery).require = true];
   // The executor of the action, LDAP ID, Token ID, etc.
-  string principal = 5;
+  string principal = 5 [json_name = "principal"];
   // The origin of the action, request host, system_id, etc.
-  map<string, string> context_variables = 6;
+  map<string, string> context_variables = 6 [json_name = "context_variables"];
 }
 
 message AuditRecordSearchRequest {
-  AuditRecord criteria = 1;
-  TimeBoundRequest bounds = 2;
-  string action = 3;
-  string principal = 4;
+  AuditRecord criteria = 1 [json_name = "criteria"];
+  TimeBoundRequest bounds = 2 [json_name = "time_bounds"];
+  string action = 3 [json_name = "action"];
+  string principal = 4 [json_name = "principal"];
 }
 
 
@@ -77,19 +79,19 @@ message AuditRecordSearchRequest {
 * - Available Shelf Cubic Feet
 */
 message NamedMeasure {
-  string name = 1;
+  string name = 1 [json_name = "name"];
   oneof uom {
-    google.retail.enums.uom.Area area = 2;
-    google.retail.enums.uom.Capacity capacity = 3;
-    google.retail.enums.uom.Distance distance = 4;
-    google.retail.enums.uom.Weight weight = 5;
-    google.retail.enums.uom.Count count = 6;
-    google.retail.enums.uom.Packaging package = 7;
-    google.retail.enums.uom.Time time = 8;
-    google.retail.enums.uom.Clothing clothing = 9;
+    google.retail.enums.uom.Area area = 2 [json_name = "area"];
+    google.retail.enums.uom.Capacity capacity = 3 [json_name = "capacity"];
+    google.retail.enums.uom.Distance distance = 4 [json_name = "distance"];
+    google.retail.enums.uom.Weight weight = 5 [json_name = "weight"];
+    google.retail.enums.uom.Count count = 6 [json_name = "count"];
+    google.retail.enums.uom.Packaging package = 7 [json_name = "package"];
+    google.retail.enums.uom.Time time = 8 [json_name = "time"];
+    google.retail.enums.uom.Clothing clothing = 9 [json_name = "clothing"];
   }
   reserved 10 to 19;
-  double size = 20;
+  double value = 20 [json_name = "value"];
 }
 
 // VersionID is an identifier used for data objects that change over time.
@@ -98,13 +100,13 @@ message NamedMeasure {
 // load on runtime systems.
 message VersionID {
   // Surrogate key, used by data source, not the business key.
-  string id = 1 [json_name = 'id'];
+  string id = 1 [json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The version identifier, where the greatest value is the latest
-  int64 version = 2 [json_name = 'ver'];
+  int64 version = 2 [json_name = 'ver', (gen_bq_schema.bigquery).require = true];
   // The date the version was created
-  google.protobuf.Timestamp created = 3 [json_name = 'cr_dt'];
+  google.protobuf.Timestamp created = 3 [json_name = 'created', (gen_bq_schema.bigquery).require = true];
   // The date the product version became effective, may be a future date
-  google.protobuf.Timestamp effective = 4 [json_name = 'ef_dt'];
+  google.protobuf.Timestamp effective = 4 [json_name = 'effective', (gen_bq_schema.bigquery).require = true];
 }
 
 /*
@@ -114,7 +116,7 @@ message VersionID {
  * This practice is recommended to create an enforceable key value.
  */
 message BusinessKey {
-  string name = 1 [json_name = 'nm'];
+  string name = 1 [json_name = 'nm', (gen_bq_schema.bigquery).require = true];
   repeated string value = 2 [json_name = 'val'];
 }
 
@@ -124,9 +126,9 @@ message BusinessKey {
  */
 message I18nText {
   // The locale of the text, such as EN_US (238)
-  google.retail.enums.locale.Locale locale = 1 [json_name = 'lcl'];
+  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale', (gen_bq_schema.bigquery).require = true];
   // The value of the text.
-  string value = 2 [json_name = 'val'];
+  string value = 2 [json_name = 'value', (gen_bq_schema.bigquery).require = true];
 }
 
 /*
@@ -134,9 +136,9 @@ message I18nText {
  */
 message I18nResource {
   // The locale of the text, such as EN_US (238)
-  google.retail.enums.locale.Locale locale = 1 [json_name = 'lcl'];
+  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale', (gen_bq_schema.bigquery).require = true];
   // The value of the text.
-  string url = 2 [json_name = 'url'];
+  string url = 2 [json_name = 'url', (gen_bq_schema.bigquery).require = true];
 }
 
 /*
@@ -144,7 +146,7 @@ message I18nResource {
  */
 message Image {
   // The URL of the image
-  string url = 1 [json_name = 'url'];
+  string url = 1 [json_name = 'url', (gen_bq_schema.bigquery).require = true];
   // The alternate text for the image
   string alt = 2 [json_name = 'alt'];
   // The height of the image
@@ -161,7 +163,7 @@ message Image {
 
 // I18nImage is used to hold images for specific languages
 message I18nImage {
-  google.retail.enums.locale.Locale locale = 1 [json_name = 'locl'];
+  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale', (gen_bq_schema.bigquery).require = true];
   repeated Image images = 2 [json_name = 'imgs'];
 }
 
@@ -169,26 +171,26 @@ message I18nImage {
  * Number is used to remove any language rounding issue from the dataset.
  */
 message Number {
-  int32 whole = 1 [json_name = 'w'];
-  int32 decimal = 2 [json_name = 'd'];
+  int32 whole = 1 [json_name = 'whole', (gen_bq_schema.bigquery).require = true];
+  int32 decimal = 2 [json_name = 'decimal', (gen_bq_schema.bigquery).require = true];
 }
 
 /*
  * Rounding rule holds logic for how to treat a number
  */
 message RoundingRule {
-  int32 relevant_decimal = 1 [json_name = 'rel_dec'];
-  bool trim_insignificant_digits = 2 [json_name = 'trim'];
-  bool round_half_up = 3 [json_name = 'hlf_up'];
+  int32 relevant_decimal = 1 [json_name = 'relevant_decimal', (gen_bq_schema.bigquery).require = true];
+  bool trim_insignificant_digits = 2 [json_name = 'trim_insignificant_digits', (gen_bq_schema.bigquery).require = true];
+  bool round_half_up = 3 [json_name = 'round_half_up', (gen_bq_schema.bigquery).require = true];
 }
 
 /*
  * Money is an extension of number
  */
 message Currency {
-  google.retail.enums.currency.Currency code = 1 [json_name = 'cur'];
-  Number value = 2 [json_name = 'val'];
-  RoundingRule rounding_rule = 3 [json_name = 'rl'];
+  google.retail.enums.currency.Currency code = 1 [json_name = 'currency', (gen_bq_schema.bigquery).require = true];
+  Number value = 2 [json_name = 'value', (gen_bq_schema.bigquery).require = true];
+  RoundingRule rounding_rule = 3 [json_name = 'rounding_rule', (gen_bq_schema.bigquery).require = true];
 }
 
 /*******************************************************************************
@@ -201,17 +203,17 @@ message Currency {
 message Country {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_country";
   // A surrogate key for the country
-  string id = 1[json_name = 'id'];
+  string id = 1[json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The common name of the country
-  string name = 2 [json_name = 'nm'];
+  string name = 2 [json_name = 'nm', (gen_bq_schema.bigquery).require = true];
   // The two letter code of the country
-  string alpha2 = 3 [json_name = 'a2'];
+  string alpha2 = 3 [json_name = 'a2', (gen_bq_schema.bigquery).require = true];
   // The three letter code of the country
-  string alpha3 = 4 [json_name = 'a3'];
+  string alpha3 = 4 [json_name = 'a3', (gen_bq_schema.bigquery).require = true];
   // The Numeric code for the region
-  string code = 5 [json_name = 'cd'];
+  string code = 5 [json_name = 'cd', (gen_bq_schema.bigquery).require = true];
   // The 3166-2 two letter alpha
-  string iso2 = 6 [json_name = 'i2'];
+  string iso2 = 6 [json_name = 'i2', (gen_bq_schema.bigquery).require = true];
   // The region name
   string region = 7 [json_name = 'rgn'];
   // The sub region name
@@ -232,14 +234,14 @@ message Country {
 message CountrySubdivision {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_country_subdivision";
   // The id of the country sub division
-  string id = 1 [json_name = 'id'];
+  string id = 1 [json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The two digit code for the country
-  string country_code = 2 [json_name = 'cntry_cd'];
+  string country_code = 2 [json_name = 'cntry_cd', (gen_bq_schema.bigquery).require = true];
   // The country subdivision full name
-  string subdivision_name = 3 [json_name = 'sub_nm'];
+  string subdivision_name = 3 [json_name = 'sub_nm', (gen_bq_schema.bigquery).require = true];
   // The numeric code, represented as a string as it's 0(zero) left padded and
   // three characters long
-  string code = 4 [json_name = 'cd'];
+  string code = 4 [json_name = 'cd', (gen_bq_schema.bigquery).require = true];
 }
 
 /*
@@ -249,15 +251,15 @@ message CountrySubdivision {
 message ICAOCode {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_icoa_codes";
   // The surrogate ID for the code
-  string id = 1 [json_name = 'id'];
+  string id = 1 [json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The iso 3166-1 country code
-  string country_id = 2 [json_name = 'cntry_cd'];
+  string country_id = 2 [json_name = 'cntry_cd', (gen_bq_schema.bigquery).require = true];
   // The iso 3166-2 subdivision code
   string country_subdivision_id = 3 [json_name = 'cntry_sub_cd'];
   // The name of the location
-  string location_name = 4 [json_name = 'loc_nm'];
+  string location_name = 4 [json_name = 'loc_nm', (gen_bq_schema.bigquery).require = true];
   // The individual station name
-  string station_name = 5 [json_name = 'stn_nm'];
+  string station_name = 5 [json_name = 'stn_nm', (gen_bq_schema.bigquery).require = true];
   // The type of station
   string type = 6 [json_name = 't'];
   // The station key identifier
@@ -265,9 +267,9 @@ message ICAOCode {
   // The status of the station
   string status = 8 [json_name = 'stat'];
   // The icao value
-  string icao = 9 [json_name = 'icao'];
+  string icao = 9 [json_name = 'icao', (gen_bq_schema.bigquery).require = true];
   // The national id
-  string national_id = 10 [json_name = 'nat_id'];
+  string national_id = 10 [json_name = 'nat_id', (gen_bq_schema.bigquery).require = true];
   // The WMO code
   string wmo = 11 [json_name = 'wmo'];
   // The GHCN code
@@ -275,9 +277,9 @@ message ICAOCode {
   // Additional special indicators
   string special = 13 [json_name = 'spec'];
   // The latitude of the station
-  string latitude = 14 [json_name = 'lat'];
+  string latitude = 14 [json_name = 'lat', (gen_bq_schema.bigquery).require = true];
   // The longitude of the station
-  string longitude = 15 [json_name = 'lng'];
+  string longitude = 15 [json_name = 'lng', (gen_bq_schema.bigquery).require = true];
   // The elevation of the station in meters
   string elevation_in_meters = 16 [json_name = 'elv'];
   // The timezone code of the station
@@ -299,32 +301,32 @@ message Contact {
     PERSONAL = 3;
     THIRD_PARTY = 4;
   }
-  string id = 1 [json_name = 'id'];
+  string id = 1 [json_name = 'id', (gen_bq_schema.bigquery).require = true];
   /*
    * Retailer defined reasons for contacting Parties and Sites. Suggested values
    * include: Accounts, Deliveries, Legal: Examples include: LEGAL, BILLING,
    * SHIP_TO, OTHER, SALES_ANALYSIS, GEOLOCATION_ANALYSIS
    */
-  string contact_purpose = 2 [json_name = 'prps'];
+  string contact_purpose = 2 [json_name = 'contact_purpose', (gen_bq_schema.bigquery).require = true];
   // The contact method type, this may be internally assigned, or
   // a code from the ContactType Enum.
-  ContactMethod contact_method = 3 [json_name = 'mthe'];
+  ContactMethod contact_method = 3 [json_name = 'contact_method', (gen_bq_schema.bigquery).require = true];
   // The effective time of the ID
-  google.protobuf.Timestamp effective_date = 4 [json_name = 'eff_dt'];
+  google.protobuf.Timestamp effective_date = 4 [json_name = 'effective_date', (gen_bq_schema.bigquery).require = true];
   // When this instance of information expired as a new record was written.
-  google.protobuf.Timestamp expiration_date = 5 [json_name = 'exp_dt'];
+  google.protobuf.Timestamp expiration_date = 5 [json_name = 'expiration_date'];
   // A link to an Address
-  Address address = 6 [json_name = 'addr'];
+  Address address = 6 [json_name = 'address'];
   // A link to an Email Address
-  string email_address = 7 [json_name = 'eml'];
+  string email_address = 7 [json_name = 'email'];
   // A link to a Telephone
-  string telephone = 8 [json_name = 'ph'];
+  string telephone = 8 [json_name = 'phone'];
   // A link to a Web Address
   string website = 9 [json_name = 'web'];
   // A link to a social media ID
-  repeated SocialMediaNetworkIdentity social_network_id = 10 [json_name = 'socl_nets'];
+  repeated SocialMediaNetworkIdentity social_network_id = 10 [json_name = 'social_network_ids'];
   // A status code, retailer assigned
-  string status = 11 [json_name = 'stat'];
+  string status = 11 [json_name = 'status'];
 }
 
 
@@ -334,9 +336,9 @@ message Contact {
 message Address {
   // The geo segment identifier of the address, this MAY be retailer specific.
   // It MAY also be a geo region ID from the Geo Enums
-  string geo_segment_id = 1 [json_name = 'geo_seg_id'];
+  string geo_segment_id = 1 [json_name = 'geo_seg_id', (gen_bq_schema.bigquery).require = true];
   // The first line of a physical address
-  string line_1 = 2 [json_name = 'l1'];
+  string line_1 = 2 [json_name = 'l1', (gen_bq_schema.bigquery).require = true];
   // The second line of a physical address
   string line_2 = 3 [json_name = 'l2'];
   // The third line of a physical address
@@ -344,15 +346,15 @@ message Address {
   // The fourth line of a physical address
   string line_4 = 5 [json_name = 'l4'];
   // The full name of the city
-  string city = 6 [json_name = 'cty'];
+  string city = 6 [json_name = 'cty', (gen_bq_schema.bigquery).require = true];
   // The territory or state of the physical address
-  string territory = 7 [json_name = 'trty'];
+  string territory = 7 [json_name = 'trty', (gen_bq_schema.bigquery).require = true];
   // The postal assignment code 5 or 10
-  string postal_code = 8 [json_name = 'pstl_cd'];
+  string postal_code = 8 [json_name = 'pstl_cd', (gen_bq_schema.bigquery).require = true];
   // The ISO subdivision code, this is a world specific identifier
   // such as: "WORLD-AMERICAS-NORTH_AMERICA-USA-NY" denoting New York City
   // in the United States.
-  string iso_3166_2_country_sub_division_code = 9 [json_name = 'cntry_sub'];
+  string iso_3166_2_country_sub_division_code = 9 [json_name = 'cntry_sub', (gen_bq_schema.bigquery).require = true];
 }
 
 /******************************************************************************
