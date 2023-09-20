@@ -1,0 +1,349 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.inventory.pb;
+
+// Go Lang Options
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/inventory/pb";
+
+// Java Options
+option java_package = "com.google.retail.inventory.pb";
+option java_multiple_files = true;
+
+import "api/enums/currency.proto";
+
+import "api/common/model.proto";
+
+import "google/protobuf/timestamp.proto";
+
+import "api/bq_table.proto";
+
+import "api/bq_field.proto";
+
+// A type of ICDLineItem that records allowances applicable to the whole
+// InventoryControlDocument.
+message ICDLineItemAllowance {
+  // A unique system assigned identifier for the rule denoting how a particular
+  // Charge or Allowance in an InventoryControlDocument is to be treated in the
+  // financial reporting systems.
+  google.retail.common.pb.VersionID charge_allowance_id = 1 [json_name = "charge_allowance_id"];
+  // The monetary allowance made by the supplier against a specific line on the
+  // INVENTORY CONTROL DOCUMENT.
+  float amount = 2 [json_name = "amount"];
+  // This code defines the type of allowance.  For ARTS purposes the UCC-defined
+  // codes, data elements 150 and  340, are used as the basis for the domain of
+  // this attribute.
+  string type_code = 3 [json_name = "type_code"];
+  // The reason code for applying the allowance.
+  string reason_code = 4 [json_name = "reason_code"];
+  // An identifier for this document, usually preprinted on the form stock prior
+  // to being filled out.
+  string serial_form_id = 5 [json_name = "serial_form_id"];
+  // The number or identifier assigned by the supplier referencing an allowance,
+  // promotion or deal.
+  string supplier_allowance_number = 6 [json_name = "supplier_allowance_number"];
+}
+
+// A type of ICDLineItem that records charges applicable to the whole
+// InventoryControlDocument.
+message ICDLineItemCharge {
+  // A unique system assigned identifier for the rule denoting how a particular
+  // Charge or Allowance in an InventoryControlDocument is to be treated in the
+  // financial reporting systems.
+  google.retail.common.pb.VersionID charge_allowance_processing_id = 1 [json_name = "charge_allowance_processing_id"];
+  // The monetary allowance made by the supplier against a specific line on the
+  // INVENTORY CONTROL DOCUMENT.
+  float amount = 2 [json_name = "amount"];
+  // This code defines the type of allowance.  For ARTS purposes the UCC-defined
+  // codes, data elements 150 and  340, are used as the basis for the domain of
+  // this attribute.
+  string type_code = 3 [json_name = "type_code"];
+  // The reason code for applying the allowance.
+  string reason_code = 4 [json_name = "reason_code"];
+  // An identifier for this document, usually preprinted on the form stock prior
+  // to being filled out.
+  string serial_form_id = 5 [json_name = "serial_form_id"];
+  // The number or identifier assigned by the supplier referencing an allowance,
+  // promotion or deal.
+  string supplier_charge_number = 6 [json_name = "supplier_charge_number"];
+}
+
+// A type of ICDLineItem that records supplementary text from the
+// InventoryControlDocument.
+message ICDLineItemFreeText {
+  string text = 1 [json_name = "text"];
+}
+
+// A type of ICDLineItem that records the type and amount of freight cost
+// incurred on an InventoryControlDocument
+message ICDLineItemFreight {
+  // A unique system assigned identifier for the rule denoting how a particular
+  // Charge or Allowance in an InventoryControlDocument is to be treated in the
+  // financial reporting systems.
+  google.retail.common.pb.VersionID charge_allowance_processing_id = 1 [json_name = "charge_allowance_processing_id"];
+  //  code to signify whether the freight cost is met by the retailer or
+  //  supplier.
+  string cost_code = 2 [json_name = "cost_code"];
+  // The freight charges.
+  float amount = 3 [json_name = "amount"];
+}
+
+message ICDLineItemMerchandiseModifier {
+  // The monetary amount amendment resulting from the INVENTORY DOCUMENT
+  // MERCHANDISE LINE ITEM MODIFIER
+  float monetary_amount = 1 [json_name = "monetary_amount"];
+  // The percent amendment resulting from the INVENTORY DOCUMENT MERCHANDISE
+  // LINE ITEM MODIFIER.
+  float percent = 2 [json_name = "percent"];
+  // The code which denotes the reason for the change made to a specific
+  // INVENTORY CONTROL DOCUMENT MERCHANDISE LINE ITEM.
+  string reason_code = 3 [json_name = "reason_code"];
+  // The code to denote as to how the amendment resulting from the  INVENTORY
+  // DOCUMENT  MERCHANDISE LINE ITEM MODIFIER will be accounted for within the
+  // STOCK LEDGER.
+  string accounting_disposition_code = 4 [json_name = "accounting_disposition_code"];
+  // A code to denote whether a charge or allowance is applied to a specific
+  // merchandise control document line.
+  string allowance_or_charge_code = 5 [json_name = "allowance_or_charge_code"];
+}
+
+message ICDLineItemMerchandiseTax {
+  // System assigned unique identifier for the TaxGroupRule.
+  google.retail.common.pb.VersionID tax_group_rule_id = 1 [json_name = "tax_group_rule_id"];
+  // A unique system assigned identifier for the rule denoting how a particular
+  // Charge or Allowance in an InventoryControlDocument is to be treated in the
+  // financial reporting systems.
+  google.retail.common.pb.VersionID tax_charge_processing_rule_id = 2 [json_name = "tax_charge_processing_rule_id"];
+  // The monetary value for which tax must be paid for the INVENTORY CONTROL
+  // DOCUMENT MERCHANDISE LINE ITEM
+  float taxable_amount = 3 [json_name = "taxable_amount"];
+  // The amount of tax to be paid for the INVENTORY CONTROL DOCUMENT MERCHANDISE
+  // LINE ITEM
+  float tax_amount = 4 [json_name = "tax_amount"];
+  // The amount of tax that does not have to be paid for the INVENTORY CONTROL
+  // DOCUMENT MERCHANDISE LINE ITEM
+  float tax_exempt_amount = 5 [json_name = "tax_exempt_amount"];
+  // A code denoting the reason why the tax that shouldve been paid was exempt
+  // for the INVENTORY CONTROL DOCUMENT MERCHANDISE LINE ITEM
+  string tax_exempt_reason_cd = 6 [json_name = "tax_exempt_reason_cd"];
+}
+
+message ICDLineItemMerchandiseTaxExempt {
+  // System assigned unique identifier for the TaxGroupRule.
+  google.retail.common.pb.VersionID tax_group_rule_id = 1 [json_name = "tax_group_rule_id"];
+  // The amount of tax that does not have to be paid for the INVENTORY CONTROL
+  // DOCUMENT MERCHANDISE LINE ITEM
+  float tax_exempt_amount = 2 [json_name = "tax_exempt_amount"];
+  // A code denoting the reason why the tax that should have been paid was exempt
+  // for the INVENTORY CONTROL DOCUMENT MERCHANDISE LINE ITEM
+  string tax_exempt_reason_cd = 3 [json_name = "tax_exempt_reason_cd"];
+}
+
+// A type of ICDLineItem that identifies and records the number of retail and
+// ship units and unit cost for a StockItem being received, returned,
+// transferred or shipped on an InventoryControlDocument.
+message ICDLineItemMerchandise {
+  //- merchandise_item_unit
+  // - merchandise_serialized_unit
+
+  // SKU, UPC, GL Code, Lot #, etc.
+  repeated google.retail.common.pb.BusinessKey business_keys = 1 [json_name = "business_keys"];
+
+  // A unique system assigned identifier for the Location.
+  google.retail.common.pb.VersionID destination_location_id = 2 [json_name = "destination_location_id"];
+
+  // A unique system assigned identifier for the Supplier.
+  google.retail.common.pb.VersionID supplier_id = 3 [json_name = "supplier_id"];
+
+  // The code assigned by the supplier to uniquely identify the ITEM
+  string supplier_item_id = 4 [json_name = "supplier_item_id"];
+
+  // Description of the Item being Ordered or Delivered. Note: If retailer is
+  // ordering a new Item, the OrderDocument and AdvancedShippingDocument may not
+  // have an ItemID because it doesnt exist yet.
+  string item_description = 5 [json_name = "item_description"];
+
+  // A code which uniquely identifies the condition for inventory being
+  // received, stored or shipped out by a retail store. These codes will signify
+  // good, broken, damaged, wrong, partial shipment, overage, etc. This code
+  // relates to the UCC code, Receiving Condition Code, data element 412.
+  string inventory_condition_code = 6 [json_name = "inventory_condition_code"];
+
+  // Defines the unit type the owned attribute costs are assigned to for this
+  // item.  Valid unit types include: SALE UNIT, PACK UNIT and SHIP UNIT.  A
+  // single SUPPLIER ITEM may in effect have 1 to three SUPPLIER ITEM BASE COST
+  // entities associated with it.
+  string cost_per_unit_code = 7 [json_name = "cost_per_unit_code"];
+
+  // A count of all item units (in the item-cost-per-unit-type) received or
+  // shipped in this document line item.
+  float cost_per_unit = 8 [json_name = "cost_per_unit"];
+
+  // A count of the damaged item units (in the item-cost-per-unit-type) received
+  // or shipped in this document line item.  This count when subtracted from the
+  // document-line-item-unit-count yields the number received or shipped in good
+  // condition.
+  int32 damaged_unit_count = 9 [json_name = "damaged_unit_count"];
+
+  // The cost of the merchandise by itself exclusive of shipping and handling,
+  // duties and import fees, insurance, taxes and other logistic expenses that a
+  // store incurs to bring the item into the store.
+  float unit_base_cost_amount = 10 [json_name = "unit_base_cost_amount"];
+
+  // The cost of the merchandise by itself plus shipping and handling, duties
+  // and import fees, insurance, taxes and other logistic expenses that a store
+  // incurs to bring the item into the store; and less any discounts or
+  // allowances allocated to the line item (hence the term NET).
+  float unit_net_cost_amount = 11 [json_name = "unit_net_cost_amount"];
+
+  // The count of units shipped versus the receiving count.  This is subtracted
+  // from the document-line-item-unit-count to yield an over/under variance
+  // between what a supplier said was shipped and what was counted and received
+  // at by the stores staff.
+  int32 units_shipped_amount = 12 [json_name = "units_shipped_amount"];
+
+  // A flag indicating whether this line item has been pre ticketed by the
+  // SUPPLIER.
+  bool document_pre_ticketed = 13 [json_name = "document_pre_ticketed"];
+
+  // A code that defines the reason for the difference between the quantity
+  // ordered and quantity shipped for a line item.This code relates to the UCC
+  // code, Line Item Change Reason Code, data element 892.
+  string charge_reason_code = 14 [json_name = "charge_reason_code"];
+
+  // A flag indicating whether or not the item is pre priced by the manufacturer.
+  bool pre_priced = 15 [json_name = "pre_priced"];
+
+  // A unique system assigned identifier for the CustomerOrder.
+  google.retail.common.pb.VersionID customer_order_id = 16 [json_name = "customer_order_id"];
+
+  // A unique system assigned identifier for the LineItem within the confines of
+  // the CustomerOrder.
+  int32 customer_order_line_number = 17 [json_name = "customer_order_line_number"];
+
+  // A unique code, which can be either alpha, numeric or alpha-numeric, to
+  // identify an individual ITEM.
+  string serial_number = 18 [json_name = "serial_number"];
+}
+
+message ICDLineItem {
+  enum ICDLineItemType {
+    MERCHANDISE = 0;
+    MODIFICATION = 5;
+    TAX = 10;
+    TAX_EXEMPT = 15;
+    CHARGE = 20;
+    TEXT = 25;
+    FREIGHT = 30;
+    ALLOWANCE = 35;
+  }
+  int32 ordinal = 1 [json_name = "ordinal"];
+  ICDLineItemType type = 2 [json_name = "type"];
+  oneof item {
+    ICDLineItemMerchandise merchandise = 3 [json_name = "merchandise"];
+    ICDLineItemMerchandiseModifier modification = 4 [json_name = "modification"];
+    ICDLineItemMerchandiseTax tax = 5 [json_name = "tax"];
+    ICDLineItemMerchandiseTaxExempt tax_exempt = 6 [json_name = "tax_exempt"];
+    ICDLineItemCharge charge = 7 [json_name = "charge"];
+    ICDLineItemFreeText text = 8 [json_name = "text"];
+    ICDLineItemFreight freight = 9 [json_name = "freight"];
+    ICDLineItemAllowance allowance = 10 [json_name = "allowance"];
+  }
+  // A line ordinal reference
+  int32 reference = 11 [json_name = "reference"];
+}
+
+message ICDHeader {
+  google.retail.common.pb.VersionID id = 1 [json_name = "id", (gen_bq_schema.bigquery).require = true];
+  // This code identifies the type of InventoryControlDocument.
+  string document_type_code = 2 [json_name = "document_type_code", (gen_bq_schema.bigquery).require = true];
+  // The contract against which the delivery has been made.
+  string contract_reference_number = 3 [json_name = "contract_reference_number"];
+  // An identifier for this document, usually preprinted on the form stock prior
+  // to being filled out.
+  string serial_form_id = 4 [json_name = "serial_form_id"];
+  // A unique retailer assigned identifier for an RetailStore,
+  // DistributionCenter or AdministrationCenter
+  // the timestamp the ICD was created
+  google.protobuf.Timestamp created = 5 [json_name = "created", (gen_bq_schema.bigquery).require = true];
+  // The last update date
+  google.protobuf.Timestamp updated = 6 [json_name = "updated", (gen_bq_schema.bigquery).require = true];
+  // The timestamp the ICD was completed
+  google.protobuf.Timestamp completed = 7 [json_name = "completed", (gen_bq_schema.bigquery).require = true];
+  // Referenced Inventory Control Documents
+  repeated google.retail.common.pb.VersionID icd_references = 8 [json_name = "icd_references"];
+}
+
+message ICDParties {
+  google.retail.common.pb.VersionID destination_business_unit_id = 1 [json_name = "destination_business_unit_id"];
+  // Identifies the point of origin for this inventory control document.  An
+  // originator may be a program (for automatically generated documents) or a
+  // person.
+  google.retail.common.pb.VersionID origin_party_id = 5 [json_name = "origin_party_id", (gen_bq_schema.bigquery).require = true];
+  // A unique retailer assigned identifier for an RetailStore,
+  // DistributionCenter or AdministrationCenter
+  google.retail.common.pb.VersionID source_business_unit_id = 6 [json_name = "source_business_unit_id", (gen_bq_schema.bigquery).require = true];
+  // A unique system assigned identifier for the Supplier.
+  google.retail.common.pb.VersionID supplier_id = 7 [json_name = "supplier_id", (gen_bq_schema.bigquery).require = true];
+}
+
+message ICDDates {
+  // The deferred payment date on which the RETAIL STORE has to make its payment.
+  // Deferred payments are an inducement to retailers to accept certain stock.
+  google.protobuf.Timestamp deferred_payment_date = 4 [json_name = "deferred_payment_date"];
+  // The expected arrival date of the shipment, to which this particular
+  // inventory control document relates.
+  google.protobuf.Timestamp supplier_expected_ship_date = 5 [json_name = "supplier_expected_ship_date"];
+  // The actual ship date of the shipment, to which this particular inventory
+  // control document relates. The actual date of the to which this particular
+  // inventory control document relates, is expected to be shipped from the
+  // originating company or store.
+  google.protobuf.Timestamp supplier_actual_ship_date = 6 [json_name = "supplier_actual_ship_date"];
+  // The expected arrival date of the shipment, to which this particular
+  // inventory control document relates.
+  google.protobuf.Timestamp expected_delivery_date = 7 [json_name = "expected_delivery_date"];
+  // The actual delivery date of the shipment, to which this particular
+  // inventory control document relates.
+  google.protobuf.Timestamp actual_delivery_date = 8 [json_name = "actual_delivery_date"];
+}
+
+// A written or printed paper, or digital equivalent, that evidences the
+// movement of merchandise or supply StockItems.
+message InventoryControlDocument {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_inventory_control_documents";
+  ICDHeader header = 1 [json_name = "header", (gen_bq_schema.bigquery).require = true];
+  ICDParties parties = 2 [json_name = "parties", (gen_bq_schema.bigquery).require = true];
+  ICDDates dates = 3 [json_name = "dates", (gen_bq_schema.bigquery).require = true];
+  // The currency code
+  google.retail.enums.currency.Currency currency = 4 [json_name = "currency", (gen_bq_schema.bigquery).require = true];
+  // A code that assigns responsibility for payment of the freight and insurance
+  // charges for this inventory control document to the store or other party in
+  // the transaction.
+  string freight_charge_disposition_code = 5 [json_name = "freight_charge_disposition_code"];
+  // A code to indicate the reason for the difference between the quantity
+  // ordered and quantity shipped. This code relates to the UCC code,
+  // Shipment/Order Status Code, data element 368.
+  string received_difference_code = 6 [json_name = "received_difference_code"];
+  // The discrepancy count between the units recorded on the
+  // InventoryControlDocument and the actual units counted.
+  int32 unit_discrepancy_count = 7 [json_name = "unit_discrepancy_count"];
+  // This code denotes the relevant terms and conditions pertaining to this
+  // particular inventory control document, eg the supplier must be notified of
+  // any shortages within three days.
+  string terms_and_conditions = 8 [json_name = "terms_and_conditions"];
+  // ICD line items
+  repeated ICDLineItem line_items = 9 [json_name = "line_items", (gen_bq_schema.bigquery).require = true];
+}

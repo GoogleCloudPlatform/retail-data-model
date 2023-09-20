@@ -384,6 +384,11 @@ message TimeBoundRequest {
   google.protobuf.Timestamp end_date = 2 [json_name = 'end_dt'];
 }
 
+// A common business key request
+message BusinessKeyRequest {
+  repeated BusinessKey business_keys = 1 [json_name = 'business_keys'];
+}
+
 // A transfer object suitable for stream and non-stream error
 message StatusResponse {
   enum Type {

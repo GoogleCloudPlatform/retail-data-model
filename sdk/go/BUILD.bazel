@@ -3,15 +3,14 @@ load("@io_bazel_rules_go//proto:def.bzl", "go_grpc_library", "go_proto_library")
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 load("//:build/go_deps.bzl", "WELL_KNOWN_TYPES")
 
-
 package(default_visibility = [
     "//visibility:public",
 ])
 
 go_proto_library(
-  name = "protogen_bq_go_proto",
-  importpath = "github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos",
-  proto = "@protoc_gen_bq_schema//api:bq_schema_proto_lib"
+    name = "protogen_bq_go_proto",
+    importpath = "github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos",
+    proto = "@protoc_gen_bq_schema//api:bq_schema_proto_lib",
 )
 
 # Enums Module
@@ -58,9 +57,9 @@ go_proto_library(
     importpath = "github.com/GoogleCloudPlatform/retail-data-model/enterprise/pb",
     proto = "//api/enterprise:model_proto",
     deps = [
+        ":common_go_proto",
         ":enums_go_proto",
         ":party_go_proto",
-        ":common_go_proto",
         ":protogen_bq_go_proto",
     ] + WELL_KNOWN_TYPES,
 )
@@ -74,7 +73,7 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":enterprise_go_proto",
-    ]+ WELL_KNOWN_TYPES,
+    ] + WELL_KNOWN_TYPES,
 )
 
 #Events Module
@@ -97,7 +96,32 @@ go_grpc_library(
     deps = [
         ":common_go_proto",
         ":events_go_proto",
-    ]+ WELL_KNOWN_TYPES,
+    ] + WELL_KNOWN_TYPES,
+)
+
+# Inventory Module
+go_proto_library(
+    name = "inventory_go_proto",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/inventory/pb",
+    proto = "//api/inventory:model_proto",
+    deps = [
+        ":common_go_proto",
+        ":enums_go_proto",
+        ":protogen_bq_go_proto",
+    ] + WELL_KNOWN_TYPES,
+)
+
+go_grpc_library(
+    name = "inventory_go_grpc",
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/inventory/grpc",
+    protos = [
+        "//api/inventory:service_proto",
+    ],
+    deps = [
+        ":common_go_proto",
+        ":enums_go_proto",
+        ":inventory_go_proto",
+    ] + WELL_KNOWN_TYPES,
 )
 
 # Location Module
@@ -106,8 +130,8 @@ go_proto_library(
     importpath = "github.com/GoogleCloudPlatform/retail-data-model/location/pb",
     proto = "//api/location:model_proto",
     deps = [
-        ":enums_go_proto",
         ":common_go_proto",
+        ":enums_go_proto",
         ":protogen_bq_go_proto",
     ] + WELL_KNOWN_TYPES,
 )
@@ -122,7 +146,7 @@ go_grpc_library(
         ":common_go_proto",
         ":enums_go_proto",
         ":location_go_proto",
-    ]+ WELL_KNOWN_TYPES,
+    ] + WELL_KNOWN_TYPES,
 )
 
 # Merchandise Module
@@ -131,9 +155,9 @@ go_proto_library(
     importpath = "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb",
     proto = "//api/merchandise:model_proto",
     deps = [
-        ":enums_go_proto",
         ":common_go_proto",
         ":enterprise_go_proto",
+        ":enums_go_proto",
         ":protogen_bq_go_proto",
     ] + WELL_KNOWN_TYPES,
 )

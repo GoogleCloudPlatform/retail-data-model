@@ -27,6 +27,7 @@ PROTOS = [
     "//api/customer:model_proto",
     "//api/enterprise:model_proto",
     "//api/events:model_proto",
+    "//api/inventory:model_proto",
     "//api/location:model_proto",
     "//api/merchandise:model_proto",
     "//api/party:model_proto",
@@ -36,6 +37,7 @@ PROTOS = [
 GRPCS = [
     "//api/common:service_proto",
     "//api/events:service_proto",
+    "//api/inventory:service_proto",
     "//api/location:service_proto",
 ]
 

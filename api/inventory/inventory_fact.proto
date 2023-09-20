@@ -1,0 +1,349 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.inventory.pb;
+
+// Go Lang Options
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/inventory/pb";
+
+// Java Options
+option java_package = "com.google.retail.inventory.pb";
+option java_multiple_files = true;
+
+import "api/common/model.proto";
+
+import "google/protobuf/timestamp.proto";
+
+import "api/bq_table.proto";
+
+import "api/bq_field.proto";
+
+message InventoryFact {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_inventory_facts";
+
+  // Document Identifier
+  google.retail.common.pb.VersionID id = 1 [json_name = "id", (gen_bq_schema.bigquery).require = true];
+
+  // SKU, UPC, GL Code, Lot #, etc.
+  repeated google.retail.common.pb.BusinessKey business_keys = 2
+  [json_name = "business_keys"];
+
+  // A unique retailer assigned identifier for an RetailStore,
+  // DistributionCenter or AdministrationCenter
+  google.retail.common.pb.VersionID business_unit_id = 3
+  [json_name = "bus_unit_id"];
+
+  // A unique system assigned identifier for the Location.
+  google.retail.common.pb.VersionID location_id = 4 [json_name = "loc_id"];
+
+  // A state that StockItems are kept in the retail enterprise item inventory
+  // records.  Suggested values include: OnHand, OnOrder, OnLayaway, Damaged,
+  // ToBeReturned etc....
+  string inventory_state = 5 [json_name = "inv_state"];
+
+  // A unique retailer assigned identifier for an accounting budget, that owns
+  // merchandise and is used to track the financial performance of the retail
+  // enterprise.
+  string revenue_cost_center = 6 [json_name = "rev_cst_cntr"];
+
+  // he unique system assigned identifier for a particular ReportingPeriod.
+  string reporting_period = 7 [json_name = "rpt_prd"];
+
+  // Token identifier for a Reporting Period.  Uniquely identifies a reporting
+  // period.
+  string calendar_reporting_period = 8 [json_name = "cal_rpt_prd"];
+
+  /*
+  The date this item is first received into the retailers inventory system.
+  Inventory system in this context includes warehouses, distribution centers or
+  stores -- any place the retailer may receive merchandise.This attribute will
+  be populated using a query looking for the oldest reporting period for the
+  item in the ItemInventoryHistory set. (See ReportingID definition for a
+  discussion of the relationship between reporting period and business day).
+  */
+  google.protobuf.Timestamp first_receipt_date = 9 [json_name = "frst_rcpt_dt"];
+
+  /*
+  The date this item was last received into the retailers inventory system.
+  Inventory system in this context includes warehouses, distribution centers or
+  stores -- any place the retailer may receive merchandise.This attribute will
+  be populated using a query looking for the newest reporting period for the
+  item in the ItemInventoryHistory set. (See ReportingID definition for a
+  discussion of the relationsip between reporting period and business day).
+  */
+  google.protobuf.Timestamp last_receipt_date = 10 [json_name = "lst_rcpt_dt"];
+
+  // The current retail price per sale unit of the item.  This monetary amount
+  // is used as the basis for deriving retail price at the point of sale.
+  float current_sale_unit_retail_price_amount = 11
+  [json_name = "crnt_sl_unt_rtl_prc_amt"];
+
+  // The weighted average cost for each retail sale unit of this item at the
+  // current time.
+  float unit_cost = 12 [json_name = "unt_cst"];
+
+  /*
+  The count of retail units that are on order during the period (i.e.purchases
+  that have not been received into inventory). This attribute value is
+  aggregated from the OrderDocument type of InventoryControlDocument
+  ICDMerchandiseLineItem Unit Count. Because this reflects the period count of
+  both units ordered this period plus units ordered in previous periods that
+  have not been received and are NOT IN TRANSIT (because intransit items are
+  legally owned by the retailer).This requires a query to look across orders,
+  intransits and receiving documents to determine the on order count. This is an
+  important number for merchandise open to buy planning and control.
+  */
+  int32 on_order_count = 13 [json_name = "on_ord_cnt"];
+
+  /*
+  The extended UnitNetCostAmount of this item multiplied by the UnitCount on
+  order. This attribute is derived by looking at OrderDocument type of
+  InventoryControlDocument and the ICDMerchandiseLineItem entity types UnitCount
+  and UnitNetCost attributes.Like OnOrderCount care must be taek to ensure that
+  this value reflects the value of current period orders plus prior period
+  orders that have not yet been received and are not in transit.
+  */
+  float on_order_cost = 14 [json_name = "on_ord_cst"];
+
+  /*
+  This value is the retail valuation (in monetary units)placed on items that are
+  currently on order. The cost attributes, as discussed in OnOrderCost are
+  available by interrogating the inventory control document line items for order
+  ICDs associated with the item.  The retail valuation for on order items will
+  be extracted from the ItemSellingPrices CurrentSaleUnitRetailPriceAmount
+  attribute. This assumes that the Inventory Fact entity is updated on a daily
+  basis Isince it only includes the current and possibly future retail
+  prices).If this assumption is not true, a second source , the
+  PermanentPriceChangeItem entity  NewPrice entity type will be used.
+  The PermanentPriceChangeEffectiveDateTime will be compared with
+  ReportingPeriod business day to obtain the correct version of the retail
+  price.
+  */
+  float on_order_retail_amount = 15 [json_name = "on_ord_rtl_amt"];
+
+  /*
+  The count of retail units that are legally and financially owned by the
+  retailer but are physically in the posssession of a carrier.  They are in
+  bound but not yet received.  For the purposes of this model intransit items
+  are reflected in the InventoryControlDocument type advanced ship notice
+  CDMerchandiseLineItem UnitCount attribute.  As with other fact attributes,
+  this one is an aggregation of these individual document unit counts for the
+  relevant reporting period.  All open ASNs are aggregate to arrive at this
+  value.  This requires that upon receipt of the merchanse, the ASN is marked as
+  received and not included in the next periods aggregation select.We are NOT
+  including intra-retailer inventory transfers as part of intransit unit counts,
+  costs and retail.
+  */
+  int32 in_transit_count = 16 [json_name = "in_trnst_cnt"];
+
+  /*
+  The extended UnitNetCostAmount of this item multiplied by the UnitCount on the
+  AdvancedShipNotice subtype of InventoryControlDocument ICDMerchandiseLineItem
+  UnitNetCost. The data model assumes that all inventory control document types
+  have one or more ICDMerchandise LineItems.  This version of the DW model
+  extends this assumption to include ICDMerchandiseLineItems which provide unit
+  counts and unt net cost.
+  */
+  float in_transit_cost = 17 [json_name = "in_trnst_cst"];
+
+  /*
+  This value is the retail valuation placed on items that are currently in
+  transit (inbound based on advanced ship notice ICD types).  The cost
+  attributes, as discussed in OnOrderCost are available by interrogating the
+  inventory control document line items for order ICDs associated with the item.
+  The retail valuation for on order items will be extracted from the
+  ItemSellingPrices CurrentSaleUnitRetailPriceAmount attribute.  This assumes
+  that the Inventory Fact entity is updated on a daily basis Isince it only
+  includes the current and possibly future retail prices).If this assumption is
+  not true, a second source , the PermanentPriceChangeItem entity  NewPrice
+  entity type will be used.  The PermanentPriceChangeEffectiveDateTime will be
+  compared with ReportingPeriod business day to obtain the correct version of
+  the retail price.
+  */
+  float in_transit_retail_cost = 18 [json_name = "in_trnst_rtl_cst"];
+
+  /*
+  Markdown cycle code is a retailer defined value that identifies which markdown
+  this item is in.  This definition assumes that a retailer has a defined retail
+  price lifecycle that incorporates a sequence of markdown stages.  For example
+  a fashion retailer may establish 4 markdown cycles for a class of womens
+  apparel which might include - initial markdown, second markdown, third
+  markdown, clearance rack and markdown.  This provides a quick snapshot of an
+  items retail price life cycle stage.This attribute will be derived from the
+  PermanentRetailPricePermanentMarkdownCount attribute of the ItemSellingPrices
+  entity type.  We use the term derived because the cycle type could be the same
+  as the count or it may be a reference value associated with a markdown count.
+  This derivation is implemented in the ETL rules used to populate the INVENTORY
+  FACT entity type from the ODS.
+  */
+  string markdown_cycle_code = 19 [json_name = "mrkdwn_cycl_cd"];
+
+  /*
+  The number of ITEMs that had an ordinary discount applied to during the
+  REPORTING PERIOD
+  */
+  int32 item_discount_markdown_count = 20 [json_name = "itm_dscnt_mrkdwn_cnt"];
+
+  // The number of units of the nominated Item present in the nominated
+  // InventoryLocation at the beginning of the nominated ReportingPeriod.
+  int32 begining_unit_count = 21 [json_name = "bgn_unt_cnt"];
+
+  // The number of units of the nominated Item received to the nominated
+  // InventoryLocation since the beginning of the nominated ReportingPeriod,
+  // excluding any returns.
+  int32 received_unit_count = 22 [json_name = "rcvd_unt_cnt"];
+
+  // The number of units of the nominated Item transferred into the nominated
+  // InventoryLocation since the beginning of the nominated
+  // ReportingPeriod.Note: Transfers include any Items for which InventoryState
+  // was changed, but InventoryLocation did not change.
+  int32 transfer_in_unit_count = 23 [json_name = "trns_in_unt_cnt"];
+
+  // The number of units of the nominated Item transferred from the nominated
+  // InventoryLocation since the beginning of the nominated
+  // ReportingPeriod.Note: Transfers include any Items for which InventoryState
+  // was changed, but InventoryLocation did not change.
+  int32 transfer_out_unit_count = 24 [json_name = "trns_out_unt_cnt"];
+
+  // The number of units of the nominated Item for which InventoryAdjustments
+  // were made in the nominated InventoryLocation since the beginning of the
+  // nominated ReportingPeriod.
+  int32 adjustment_unit_count = 25 [json_name = "adj_unt_cnt"];
+
+  // The number of units of the nominated Item returned to the nominated
+  // InventoryLocation since the beginning of the nominated ReportingPeriod.
+  int32 return_unit_count = 26 [json_name = "rtrn_unt_cnt"];
+
+  // The number of units of the nominated Item sold from the nominated
+  // InventoryLocation since the beginning of the nominated ReportingPeriod,
+  // excluding any returns.
+  int32 gross_sale_unit_count = 27 [json_name = "grs_sl_unt_cnt"];
+
+  // The number of units of the nominated Item returned to Vendor from the
+  // nominated InventoryLocation since the beginning of the  nominated
+  // ReportingPeriod.
+  int32 return_to_vendor_unit_count = 28 [json_name = "rtn_to_vndr_unt_cnt"];
+
+  // The number of units of the nominated Item present in the nominated
+  // InventoryLocation at the end of the nominated ReportingPeriod.
+  int32 ending_unit_count = 29 [json_name = "ndg_unt_cnt"];
+
+  // The weighted average cost for each retail sale unit of this item at the
+  // beginning of the current ReportingPeriod.  The weighted average cost is
+  // updated each time a shipment of this item is received by the owning
+  // MerchandisingRevenueCenter.
+  float beginning_average_weighted_unit_cost = 30
+  [json_name = "bgn_avg_wght_unt_cnt"];
+
+  // The current weighted average cost for each retail sale unit of this item at
+  // the end of the historical ReportingPeriod.Extracted from the
+  // CostValueLedgerAccountHistory entity for the relevant period
+  float ending_average_weighted_unit_cost = 31
+  [json_name = "ndg_avg_wght_unt_cnt"];
+
+  // The cumulative cost value of units received by the
+  // MerchandisingRevenueCenter since the beginning of the current
+  // ReportingPeriod.This figure is used to update the AverageWeightedUnitCost
+  // of Items during the ReportingPeriod.
+  float cumulative_received_cost_amount = 32 [json_name = "cml_rcvd_cst_amt"];
+
+  // The cumulative retail value of units received for a particular ITEM since
+  // the beginning of the current ReportingPeriod.
+  float cumulative_received_retail_amount = 33 [json_name = "cml_rcvd_rtl_amt"];
+
+  // The monetary value of all Items owned by the MerchandisingCenter at the
+  // beginning of the current ReportingPeriod
+  float beginning_value_amount = 34 [json_name = "bgn_val_amt"];
+
+  // The markon amount (initial markon) at the beginning of the current
+  // ReportingPeriod. The original retail value recorded for an item (or a group
+  // of items) over its cost.
+  float beginning_cumulative_markon_amount = 35
+  [json_name = "bgn_cml_mrkon_amt"];
+
+  // The markon percentage (initial markon) at the beginning of the current
+  // ReportingPeriod.
+  float beginning_cumulative_markon_percent = 36
+  [json_name = "bgn_cml_mrkon_pct"];
+
+  // The cumulative gross sales for a specific ITEM since the beginning of the
+  // current ReportingPeriod. The gross figure excludes returns.
+  float cummulative_gross_sales_retail_amount = 37
+  [json_name = "cml_grs_sl_rtl_amt"];
+
+  // The cumulative retail value of merchandise that is returned by customers to
+  // the RetailStore during the current ReportingPeriod.
+  float cummulative_return_retail_amount = 38 [json_name = "cml_rtrn_rtl_amt"];
+
+  // The cumulative retail value of merchandise transferred into the store from
+  // other stores or distribution centers during the current ReportingPeriod.
+  float cummulative_transfer_in_retail_amount = 39
+  [json_name = "cml_txfr_in_rtl_amt"];
+
+  // The cumulative retail value of merchandise transferred from the store to
+  // another store or distribution center during the current ReportingPeriod.
+  float cummulative_transfer_out_retail_amount = 40
+  [json_name = "cml_txfr_out_rtl_amt"];
+
+  // he cumulative retail value of merchandise returned to the vendor from the
+  // store during the current ReportingPeriod.
+  float cummulative_return_to_vendor_amount = 41
+  [json_name = "cml_rtrn_2_vndr_amt"];
+
+  // The cumulative retail value of inventory adjustments (overages and
+  // shortages) made to ItemInventory during the current ReportingPeriod.
+  float cummulative_adjusted_retail_amount = 42 [json_name = "cml_adj_rtl_amt"];
+
+  // The cumulative value of permanent markdowns taken against this item during
+  // the current ReportingPeriod.
+  float cumulative_permanent_markdown_amount = 43
+  [json_name = "cml_prmnt_mrkdn_amt"];
+
+  // The cumulative temporary or promotional markdown value taken against this
+  // item either as a price change or through the application of price
+  // derivation rules at the point of sale during the current ReportingPeriod.
+  float cumulative_temporary_markdown_amount = 44
+  [json_name = "cml_tmp_mrkdn_amt"];
+
+  // The cumulative value of permanent markups taken against this item during
+  // the current ReportingPeriod.
+  float cumulative_permanent_markup_amount = 45
+  [json_name = "cml_perm_mrkup_amt"];
+
+  // The cumulative temporary or promotional markup value taken against this
+  // item either as a price change or through the application of price
+  // derivation rules at the point of sale, during the current ReportingPeriod.
+  float cumulative_temporary_markup_amount = 46
+  [json_name = "cml_tmp_mrkup_amt"];
+
+  // Cumulative value of all discounts granted for the item during the current
+  // ReportingPeriod.
+  float cumulative_discount_amount = 47 [json_name = "cml_dscnt_amt"];
+
+  // Cumulative retail value lost due to damage to stock during the current
+  // ReportingPeriod.
+  float cumulative_damaged_item_depreciation_amount = 48
+  [json_name = "cml_dmg_itm_dprctn_amt"];
+
+  // Cumulative retail value lost due to stock aging past its sell-by date
+  // during the current ReportingPeriod.
+  float cumulative_out_of_date_item_depreciation_amount = 49
+  [json_name = "cml_ood_itm_dprctn_amt"];
+
+  // The monetary value of all Items owned by the MerchandisingCenter at the
+  // current time.
+  float ending_value_amount = 50 [json_name = "ndg_val_amt"];
+}
