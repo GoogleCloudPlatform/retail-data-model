@@ -58,8 +58,17 @@ bq_schema_compile(
 )
 
 doc_markdown_compile(
-    name = "doc_location_model",
+    name = "doc_invenotry_model",
     protos = [
         ":model_proto",
+    ],
+)
+
+doc_markdown_compile(
+    name = "doc_inventory_service",
+    output_mode = "NO_PREFIX",
+    prefix_path = "docs/inventory",
+    protos = [
+        ":service_proto",
     ],
 )
