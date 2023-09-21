@@ -1,0 +1,53 @@
+load("@rules_jvm_external//:defs.bzl", "java_export")
+
+package(
+    default_visibility = ["//examples/java:__subpackages__"],
+)
+
+java_library(
+    name = "grpc_deps",
+    exports = [
+        "@maven//:io_grpc_grpc_core",
+        "@maven//:io_grpc_grpc_googleapis",
+        "@maven//:io_grpc_grpc_protobuf",
+    ],
+)
+
+java_library(
+    name = "pico_cli",
+    exports = [
+        "@maven//:info_picocli_picocli",
+        "@maven//:info_picocli_picocli_codegen",
+    ],
+)
+
+java_library(
+    name = "rpc_deps",
+    exports = [
+        "//sdk/java:common_java_grpc",
+        "//sdk/java:common_java_proto",
+        "//sdk/java:enums_java_proto",
+        "//sdk/java:events_java_grpc",
+        "//sdk/java:events_java_proto",
+    ],
+)
+
+java_binary(
+    name = "java_events_service",
+    srcs = glob([
+        "com/google/retail/events/service/EventDescriptionsService.java",
+        "com/google/retail/events/service/EventRecordsService.java",
+        "com/google/retail/events/service/EventsService.java",
+        "com/google/retail/events/service/StatusService.java",
+        "com/google/retail/events/Server.java",
+    ]),
+    main_class = "com.google.retail.events.Server",
+    resources = [
+        "//examples/java/events/src/main/resources:main_resources",
+    ],
+    deps = [
+        ":grpc_deps",
+        ":pico_cli",
+        ":rpc_deps",
+    ],
+)

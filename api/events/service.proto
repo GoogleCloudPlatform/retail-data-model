@@ -35,6 +35,18 @@ import "api/events/model.proto";
 
 import "google/api/annotations.proto";
 
+service Status {
+  /*
+   * Gets an event record based on its Id.
+   */
+  rpc Get(google.protobuf.Empty)
+      returns (google.retail.common.pb.HealthCheckResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/status"
+    };
+  }
+}
+
 /**
  * A service used for CRUD operations for event descriptions.
  */
@@ -45,7 +57,7 @@ service EventDescriptions {
   rpc List(google.protobuf.Empty)
     returns (stream google.retail.events.pb.EventDescription) {
     option (google.api.http) = {
-      get: "/v2/event_descriptions"
+      get: "/api/v1/event_descriptions"
     };
   }
 
@@ -55,7 +67,7 @@ service EventDescriptions {
   rpc Get(google.retail.common.pb.IDRequest)
     returns (google.retail.events.pb.EventDescription) {
     option (google.api.http) = {
-      get: "/v2/event_descriptions/{id}"
+      get: "/api/v1/event_descriptions/{id}"
     };
   }
 
@@ -65,7 +77,7 @@ service EventDescriptions {
   rpc Create(stream google.retail.events.pb.EventDescription)
     returns (stream google.retail.common.pb.StatusResponse) {
     option (google.api.http) = {
-      post: "/v2/event_descriptions"
+      post: "/api/v1/event_descriptions"
       body: "event_description"
     };
   }
@@ -76,7 +88,7 @@ service EventDescriptions {
   rpc Update(stream google.retail.events.pb.EventDescription)
     returns (stream google.retail.common.pb.StatusResponse) {
     option (google.api.http) = {
-      put: "/v2/event_descriptions"
+      put: "/api/v1/event_descriptions"
       body: "event_description"
     };
   }
@@ -87,7 +99,7 @@ service EventDescriptions {
   rpc Delete(stream google.retail.events.pb.EventDescription)
     returns (stream google.retail.common.pb.StatusResponse) {
     option (google.api.http) = {
-      delete: "/v2/event_descriptions"
+      delete: "/api/v1/event_descriptions"
       body: "event_description"
     };
   }
@@ -104,7 +116,7 @@ service EventRecords {
   rpc List(google.retail.common.pb.TimeBoundRequest)
     returns (stream google.retail.events.pb.EventRecord) {
     option (google.api.http) = {
-      get: "/v2/event_records"
+      get: "/api/v1/event_records"
     };
   }
 
@@ -114,7 +126,7 @@ service EventRecords {
   rpc FindTransactionById(google.retail.common.pb.IDRequest)
     returns (google.retail.events.pb.EventRecord) {
     option (google.api.http) = {
-      get: "/v2/event_records/{id}"
+      get: "/api/v1/event_records/{id}"
     };
   }
 }
@@ -129,7 +141,7 @@ service Events {
   rpc Emit(stream google.retail.events.pb.Event)
     returns (stream google.retail.common.pb.StatusResponse) {
     option (google.api.http) = {
-      post: "/v2/events"
+      post: "/api/v1/events"
       body: "event"
     };
   }
