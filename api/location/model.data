@@ -1,0 +1,113 @@
+
+// site
+
+{
+  "id": {
+    "id": "",
+    "version": 1,
+    "created": "2023-08-01T01:00:00.000-05:00",
+    "effective": "2023-08-01T01:00:00.000-05:00",
+  },
+  "site_type": "STORE",
+  "location": {
+    "address": {
+      "geo_segment_id": "",
+      "line_1": "000 Laurel Canyon Village Road.",
+      "line_2": "",
+      "line_3": "",
+      "line_4": "",
+      "city": "Canton",
+      "state": "GA",
+      "territory": "USA",
+      "postal_code": "30144",
+      "iso_3166_2_country_sub_division_code": "USA_GA"
+    },
+    "climate": "Cta",
+    "northwest_corner": {
+      "latitude_degrees": 34,
+      "latitude_minutes": 272,
+      "latitude_seconds": 860,
+      "latitude_direction_code": "NORTH",
+      "longitude_degrees": -84,
+      "longitude_minutes": 500,
+      "longitude_seconds": 781,
+      "longitude_direction_code": "EAST"
+    },
+    "southeast_corner": {
+      "latitude_degrees": 34,
+      "latitude_minutes": 271,
+      "latitude_seconds": 817,
+      "latitude_direction_code": "NORTH",
+      "longitude_degrees": -84,
+      "longitude_minutes": 500,
+      "longitude_seconds": 354,
+      "longitude_direction_code": "EAST"
+    },
+    "altitude_meters": "313"
+  },
+  "operational_party": {
+    "id": {
+      "id": "",
+      "version": 0,
+      "created": "2023-08-01T01:00:00.000-05:00",
+      "effective": "2023-08-01T01:00:00.000-05:00",
+    },
+    "party_role_assignement_id": {
+      ...
+    }
+  },
+  "icoa_code": "",
+  "time_zone": "-05:00",
+  "contacts": [],
+  "location_ids": [
+    
+  ]
+}
+
+[
+  {
+    "id": {},
+    "location_type": "FIXTURE",
+    "location_function_type": "STOCK_POINT",
+    "inventory_security_type": "PUBLIC",
+    "stock_ledger_control_flag": "NA",
+    "measures": [
+      {
+        "name": "length",
+        "uom": "METER",
+        "value": 12.0
+      },
+      {
+        "name": "width",
+        "uom": "METER",
+        "value": 1.4
+      },
+      {
+        "name": "height",
+        "uom": "METER",
+        "value": 1.8
+      },
+      {
+        "name": "depth",
+        "uom": "METER",
+        "value": 0.5
+      }
+    ]
+  },
+  "merch_groups": [
+    {
+      "merchandise_hierarchy_id": "",
+      "effective_date": "",
+      "performance_score": ""
+    }
+  ],
+  "location_coordinate": {
+    "angle_offset_degrees": -23,
+    "coordinate_x": "3",
+    "coordinate_y": "C",
+    "coordinate_z": "0",
+    "children": [
+      {"ordinal": }
+    ]
+  }
+]
