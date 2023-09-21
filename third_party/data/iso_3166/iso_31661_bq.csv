@@ -1,0 +1,250 @@
+id,name,alpha-2,alpha-3,country-code,iso_3166-2,region,sub-region,intermediate-region,region-code,sub-region-code,intermediate-region-code
+5d323359-2db6-4e28-a801-d10b48144b76,Afghanistan,AF,AFG,004,ISO 3166-2:AF,Asia,Southern Asia,"",142,034,""
+b8452475-106c-4c3b-9cc9-e4b4a0b7f7e6,Åland Islands,AX,ALA,248,ISO 3166-2:AX,Europe,Northern Europe,"",150,154,""
+77425c56-4a15-49b8-9e4f-fb50564e5c5a,Albania,AL,ALB,008,ISO 3166-2:AL,Europe,Southern Europe,"",150,039,""
+c4fff53c-80c9-4f35-a909-3f89f70b626d,Algeria,DZ,DZA,012,ISO 3166-2:DZ,Africa,Northern Africa,"",002,015,""
+9433c083-0d68-4a84-9731-59ac78b6b123,American Samoa,AS,ASM,016,ISO 3166-2:AS,Oceania,Polynesia,"",009,061,""
+6e024763-67d3-45d7-ac2a-f10dcbe77aec,Andorra,AD,AND,020,ISO 3166-2:AD,Europe,Southern Europe,"",150,039,""
+6ceb174f-2b99-4d4f-8d59-b895549313c2,Angola,AO,AGO,024,ISO 3166-2:AO,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+0c6d2501-5af3-4f84-83d8-f734f5757ad5,Anguilla,AI,AIA,660,ISO 3166-2:AI,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+37c829a5-c3b6-43fb-a9d6-78253862651b,Antarctica,AQ,ATA,010,ISO 3166-2:AQ,"","","","","",""
+ed157211-10e4-4333-b1d8-189934354890,Antigua and Barbuda,AG,ATG,028,ISO 3166-2:AG,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+14214961-3567-41da-a217-e037fb3bc9ed,Argentina,AR,ARG,032,ISO 3166-2:AR,Americas,Latin America and the Caribbean,South America,019,419,005
+3a19da48-19e5-4d99-9213-e0331c3e4e50,Armenia,AM,ARM,051,ISO 3166-2:AM,Asia,Western Asia,"",142,145,""
+1e30261c-1c4c-49c8-8920-29aadb605750,Aruba,AW,ABW,533,ISO 3166-2:AW,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+8309269c-7f98-45d3-8b03-8dd46b34a777,Australia,AU,AUS,036,ISO 3166-2:AU,Oceania,Australia and New Zealand,"",009,053,""
+8efdaa78-f32a-4f17-a340-8c8af2544a1c,Austria,AT,AUT,040,ISO 3166-2:AT,Europe,Western Europe,"",150,155,""
+bb74fe70-e8de-4823-a7bb-bc5e222816f6,Azerbaijan,AZ,AZE,031,ISO 3166-2:AZ,Asia,Western Asia,"",142,145,""
+db025a8d-070f-4836-a9e9-081e6f8975b6,Bahamas,BS,BHS,044,ISO 3166-2:BS,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+09197f24-bc59-4270-84e9-ae6477421256,Bahrain,BH,BHR,048,ISO 3166-2:BH,Asia,Western Asia,"",142,145,""
+680354a6-a200-40b0-9a20-1fe691bd4ad9,Bangladesh,BD,BGD,050,ISO 3166-2:BD,Asia,Southern Asia,"",142,034,""
+7815cf72-1845-45b1-855d-99196d6661c2,Barbados,BB,BRB,052,ISO 3166-2:BB,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+34a440c5-7e43-4837-8eb1-8bf14cf3120d,Belarus,BY,BLR,112,ISO 3166-2:BY,Europe,Eastern Europe,"",150,151,""
+f63ee5d7-7ead-4c49-87ed-07d1f65d8eea,Belgium,BE,BEL,056,ISO 3166-2:BE,Europe,Western Europe,"",150,155,""
+aa9263d0-ae6b-48c3-a7a3-10f7f50c8fbd,Belize,BZ,BLZ,084,ISO 3166-2:BZ,Americas,Latin America and the Caribbean,Central America,019,419,013
+7e122f9c-b253-419c-bdc5-f349bb031c93,Benin,BJ,BEN,204,ISO 3166-2:BJ,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+dcbb23ae-fdd0-472b-86f4-8d8fb46eb365,Bermuda,BM,BMU,060,ISO 3166-2:BM,Americas,Northern America,"",019,021,""
+98b6c754-1b35-40d4-92ee-7b33bd696f96,Bhutan,BT,BTN,064,ISO 3166-2:BT,Asia,Southern Asia,"",142,034,""
+a3903510-daaa-4abe-9171-883347c10019,Bolivia (Plurinational State of),BO,BOL,068,ISO 3166-2:BO,Americas,Latin America and the Caribbean,South America,019,419,005
+2541a380-4231-40c2-9211-ef63d23e091b,"Bonaire, Sint Eustatius and Saba",BQ,BES,535,ISO 3166-2:BQ,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+6a628cd6-3923-4feb-959e-3b68f48c38c4,Bosnia and Herzegovina,BA,BIH,070,ISO 3166-2:BA,Europe,Southern Europe,"",150,039,""
+1833958e-5d4c-429f-982d-384a36dcf6b1,Botswana,BW,BWA,072,ISO 3166-2:BW,Africa,Sub-Saharan Africa,Southern Africa,002,202,018
+88d919f1-0e15-4e56-b381-fdac2286d273,Bouvet Island,BV,BVT,074,ISO 3166-2:BV,Americas,Latin America and the Caribbean,South America,019,419,005
+194066d4-2a63-4ab9-a681-f72d178df06d,Brazil,BR,BRA,076,ISO 3166-2:BR,Americas,Latin America and the Caribbean,South America,019,419,005
+c8be3661-890c-4b4a-81eb-263c0433beae,British Indian Ocean Territory,IO,IOT,086,ISO 3166-2:IO,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+045fc775-961d-44be-b3e1-273f8166d5be,Brunei Darussalam,BN,BRN,096,ISO 3166-2:BN,Asia,South-eastern Asia,"",142,035,""
+a041a6c4-2b89-485d-8ed4-d9ad09999ced,Bulgaria,BG,BGR,100,ISO 3166-2:BG,Europe,Eastern Europe,"",150,151,""
+16a3bb99-9e93-41e2-a2d9-0c08e4ac5f1b,Burkina Faso,BF,BFA,854,ISO 3166-2:BF,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+1e93e9e0-4450-4c0a-85bb-4638aa0a8e3c,Burundi,BI,BDI,108,ISO 3166-2:BI,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+c289a202-09d8-48bb-ad4c-46d79f9a4edb,Cabo Verde,CV,CPV,132,ISO 3166-2:CV,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+21796de2-ee46-4d6c-846d-e4bc83638f61,Cambodia,KH,KHM,116,ISO 3166-2:KH,Asia,South-eastern Asia,"",142,035,""
+d0a92a5b-eeeb-4841-9406-955a6850df6a,Cameroon,CM,CMR,120,ISO 3166-2:CM,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+2cfaabef-7c98-4cb7-9147-cb2ef16c7c5f,Canada,CA,CAN,124,ISO 3166-2:CA,Americas,Northern America,"",019,021,""
+e62ce47b-fc5d-4177-9fe2-1970b3b151b2,Cayman Islands,KY,CYM,136,ISO 3166-2:KY,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+0766427b-a19a-4508-a7df-5326dff4ecad,Central African Republic,CF,CAF,140,ISO 3166-2:CF,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+dedde4dc-faaa-46fc-9b8d-a2f3bbdc536e,Chad,TD,TCD,148,ISO 3166-2:TD,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+5f44152e-004e-485c-821c-961e632d6783,Chile,CL,CHL,152,ISO 3166-2:CL,Americas,Latin America and the Caribbean,South America,019,419,005
+c56cc9ca-96fe-4073-bc8c-98a552064ecb,China,CN,CHN,156,ISO 3166-2:CN,Asia,Eastern Asia,"",142,030,""
+bff0c3b8-6e46-48c2-bcf8-e5c2f7b94e1a,Christmas Island,CX,CXR,162,ISO 3166-2:CX,Oceania,Australia and New Zealand,"",009,053,""
+ebcd6a00-d3dd-4e66-b32b-d23b3b54df19,Cocos (Keeling) Islands,CC,CCK,166,ISO 3166-2:CC,Oceania,Australia and New Zealand,"",009,053,""
+fc00766d-af7b-418a-b02a-6fb396eae115,Colombia,CO,COL,170,ISO 3166-2:CO,Americas,Latin America and the Caribbean,South America,019,419,005
+ea3a0885-d935-4161-b9f0-2d0a2a42d223,Comoros,KM,COM,174,ISO 3166-2:KM,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+38eb207a-cbfd-441a-825f-efe1d396efbb,Congo,CG,COG,178,ISO 3166-2:CG,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+6173bb8f-93eb-44bd-aded-3070b6bb8c91,"Congo, Democratic Republic of the",CD,COD,180,ISO 3166-2:CD,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+16a8e1bf-a08f-4abd-97d9-64fba97be4d5,Cook Islands,CK,COK,184,ISO 3166-2:CK,Oceania,Polynesia,"",009,061,""
+d364c3c5-cf8e-4cf8-957a-fc5d34bbc1dd,Costa Rica,CR,CRI,188,ISO 3166-2:CR,Americas,Latin America and the Caribbean,Central America,019,419,013
+dfc57b67-0cdb-46ce-8ca1-0102a304639c,Côte d'Ivoire,CI,CIV,384,ISO 3166-2:CI,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+6a8fcdf2-a98a-428e-bf04-911b58278bb4,Croatia,HR,HRV,191,ISO 3166-2:HR,Europe,Southern Europe,"",150,039,""
+5bcd5412-08b5-444e-b140-3adbc16a426b,Cuba,CU,CUB,192,ISO 3166-2:CU,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+ae3a1703-28a3-4cf4-b9ca-57ca76ef3d23,Curaçao,CW,CUW,531,ISO 3166-2:CW,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+3d13e493-fe35-456d-afa6-5561bb447649,Cyprus,CY,CYP,196,ISO 3166-2:CY,Asia,Western Asia,"",142,145,""
+13f5b00b-137e-4e26-b5cb-f9cfe0dd0998,Czechia,CZ,CZE,203,ISO 3166-2:CZ,Europe,Eastern Europe,"",150,151,""
+bde7f099-aad8-4611-9a57-986bdf2f2c7b,Denmark,DK,DNK,208,ISO 3166-2:DK,Europe,Northern Europe,"",150,154,""
+b5b0658a-a478-4707-94b2-8bbff52a762d,Djibouti,DJ,DJI,262,ISO 3166-2:DJ,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+d66006c2-3527-4170-9724-6b14857458c6,Dominica,DM,DMA,212,ISO 3166-2:DM,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+dad90fdf-bae8-429f-8ab9-e786b76cbdb1,Dominican Republic,DO,DOM,214,ISO 3166-2:DO,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+da44f753-b813-4b5d-9b1c-894e29898145,Ecuador,EC,ECU,218,ISO 3166-2:EC,Americas,Latin America and the Caribbean,South America,019,419,005
+6273b8b0-eab2-4cf6-9c45-4bef214ce8a7,Egypt,EG,EGY,818,ISO 3166-2:EG,Africa,Northern Africa,"",002,015,""
+cb5b98d7-128c-4b63-a56f-ea90a16f2184,El Salvador,SV,SLV,222,ISO 3166-2:SV,Americas,Latin America and the Caribbean,Central America,019,419,013
+11c6f815-9f8a-4ece-87d2-851ce439fd9d,Equatorial Guinea,GQ,GNQ,226,ISO 3166-2:GQ,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+e0e3ccda-d136-43f2-9ff9-01cb8c21114f,Eritrea,ER,ERI,232,ISO 3166-2:ER,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+52619d77-09a3-4276-ab9e-38cb6e444ec2,Estonia,EE,EST,233,ISO 3166-2:EE,Europe,Northern Europe,"",150,154,""
+c199d3f7-0fc0-494b-9246-bef8c7abcf63,Eswatini,SZ,SWZ,748,ISO 3166-2:SZ,Africa,Sub-Saharan Africa,Southern Africa,002,202,018
+14ead744-5442-4b42-9675-a0a9a228f919,Ethiopia,ET,ETH,231,ISO 3166-2:ET,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+811b4bc7-4726-4dba-b324-a70e3a3effe3,Falkland Islands (Malvinas),FK,FLK,238,ISO 3166-2:FK,Americas,Latin America and the Caribbean,South America,019,419,005
+9ad7e23b-8e71-4376-acb9-0dff4ea218b9,Faroe Islands,FO,FRO,234,ISO 3166-2:FO,Europe,Northern Europe,"",150,154,""
+959eadbf-662c-48e7-a61a-8b6cd58de5ce,Fiji,FJ,FJI,242,ISO 3166-2:FJ,Oceania,Melanesia,"",009,054,""
+1c53ae4f-e6ee-4186-a330-13f8304884c8,Finland,FI,FIN,246,ISO 3166-2:FI,Europe,Northern Europe,"",150,154,""
+d44410eb-ead6-4ced-b5c3-b86f8b39d01d,France,FR,FRA,250,ISO 3166-2:FR,Europe,Western Europe,"",150,155,""
+90d2459f-eaf1-44a3-b4c7-b6004738ccec,French Guiana,GF,GUF,254,ISO 3166-2:GF,Americas,Latin America and the Caribbean,South America,019,419,005
+210efd95-d514-402a-a163-db69b1a139bc,French Polynesia,PF,PYF,258,ISO 3166-2:PF,Oceania,Polynesia,"",009,061,""
+3d93b68a-496c-451f-9780-0a4447ab147a,French Southern Territories,TF,ATF,260,ISO 3166-2:TF,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+9715ed21-2a67-4998-82aa-1eba1e6752b0,Gabon,GA,GAB,266,ISO 3166-2:GA,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+1725735f-300b-430c-8ba4-e1e80a484502,Gambia,GM,GMB,270,ISO 3166-2:GM,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+01ef422c-bfd3-4332-9e65-b68152c233f5,Georgia,GE,GEO,268,ISO 3166-2:GE,Asia,Western Asia,"",142,145,""
+7eb24307-29cd-45eb-a81e-f4b915636425,Germany,DE,DEU,276,ISO 3166-2:DE,Europe,Western Europe,"",150,155,""
+05668b72-f39f-4d63-b965-d626392fa9d3,Ghana,GH,GHA,288,ISO 3166-2:GH,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+11a8b3d5-aee6-4bf2-a331-5fde16d76f88,Gibraltar,GI,GIB,292,ISO 3166-2:GI,Europe,Southern Europe,"",150,039,""
+1fa3269f-db2c-4c2f-9a6b-a2d1a87eaf26,Greece,GR,GRC,300,ISO 3166-2:GR,Europe,Southern Europe,"",150,039,""
+5d119607-dcf1-4c70-94cd-d70c0950cb16,Greenland,GL,GRL,304,ISO 3166-2:GL,Americas,Northern America,"",019,021,""
+f643840f-ade2-49d6-a78e-d1e419c878f2,Grenada,GD,GRD,308,ISO 3166-2:GD,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+7b4d093e-0ef2-43a8-ae16-1818abf4acd1,Guadeloupe,GP,GLP,312,ISO 3166-2:GP,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+b4b1490b-efd0-4725-9d66-4cd9c2f2c5a0,Guam,GU,GUM,316,ISO 3166-2:GU,Oceania,Micronesia,"",009,057,""
+cfe10dd8-14f2-424c-8888-355e237912b8,Guatemala,GT,GTM,320,ISO 3166-2:GT,Americas,Latin America and the Caribbean,Central America,019,419,013
+6bbb8d68-d0b5-4d52-88eb-bd85786c8a77,Guernsey,GG,GGY,831,ISO 3166-2:GG,Europe,Northern Europe,Channel Islands,150,154,830
+318973d9-da79-495c-9d83-b1231467e9cd,Guinea,GN,GIN,324,ISO 3166-2:GN,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+1cb2457c-9e14-4fd1-8a72-8367bef83538,Guinea-Bissau,GW,GNB,624,ISO 3166-2:GW,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+40ce67e0-56e0-4422-b23f-4d3de25261d4,Guyana,GY,GUY,328,ISO 3166-2:GY,Americas,Latin America and the Caribbean,South America,019,419,005
+25234d60-718c-4613-8a69-3aca702d4b67,Haiti,HT,HTI,332,ISO 3166-2:HT,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+fcfd4573-1fac-4122-b505-2e35461bf96f,Heard Island and McDonald Islands,HM,HMD,334,ISO 3166-2:HM,Oceania,Australia and New Zealand,"",009,053,""
+a5b0b022-8346-4600-a6a3-0913d0b82c8b,Holy See,VA,VAT,336,ISO 3166-2:VA,Europe,Southern Europe,"",150,039,""
+424c9432-72a3-44bb-9d5c-f5e09fdd3784,Honduras,HN,HND,340,ISO 3166-2:HN,Americas,Latin America and the Caribbean,Central America,019,419,013
+a173efe8-3b12-41f1-9b97-5db7c0711ea1,Hong Kong,HK,HKG,344,ISO 3166-2:HK,Asia,Eastern Asia,"",142,030,""
+86c651eb-cd57-4f7e-8aa8-6128bd3317ee,Hungary,HU,HUN,348,ISO 3166-2:HU,Europe,Eastern Europe,"",150,151,""
+2f13e34f-6f38-4aac-830a-586838f1d9ee,Iceland,IS,ISL,352,ISO 3166-2:IS,Europe,Northern Europe,"",150,154,""
+f9bef1c7-aadb-4da0-8ee3-02f6e39ac0ab,India,IN,IND,356,ISO 3166-2:IN,Asia,Southern Asia,"",142,034,""
+abd46bae-3a18-4cad-8320-8995b39df4ed,Indonesia,ID,IDN,360,ISO 3166-2:ID,Asia,South-eastern Asia,"",142,035,""
+c270607b-57b9-495e-bfc7-fd5092cc8155,Iran (Islamic Republic of),IR,IRN,364,ISO 3166-2:IR,Asia,Southern Asia,"",142,034,""
+58711459-9204-411b-b8a5-28b37c09a27b,Iraq,IQ,IRQ,368,ISO 3166-2:IQ,Asia,Western Asia,"",142,145,""
+f0d7a92b-810c-4fcf-8bdb-d96f4830b070,Ireland,IE,IRL,372,ISO 3166-2:IE,Europe,Northern Europe,"",150,154,""
+74869408-6793-40bb-b590-614076964171,Isle of Man,IM,IMN,833,ISO 3166-2:IM,Europe,Northern Europe,"",150,154,""
+50ac5793-29b7-452d-9d00-d94dc7725f84,Israel,IL,ISR,376,ISO 3166-2:IL,Asia,Western Asia,"",142,145,""
+2d661d55-26be-4eb5-9238-a99162dab4a2,Italy,IT,ITA,380,ISO 3166-2:IT,Europe,Southern Europe,"",150,039,""
+5b60d5b8-33e2-4763-ab5e-b9d85a6878b2,Jamaica,JM,JAM,388,ISO 3166-2:JM,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+4402830f-944f-4fac-87c0-cba51a2483cc,Japan,JP,JPN,392,ISO 3166-2:JP,Asia,Eastern Asia,"",142,030,""
+64a0fc12-417a-4aa5-a147-9df420976643,Jersey,JE,JEY,832,ISO 3166-2:JE,Europe,Northern Europe,Channel Islands,150,154,830
+0d8362f8-718a-47a6-81cd-81cead86e3ca,Jordan,JO,JOR,400,ISO 3166-2:JO,Asia,Western Asia,"",142,145,""
+41fb30d8-5a19-40f6-bdbc-98863f16e9b7,Kazakhstan,KZ,KAZ,398,ISO 3166-2:KZ,Asia,Central Asia,"",142,143,""
+66b7aab2-902f-4e4e-9960-152d296d9209,Kenya,KE,KEN,404,ISO 3166-2:KE,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+2beca1d8-e0bd-4cf7-b757-f411efa9c9d4,Kiribati,KI,KIR,296,ISO 3166-2:KI,Oceania,Micronesia,"",009,057,""
+96a80e17-8fba-45a2-8d9c-8bfaf7af2a30,Korea (Democratic People's Republic of),KP,PRK,408,ISO 3166-2:KP,Asia,Eastern Asia,"",142,030,""
+426973fb-91b3-4843-9335-ede1c85d2b37,"Korea, Republic of",KR,KOR,410,ISO 3166-2:KR,Asia,Eastern Asia,"",142,030,""
+2cb3135f-1f8e-40d3-ba77-c94fa4cfb95e,Kuwait,KW,KWT,414,ISO 3166-2:KW,Asia,Western Asia,"",142,145,""
+3e537667-06b9-4e80-9608-251aabffac82,Kyrgyzstan,KG,KGZ,417,ISO 3166-2:KG,Asia,Central Asia,"",142,143,""
+1bac0cae-a5c9-49ee-87f4-73790bab3d9a,Lao People's Democratic Republic,LA,LAO,418,ISO 3166-2:LA,Asia,South-eastern Asia,"",142,035,""
+db88b4fc-a621-4f97-b4b7-d25aae9eaea9,Latvia,LV,LVA,428,ISO 3166-2:LV,Europe,Northern Europe,"",150,154,""
+eb959958-daa3-4e11-bde0-5cd47df3b6cb,Lebanon,LB,LBN,422,ISO 3166-2:LB,Asia,Western Asia,"",142,145,""
+c89d8942-4c7a-4731-85ec-002c12f3325e,Lesotho,LS,LSO,426,ISO 3166-2:LS,Africa,Sub-Saharan Africa,Southern Africa,002,202,018
+ea44841e-59b1-48fc-855c-cdfb1b95d655,Liberia,LR,LBR,430,ISO 3166-2:LR,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+acacc2f8-4d56-4cf4-b4d0-f5c63d393412,Libya,LY,LBY,434,ISO 3166-2:LY,Africa,Northern Africa,"",002,015,""
+0acb452a-7522-49cd-b4c9-8018c938dd92,Liechtenstein,LI,LIE,438,ISO 3166-2:LI,Europe,Western Europe,"",150,155,""
+26428ede-c17e-4339-8da0-af25f4b176e9,Lithuania,LT,LTU,440,ISO 3166-2:LT,Europe,Northern Europe,"",150,154,""
+eb93a507-3023-4f4a-9639-b3f7f5053391,Luxembourg,LU,LUX,442,ISO 3166-2:LU,Europe,Western Europe,"",150,155,""
+e310240e-3b96-4711-9900-97ec10f503e7,Macao,MO,MAC,446,ISO 3166-2:MO,Asia,Eastern Asia,"",142,030,""
+cb585034-6cf3-465a-a1c0-3655926b3518,Madagascar,MG,MDG,450,ISO 3166-2:MG,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+714004f4-21dc-4b71-b6ae-ab6ec4844644,Malawi,MW,MWI,454,ISO 3166-2:MW,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+30f60940-52b5-4ba0-ac39-3935993fc3cd,Malaysia,MY,MYS,458,ISO 3166-2:MY,Asia,South-eastern Asia,"",142,035,""
+d014fdb4-9e93-4fc9-8940-5105d41050d6,Maldives,MV,MDV,462,ISO 3166-2:MV,Asia,Southern Asia,"",142,034,""
+768a3ed1-c91b-4fab-8606-481b749ead51,Mali,ML,MLI,466,ISO 3166-2:ML,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+7cadf5ed-752f-4c0b-868d-88ba25b1cd27,Malta,MT,MLT,470,ISO 3166-2:MT,Europe,Southern Europe,"",150,039,""
+716fd38c-c8f8-4665-a3c6-1c004d54c373,Marshall Islands,MH,MHL,584,ISO 3166-2:MH,Oceania,Micronesia,"",009,057,""
+1f674e5c-9841-4173-83e6-2a73450d63b6,Martinique,MQ,MTQ,474,ISO 3166-2:MQ,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+4a9728a1-d7f8-4614-92b0-c4813b933953,Mauritania,MR,MRT,478,ISO 3166-2:MR,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+2fc0643f-adff-4970-9afb-50774d76eb3b,Mauritius,MU,MUS,480,ISO 3166-2:MU,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+34392fcd-f394-4fc9-b07c-5c7f7c799b82,Mayotte,YT,MYT,175,ISO 3166-2:YT,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+afc978ae-40b7-4489-a271-6b157ef69ec3,Mexico,MX,MEX,484,ISO 3166-2:MX,Americas,Latin America and the Caribbean,Central America,019,419,013
+c8e13fb1-cd1d-4df7-8572-fad5755e9556,Micronesia (Federated States of),FM,FSM,583,ISO 3166-2:FM,Oceania,Micronesia,"",009,057,""
+1dd63d37-37c4-4c5c-ab93-12507f5a6cc9,"Moldova, Republic of",MD,MDA,498,ISO 3166-2:MD,Europe,Eastern Europe,"",150,151,""
+f5ee11e6-e190-4bbf-a0f9-e61b456c5d91,Monaco,MC,MCO,492,ISO 3166-2:MC,Europe,Western Europe,"",150,155,""
+1df2d7f9-3d46-45b0-9805-7d9c6d176ce8,Mongolia,MN,MNG,496,ISO 3166-2:MN,Asia,Eastern Asia,"",142,030,""
+e7e5a842-b0a8-41c5-ac1c-259cca78b793,Montenegro,ME,MNE,499,ISO 3166-2:ME,Europe,Southern Europe,"",150,039,""
+7edafed3-f654-4993-b25b-15dec2b3ba2a,Montserrat,MS,MSR,500,ISO 3166-2:MS,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+486ca0f3-f5ef-407e-9ab1-2254161b1936,Morocco,MA,MAR,504,ISO 3166-2:MA,Africa,Northern Africa,"",002,015,""
+3bbf1f48-f5cf-4f75-b20d-28e28eebab57,Mozambique,MZ,MOZ,508,ISO 3166-2:MZ,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+c53f58b0-05fd-4f9d-9ff2-9da81ef80a64,Myanmar,MM,MMR,104,ISO 3166-2:MM,Asia,South-eastern Asia,"",142,035,""
+83a64d9e-78ca-40e2-9c91-e73dd53d5cb2,Namibia,NA,NAM,516,ISO 3166-2:NA,Africa,Sub-Saharan Africa,Southern Africa,002,202,018
+0d9792ab-428d-4126-8e19-418244727879,Nauru,NR,NRU,520,ISO 3166-2:NR,Oceania,Micronesia,"",009,057,""
+78f249c8-0b1e-4ebd-88af-68a6ae39c01a,Nepal,NP,NPL,524,ISO 3166-2:NP,Asia,Southern Asia,"",142,034,""
+1dc35d4b-6249-4e8b-9cbb-a3a44f7151f3,Netherlands,NL,NLD,528,ISO 3166-2:NL,Europe,Western Europe,"",150,155,""
+28db040e-f123-446f-8818-bb96ea9c3914,New Caledonia,NC,NCL,540,ISO 3166-2:NC,Oceania,Melanesia,"",009,054,""
+2ae0d3a0-976a-43ff-b66d-2da3d815cdea,New Zealand,NZ,NZL,554,ISO 3166-2:NZ,Oceania,Australia and New Zealand,"",009,053,""
+b3f66ff5-8ae5-4b5d-b0f6-90d6fa5210aa,Nicaragua,NI,NIC,558,ISO 3166-2:NI,Americas,Latin America and the Caribbean,Central America,019,419,013
+99db2bd0-0a87-4f8a-b8d7-8ff6bbaa98ce,Niger,NE,NER,562,ISO 3166-2:NE,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+b0827143-7691-41f4-9f4e-b32edf4111df,Nigeria,NG,NGA,566,ISO 3166-2:NG,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+3f290ac8-5292-4042-876d-76218e77ee46,Niue,NU,NIU,570,ISO 3166-2:NU,Oceania,Polynesia,"",009,061,""
+1c362939-d56d-4aff-985a-ee51d03213f6,Norfolk Island,NF,NFK,574,ISO 3166-2:NF,Oceania,Australia and New Zealand,"",009,053,""
+3e214629-001d-4af1-841b-48a3dae054ee,North Macedonia,MK,MKD,807,ISO 3166-2:MK,Europe,Southern Europe,"",150,039,""
+41b2c6b8-cbc2-4a2e-a7d6-df47b76e9e76,Northern Mariana Islands,MP,MNP,580,ISO 3166-2:MP,Oceania,Micronesia,"",009,057,""
+70ed47f6-5182-4077-8a80-36c22a0725dd,Norway,NO,NOR,578,ISO 3166-2:NO,Europe,Northern Europe,"",150,154,""
+9b5b8ac9-c80e-46cb-8297-6cd26cfe4f88,Oman,OM,OMN,512,ISO 3166-2:OM,Asia,Western Asia,"",142,145,""
+47299645-7c03-4965-bb70-b433d1e9e04a,Pakistan,PK,PAK,586,ISO 3166-2:PK,Asia,Southern Asia,"",142,034,""
+bd66926b-f5be-4f59-9df2-fd1834f0983e,Palau,PW,PLW,585,ISO 3166-2:PW,Oceania,Micronesia,"",009,057,""
+4f658600-22cf-4978-b1a1-6dab9265d6d3,"Palestine, State of",PS,PSE,275,ISO 3166-2:PS,Asia,Western Asia,"",142,145,""
+0223a0b2-8f3b-4ef5-87ed-9473d330a035,Panama,PA,PAN,591,ISO 3166-2:PA,Americas,Latin America and the Caribbean,Central America,019,419,013
+d7e30218-e0ce-4839-8c9c-71ffe7b1e481,Papua New Guinea,PG,PNG,598,ISO 3166-2:PG,Oceania,Melanesia,"",009,054,""
+8bb516f0-4a02-4700-af5a-2c48172c912f,Paraguay,PY,PRY,600,ISO 3166-2:PY,Americas,Latin America and the Caribbean,South America,019,419,005
+dbc1344b-c6bf-4269-9feb-eec9c3290c8f,Peru,PE,PER,604,ISO 3166-2:PE,Americas,Latin America and the Caribbean,South America,019,419,005
+4999d73c-e781-4731-8ba6-974a17e80be2,Philippines,PH,PHL,608,ISO 3166-2:PH,Asia,South-eastern Asia,"",142,035,""
+5b309118-b517-4133-a96b-d1d1bbdd5750,Pitcairn,PN,PCN,612,ISO 3166-2:PN,Oceania,Polynesia,"",009,061,""
+10c98714-2c77-4cb1-adb1-6856d52816f9,Poland,PL,POL,616,ISO 3166-2:PL,Europe,Eastern Europe,"",150,151,""
+cfabe329-23e7-4b2d-8e68-8fb8f77f681a,Portugal,PT,PRT,620,ISO 3166-2:PT,Europe,Southern Europe,"",150,039,""
+940e12dd-1914-4c8f-853b-45f457fed241,Puerto Rico,PR,PRI,630,ISO 3166-2:PR,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+37026cff-f997-4274-a9ec-ff16af169c5b,Qatar,QA,QAT,634,ISO 3166-2:QA,Asia,Western Asia,"",142,145,""
+3fc018f8-8d75-4bf1-a563-33f32ee18b16,Réunion,RE,REU,638,ISO 3166-2:RE,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+551279c6-688b-47db-9b6e-5f90236df67d,Romania,RO,ROU,642,ISO 3166-2:RO,Europe,Eastern Europe,"",150,151,""
+1769f35f-c082-4ad1-826d-c5db4820dd0e,Russian Federation,RU,RUS,643,ISO 3166-2:RU,Europe,Eastern Europe,"",150,151,""
+0f0d65ca-b22f-4178-8a50-ad43bcc23ed2,Rwanda,RW,RWA,646,ISO 3166-2:RW,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+4882519a-b864-4608-a9a1-ad376a4d9339,Saint Barthélemy,BL,BLM,652,ISO 3166-2:BL,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+da468a0b-7c04-48eb-9f76-340d752288e6,"Saint Helena, Ascension and Tristan da Cunha",SH,SHN,654,ISO 3166-2:SH,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+897b4494-dfc7-490d-84f9-f882cd4e1015,Saint Kitts and Nevis,KN,KNA,659,ISO 3166-2:KN,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+306d8bc8-9d0a-47e1-8dda-abb05e440b46,Saint Lucia,LC,LCA,662,ISO 3166-2:LC,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+d96d32eb-6282-42d5-9586-48b245d94475,Saint Martin (French part),MF,MAF,663,ISO 3166-2:MF,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+826f4ed4-df2d-4be2-b54b-cd217a420671,Saint Pierre and Miquelon,PM,SPM,666,ISO 3166-2:PM,Americas,Northern America,"",019,021,""
+ea92b182-b14d-478c-9427-aabadc7d3a19,Saint Vincent and the Grenadines,VC,VCT,670,ISO 3166-2:VC,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+17ef07ec-057d-4d54-a87e-246025289fc8,Samoa,WS,WSM,882,ISO 3166-2:WS,Oceania,Polynesia,"",009,061,""
+146c10e8-c134-4eb9-a2da-62fec7490f37,San Marino,SM,SMR,674,ISO 3166-2:SM,Europe,Southern Europe,"",150,039,""
+3b870921-5e1c-4d40-86ca-0ff0b25e794e,Sao Tome and Principe,ST,STP,678,ISO 3166-2:ST,Africa,Sub-Saharan Africa,Middle Africa,002,202,017
+bf7b185e-645a-4a40-b62c-cb8b08401f42,Saudi Arabia,SA,SAU,682,ISO 3166-2:SA,Asia,Western Asia,"",142,145,""
+beb7f41f-8919-4862-a0ee-bb735a5a2002,Senegal,SN,SEN,686,ISO 3166-2:SN,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+0a91be1c-ca0b-43b6-a88f-f192e0a2a85f,Serbia,RS,SRB,688,ISO 3166-2:RS,Europe,Southern Europe,"",150,039,""
+c67a99a8-aa81-4ec7-bec9-bf3ce7136dae,Seychelles,SC,SYC,690,ISO 3166-2:SC,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+3b92f862-1cd4-45b6-be22-eab31286a994,Sierra Leone,SL,SLE,694,ISO 3166-2:SL,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+708013fa-c7a3-46ef-ae81-ee4bc31dd31d,Singapore,SG,SGP,702,ISO 3166-2:SG,Asia,South-eastern Asia,"",142,035,""
+59cf638a-e75a-4583-8662-a3d99b84dbde,Sint Maarten (Dutch part),SX,SXM,534,ISO 3166-2:SX,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+37594977-4ccf-4440-ac53-c2635fba2914,Slovakia,SK,SVK,703,ISO 3166-2:SK,Europe,Eastern Europe,"",150,151,""
+377fa155-8305-427c-be5b-979a671c4539,Slovenia,SI,SVN,705,ISO 3166-2:SI,Europe,Southern Europe,"",150,039,""
+cbed619c-acd6-4d21-a5ad-5a2a61c2faee,Solomon Islands,SB,SLB,090,ISO 3166-2:SB,Oceania,Melanesia,"",009,054,""
+d6a7cb82-a6ec-4fbb-9991-aea03c65fb53,Somalia,SO,SOM,706,ISO 3166-2:SO,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+da256747-eabc-48ab-9b03-0427c9425480,South Africa,ZA,ZAF,710,ISO 3166-2:ZA,Africa,Sub-Saharan Africa,Southern Africa,002,202,018
+20752b40-60c0-48d2-a7d2-9eff8ead7812,South Georgia and the South Sandwich Islands,GS,SGS,239,ISO 3166-2:GS,Americas,Latin America and the Caribbean,South America,019,419,005
+8165a7c9-f5a1-4cb1-9f8c-0626fb6876fb,South Sudan,SS,SSD,728,ISO 3166-2:SS,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+5c5ba400-f97b-4be8-b0a1-4c342e6ee6cf,Spain,ES,ESP,724,ISO 3166-2:ES,Europe,Southern Europe,"",150,039,""
+8361a62d-3f25-4cc3-b8ec-91a2a32c83e3,Sri Lanka,LK,LKA,144,ISO 3166-2:LK,Asia,Southern Asia,"",142,034,""
+25c0a90b-e7c0-4802-b1c9-24fac5b5c701,Sudan,SD,SDN,729,ISO 3166-2:SD,Africa,Northern Africa,"",002,015,""
+e9de939b-f813-4ac5-b6b1-fcfe37419dc5,Suriname,SR,SUR,740,ISO 3166-2:SR,Americas,Latin America and the Caribbean,South America,019,419,005
+7c589aad-fc83-4df9-9ab8-3cc3fc4a8896,Svalbard and Jan Mayen,SJ,SJM,744,ISO 3166-2:SJ,Europe,Northern Europe,"",150,154,""
+b807f1dc-74d1-493f-adf9-2785dcbc04f2,Sweden,SE,SWE,752,ISO 3166-2:SE,Europe,Northern Europe,"",150,154,""
+2e5d8b0c-5d6e-44f9-8c32-45c21f656428,Switzerland,CH,CHE,756,ISO 3166-2:CH,Europe,Western Europe,"",150,155,""
+6f2bc756-7643-4b44-b79c-2a9645f59367,Syrian Arab Republic,SY,SYR,760,ISO 3166-2:SY,Asia,Western Asia,"",142,145,""
+682c446d-3f98-4acd-b98b-c5eafca6ecf3,"Taiwan, Province of China",TW,TWN,158,ISO 3166-2:TW,Asia,Eastern Asia,"",142,030,""
+79da121a-4135-48d9-a673-24d4271799ef,Tajikistan,TJ,TJK,762,ISO 3166-2:TJ,Asia,Central Asia,"",142,143,""
+bf6eb234-8f32-4c62-b07e-0c1dfaa4bf1b,"Tanzania, United Republic of",TZ,TZA,834,ISO 3166-2:TZ,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+f57da63d-1c2d-426e-b21e-daa25cbd53a6,Thailand,TH,THA,764,ISO 3166-2:TH,Asia,South-eastern Asia,"",142,035,""
+f31d8fc3-04c1-4d69-9628-644bb7b82d1c,Timor-Leste,TL,TLS,626,ISO 3166-2:TL,Asia,South-eastern Asia,"",142,035,""
+68ca3c1a-2029-4075-8bfa-10f68eea07f9,Togo,TG,TGO,768,ISO 3166-2:TG,Africa,Sub-Saharan Africa,Western Africa,002,202,011
+f2eb3456-3617-4d9b-ad57-61c7a1735acf,Tokelau,TK,TKL,772,ISO 3166-2:TK,Oceania,Polynesia,"",009,061,""
+baac2b9f-1225-498f-9101-29f1aa0366b0,Tonga,TO,TON,776,ISO 3166-2:TO,Oceania,Polynesia,"",009,061,""
+5ce7b66a-0fc1-4877-9805-3a81fec40096,Trinidad and Tobago,TT,TTO,780,ISO 3166-2:TT,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+d40c4031-77dc-4b1b-8f24-2be3d975e786,Tunisia,TN,TUN,788,ISO 3166-2:TN,Africa,Northern Africa,"",002,015,""
+364d378b-662a-4fbb-9ded-614112d1bd9f,Turkey,TR,TUR,792,ISO 3166-2:TR,Asia,Western Asia,"",142,145,""
+c8d7a61d-9c9c-4289-832e-1bbc66d7ad3e,Turkmenistan,TM,TKM,795,ISO 3166-2:TM,Asia,Central Asia,"",142,143,""
+db1a78a9-e76c-4ed9-8612-2bf1037dafae,Turks and Caicos Islands,TC,TCA,796,ISO 3166-2:TC,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+b9132b37-3465-48b2-b62e-0462a0135f11,Tuvalu,TV,TUV,798,ISO 3166-2:TV,Oceania,Polynesia,"",009,061,""
+5d6ebecc-e06e-41e1-acd8-23eac093dadf,Uganda,UG,UGA,800,ISO 3166-2:UG,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+0c6b01a2-3f11-4790-af4b-7af303157289,Ukraine,UA,UKR,804,ISO 3166-2:UA,Europe,Eastern Europe,"",150,151,""
+43beb84c-4b7a-41ec-8ad1-ea2108618ed1,United Arab Emirates,AE,ARE,784,ISO 3166-2:AE,Asia,Western Asia,"",142,145,""
+3c2e5de3-a96f-4bef-9627-6ee802687767,United Kingdom of Great Britain and Northern Ireland,GB,GBR,826,ISO 3166-2:GB,Europe,Northern Europe,"",150,154,""
+e8ad964a-1a79-4297-8ff9-3cf65adcd541,United States of America,US,USA,840,ISO 3166-2:US,Americas,Northern America,"",019,021,""
+ce18add1-3e02-4109-9b87-9bda13dcbfdb,United States Minor Outlying Islands,UM,UMI,581,ISO 3166-2:UM,Oceania,Micronesia,"",009,057,""
+af992398-32ec-4bdb-8a56-f2290354abcb,Uruguay,UY,URY,858,ISO 3166-2:UY,Americas,Latin America and the Caribbean,South America,019,419,005
+a3cccdd4-6795-41d3-993b-da731da2e923,Uzbekistan,UZ,UZB,860,ISO 3166-2:UZ,Asia,Central Asia,"",142,143,""
+e793fb05-860a-4fa5-9775-78d239216f2c,Vanuatu,VU,VUT,548,ISO 3166-2:VU,Oceania,Melanesia,"",009,054,""
+63639eef-0025-428b-9103-c55c47a610c0,Venezuela (Bolivarian Republic of),VE,VEN,862,ISO 3166-2:VE,Americas,Latin America and the Caribbean,South America,019,419,005
+833f2a7b-eb78-419d-9dcf-25855c1ca126,Viet Nam,VN,VNM,704,ISO 3166-2:VN,Asia,South-eastern Asia,"",142,035,""
+6c285626-40ca-4105-90dd-d243beaf1e8a,Virgin Islands (British),VG,VGB,092,ISO 3166-2:VG,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+600668c3-1cd2-48c5-a517-ea42c877c0d3,Virgin Islands (U.S.),VI,VIR,850,ISO 3166-2:VI,Americas,Latin America and the Caribbean,Caribbean,019,419,029
+7db349ae-8486-4e82-a365-5c30370cfc8a,Wallis and Futuna,WF,WLF,876,ISO 3166-2:WF,Oceania,Polynesia,"",009,061,""
+23cc5ac5-5840-421a-8d6e-a1c863d71f3f,Western Sahara,EH,ESH,732,ISO 3166-2:EH,Africa,Northern Africa,"",002,015,""
+b983f06f-3a7f-45d8-885f-1a6e573549e8,Yemen,YE,YEM,887,ISO 3166-2:YE,Asia,Western Asia,"",142,145,""
+00600ff4-7f33-46ca-8794-7c41af6f41b5,Zambia,ZM,ZMB,894,ISO 3166-2:ZM,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
+494c12bc-5ae3-4758-86e8-3420b8aabd49,Zimbabwe,ZW,ZWE,716,ISO 3166-2:ZW,Africa,Sub-Saharan Africa,Eastern Africa,002,202,014
