@@ -3,7 +3,7 @@ load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library", "java_proto_librar
 load("@rules_proto_grpc//java:defs.bzl", "java_grpc_compile")
 
 package(default_visibility = [
-    "//visibility:public",
+    "//visibility:public"
 ])
 
 java_proto_library(
