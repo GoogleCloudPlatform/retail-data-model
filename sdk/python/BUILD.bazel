@@ -11,10 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
 load("@rules_proto_grpc//python:defs.bzl", "python_grpc_library", "python_proto_library")
 
 package(default_visibility = [
-    "//examples/python:__subpackages__",
+    "//visibility:public",
 ])
 
 ENUMS = [
@@ -27,6 +30,7 @@ PROTOS = [
     "//api/customer:model_proto",
     "//api/enterprise:model_proto",
     "//api/events:model_proto",
+    "//api/inventory:model_proto",
     "//api/location:model_proto",
     "//api/merchandise:model_proto",
     "//api/party:model_proto",
@@ -36,6 +40,7 @@ PROTOS = [
 GRPCS = [
     "//api/common:service_proto",
     "//api/events:service_proto",
+    "//api/inventory:service_proto",
     "//api/location:service_proto",
 ]
 
@@ -47,4 +52,18 @@ python_proto_library(
 python_grpc_library(
     name = "python_grpc_library",
     protos = ENUMS + PROTOS + GRPCS,
+)
+
+# Create a tgz package
+pkg_tar(
+    name = "rdm_python_lib_tar",
+    srcs = [":python_grpc_library"],
+    package_file_name = "rdm_python_lib.tgz",
+)
+
+# Create a zip package
+pkg_zip(
+    name = "rdm_python_lib_zip",
+    srcs = [":python_grpc_library"],
+    package_file_name = "rdm_python_lib.zip",
 )

@@ -11,6 +11,8 @@ filegroup(
         "//api/enums:doc_enums",
         "//api/events:doc_events_model",
         "//api/events:doc_events_service",
+        "//api/inventory:doc_invenotry_model",
+        "//api/inventory:doc_inventory_service",
         "//api/location:doc_location_model",
         "//api/location:doc_location_service",
         "//api/merchandise:doc_merchandise_model",

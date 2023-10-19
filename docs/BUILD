@@ -14,6 +14,8 @@
 
 load("@build_stack_rules_hugo//hugo:rules.bzl", "hugo_serve", "hugo_site", "hugo_theme")
 load("//:build/copy_file_groups.bzl", "copy_file_groups")
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
 
 hugo_theme(
     name = "hugo_theme_geekdoc",
@@ -52,8 +54,16 @@ hugo_serve(
     ],
 )
 
-# Tar it up
-# pkg_tar(
-#     name = "documentation_tar",
-#     srcs = [":docs"],
-# )
+# Create a tgz package
+pkg_tar(
+    name = "docs_tgz",
+    srcs = [":docs"],
+    package_file_name = "docs.tgz",
+)
+
+# Create a zip package
+pkg_zip(
+    name = "docs_zip",
+    srcs = [":docs"],
+    package_file_name = "docs.zip",
+)

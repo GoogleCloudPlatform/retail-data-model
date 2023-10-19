@@ -51,7 +51,7 @@ func NewSite(id *VersionID,
 		TimeZone:           timeZone,
 		AngleOffsetDegrees: angleOffsetFromNorth,
 		Contacts:           make([]*common.Contact, 0),
-		Meta:               make(map[string]string),
+		Meta:               make([]*common.BusinessKey, 0),
 		LocationIds:        make([]string, 0),
 	}
 }
@@ -66,7 +66,7 @@ func (site *Site) AddLocationId(locationId string) *Site {
 	return site
 }
 
-func (site *Site) AddMeta(key string, value string) *Site {
-	site.Meta[key] = value
+func (site *Site) AddMeta(key string, value ...string) *Site {
+	site.Meta = append(site.Meta, &common.BusinessKey{Name: key, Value: value})
 	return site
 }

@@ -15,9 +15,7 @@
 # limitations under the License.
 
 package(default_visibility = [
-    "//api:__subpackages__",
-    "//examples:__subpackages__",
-    "//sdk:__subpackages__",
+    "//visibility:public"
 ])
 
 load("@rules_proto//proto:defs.bzl", "proto_library")

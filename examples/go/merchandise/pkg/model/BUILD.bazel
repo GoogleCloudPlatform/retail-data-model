@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+package(default_visibility = [
+    "//examples/go:__subpackages__",
+])
+
+go_library(
+    name = "model",
+    srcs = [
+        "common.go",
+        "product.go",
+        "product_template.go",
+        "supplier.go",
+    ],
+    importpath = "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pkg/model",
+    deps = [
+        "//sdk/go:common_go_proto",
+        "//sdk/go:enums_go_proto",
+        "//sdk/go:merchandise_go_proto",
+        "@com_github_google_uuid//:uuid",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_protobuf//encoding/protojson",
+        "@org_golang_google_protobuf//proto:go_default_library",
+        "@org_golang_google_protobuf//types/known/emptypb",
+        "@org_golang_google_protobuf//types/known/structpb",
+        "@org_golang_google_protobuf//types/known/timestamppb",
+    ],
+)

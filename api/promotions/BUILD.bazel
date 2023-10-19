@@ -18,9 +18,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_proto_grpc//doc:defs.bzl", "doc_markdown_compile")
 
 package(default_visibility = [
-    "//api:__subpackages__",
-    "//examples:__subpackages__",
-    "//sdk:__subpackages__",
+    "//visibility:public"
 ])
 
 proto_library(

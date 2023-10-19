@@ -3,13 +3,13 @@ load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library", "java_proto_librar
 load("@rules_proto_grpc//java:defs.bzl", "java_grpc_compile")
 
 package(default_visibility = [
-    "//visibility:public",
+    "//visibility:public"
 ])
 
 java_proto_library(
-  name = "protogen_bq_schema_java_proto",
-  importpath = "github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos",
-  protos = [ "@protoc_gen_bq_schema//api:bq_schema_proto_lib" ],
+    name = "protogen_bq_schema_java_proto",
+    importpath = "github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos",
+    protos = ["@protoc_gen_bq_schema//api:bq_schema_proto_lib"],
 )
 
 java_proto_library(
@@ -80,6 +80,30 @@ java_grpc_library(
     deps = [
         ":common_java_proto",
         ":events_java_proto",
+        "@maven//:com_google_api_grpc_proto_google_common_protos",
+    ],
+)
+
+# Inventory
+java_proto_library(
+    name = "inventory_java_proto",
+    importpath = "com.google.retail.inventory.pb",
+    protos = ["//api/inventory:model_proto"],
+    deps = [
+        ":common_java_proto",
+        ":enums_java_proto",
+        ":protogen_bq_schema_java_proto",
+    ],
+)
+
+java_grpc_library(
+    name = "inventory_java_grpc",
+    importpath = "com.google.retail.inventory.grpc",
+    protos = ["//api/inventory:service_proto"],
+    deps = [
+        ":common_java_proto",
+        ":enums_java_proto",
+        ":inventory_java_proto",
         "@maven//:com_google_api_grpc_proto_google_common_protos",
     ],
 )

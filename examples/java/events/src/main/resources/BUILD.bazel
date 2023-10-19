@@ -1,0 +1,10 @@
+package(
+    default_visibility = ["//examples/java:__subpackages__"],
+)
+
+filegroup(
+    name = "main_resources",
+    srcs = [
+        "application.properties",
+    ],
+)

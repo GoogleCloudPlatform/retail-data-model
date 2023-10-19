@@ -37,10 +37,10 @@ bazel_skylib_workspace()
 ###############################################################################
 http_archive(
     name = "protoc_gen_bq_schema",
-    sha256 = "98f700a6856686be10fb844ed8792cacb1db94854b4931e795e3657d46fd8c99",
-    strip_prefix = "protoc-gen-bq-schema-fork-1.0.0",
+    sha256 = "d55addc2b7226397e777aaa4edf6b5d8488ed332f17732ed0490e060dae2ef9e",
+    strip_prefix = "protoc-gen-bq-schema-fork-1.1.0",
     urls = [
-        "https://github.com/rrmcguinness/protoc-gen-bq-schema-fork/archive/refs/tags/v1.0.0.tar.gz",
+        "https://github.com/rrmcguinness/protoc-gen-bq-schema-fork/archive/refs/tags/v1.1.0.tar.gz",
     ],
 )
 
@@ -60,7 +60,7 @@ load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_languag
 
 switched_rules_by_language(
     name = "com_google_googleapis_imports",
-    cc = True,
+    cc = False,
     go = True,
     grpc = True,
     java = True,
@@ -176,20 +176,23 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
     artifacts = [
+        "info.picocli:picocli:4.7.5",
+        "info.picocli:picocli-codegen:4.7.5",
         "org.apache.commons:commons-lang3:3.13.0",
-        "com.google.protobuf:protobuf-java-util:3.24.2",
-        "io.grpc:grpc-core:1.57.2",
-        "io.grpc:grpc-googleapis:1.57.2",
-        "io.grpc:grpc-netty-shaded:1.57.2",
-        "io.grpc:grpc-protobuf:1.57.2",
-        "io.grpc:grpc-stub:1.57.2",
-        "io.grpc:grpc-testing:1.57.2",
+        "com.google.protobuf:protobuf-java-util:3.24.3",
+        "io.grpc:grpc-core:1.58.0",
+        "io.grpc:grpc-googleapis:1.58.0",
+        "io.grpc:grpc-netty-shaded:1.58.0",
+        "io.grpc:grpc-protobuf:1.58.0",
+        "io.grpc:grpc-stub:1.58.0",
+        "io.grpc:grpc-testing:1.58.0",
         "org.apache.tomcat:annotations-api:6.0.53",
         "org.apache.logging.log4j:log4j-api:2.18.0",
         "org.apache.logging.log4j:log4j-core:2.18.0",
         "com.google.protobuf:protoc:3.24.2",
         "io.netty:netty-all:4.1.79.Final",
     ] + IO_GRPC_GRPC_JAVA_ARTIFACTS,
+    fetch_sources = True,
     generate_compat_repositories = True,
     override_targets = IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS,
     repositories = [
@@ -281,10 +284,10 @@ local_deps()
 ###############################################################################
 http_archive(
     name = "rules_pkg",
-    sha256 = "eea0f59c28a9241156a47d7a8e32db9122f3d50b505fae0f33de6ce4d9b61834",
+    sha256 = "8f9ee2dc10c1ae514ee599a8b42ed99fa262b757058f65ad3c384289ff70c4b8",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
-        "https://github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.9.1/rules_pkg-0.9.1.tar.gz",
+        "https://github.com/bazelbuild/rules_pkg/releases/download/0.9.1/rules_pkg-0.9.1.tar.gz",
     ],
 )
 

@@ -69,6 +69,8 @@ message ProductTemplateAttribute {
 // sku with the retailer SKU rules defined
 message ProductAttributeRuleGroup {
   google.retail.common.pb.VersionID id = 1;
+  string name = 2;
+  string description = 3;
   repeated ProductAttributeRule product_attribute_rules = 4;
 }
 
@@ -143,38 +145,46 @@ message I18nProductHeader {
 
 message Product {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_product";
-  message Detail {
-    repeated I18nProductHeader headers = 1;
-    repeated ProductAttribute attributes = 2;
-  }
-  message Variant {
-    repeated Detail details = 1;
-  }
-  google.retail.common.pb.VersionID id = 1;
+
+  google.retail.common.pb.VersionID id = 1 [json_name = "id"];
+
   // A set of business keys used for identifying the product,
   // SKU, UPC, GL Code, Lot #, etc.
-  repeated google.retail.common.pb.BusinessKey business_keys = 2;
+  repeated google.retail.common.pb.BusinessKey business_keys = 2 [json_name = "business_keys"];
+
+  repeated I18nProductHeader headers = 3 [json_name = "headers"];
+
+  repeated ProductAttribute attributes = 4 [json_name = "attributes"];
+
   // The base price represents the price the product should not be sold below,
   // if this occurs, this would be recorded as net loss.
-  google.retail.common.pb.Currency base_price = 3;
+  google.retail.common.pb.Currency base_price = 5 [json_name = "base_price"];
+
   // The tax code used to evaluate taxes on the product
-  google.retail.enterprise.pb.TaxCode tax_code = 4;
+  google.retail.enterprise.pb.TaxCode tax_code = 6 [json_name = "tax_code"];
+
   // The internal classification of a product.
-  google.retail.enterprise.pb.MerchandiseHierarchy hierarchy = 5;
-  // Details - the details for the primary product
-  Detail detail = 6;
+  google.retail.enterprise.pb.MerchandiseHierarchy hierarchy = 7 [json_name = "hierarchy"];
+  
   // A numeric double rating
-  double rating = 7;
+  double rating = 8;
+  
   // A set of measurements for a product, length, height, width, weight, etc.
-  repeated google.retail.common.pb.NamedMeasure measurements = 8;
+  repeated google.retail.common.pb.NamedMeasure measurements = 9 [json_name = "measurements"];
+  
   // Variants - are override value for the base product. For example, the primary
   // color may be black, and it could have two color variants, where the red costs
   // more than the white.
-  repeated Variant variations = 9;
+  repeated google.retail.common.pb.VersionID variations = 10 [json_name = "variations"];
+
+  // Acceptable items to substitute with
+  repeated google.retail.common.pb.VersionID substitutions = 20 [json_name = "substitutions"];
+
   // A set of affective suppliers. Changes to suppliers MUST create new versions
-  repeated google.retail.common.pb.VersionID related_product_ids = 30;
+  repeated google.retail.common.pb.VersionID related_products = 30 [json_name = "related_products"];
+  
   // of products.
-  repeated Supplier suppliers = 99;
+  repeated Supplier suppliers = 50;
 }
 
 

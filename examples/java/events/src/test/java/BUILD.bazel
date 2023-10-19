@@ -1,0 +1,19 @@
+load("//:build/junit.bzl", "java_junit5_test")
+
+package(
+    default_visibility = ["//examples/java:__subpackages__"],
+)
+
+java_junit5_test(
+    name = "event_service_test",
+    srcs = glob([
+        "com.google.retail.events.service/EventsServiceTest.java",
+    ]),
+    test_package = "com.google.retail.events.service",
+    deps = [
+        "//examples/java/events/src/main/java:grpc_deps",
+        "//examples/java/events/src/main/java:java_events_service",
+        "//examples/java/events/src/main/java:pico_cli",
+        "//examples/java/events/src/main/java:rpc_deps",
+    ],
+)
