@@ -109,7 +109,7 @@ message Site {
   // Site offset from north where the north west most corner of the building is the origin.
   double angle_offset_degrees = 10 [json_name = "ang_offset"];
 
-  map<string, string> meta = 11 [json_name = "meta"];
+  repeated google.retail.common.pb.BusinessKey meta = 11 [json_name = "meta"];
 
   // A list of the UUID of locations at a site.
   // only the UUID is required as the look up should return the active
@@ -239,6 +239,13 @@ message Location {
    */
   google.retail.common.pb.VersionID id = 1  [json_name = "id"];
 
+
+  /*
+   * A version ID with effective date for location site change planning.
+   */
+  google.retail.common.pb.VersionID parent_id = 2  [json_name = "parent_id"];
+
+
   /*
    * The ID of the site the location
    */
@@ -247,24 +254,24 @@ message Location {
    * Designates the location category such as: FIXTURE, FLOOR, SECTION, STORE
    * WINDOW, End Cap, etc.
    */
-  string location_type = 2  [json_name = "loc_t"];
+  string location_type = 3  [json_name = "loc_t"];
   /*
    * A code that describes what business activities and functions are performed
    * in a specific location: Admin, Display, Customer Service, Returns &
    * OVERFLOW, OVERHEAD_MANAGEMENT, STOCK_POINT, RECEIVING, etc.
    */
-  string location_function_type = 3  [json_name = "loc_func"];
+  string location_function_type = 4  [json_name = "loc_func"];
 
   // Additional security measures for the location such as KEYED_ACCESS,
   // or REQUIRES_MANAGER, etc.
-  string inventory_location_security_type = 4 [json_name = "inv_loc_sec"];
+  string inventory_location_security_type = 5 [json_name = "inv_loc_sec"];
 
   // Does the space stock items, and is it ledger controlled.
-  bool stock_ledger_control_flag = 5  [json_name = "stk_ldgr_ctl"];
+  bool stock_ledger_control_flag = 6  [json_name = "stk_ldgr_ctl"];
 
   // The available measurements for the location, This may be volume, or area
   // weight limits, etc.
-  repeated LocationMeasure measures = 6 [json_name = "measures"];
+  repeated LocationMeasure measures = 7 [json_name = "measures"];
 
   // A merchandise group represents the intended use of the location to an
   // attributed merchandise hierarchy
@@ -279,15 +286,13 @@ message Location {
   }
 
   // A list of historical merchandise hierarchies used in this location.
-  repeated MerchGroup merchandise_groups = 7 [json_name = "merch_grps"];
+  repeated MerchGroup merchandise_groups = 8 [json_name = "merch_grps"];
 
   // Coordinates of the location
-  LocationCoordinate location_coordinate = 8 [json_name = 'loc_crd'];
+  LocationCoordinate location_coordinate = 9 [json_name = 'loc_crd'];
   // Children locations, as a location may be hierarchical
 
-  map<string, string> meta = 9 [json_name = 'store_ids'];
-
-  repeated Location locations = 10 [json_name = "locations"];
+  repeated google.retail.common.pb.BusinessKey meta = 10 [json_name = 'meta'];
 }
 
 /*

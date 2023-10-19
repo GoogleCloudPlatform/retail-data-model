@@ -37,10 +37,10 @@ bazel_skylib_workspace()
 ###############################################################################
 http_archive(
     name = "protoc_gen_bq_schema",
-    sha256 = "98f700a6856686be10fb844ed8792cacb1db94854b4931e795e3657d46fd8c99",
-    strip_prefix = "protoc-gen-bq-schema-fork-1.0.0",
+    sha256 = "d55addc2b7226397e777aaa4edf6b5d8488ed332f17732ed0490e060dae2ef9e",
+    strip_prefix = "protoc-gen-bq-schema-fork-1.1.0",
     urls = [
-        "https://github.com/rrmcguinness/protoc-gen-bq-schema-fork/archive/refs/tags/v1.0.0.tar.gz",
+        "https://github.com/rrmcguinness/protoc-gen-bq-schema-fork/archive/refs/tags/v1.1.0.tar.gz",
     ],
 )
 
@@ -60,7 +60,7 @@ load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_languag
 
 switched_rules_by_language(
     name = "com_google_googleapis_imports",
-    cc = True,
+    cc = False,
     go = True,
     grpc = True,
     java = True,

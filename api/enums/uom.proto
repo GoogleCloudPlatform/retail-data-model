@@ -57,7 +57,7 @@ enum Capacity {
   HECTOLITER = 116;          // HECTOLITER
   KILOLITER = 117;           // KILOLITER
   LITER = 118;               // LITER
-  MILLLITER = 119;           // MILLITER
+  MILLILITER = 119;           // MILLILITER
   MINIM = 120;               // MINUM
   PECK = 121;                // PECK
   PINT = 122;                // PINT
@@ -79,7 +79,7 @@ enum Count {
   LOT = 211;                    // LOT
   PACK = 212;                   // PACK
   PAIR = 213;                   // PAIR
-  PEICE = 214;                  // PEICE
+  PIECE = 214;                  // PIECE
   PERSON = 215;                 // PERSON
   PLATE = 216;                  // PLATE
   ROLL = 217;                   // ROLL
@@ -106,7 +106,7 @@ enum Distance {
   FATHOM = 305;              // FATHOM
   FOOT = 306;                // FOOT
   FURLONG = 307;             // FURLONG
-  HECTOMETER = 308;          // HECOMETER
+  HECTOMETER = 308;          // HECTOMETER
   KILOMETER = 309;           // KILOMETER
   METER = 310;               // METER
   MILE = 311;                // MILE

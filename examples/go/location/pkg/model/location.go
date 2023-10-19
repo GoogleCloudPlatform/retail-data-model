@@ -16,20 +16,13 @@ func (loc *Location) AddMerchandiseGroup(merchGroup *MerchantGroup) *Location {
 	return loc
 }
 
-func (loc *Location) AddLocation(children ...*Location) *Location {
-	for _, c := range children {
-		loc.Locations = append(loc.Locations, (*location.Location)(c))
-	}
-	return loc
-}
-
 func (loc *Location) AddLocationMeasure(measure *LocationMeasure) *Location {
 	loc.Measures = append(loc.Measures, (*location.LocationMeasure)(measure))
 	return loc
 }
 
-func (loc *Location) AddMeta(key string, value string) *Location {
-	loc.Meta[key] = value
+func (loc *Location) AddMeta(key string, value ...string) *Location {
+	loc.Meta = append(loc.Meta, &common.BusinessKey{Name: key, Value: value})
 	return loc
 }
 
@@ -144,13 +137,13 @@ func NewLocation(
 ) *Location {
 	return &Location{
 		Id:                            (*common.VersionID)(id),
+		ParentId:                      nil,
 		LocationType:                  locationType,
 		LocationFunctionType:          locationFunctionType,
 		InventoryLocationSecurityType: inventoryLocationSecurityType,
 		StockLedgerControlFlag:        stockLedgerControlFlag,
 		LocationCoordinate:            (*location.LocationCoordinate)(locationCoordinate),
 		MerchandiseGroups:             make([]*location.Location_MerchGroup, 0),
-		Meta:                          make(map[string]string),
-		Locations:                     make([]*location.Location, 0),
+		Meta:                          make([]*common.BusinessKey, 0),
 	}
 }

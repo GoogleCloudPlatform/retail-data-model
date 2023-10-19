@@ -71,10 +71,14 @@ func TestLocation(t *testing.T) {
 			AddVertex(3000, -2500, 0).
 			AddVertex(1000, -2500, 0))
 
-	store0101.AddLocation(dairy, frozen, coldCuts, produce, restRooms, checkout)
+	dairy.ParentId = store0101.Id
+	frozen.ParentId = store0101.Id
+	coldCuts.ParentId = store0101.Id
+	produce.ParentId = store0101.Id
+	restRooms.ParentId = store0101.Id
+	checkout.ParentId = store0101.Id
 
 	assert.NotNil(t, store0101)
-	assert.Equal(t, 6, len(store0101.Locations))
 
 	b, err := json.Marshal(store0101)
 	assert.Nil(t, err, "Error was not nil")
