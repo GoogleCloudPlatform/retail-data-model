@@ -147,15 +147,17 @@ go_dependencies()
 # Java Tool Chain
 ###############################################################################
 
-RULES_JVM_EXTERNAL_TAG = "4.5"
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-RULES_JVM_EXTERNAL_SHA = "b17d7388feb9bfa7f2fa09031b32707df529f26c91ab9e5d909eb1676badd9a6"
+RULES_JVM_EXTERNAL_TAG = "5.3"
+
+RULES_JVM_EXTERNAL_SHA = "d31e369b854322ca5098ea12c69d7175ded971435e55c18dd9dd5f29cc5249ac"
 
 http_archive(
     name = "rules_jvm_external",
     sha256 = RULES_JVM_EXTERNAL_SHA,
     strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
-    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+    url = "https://github.com/bazelbuild/rules_jvm_external/releases/download/%s/rules_jvm_external-%s.tar.gz" % (RULES_JVM_EXTERNAL_TAG, RULES_JVM_EXTERNAL_TAG),
 )
 
 load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
@@ -179,18 +181,18 @@ maven_install(
         "info.picocli:picocli:4.7.5",
         "info.picocli:picocli-codegen:4.7.5",
         "org.apache.commons:commons-lang3:3.13.0",
-        "com.google.protobuf:protobuf-java-util:3.24.3",
-        "io.grpc:grpc-core:1.58.0",
-        "io.grpc:grpc-googleapis:1.58.0",
-        "io.grpc:grpc-netty-shaded:1.58.0",
-        "io.grpc:grpc-protobuf:1.58.0",
-        "io.grpc:grpc-stub:1.58.0",
-        "io.grpc:grpc-testing:1.58.0",
+        "com.google.protobuf:protobuf-java-util:3.24.4",
+        "io.grpc:grpc-core:1.59.0",
+        "io.grpc:grpc-googleapis:1.59.0",
+        "io.grpc:grpc-netty-shaded:1.59.0",
+        "io.grpc:grpc-protobuf:1.59.0",
+        "io.grpc:grpc-stub:1.59.0",
+        "io.grpc:grpc-testing:1.59.0",
         "org.apache.tomcat:annotations-api:6.0.53",
-        "org.apache.logging.log4j:log4j-api:2.18.0",
-        "org.apache.logging.log4j:log4j-core:2.18.0",
-        "com.google.protobuf:protoc:3.24.2",
-        "io.netty:netty-all:4.1.79.Final",
+        "org.apache.logging.log4j:log4j-api:2.21.0",
+        "org.apache.logging.log4j:log4j-core:2.21.0",
+        "com.google.protobuf:protoc:3.24.4",
+        "io.netty:netty-all:4.1.100.Final",
     ] + IO_GRPC_GRPC_JAVA_ARTIFACTS,
     fetch_sources = True,
     generate_compat_repositories = True,

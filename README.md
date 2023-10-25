@@ -1,5 +1,8 @@
 # Google Retail Data Model
 
+> The Retail Data Model is under development and SHOULD NOT be used in production
+> environments until the 1.0.0 release.
+
 Google Retail Data Model (RDM) is a set of model and service definitions grouped
 by operational boundaries called modules. The purpose of the API is to 
 provide a concrete, extensible, and simplified version of the Association 
