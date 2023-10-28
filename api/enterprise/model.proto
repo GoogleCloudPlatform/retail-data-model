@@ -36,10 +36,10 @@ import "api/bq_table.proto";
 // import "api/bq_field.proto";
 
 message BusinessUnitGroup {
-  google.retail.common.pb.VersionID id = 1;
-  google.retail.enums.lang.Language primary_language = 2;
-  repeated google.retail.enums.lang.Language supported_languages = 3;
-  repeated string business_unit_ids = 4;
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  google.retail.enums.lang.Language primary_language = 2 [json_name = 'primary_language'];
+  repeated google.retail.enums.lang.Language supported_languages = 3 [json_name = 'languages'];
+  repeated string business_unit_ids = 4 [json_name = 'business_unit_ids'];
 }
 
 message BusinessUnit {
@@ -53,10 +53,10 @@ message BusinessUnit {
    * TODO - Add departments and hours
    */
   message RetailStore {
-    google.protobuf.Timestamp open_date = 1;
-    google.protobuf.Timestamp close_date = 2;
-    google.protobuf.Timestamp last_remodeled_date = 3;
-    repeated google.retail.common.pb.NamedMeasure named_measures = 4;
+    google.protobuf.Timestamp open_date = 1 [json_name = 'open_date'];
+    google.protobuf.Timestamp close_date = 2 [json_name = 'close_date'];
+    google.protobuf.Timestamp last_remodeled_date = 3 [json_name = 'last_remodeled_date'];
+    repeated google.retail.common.pb.NamedMeasure named_measures = 4 [json_name = 'named_measures'];
   }
 
   /*
@@ -65,10 +65,10 @@ message BusinessUnit {
    * co-located at the same Site as a RetailStore or AdministrativeCenter.
    */
   message DistributionCenter {
-    google.protobuf.Timestamp open_date = 1;
-    google.protobuf.Timestamp close_date = 2;
-    google.protobuf.Timestamp last_remodeled_date = 3;
-    repeated google.retail.common.pb.NamedMeasure named_measures = 4;
+    google.protobuf.Timestamp open_date = 1 [json_name = 'open_date'];
+    google.protobuf.Timestamp close_date = 2 [json_name = 'close_date'];
+    google.protobuf.Timestamp last_remodeled_date = 3 [json_name = 'last_remodeled_date'];
+    repeated google.retail.common.pb.NamedMeasure named_measures = 4 [json_name = 'named_measures'];
   }
 
   /*
@@ -77,22 +77,22 @@ message BusinessUnit {
    * DistributionCenter, or InventoryLocation.
    */
   message AdministrationCenter {
-    google.protobuf.Timestamp open_date = 1;
-    google.protobuf.Timestamp close_date = 2;
-    google.protobuf.Timestamp last_remodeled_date = 3;
-    repeated google.retail.common.pb.NamedMeasure named_measures = 4;
+    google.protobuf.Timestamp open_date = 1 [json_name = 'open_date'];
+    google.protobuf.Timestamp close_date = 2 [json_name = 'close_date'];
+    google.protobuf.Timestamp last_remodeled_date = 3 [json_name = 'last_remodeled_date'];
+    repeated google.retail.common.pb.NamedMeasure named_measures = 4 [json_name = 'named_measures'];
   }
 
-  google.retail.common.pb.VersionID id = 1;
-  string status = 2;
-  google.retail.enums.currency.Currency primary_currency = 3;
-  repeated google.retail.enums.currency.Currency supported_currencies = 4;
-  google.retail.party.pb.OperationalParty operational_party = 5;
-  int32 operational_capacity = 6;
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  string status = 2 [json_name = 'status'];
+  google.retail.enums.currency.Currency primary_currency = 3 [json_name = 'primary_currency'];
+  repeated google.retail.enums.currency.Currency supported_currencies = 4 [json_name = 'supported_currencies'];
+  google.retail.party.pb.OperationalParty operational_party = 5 [json_name = 'operational_party'];
+  int32 operational_capacity = 6 [json_name = 'operational_capacity'];
   oneof detail {
-    RetailStore store = 7;
-    DistributionCenter distribution_center = 8;
-    AdministrationCenter administration_center = 9;
+    RetailStore store = 7 [json_name = 'store'];
+    DistributionCenter distribution_center = 8 [json_name = 'distribution_center'];
+    AdministrationCenter administration_center = 9 [json_name = 'administration_center'];
   }
 }
 
@@ -107,28 +107,28 @@ message BusinessUnit {
 message MerchandiseHierarchy {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_merch_hierarchy";
   string id = 1 [json_name = 'id'];
-  string parent_id = 2 [json_name = 'prnt_id'];
-  string name = 3 [json_name = 'nm'];
-  string description = 4 [json_name = 'dscr'];
+  string parent_id = 2 [json_name = 'parent_id'];
+  string name = 3 [json_name = 'name'];
+  string description = 4 [json_name = 'description'];
   /*
    * Code used to identify a collection of weather characteristics that are
    * important to a retailer in tracking sales and operations.
    */
-  string climate_id = 5 [json_name = 'clmt_id'];
+  string climate_id = 5 [json_name = 'client_id'];
   /*
    * A unique system assigned identifier for the ItemSellingPrices.
    */
-  string selling_rule_id = 6 [json_name = 'sllg_rl_id'];
+  string selling_rule_id = 6 [json_name = 'selling_rule_id'];
   /*
    * The name ofr the Holiday instance
    */
-  string occasion_name = 7 [json_name = 'occ_nm'];
+  string occasion_name = 7 [json_name = 'occesion_name'];
   /*
    * A lookup value that designates a valid activity or interest code used to
    * segment customers.
    * The code list must be defined by the retailer.
    */
-  string activity_interest_id = 8 [json_name = 'act_int_id'];
+  string activity_interest_id = 8 [json_name = 'activity_interest_id'];
 
   /*
    * Child Hierarchies
@@ -174,21 +174,3 @@ message TaxCode {
   google.retail.enums.countries.Country country = 5 [json_name = 'country'];
   repeated Rate rates = 6 [json_name = 'rates'];
 }
-
-// {
-//   "id": { <UUID>, 0, 01/01/2022, 01/01/2022 },
-//   "dl_dt": null,
-//   "nm": "US Sales Tax",
-//   "dscr": "Tax for US Sales",
-//   "cntry": "USA",
-//   "rts" : [
-//      {
-//        "name": "Colorado",
-//        "categories": [ "SALES" ],
-//
-// Colorado, SALES
-// hierarchy_rates [ { ALL, 0.07 } ]
-// municipal_rates [ { Parker, [ FOOD & BEVERAGE, 0.001 ] }, { Denver, [FOOD & BEVERAGE, 0.005] } ]
-// Colorado, SERVICES
-// ... }
-

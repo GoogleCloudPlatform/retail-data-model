@@ -102,7 +102,7 @@ message VersionID {
   // Surrogate key, used by data source, not the business key.
   string id = 1 [json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The version identifier, where the greatest value is the latest
-  int64 version = 2 [json_name = 'ver', (gen_bq_schema.bigquery).require = true];
+  int64 version = 2 [json_name = 'version', (gen_bq_schema.bigquery).require = true];
   // The date the version was created
   google.protobuf.Timestamp created = 3 [json_name = 'created', (gen_bq_schema.bigquery).require = true];
   // The date the product version became effective, may be a future date
@@ -116,7 +116,7 @@ message VersionID {
  * This practice is recommended to create an enforceable key value.
  */
 message BusinessKey {
-  string name = 1 [json_name = 'nm', (gen_bq_schema.bigquery).require = true];
+  string name = 1 [json_name = 'name', (gen_bq_schema.bigquery).require = true];
   repeated string values = 2 [json_name = 'values'];
 }
 
@@ -155,16 +155,16 @@ message Image {
   int32 width = 4 [json_name = 'w'];
   // An internal string classifying the image such as Ad, Banner,
   // Thumbnail, Small, Medium, Large, Primary, Secondary, etc.
-  string classifier = 5 [json_name = 'cls'];
+  string classifier = 5 [json_name = 'classifier'];
   // Frame is used as an additional classifier to describe
   // for describing TOP, LEFT, RIGHT, BOTTOM, FRONT, BACK or their composites
-  string frame = 6 [json_name = "frm"];
+  string frame = 6 [json_name = "frame"];
 }
 
 // I18nImage is used to hold images for specific languages
 message I18nImage {
   google.retail.enums.locale.Locale locale = 1 [json_name = 'locale', (gen_bq_schema.bigquery).require = true];
-  repeated Image images = 2 [json_name = 'imgs'];
+  repeated Image images = 2 [json_name = 'images'];
 }
 
 /*
@@ -205,27 +205,27 @@ message Country {
   // A surrogate key for the country
   string id = 1[json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The common name of the country
-  string name = 2 [json_name = 'nm', (gen_bq_schema.bigquery).require = true];
+  string name = 2 [json_name = 'name', (gen_bq_schema.bigquery).require = true];
   // The two letter code of the country
-  string alpha2 = 3 [json_name = 'a2', (gen_bq_schema.bigquery).require = true];
+  string alpha2 = 3 [json_name = 'alpha2', (gen_bq_schema.bigquery).require = true];
   // The three letter code of the country
-  string alpha3 = 4 [json_name = 'a3', (gen_bq_schema.bigquery).require = true];
+  string alpha3 = 4 [json_name = 'alpha3', (gen_bq_schema.bigquery).require = true];
   // The Numeric code for the region
-  string code = 5 [json_name = 'cd', (gen_bq_schema.bigquery).require = true];
+  string code = 5 [json_name = 'code', (gen_bq_schema.bigquery).require = true];
   // The 3166-2 two letter alpha
-  string iso2 = 6 [json_name = 'i2', (gen_bq_schema.bigquery).require = true];
+  string iso2 = 6 [json_name = 'iso2', (gen_bq_schema.bigquery).require = true];
   // The region name
-  string region = 7 [json_name = 'rgn'];
+  string region = 7 [json_name = 'region'];
   // The sub region name
-  string sub_region = 8 [json_name = 'sub_rgn'];
+  string sub_region = 8 [json_name = 'sub_region'];
   // The intermediate region name
-  string intermediate_region = 9 [json_name = 'int_reg'];
+  string intermediate_region = 9 [json_name = 'intermediate_region'];
   // The region code
-  string region_code = 10 [json_name = 'rgn_cd'];
+  string region_code = 10 [json_name = 'region_code'];
   // The sub region code
-  string sub_region_code = 11 [json_name = 'sub_rgn_cd'];
+  string sub_region_code = 11 [json_name = 'sub_region_code'];
   // The intermediate region code
-  string intermediate_region_code = 12 [json_name = 'int_reg_cd'];
+  string intermediate_region_code = 12 [json_name = 'intermediate_region_code'];
 }
 
 /*
@@ -236,12 +236,12 @@ message CountrySubdivision {
   // The id of the country sub division
   string id = 1 [json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The two digit code for the country
-  string country_code = 2 [json_name = 'cntry_cd', (gen_bq_schema.bigquery).require = true];
+  string country_code = 2 [json_name = 'country_code', (gen_bq_schema.bigquery).require = true];
   // The country subdivision full name
-  string subdivision_name = 3 [json_name = 'sub_nm', (gen_bq_schema.bigquery).require = true];
+  string subdivision_name = 3 [json_name = 'subdivision_name', (gen_bq_schema.bigquery).require = true];
   // The numeric code, represented as a string as it's 0(zero) left padded and
   // three characters long
-  string code = 4 [json_name = 'cd', (gen_bq_schema.bigquery).require = true];
+  string code = 4 [json_name = 'code', (gen_bq_schema.bigquery).require = true];
 }
 
 /*
@@ -253,37 +253,37 @@ message ICAOCode {
   // The surrogate ID for the code
   string id = 1 [json_name = 'id', (gen_bq_schema.bigquery).require = true];
   // The iso 3166-1 country code
-  string country_id = 2 [json_name = 'cntry_cd', (gen_bq_schema.bigquery).require = true];
+  string country_id = 2 [json_name = 'country_code', (gen_bq_schema.bigquery).require = true];
   // The iso 3166-2 subdivision code
-  string country_subdivision_id = 3 [json_name = 'cntry_sub_cd'];
+  string country_subdivision_id = 3 [json_name = 'country_subdivision_id'];
   // The name of the location
-  string location_name = 4 [json_name = 'loc_nm', (gen_bq_schema.bigquery).require = true];
+  string location_name = 4 [json_name = 'location_name', (gen_bq_schema.bigquery).require = true];
   // The individual station name
-  string station_name = 5 [json_name = 'stn_nm', (gen_bq_schema.bigquery).require = true];
+  string station_name = 5 [json_name = 'station_name', (gen_bq_schema.bigquery).require = true];
   // The type of station
-  string type = 6 [json_name = 't'];
+  string type = 6 [json_name = 'type'];
   // The station key identifier
-  string station_key = 7 [json_name = 'stn_ky'];
+  string station_key = 7 [json_name = 'station_key'];
   // The status of the station
-  string status = 8 [json_name = 'stat'];
+  string status = 8 [json_name = 'status'];
   // The icao value
   string icao = 9 [json_name = 'icao', (gen_bq_schema.bigquery).require = true];
   // The national id
-  string national_id = 10 [json_name = 'nat_id', (gen_bq_schema.bigquery).require = true];
+  string national_id = 10 [json_name = 'national_id', (gen_bq_schema.bigquery).require = true];
   // The WMO code
   string wmo = 11 [json_name = 'wmo'];
   // The GHCN code
   string ghcn = 12 [json_name = 'ghcn'];
   // Additional special indicators
-  string special = 13 [json_name = 'spec'];
+  string special = 13 [json_name = 'special'];
   // The latitude of the station
-  string latitude = 14 [json_name = 'lat', (gen_bq_schema.bigquery).require = true];
+  string latitude = 14 [json_name = 'latitude', (gen_bq_schema.bigquery).require = true];
   // The longitude of the station
-  string longitude = 15 [json_name = 'lng', (gen_bq_schema.bigquery).require = true];
+  string longitude = 15 [json_name = 'longitude', (gen_bq_schema.bigquery).require = true];
   // The elevation of the station in meters
-  string elevation_in_meters = 16 [json_name = 'elv'];
+  string elevation_in_meters = 16 [json_name = 'elevation_in_meters'];
   // The timezone code of the station
-  string time_zone = 17 [json_name = 'tz'];
+  string time_zone = 17 [json_name = 'time_zone'];
 }
 
 /*
@@ -292,8 +292,8 @@ message ICAOCode {
  */
 message Contact {
   message SocialMediaNetworkIdentity {
-    string platform = 1 [json_name = 'plt'];
-    string platform_id = 2 [json_name = 'plt_id'];
+    string platform = 1 [json_name = 'platform'];
+    string platform_id = 2 [json_name = 'platform_id'];
   }
   enum ContactMethod {
     OTHER = 0;
@@ -318,13 +318,13 @@ message Contact {
   // A link to an Address
   Address address = 6 [json_name = 'address'];
   // A link to an Email Address
-  string email_address = 7 [json_name = 'email'];
+  string email_address = 7 [json_name = 'email_address'];
   // A link to a Telephone
-  string telephone = 8 [json_name = 'phone'];
+  string telephone = 8 [json_name = 'telephone'];
   // A link to a Web Address
-  string website = 9 [json_name = 'web'];
+  string website = 9 [json_name = 'website'];
   // A link to a social media ID
-  repeated SocialMediaNetworkIdentity social_network_id = 10 [json_name = 'social_network_ids'];
+  repeated SocialMediaNetworkIdentity social_network_id = 10 [json_name = 'social_media_network_id'];
   // A status code, retailer assigned
   string status = 11 [json_name = 'status'];
 }
@@ -336,25 +336,25 @@ message Contact {
 message Address {
   // The geo segment identifier of the address, this MAY be retailer specific.
   // It MAY also be a geo region ID from the Geo Enums
-  string geo_segment_id = 1 [json_name = 'geo_seg_id', (gen_bq_schema.bigquery).require = true];
+  string geo_segment_id = 1 [json_name = 'geo_segment_id', (gen_bq_schema.bigquery).require = true];
   // The first line of a physical address
-  string line_1 = 2 [json_name = 'l1', (gen_bq_schema.bigquery).require = true];
+  string line_1 = 2 [json_name = 'line_1', (gen_bq_schema.bigquery).require = true];
   // The second line of a physical address
-  string line_2 = 3 [json_name = 'l2'];
+  string line_2 = 3 [json_name = 'line_2'];
   // The third line of a physical address
-  string line_3 = 4 [json_name = 'l3'];
+  string line_3 = 4 [json_name = 'line_3'];
   // The fourth line of a physical address
-  string line_4 = 5 [json_name = 'l4'];
+  string line_4 = 5 [json_name = 'line_4'];
   // The full name of the city
-  string city = 6 [json_name = 'cty', (gen_bq_schema.bigquery).require = true];
+  string city = 6 [json_name = 'city', (gen_bq_schema.bigquery).require = true];
   // The territory or state of the physical address
-  string territory = 7 [json_name = 'trty', (gen_bq_schema.bigquery).require = true];
+  string territory = 7 [json_name = 'territory', (gen_bq_schema.bigquery).require = true];
   // The postal assignment code 5 or 10
-  string postal_code = 8 [json_name = 'pstl_cd', (gen_bq_schema.bigquery).require = true];
+  string postal_code = 8 [json_name = 'postal_code', (gen_bq_schema.bigquery).require = true];
   // The ISO subdivision code, this is a world specific identifier
   // such as: "WORLD-AMERICAS-NORTH_AMERICA-USA-NY" denoting New York City
   // in the United States.
-  string iso_3166_2_country_sub_division_code = 9 [json_name = 'cntry_sub', (gen_bq_schema.bigquery).require = true];
+  string iso_3166_2_country_sub_division_code = 9 [json_name = 'country_subdivision_code', (gen_bq_schema.bigquery).require = true];
 }
 
 /******************************************************************************
@@ -369,21 +369,21 @@ message IDRequest {
 
 message VersionIDRequest {
   string id = 1 [json_name = 'id'];
-  int32 version = 2 [json_name = 'ver'];
+  int32 version = 2 [json_name = 'version'];
 }
 
 message VersionIDEffectiveRequest {
   VersionIDRequest id = 1 [json_name = 'id'];
   // The start time of the span.
-  google.protobuf.Timestamp on_or_before = 2 [json_name = 'ts'];
+  google.protobuf.Timestamp on_or_before = 2 [json_name = 'on_or_before'];
 }
 
 // A common transfer object for requesting information by a span of time.
 message TimeBoundRequest {
   // The start time of the span.
-  google.protobuf.Timestamp start_date = 1 [json_name = 'strt_dt'];
+  google.protobuf.Timestamp start_date = 1 [json_name = 'start_date'];
   // The end time of the span.
-  google.protobuf.Timestamp end_date = 2 [json_name = 'end_dt'];
+  google.protobuf.Timestamp end_date = 2 [json_name = 'end_date'];
 }
 
 // A common business key request
@@ -400,13 +400,13 @@ message StatusResponse {
     UPDATED = 3;
     DELETED = 4;
   }
-  google.protobuf.Timestamp ts = 1;
-  Type type = 2;
-  string id = 3;
-  string message = 4;
+  google.protobuf.Timestamp ts = 1 [json_name = 'timestamp'];
+  Type type = 2 [json_name = 'type'];
+  string id = 3 [json_name = 'id'];
+  string message = 4 [json_name = 'message'];
   // The original payload is used in the error response for clients that MUST
   // implement a backoff / replay. This is consistent with Cloud SLOs
-  google.protobuf.Struct payload = 5;
+  google.protobuf.Struct payload = 5 [json_name = 'payload'];
 }
 
 message HealthCheckResponse {
@@ -416,5 +416,5 @@ message HealthCheckResponse {
     NOT_SERVING = 2;
     SERVICE_UNKNOWN = 3;  // Used only by the Watch method.
   }
-  ServingStatus status = 1;
+  ServingStatus status = 1 [json_name = 'status'];
 }

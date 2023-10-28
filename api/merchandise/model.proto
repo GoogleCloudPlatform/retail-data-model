@@ -49,18 +49,18 @@ message Supplier {
 // asymmetric in nature, meaning simply one size does not fit all.
 message ProductTemplate {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_product_template";
-  google.retail.common.pb.VersionID id = 1;
-  string name = 2;
-  string description = 3;
-  repeated ProductTemplateAttribute attributes = 4;
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  string name = 2 [json_name = 'name'];
+  string description = 3 [json_name = 'description'];
+  repeated ProductTemplateAttribute attributes = 4 [json_name = 'attributes'];
 }
 
 // Product template attributes describe either a group of rules, or a single
 // rule used by the template.
 message ProductTemplateAttribute {
   oneof value {
-    ProductAttributeRuleGroup rule_group = 1;
-    ProductAttributeRule rule = 2;
+    ProductAttributeRuleGroup rule_group = 1 [json_name = 'rule_group'];
+    ProductAttributeRule rule = 2 [json_name = 'rule'];
   }
 }
 
@@ -68,18 +68,18 @@ message ProductTemplateAttribute {
 // for products. For example, a retailer specific header that includes
 // sku with the retailer SKU rules defined
 message ProductAttributeRuleGroup {
-  google.retail.common.pb.VersionID id = 1;
-  string name = 2;
-  string description = 3;
-  repeated ProductAttributeRule product_attribute_rules = 4;
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  string name = 2 [json_name = 'name'];
+  string description = 3 [json_name = 'description'];
+  repeated ProductAttributeRule product_attribute_rules = 4 [json_name = 'product_attribute_rules'];
 }
 
 message AttributeLabel {
-  google.retail.enums.locale.Locale locale = 1;
+  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale'];
   // The names of the field
-  string name = 6;
+  string name = 2 [json_name = 'name'];
   // The descriptions of the intention of the field
-  string description = 7;
+  string description = 3 [json_name = 'description'];
 }
 
 message ProductAttributeRule {
@@ -92,55 +92,55 @@ message ProductAttributeRule {
   }
   // Is the order of the product field. It MUST not be repeated, and any changes
   // to order should result in a new finalized ProductTemplate
-  int32 ordinal = 1;
+  int32 ordinal = 1 [json_name = 'ordinal'];
   // What type of field is this
-  Type type = 2;
+  Type type = 2 [json_name = 'type'];
   // Is the field required
-  bool required = 3;
+  bool required = 3 [json_name = 'required'];
   // If the rule is able to be overridden by a child rule
-  bool allow_override = 4;
+  bool allow_override = 4 [json_name = 'allow_override'];
   // How should the field be verified
-  string validation_reg_ex = 5;
+  string validation_reg_ex = 5 [json_name = 'validation_reg_ex'];
   // A set of international labels for the field
-  repeated AttributeLabel labels = 6;
+  repeated AttributeLabel labels = 6 [json_name = 'labels'];
 }
 
 message ProductAttribute {
   oneof value {
-    ProductAttributeRuleGroupValue attribute_group = 1;
-    ProductAttributeRuleValue attribute = 2;
+    ProductAttributeRuleGroupValue attribute_group = 1 [json_name = 'attribute_group'];
+    ProductAttributeRuleValue attribute = 2 [json_name = 'attribute'];
   }
 }
 
 message ProductAttributeRuleGroupValue {
-  google.retail.common.pb.VersionID rule_group_id = 1;
-  repeated ProductAttributeRuleValue values = 2;
+  google.retail.common.pb.VersionID rule_group_id = 1 [json_name = 'rule_group_id'];
+  repeated ProductAttributeRuleValue values = 2 [json_name = 'values'];
 }
 
 message ProductAttributeRuleValue {
   message Number {
-    repeated double value = 1;
+    repeated double value = 1 [json_name = 'value'];
   }
   // A repeatable string
   message String {
-    repeated string value = 1;
+    repeated string value = 1 [json_name = 'value'];
   }
-  google.retail.common.pb.VersionID product_template_id = 1;
-  int32 field_ordinal = 2;
+  google.retail.common.pb.VersionID product_template_id = 1 [json_name = 'product_template_id'];
+  int32 field_ordinal = 2 [json_name = 'field_ordinal'];
   oneof value {
-    Number number_value = 3;
-    String string_value = 4;
+    Number number_value = 3 [json_name = 'number_value'];
+    String string_value = 4 [json_name = 'string_value'];
   }
 }
 
 message I18nProductHeader {
-  google.retail.enums.locale.Locale locale = 1;
-  string brand = 2;
-  string name = 3;
-  string short_description = 4;
-  string long_description = 5;
-  repeated string search_terms = 6;
-  repeated google.retail.common.pb.Image images = 7;
+  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale'];
+  string brand = 2 [json_name = 'brand'];
+  string name = 3 [json_name = 'name'];
+  string short_description = 4 [json_name = 'short_description'];
+  string long_description = 5 [json_name = 'long_description'];
+  repeated string search_terms = 6 [json_name = 'search_terms'];
+  repeated google.retail.common.pb.Image images = 7 [json_name = 'images'];
 }
 
 message Product {
@@ -184,7 +184,7 @@ message Product {
   repeated google.retail.common.pb.VersionID related_products = 30 [json_name = "related_products"];
   
   // of products.
-  repeated Supplier suppliers = 50;
+  repeated Supplier suppliers = 50 [json_name = 'suppliers'];
 }
 
 
