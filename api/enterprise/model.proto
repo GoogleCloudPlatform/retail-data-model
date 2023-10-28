@@ -133,7 +133,7 @@ message MerchandiseHierarchy {
   /*
    * Child Hierarchies
    */
-  repeated MerchandiseHierarchy children = 9 [json_name = 'chldrn'];
+  repeated MerchandiseHierarchy children = 9 [json_name = 'children'];
 }
 
 /*
@@ -152,27 +152,27 @@ message TaxCode {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_tax_code";
   message Rate {
     message HierarchyGroupRate {
-      string merchandise_hierarchy_id = 1 [json_name = 'mrch_hrchy_id'];
-      google.protobuf.Timestamp effective = 2 [json_name = 'eff_dt'];
-      double rate = 3 [json_name = 'rt'];
+      string merchandise_hierarchy_id = 1 [json_name = 'merchandise_hierarchy_id'];
+      google.protobuf.Timestamp effective = 2 [json_name = 'effective'];
+      double rate = 3 [json_name = 'rate'];
     }
     message MunicipalRate {
-      string municipality = 1 [json_name = 'mncpl'];
-      google.protobuf.Timestamp effective = 2 [json_name = 'eff_dt'];
-      repeated HierarchyGroupRate hierarchy_group_rate = 3;
+      string municipality = 1 [json_name = 'municipality'];
+      google.protobuf.Timestamp effective = 2 [json_name = 'effective'];
+      repeated HierarchyGroupRate hierarchy_group_rates = 3 [json_name = 'hierarchy_group_rates'];
     }
-    string name = 1 [json_name = 'nm'];
-    google.protobuf.Timestamp deleted = 2 [json_name = 'dl_dt'];
-    repeated string categories= 3 [json_name = 'cats'];
-    repeated HierarchyGroupRate base_rates = 4 [json_name = 'bs_rts'];
-    repeated MunicipalRate municipal_rates = 5 [json_name = 'mncpl_rts'];
+    string name = 1 [json_name = 'name'];
+    google.protobuf.Timestamp deleted = 2 [json_name = 'deleted'];
+    repeated string merchandise_hierarchy_ids= 3 [json_name = 'merchandise_hierarchy_ids'];
+    repeated HierarchyGroupRate base_rates = 4 [json_name = 'base_rates'];
+    repeated MunicipalRate municipal_rates = 5 [json_name = 'municipal_rates'];
   }
   google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
-  google.protobuf.Timestamp deleted = 2 [json_name = 'dl_dt'];
-  string name = 3 [json_name = 'nm'];
-  string description = 4  [json_name = 'desc'];
-  google.retail.enums.countries.Country country = 5 [json_name = 'cntry'];
-  repeated Rate rates = 6 [json_name = 'rts'];
+  google.protobuf.Timestamp deleted = 2 [json_name = 'deleted'];
+  string name = 3 [json_name = 'name'];
+  string description = 4  [json_name = 'description'];
+  google.retail.enums.countries.Country country = 5 [json_name = 'country'];
+  repeated Rate rates = 6 [json_name = 'rates'];
 }
 
 // {
