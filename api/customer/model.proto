@@ -27,9 +27,9 @@ option java_multiple_files = true;
 import "google/protobuf/timestamp.proto";
 
 message Consumer {
-  string id = 1;
-  string party_id = 2;
-  string party_role_assignment_id = 3;
+  string id = 1 [json_name = 'id'];
+  string party_id = 2 [json_name = 'party_id'];
+  string party_role_assignment_id = 3 [json_name = 'party_assignment_id'];
 }
 
 /*
@@ -62,14 +62,14 @@ message ConsumerConversionState {
     INACTIVE_CUSTOMER = 5;
     EXCUSTOMER = 6;
   }
-  string id = 1;
-  string consumer_id = 2;
-  string channel_id = 3;
-  State state = 4;
-  google.protobuf.Timestamp effective_date = 5;
-  google.protobuf.Timestamp expiration_date = 6;
+  string id = 1 [json_name = 'id'];
+  string consumer_id = 2 [json_name = 'consumer_id'];
+  string channel_id = 3 [json_name = 'channel_id'];
+  State state = 4 [json_name = 'state'];
+  google.protobuf.Timestamp effective = 5 [json_name = 'effective'];
+  google.protobuf.Timestamp expiration = 6 [json_name = 'expiration'];
   reserved 7 to 98;
-  map<string, string> additional_attributes = 99;
+  map<string, string> additional_attributes = 99 [json_name = 'additional_attributes'];
 }
 
 // "An individual (person or web crawler or other agent) that accesses the web
@@ -88,10 +88,10 @@ message ConsumerConversionState {
 // technology may be able to track visitors in their store which is why we've
 // modeled Visitor for web or bricks and mortar scenarios.
 message Visitor {
-  string id = 1;
-  string user_name = 2;
-  string email_address = 3;
-  string consumer_conversion_state_id = 4;
+  string id = 1 [json_name = 'id'];
+  string user_name = 2 [json_name = 'user_name'];
+  string email_address = 3 [json_name = 'email_address'];
+  string consumer_conversion_state_id = 4 [json_name = 'consumer_conversion_state_id'];
 }
 
 // A PartyRoleAssignment type that represents the association between a
@@ -107,10 +107,10 @@ message Visitor {
 // funnel), an active state (they have purchased items and are ActiveCustomers)
 // , an inactive state (InactiveCustomers) or a ""dead"" state (ExCustomers).
 message Customer {
-  string id = 1;
-  string consumer_conversion_state_id = 2;
-  string party_id = 3;
-  bool anonymous = 4;
+  string id = 1 [json_name = 'id'];
+  string consumer_conversion_state_id = 2 [json_name = 'consumer_conversion_state_id'];
+  string party_id = 3 [json_name = 'party_id'];
+  bool anonymous = 4 [json_name = 'anonymous'];
 }
 
 // A customer that has registered with the retailer and in addition to a unique
@@ -121,11 +121,11 @@ message Customer {
 // customer and the retailer.  It can be thought of  as the registration (i.e.
 // personal contact information) part of setting up an account relationship.
 message KeyCustomer {
-  string customer_id = 1;
-  string consumer_registration_state_id = 2;
+  string customer_id = 1 [json_name = 'customer_id'];
+  string consumer_registration_state_id = 2 [json_name = 'consumer_registration_state_id'];
   // A two character retailer assigned code denoting which forms of contact the
   // Customer has chosen to opt out of.
-  repeated string privacy_opt_out = 3;
+  repeated string privacy_opt_out = 3 [json_name = 'privacy_opt_out'];
 }
 
 /*
@@ -134,9 +134,9 @@ message KeyCustomer {
  * reasons.
  */
 message CustomerGroupType {
-  string id = 1;
-  string name = 2;
-  string description = 3;
+  string id = 1 [json_name = 'id'];
+  string name = 2 [json_name = 'name'];
+  string description = 3 [json_name = 'description'];
 }
 
 // A group of customers based on specific demographic and marketing attributes
@@ -152,10 +152,10 @@ message CustomerGroupType {
 // Also used to classify customer's known taxability; eg: Hospital, Charity,
 // etc.
 message CustomerGroup {
-  string id = 1;
-  string name = 2;
-  string description = 3;
-  string require_identity_verification = 4;
+  string id = 1 [json_name = 'id'];
+  string name = 2 [json_name = 'name'];
+  string description = 3 [json_name = 'description'];
+  string require_identity_verification = 4 [json_name = 'require_identity_verification'];
 }
 
 message KeyCustomerGroupAffiliation {
@@ -163,13 +163,13 @@ message KeyCustomerGroupAffiliation {
     INACTIVE = 0;
     ACTIVE = 1;
   }
-  string id = 1;
-  string customer_group_id = 2;
-  string key_customer_id = 3;
-  Status status = 4;
-  bool require_identity_verification = 5;
-  google.protobuf.Timestamp effective_date = 6;
-  google.protobuf.Timestamp expiration_date = 7;
+  string id = 1 [json_name = 'id'];
+  string customer_group_id = 2 [json_name = 'customer_group_id'];
+  string key_customer_id = 3 [json_name = 'key_customer_id'];
+  Status status = 4 [json_name = 'status'];
+  bool require_identity_verification = 5 [json_name = 'require_identity_verification'];
+  google.protobuf.Timestamp effective = 6 [json_name = 'effective'];
+  google.protobuf.Timestamp expiration = 7 [json_name = 'expiration'];
 }
 
 /* An identified, named collection of balances and cumulative totals used to
@@ -204,14 +204,14 @@ message KeyCustomerAccount {
     CONSIGNMENT_ACCOUNT = 10;
     OTHER_ACCOUNT = 11;
   }
-  string id = 1;
-  string key_customer_id = 2;
-  string financial_ledger_account_id = 3;
-  Type customer_account_type = 4;
-  Status status = 5;
-  string name = 6;
-  google.protobuf.Timestamp effective_date = 7;
-  google.protobuf.Timestamp expiration_date = 8;
-  double unpaid_balance_interest_rate_percent = 9;
-  int32 grace_period_in_days = 10;
+  string id = 1 [json_name = 'id'];
+  string key_customer_id = 2 [json_name = 'key_customer_id'];
+  string financial_ledger_account_id = 3 [json_name = 'financial_ledger_account_id'];
+  Type customer_account_type = 4 [json_name = 'customer_account_type'];
+  Status status = 5 [json_name = 'status'];
+  string name = 6 [json_name = 'name'];
+  google.protobuf.Timestamp effective = 7 [json_name = 'effective'];
+  google.protobuf.Timestamp expiration = 8 [json_name = 'expiration'];
+  double unpaid_balance_interest_rate_percent = 9 [json_name = 'unpaid_balance_interest_rate_percent'];
+  int32 grace_period_in_days = 10 [json_name = 'grace_period_in_days'];
 }
