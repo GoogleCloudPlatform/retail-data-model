@@ -151,21 +151,13 @@ message MerchandiseHierarchy {
 message TaxCode {
   option (gen_bq_schema.bigquery_opts).table_name = "tbl_tax_code";
   message Rate {
-    message HierarchyGroupRate {
-      string merchandise_hierarchy_id = 1 [json_name = 'merchandise_hierarchy_id'];
-      google.protobuf.Timestamp effective = 2 [json_name = 'effective'];
-      double rate = 3 [json_name = 'rate'];
-    }
-    message MunicipalRate {
-      string municipality = 1 [json_name = 'municipality'];
-      google.protobuf.Timestamp effective = 2 [json_name = 'effective'];
-      repeated HierarchyGroupRate hierarchy_group_rates = 3 [json_name = 'hierarchy_group_rates'];
-    }
-    string name = 1 [json_name = 'name'];
+    google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
     google.protobuf.Timestamp deleted = 2 [json_name = 'deleted'];
-    repeated string merchandise_hierarchy_ids= 3 [json_name = 'merchandise_hierarchy_ids'];
-    repeated HierarchyGroupRate base_rates = 4 [json_name = 'base_rates'];
-    repeated MunicipalRate municipal_rates = 5 [json_name = 'municipal_rates'];
+    string name = 3 [json_name = 'name'];
+    string description = 4 [json_name = 'description'];
+    string municipality = 5 [json_name = 'municipality'];
+    double rate = 6 [json_name = 'rate'];
+    repeated string merchandise_hierarchy_ids= 7 [json_name = 'merchandise_hierarchy_ids'];
   }
   google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
   google.protobuf.Timestamp deleted = 2 [json_name = 'deleted'];

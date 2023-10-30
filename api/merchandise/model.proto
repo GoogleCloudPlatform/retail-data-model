@@ -123,7 +123,7 @@ message ProductAttribute {
 }
 
 message ProductAttributeRuleGroupValue {
-  google.retail.common.pb.VersionID rule_group_id = 1 [json_name = 'rule_group_id'];
+  string product_attribute_rule_group_id = 1 [json_name = 'product_attribute_rule_group_id'];
   repeated ProductAttributeRuleValue values = 2 [json_name = 'values'];
 }
 
@@ -135,7 +135,7 @@ message ProductAttributeRuleValue {
   message String {
     repeated string value = 1 [json_name = 'value'];
   }
-  google.retail.common.pb.VersionID product_template_id = 1 [json_name = 'product_template_id'];
+  string product_template_attribute_id = 1 [json_name = 'product_template_attribute_id'];
   int32 field_ordinal = 2 [json_name = 'field_ordinal'];
   oneof value {
     Number number_value = 3 [json_name = 'number_value'];
@@ -161,6 +161,8 @@ message Product {
   // A set of business keys used for identifying the product,
   // SKU, UPC, GL Code, Lot #, etc.
   repeated google.retail.common.pb.BusinessKey business_keys = 2 [json_name = "business_keys"];
+
+  string product_template_id = 11 [json_name = 'product_template_id'];
 
   repeated I18nProductHeader headers = 3 [json_name = "headers"];
 
