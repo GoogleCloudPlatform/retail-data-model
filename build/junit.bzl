@@ -23,7 +23,7 @@ JUNIT_EXTRA_DEPENDENCIES = [
     ("org.opentest4j", "opentest4j", "1.3.0"),
 ]
 
-def junit_jupiter_java_repositories(version = "5.10.0"):
+def junit_jupiter_java_repositories(version = "5.8.2"):
     """Imports dependencies for JUnit Jupiter"""
     for artifact_id in JUNIT_JUPITER_ARTIFACT_ID_LIST:
         jvm_maven_import_external(
