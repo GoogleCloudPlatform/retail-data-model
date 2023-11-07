@@ -64,6 +64,7 @@ switched_rules_by_language(
     go = True,
     grpc = True,
     java = True,
+    nodejs = True,
     python = True,
 )
 
@@ -93,6 +94,22 @@ rules_proto_toolchains()
 load("@rules_proto_grpc//doc:repositories.bzl", rules_proto_grpc_doc_repos = "doc_repos")
 
 rules_proto_grpc_doc_repos()
+
+load("@rules_proto_grpc//js:repositories.bzl", rules_proto_grpc_js_repos = "js_repos")
+
+rules_proto_grpc_js_repos()
+
+load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_dependencies")
+
+build_bazel_rules_nodejs_dependencies()
+
+load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+
+yarn_install(
+    name = "npm",
+    package_json = "@rules_proto_grpc//js:requirements/package.json",  # This should be changed to your local package.json which should contain the dependencies required
+    yarn_lock = "@rules_proto_grpc//js:requirements/yarn.lock",
+)
 
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
 
@@ -268,15 +285,6 @@ pip_parse(
     requirements_lock = "//:build/requirements.txt",
 )
 
-# pip_parse(
-#     name = "rules_proto_grpc_py3_deps",
-#     python_interpreter = "python3",
-#     requirements_lock = "@rules_proto_grpc//python:requirements.txt",
-# )
-
-# load("@rules_proto_grpc_py3_deps//:requirements.bzl", "install_deps")
-# install_deps()
-
 load("@python_deps//:requirements.bzl", local_deps = "install_deps")
 
 local_deps()
@@ -338,6 +346,16 @@ filegroup(
     """,
     sha256 = HUGO_THEME_SHA256,
     url = HUGO_THEME_URL,
+)
+
+###############################################################################
+# NodeJS tool chain
+###############################################################################
+http_archive(
+    name = "rules_nodejs",
+    sha256 = "162f4adfd719ba42b8a6f16030a20f434dc110c65dc608660ef7b3411c9873f9",
+    strip_prefix = "rules_nodejs-6.0.2",
+    url = "https://github.com/bazelbuild/rules_nodejs/releases/download/v6.0.2/rules_nodejs-v6.0.2.tar.gz",
 )
 
 ###############################################################################

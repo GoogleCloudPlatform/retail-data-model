@@ -45,9 +45,7 @@ type ProductAttributeRuleGroup merchandise.ProductAttributeRuleGroup
 
 func NewProductAttributeRuleGroup(id *VersionID, name string, description string) *ProductAttributeRuleGroup {
 	return &ProductAttributeRuleGroup{
-		Id:                    (*common.VersionID)(id),
-		Name:                  name,
-		Description:           description,
+		Labels:                make([]*merchandise.AttributeLabel, 0),
 		ProductAttributeRules: make([]*merchandise.ProductAttributeRule, 0),
 	}
 }
@@ -101,8 +99,7 @@ type NumericProductAttributeRuleValue ProductAttributeRuleValue
 
 func NewNumericProductAttributeRuleValue(id *VersionID, ordinal int32) *NumericProductAttributeRuleValue {
 	return &NumericProductAttributeRuleValue{
-		ProductTemplateId: (*common.VersionID)(id),
-		FieldOrdinal:      ordinal,
+		FieldOrdinal: ordinal,
 		Value: &merchandise.ProductAttributeRuleValue_NumberValue{
 			NumberValue: &merchandise.ProductAttributeRuleValue_Number{
 				Value: make([]float64, 0),
@@ -119,8 +116,7 @@ type StringProductAttributeRuleValue ProductAttributeRuleValue
 
 func NewStringProductAttributeRuleValue(id *VersionID, ordinal int32) *StringProductAttributeRuleValue {
 	return &StringProductAttributeRuleValue{
-		ProductTemplateId: (*common.VersionID)(id),
-		FieldOrdinal:      ordinal,
+		FieldOrdinal: ordinal,
 		Value: &merchandise.ProductAttributeRuleValue_StringValue{
 			StringValue: &merchandise.ProductAttributeRuleValue_String{
 				Value: make([]string, 0),
