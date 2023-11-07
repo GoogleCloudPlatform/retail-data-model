@@ -42,6 +42,15 @@ message Supplier {
   string general_ledger_code = 2;
 }
 
+// Attribute Labels used by multiple entities
+message AttributeLabel {
+  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale'];
+  // The names of the field
+  string name = 2 [json_name = 'name'];
+  // The descriptions of the intention of the field
+  string description = 3 [json_name = 'description'];
+}
+
 // A product template is used to describe a line of products, such as
 // durable (appliances, furniture, etc), perishables (food), or soft (clothing)
 // Product templates are then used to import and validate data, as well as
@@ -52,34 +61,31 @@ message ProductTemplate {
   google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
   string name = 2 [json_name = 'name'];
   string description = 3 [json_name = 'description'];
-  repeated ProductTemplateAttribute attributes = 4 [json_name = 'attributes'];
+  repeated AttributeLabel labels = 4 [json_name = 'labels'];
+  repeated ProductTemplateAttribute attributes = 5 [json_name = 'attributes'];
+  repeated string merchandise_hierarchy_ids = 6 [json_name = 'merchandise_hierarchy_ids'];
 }
 
 // Product template attributes describe either a group of rules, or a single
 // rule used by the template.
 message ProductTemplateAttribute {
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  int32 ordinal = 2 [json_name = 'ordinal'];
+  string name = 3 [json_name = 'name'];
+  string description = 4 [json_name = 'description'];
   oneof value {
-    ProductAttributeRuleGroup rule_group = 1 [json_name = 'rule_group'];
-    ProductAttributeRule rule = 2 [json_name = 'rule'];
+    ProductAttributeRuleGroup rule_group = 5 [json_name = 'rule_group'];
+    ProductAttributeRule rule = 6 [json_name = 'rule'];
   }
+  repeated string merchandise_hierarchy_ids = 7 [json_name = 'merchandise_hierarchy_ids'];
 }
 
 // Product Attribute Rule Groups provide a way to create reusable rule groups
 // for products. For example, a retailer specific header that includes
 // sku with the retailer SKU rules defined
 message ProductAttributeRuleGroup {
-  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
-  string name = 2 [json_name = 'name'];
-  string description = 3 [json_name = 'description'];
-  repeated ProductAttributeRule product_attribute_rules = 4 [json_name = 'product_attribute_rules'];
-}
-
-message AttributeLabel {
-  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale'];
-  // The names of the field
-  string name = 2 [json_name = 'name'];
-  // The descriptions of the intention of the field
-  string description = 3 [json_name = 'description'];
+  repeated AttributeLabel labels = 1 [json_name = 'labels'];
+  repeated ProductAttributeRule product_attribute_rules = 2 [json_name = 'product_attribute_rules'];
 }
 
 message ProductAttributeRule {
@@ -101,8 +107,12 @@ message ProductAttributeRule {
   bool allow_override = 4 [json_name = 'allow_override'];
   // How should the field be verified
   string validation_reg_ex = 5 [json_name = 'validation_reg_ex'];
-  // A set of international labels for the field
-  repeated AttributeLabel labels = 6 [json_name = 'labels'];
+  // Default Name
+  string name = 6 [json_name = 'name'];
+  // Default Description
+  string description = 7 [json_name = 'description'];
+  // Labels for the attribute
+  repeated AttributeLabel labels = 8 [json_name = 'labels'];
 }
 
 message ProductAttribute {
@@ -113,7 +123,7 @@ message ProductAttribute {
 }
 
 message ProductAttributeRuleGroupValue {
-  google.retail.common.pb.VersionID rule_group_id = 1 [json_name = 'rule_group_id'];
+  string product_attribute_rule_group_id = 1 [json_name = 'product_attribute_rule_group_id'];
   repeated ProductAttributeRuleValue values = 2 [json_name = 'values'];
 }
 
@@ -125,7 +135,7 @@ message ProductAttributeRuleValue {
   message String {
     repeated string value = 1 [json_name = 'value'];
   }
-  google.retail.common.pb.VersionID product_template_id = 1 [json_name = 'product_template_id'];
+  string product_template_attribute_id = 1 [json_name = 'product_template_attribute_id'];
   int32 field_ordinal = 2 [json_name = 'field_ordinal'];
   oneof value {
     Number number_value = 3 [json_name = 'number_value'];
@@ -151,6 +161,8 @@ message Product {
   // A set of business keys used for identifying the product,
   // SKU, UPC, GL Code, Lot #, etc.
   repeated google.retail.common.pb.BusinessKey business_keys = 2 [json_name = "business_keys"];
+
+  string product_template_id = 11 [json_name = 'product_template_id'];
 
   repeated I18nProductHeader headers = 3 [json_name = "headers"];
 

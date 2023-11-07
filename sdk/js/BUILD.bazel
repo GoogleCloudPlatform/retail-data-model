@@ -1,0 +1,178 @@
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_library", "js_proto_compile", "js_proto_library")
+
+js_proto_library(
+    name = "protogen_bq_schema_js_proto",
+    protos = ["@protoc_gen_bq_schema//api:bq_schema_proto_lib"],
+)
+
+js_proto_library(
+    name = "rdm_enums_js_proto",
+    protos = ["//api/enums"],
+)
+
+js_proto_library(
+    name = "rdm_common_js_proto",
+    protos = ["//api/common:model_proto"],
+    deps = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_enums_js_proto",
+    ],
+)
+
+js_grpc_node_library(
+    name = "rdm_common_js_grpc",
+    protos = ["//api/common:service_proto"],
+    deps = ["rdm_common_js_proto"],
+)
+
+js_proto_library(
+    name = "rdm_customer_js_proto",
+    protos = ["//api/customer:model_proto"],
+)
+
+js_proto_library(
+    name = "rdm_party_js_proto",
+    protos = ["//api/party:model_proto"],
+    deps = [
+        ":rdm_common_js_proto",
+        ":rdm_enums_js_proto",
+    ],
+)
+
+js_proto_library(
+    name = "rdm_enterprise_js_proto",
+    protos = ["//api/enterprise:model_proto"],
+    deps = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_common_js_proto",
+        ":rdm_enums_js_proto",
+        ":rdm_party_js_proto",
+    ],
+)
+
+js_proto_library(
+    name = "rdm_events_js_proto",
+    protos = ["//api/events:model_proto"],
+    deps = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_common_js_proto",
+    ],
+)
+
+js_grpc_node_library(
+    name = "rdm_events_js_grpc",
+    protos = ["//api/events:service_proto"],
+    deps = [
+        ":rdm_common_js_grpc",
+        ":rdm_events_js_proto",
+    ],
+)
+
+js_proto_library(
+    name = "rdm_inventory_js_proto",
+    protos = ["//api/inventory:model_proto"],
+    deps = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_common_js_proto",
+        ":rdm_enums_js_proto",
+    ],
+)
+
+js_grpc_node_library(
+    name = "rdm_inventory_js_grpc",
+    protos = ["//api/inventory:service_proto"],
+    deps = [
+        ":rdm_common_js_grpc",
+        ":rdm_enums_js_proto",
+        ":rdm_inventory_js_proto",
+    ],
+)
+
+js_proto_library(
+    name = "rdm_location_js_proto",
+    protos = ["//api/location:model_proto"],
+    deps = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_common_js_proto",
+        ":rdm_enums_js_proto",
+    ],
+)
+
+js_grpc_node_library(
+    name = "rdm_location_js_grpc",
+    protos = ["//api/location:service_proto"],
+    deps = [
+        ":rdm_common_js_grpc",
+        ":rdm_enums_js_proto",
+        ":rdm_location_js_proto",
+    ],
+)
+
+js_proto_library(
+    name = "rdm_merchandise_js_proto",
+    protos = ["//api/merchandise:model_proto"],
+    deps = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_common_js_proto",
+        ":rdm_enterprise_js_proto",
+        ":rdm_enums_js_proto",
+    ],
+)
+
+js_grpc_node_library(
+    name = "rdm_merchandise_js_grpc",
+    protos = ["//api/merchandise:service_proto"],
+    deps = [
+        ":rdm_common_js_grpc",
+        ":rdm_enterprise_js_proto",
+        ":rdm_enums_js_proto",
+        ":rdm_merchandise_js_proto",
+    ],
+)
+
+pkg_tar(
+    name = "rdm_js_lib_tar",
+    srcs = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_common_js_grpc",
+        ":rdm_common_js_proto",
+        ":rdm_customer_js_proto",
+        ":rdm_enterprise_js_proto",
+        ":rdm_enums_js_proto",
+        ":rdm_events_js_grpc",
+        ":rdm_events_js_proto",
+        ":rdm_inventory_js_grpc",
+        ":rdm_inventory_js_proto",
+        ":rdm_location_js_grpc",
+        ":rdm_location_js_proto",
+        ":rdm_merchandise_js_grpc",
+        ":rdm_merchandise_js_proto",
+        ":rdm_party_js_proto",
+    ],
+    package_file_name = "rdm_js_lib.tgz",
+)
+
+# Create a zip package
+pkg_zip(
+    name = "rdm_js_lib_zip",
+    srcs = [
+        ":protogen_bq_schema_js_proto",
+        ":rdm_common_js_grpc",
+        ":rdm_common_js_proto",
+        ":rdm_customer_js_proto",
+        ":rdm_enterprise_js_proto",
+        ":rdm_enums_js_proto",
+        ":rdm_events_js_grpc",
+        ":rdm_events_js_proto",
+        ":rdm_inventory_js_grpc",
+        ":rdm_inventory_js_proto",
+        ":rdm_location_js_grpc",
+        ":rdm_location_js_proto",
+        ":rdm_merchandise_js_grpc",
+        ":rdm_merchandise_js_proto",
+        ":rdm_party_js_proto",
+    ],
+    package_file_name = "rdm_js_lib.zip",
+)
