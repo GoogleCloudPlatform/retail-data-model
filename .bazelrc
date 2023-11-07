@@ -32,6 +32,10 @@ try-import %workspace%/user.bazelrc
 # build --action_env=GRPC_BAZEL_RUNTIME=1
 # build --define=use_fast_cpp_protos=true
 
+build --@aspect_rules_ts//ts:skipLibCheck=honor_tsconfig
+fetch --@aspect_rules_ts//ts:skipLibCheck=honor_tsconfig
+query --@aspect_rules_ts//ts:skipLibCheck=honor_tsconfig
+
 build --java_language_version=17 --cxxopt='-std=c++17' --host_cxxopt='-std=c++17'
 
 test --java_language_version=17 --test_output=all --cache_test_results=no

@@ -1,0 +1,30 @@
+{
+  "name": "google-retail-data-model",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && npm run build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "test": ""
+  },
+  "jest": {
+    "verbose": true
+  },
+  "dependencies": {
+    "google-protobuf": "^3.21.2",
+    "grpc-tools": "^1.12.4",
+    "grpc-web": "^1.4.2",
+    "ts-protoc-gen": "^0.15.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.23.2",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "typescript": "^5.0.2"
+  }
+}
