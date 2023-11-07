@@ -43,7 +43,7 @@ js_grpc_node_library(
 npm_package(
     name = "google_retail_data_model_npm",
     srcs = [":google_rdm_js"],
-    package = "google-retail-data-model",
+    package = "@google/rdm",
     replace_prefixes = {
         "google_rdm_js_pb/api": "@google/rdm",
     },
