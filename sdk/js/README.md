@@ -7,7 +7,7 @@
 #### package.json
 ```json
 "dependencies": {
-  "@grpc/grpc-js": "1.7.3",
+  "@grpc/grpc-js": "1.9.9",
   "google-protobuf": "3.21.2",
   "grpc-tools": "1.11.3",
   "grpc-web": "1.4.2",

@@ -1,0 +1,26 @@
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_compile")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@retail_data_model_npm//:defs.bzl", "npm_link_all_packages")
+
+PROTO_FILES = [
+    "//api/events:model_proto",
+    "//api/events:service_proto",
+]
+
+js_grpc_node_compile(
+    name = "events_protos",
+    protos = PROTO_FILES,
+    visibility = ["//visibility:public"],
+)
+
+npm_package(
+    name = "events",
+    srcs = [
+        ":events_protos",
+        ":package.json",
+    ],
+    replace_prefixes = {
+        "events_protos/api/events": "",
+    },
+    visibility = ["//visibility:public"],
+)

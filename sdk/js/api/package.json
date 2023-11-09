@@ -1,0 +1,18 @@
+{
+  "name": "api",
+  "author": "Google, LLC",
+  "license": "Apache-2.0",
+  "type": "module",
+  "workspaces": [
+    "common",
+    "customer",
+    "enterprise",
+    "enums",
+    "events",
+    "inventory",
+    "location",
+    "merchandise",
+    "party",
+    "promotions"
+  ]
+}

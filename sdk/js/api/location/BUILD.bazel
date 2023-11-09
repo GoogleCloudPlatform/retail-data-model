@@ -1,0 +1,28 @@
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_compile")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@retail_data_model_npm//:defs.bzl", "npm_link_all_packages")
+
+PROTO_FILES = [
+    "//api/location:model_proto",
+    "//api/location:service_proto",
+]
+
+js_grpc_node_compile(
+    name = "location_protos",
+    protos = PROTO_FILES,
+    visibility = ["//visibility:public"],
+)
+
+npm_package(
+    name = "location",
+    srcs = [
+        ":location_protos",
+        ":package.json",
+    ],
+    replace_prefixes = {
+        "location_protos/api/location": "",
+    },
+    visibility = ["//visibility:public"],
+)
+
+npm_link_all_packages()

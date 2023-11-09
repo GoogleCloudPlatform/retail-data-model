@@ -1,73 +1,42 @@
-load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
-load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
-load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_library", "js_grpc_web_library")
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_web_compile")
 load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+load("@retail_data_model_npm//:defs.bzl", "npm_link_all_packages")
 
 BUILD_DEPS = [":node_modules/" + d for d in [
     "@grpc/grpc-js",
     "google-protobuf",
     "grpc-tools",
     "grpc-web",
-    "@babel/core",
-    "@babel/preset-env",
-    "@babel/preset-typescript",
-    "@typescript-eslint/eslint-plugin",
-    "@typescript-eslint/parser",
-    "eslint",
-    "jest",
-    "typescript",
     "ts-protoc-gen",
 ]]
 
-js_grpc_node_library(
-    name = "google_rdm_js",
-    package_name = "google-rdm-js",
-    protos = [
-        "//api/common:model_proto",
-        "//api/common:service_proto",
-        "//api/customer:model_proto",
-        "//api/enterprise:model_proto",
-        "//api/events:model_proto",
-        "//api/events:service_proto",
-        "//api/inventory:model_proto",
-        "//api/inventory:service_proto",
-        "//api/location:model_proto",
-        "//api/location:service_proto",
-        "//api/merchandise:model_proto",
-        "//api/party:model_proto",
-        "//api/promotions:model_proto",
-        "@protoc_gen_bq_schema//api:bq_schema_proto_lib",
+filegroup(
+    name = "workspace_files",
+    srcs = [
+        "//sdk/js/api",
+        "//sdk/js/google/api",
+        "//sdk/js/google/protobuf",
     ],
 )
 
 npm_package(
-    name = "google_retail_data_model_npm",
+    name = "js",
     srcs = [
-        "package.json",
-        "package-lock.json",
         ":LICENSE",
         ":README.md",
-        ":google_rdm_js",
+        ":package.json",
+        ":tsconfig.json",
+        ":workspace_files",
     ],
-    package = "@google/rdm",
+    out = "gcp-rdm",
     replace_prefixes = {
-        "google_rdm_js_pb/api": "@google/rdm",
+        "api/api": "api",
+        "google/api/api": "google/api",
+        "google/protobuf/protobuf": "google/protobuf",
     },
+    visibility = ["//visibility:public"],
 )
 
-pkg_tar(
-    name = "rdm_js_lib_tar",
-    srcs = [
-        ":google_retail_data_model_npm",
-    ],
-    package_file_name = "google_rdm_js.tgz",
-)
-
-# Create a zip package
-pkg_zip(
-    name = "rdm_js_lib_zip",
-    srcs = [
-        ":google_retail_data_model_npm",
-    ],
-    package_file_name = "google_rdm_js.zip",
-)
+npm_link_all_packages()

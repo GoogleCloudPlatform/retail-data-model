@@ -14,3 +14,16 @@
 
 sdk/js/dist
 sdk/js/node_modules
+sdk/js/api/node_modules
+sdk/js/api/common/node_modules
+sdk/js/api/customer/node_modules
+sdk/js/api/enterprise/node_modules
+sdk/js/api/enums/node_modules
+sdk/js/api/events/node_modules
+sdk/js/api/inventory/node_modules
+sdk/js/api/location/node_modules
+sdk/js/api/merchandise/node_modules
+sdk/js/api/party/node_modules
+sdk/js/api/promotions/node_modules
+sdk/js/google/api/node_modules
+sdk/js/google/protobuf/node_modules

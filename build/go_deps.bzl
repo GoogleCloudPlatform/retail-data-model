@@ -1710,7 +1710,6 @@ WELL_KNOWN_TYPES = [
     "@org_golang_google_protobuf//types/known/wrapperspb:go_default_library",
     "@go_googleapis//google/api:annotations_go_proto",
 ]
-# "@org_golang_google_genproto//googleapis/api/annotations:go_default_library",
 
 GO_TEST_TYPES = [
     "@com_github_stretchr_testify//assert",
