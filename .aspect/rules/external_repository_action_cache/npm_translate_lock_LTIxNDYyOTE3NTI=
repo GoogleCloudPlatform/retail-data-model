@@ -1,0 +1,19 @@
+# @generated
+# Input hashes for repository rule npm_translate_lock(name = "retail_data_model_npm", pnpm_lock = "//sdk/js:pnpm-lock.yaml").
+# This file should be checked into version control along with the pnpm-lock.yaml file.
+sdk/js/.npmrc=-1345432824
+sdk/js/pnpm-lock.yaml=1699011792
+sdk/js/package-lock.json=-631465276
+sdk/js/api/common/package.json=1453094993
+sdk/js/api/customer/package.json=-1749914818
+sdk/js/api/enterprise/package.json=-1791587685
+sdk/js/api/enums/package.json=-114241158
+sdk/js/api/events/package.json=1734986723
+sdk/js/api/inventory/package.json=507506672
+sdk/js/api/location/package.json=1044527303
+sdk/js/api/merchandise/package.json=-884023575
+sdk/js/api/package.json=447822833
+sdk/js/api/party/package.json=-1024267610
+sdk/js/api/promotions/package.json=1643030060
+sdk/js/package.json=-1814246406
+sdk/js/pnpm-workspace.yaml=-379618497
