@@ -2,7 +2,7 @@
   "name": "gcp-rdm",
   "author": "Google, LLC",
   "license": "Apache-2.0",
-  "version": "0.1.0-rc3",
+  "version": "0.1.0-rc4",
   "type": "module",
   "homepage": "https://github.com/GoogleCloudPlatform/retail-data-model",
   "bugs": "https://github.com/GoogleCloudPlatform/retail-data-model/issues",
@@ -13,8 +13,13 @@
     "model"
   ],
   "workspaces": [
-    "api",
-    "google/api",
-    "google/protobuf"
-  ]
+    "api"
+  ],
+  "dependencies": {
+    "@grpc/grpc-js": "^1.9.9",
+    "google-protobuf": "^3.21.2",
+    "grpc-tools": "^1.12.4",
+    "grpc-web": "^1.4.2",
+    "ts-protoc-gen": "^0.15.0"
+  }
 }

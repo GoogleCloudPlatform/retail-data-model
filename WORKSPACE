@@ -423,8 +423,6 @@ npm_translate_lock(
         "//sdk/js:api/package.json",
         "//sdk/js:api/party/package.json",
         "//sdk/js:api/promotions/package.json",
-        "//sdk/js:google/api/package.json",
-        "//sdk/js:google/protobuf/package.json",
         "//sdk/js:package.json",
         "//sdk/js:pnpm-workspace.yaml",
     ],

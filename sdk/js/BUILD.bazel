@@ -16,8 +16,8 @@ filegroup(
     name = "workspace_files",
     srcs = [
         "//sdk/js/api",
-        "//sdk/js/google/api",
-        "//sdk/js/google/protobuf",
+        #        "//sdk/js/google/api",
+        #        "//sdk/js/google/protobuf",
     ],
 )
 
