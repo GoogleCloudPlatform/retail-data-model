@@ -410,17 +410,30 @@ nodejs_register_toolchains(
 load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 
 npm_translate_lock(
-    name = "sdk_npm",
+    name = "retail_data_model_npm",
     data = [
+        "//sdk/js:api/common/package.json",
+        "//sdk/js:api/customer/package.json",
+        "//sdk/js:api/enterprise/package.json",
+        "//sdk/js:api/enums/package.json",
+        "//sdk/js:api/events/package.json",
+        "//sdk/js:api/inventory/package.json",
+        "//sdk/js:api/location/package.json",
+        "//sdk/js:api/merchandise/package.json",
+        "//sdk/js:api/package.json",
+        "//sdk/js:api/party/package.json",
+        "//sdk/js:api/promotions/package.json",
         "//sdk/js:package.json",
+        "//sdk/js:pnpm-workspace.yaml",
     ],
     npm_package_lock = "//sdk/js:package-lock.json",
+    npm_package_target_name = "@google/rdm",
     npmrc = "//sdk/js:.npmrc",
     pnpm_lock = "//sdk/js:pnpm-lock.yaml",
     verify_node_modules_ignored = "//:sdk/js/.bazelignore",
 )
 
-load("@sdk_npm//:repositories.bzl", "npm_repositories")
+load("@retail_data_model_npm//:repositories.bzl", "npm_repositories")
 
 npm_repositories()
 

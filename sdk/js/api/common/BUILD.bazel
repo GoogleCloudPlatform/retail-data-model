@@ -1,0 +1,28 @@
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_compile")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@retail_data_model_npm//:defs.bzl", "npm_link_all_packages")
+
+PROTO_FILES = [
+    "//api/common:model_proto",
+    "//api/common:service_proto",
+]
+
+js_grpc_node_compile(
+    name = "common_protos",
+    protos = PROTO_FILES,
+    visibility = ["//visibility:public"],
+)
+
+npm_package(
+    name = "common",
+    srcs = [
+        ":common_protos",
+        ":package.json",
+    ],
+    replace_prefixes = {
+        "common_protos/api/common": "",
+    },
+    visibility = ["//visibility:public"],
+)
+
+npm_link_all_packages()
