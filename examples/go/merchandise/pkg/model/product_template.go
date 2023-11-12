@@ -2,7 +2,6 @@ package model
 
 import (
 	common "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
-	"github.com/GoogleCloudPlatform/retail-data-model/enums"
 	merchandise "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb"
 )
 
@@ -25,15 +24,15 @@ func (productTemplate *ProductTemplate) addTemplateAttribute(attribute *ProductT
 
 type ProductTemplateAttribute merchandise.ProductTemplateAttribute
 
-func NewProductTemplateAttributeFromGroup(group *ProductAttributeRuleGroup) *ProductTemplateAttribute {
-	_group := &merchandise.ProductTemplateAttribute_RuleGroup{RuleGroup: (*merchandise.ProductAttributeRuleGroup)(group)}
+func NewProductTemplateAttributeFromGroup(group *ProductTemplateAttributeRuleGroup) *ProductTemplateAttribute {
+	_group := &merchandise.ProductTemplateAttribute_RuleGroup{RuleGroup: (*merchandise.ProductTemplateAttributeRuleGroup)(group)}
 	return &ProductTemplateAttribute{
 		Value: _group,
 	}
 }
 
-func NewProductTemplateAttributeFromRule(rule *ProductAttributeRule) *ProductTemplateAttribute {
-	_attr := &merchandise.ProductTemplateAttribute_Rule{Rule: (*merchandise.ProductAttributeRule)(rule)}
+func NewProductTemplateAttributeFromRule(rule *ProductTemplateAttributeRule) *ProductTemplateAttribute {
+	_attr := &merchandise.ProductTemplateAttribute_Rule{Rule: (*merchandise.ProductTemplateAttributeRule)(rule)}
 	return &ProductTemplateAttribute{
 		Value: _attr,
 	}
@@ -41,43 +40,30 @@ func NewProductTemplateAttributeFromRule(rule *ProductAttributeRule) *ProductTem
 
 // Template Attribute Rule Group
 
-type ProductAttributeRuleGroup merchandise.ProductAttributeRuleGroup
+type ProductTemplateAttributeRuleGroup merchandise.ProductTemplateAttributeRuleGroup
 
-func NewProductAttributeRuleGroup(id *VersionID, name string, description string) *ProductAttributeRuleGroup {
-	return &ProductAttributeRuleGroup{
-		Labels:                make([]*merchandise.AttributeLabel, 0),
-		ProductAttributeRules: make([]*merchandise.ProductAttributeRule, 0),
+func NewProductAttributeRuleGroup(id *VersionID, name string, description string) *ProductTemplateAttributeRuleGroup {
+	return &ProductTemplateAttributeRuleGroup{
+		ProductTemplateAttributeRules: make([]*merchandise.ProductTemplateAttributeRule, 0),
 	}
 }
 
-func (group *ProductAttributeRuleGroup) AddProductAttributeRule(rule *ProductAttributeRule) {
-	group.ProductAttributeRules = append(group.ProductAttributeRules, (*merchandise.ProductAttributeRule)(rule))
+func (group *ProductTemplateAttributeRuleGroup) AddProductAttributeRule(rule *ProductTemplateAttributeRule) {
+	group.ProductTemplateAttributeRules = append(group.ProductTemplateAttributeRules, (*merchandise.ProductTemplateAttributeRule)(rule))
 }
 
 // Template Attribute Rules
 
-type ProductAttributeRule merchandise.ProductAttributeRule
+type ProductTemplateAttributeRule merchandise.ProductTemplateAttributeRule
 
-func NewProductAttributeRule(t merchandise.ProductAttributeRule_Type, ordinal int32, required bool, allowOverride bool, validationRegEx string) *ProductAttributeRule {
-	return &ProductAttributeRule{
-		Type:            t,
+func NewProductAttributeRule(t merchandise.ProductTemplateAttributeRule_FieldType, ordinal int32, required bool, allowOverride bool, validationRegEx string) *ProductTemplateAttributeRule {
+	return &ProductTemplateAttributeRule{
+		FieldType:       t,
 		Ordinal:         ordinal,
 		Required:        required,
 		AllowOverride:   allowOverride,
-		ValidationRegEx: validationRegEx,
-		Labels:          make([]*merchandise.AttributeLabel, 0),
+		ValidationRegex: validationRegEx,
 	}
-}
-
-func (rule *ProductAttributeRule) AddAttributeLabel(label *AttributeLabel) *ProductAttributeRule {
-	rule.Labels = append(rule.Labels, (*merchandise.AttributeLabel)(label))
-	return rule
-}
-
-type AttributeLabel merchandise.AttributeLabel
-
-func NewAttributeLabel(locale enums.Locale, name string, description string) *AttributeLabel {
-	return &AttributeLabel{Locale: locale, Name: name, Description: description}
 }
 
 type ProductAttributeRuleGroupValue merchandise.ProductAttributeRuleGroupValue
