@@ -17,6 +17,7 @@ npm_package(
     srcs = [
         ":package.json",
         ":promotions_protos",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "promotions_protos/api/promotions": "",

@@ -47,8 +47,8 @@ func NewProduct(header *I18nProductHeader, rating float64) *Product {
 	return product
 }
 
-func (p *Product) AddBusinessKey(key string, values ...string) {
-	p.BusinessKeys = append(p.BusinessKeys, (*common.BusinessKey)(NewBusinessKey(key, values)))
+func (p *Product) AddBusinessKey(key string, value string) {
+	p.BusinessKeys = append(p.BusinessKeys, (*common.BusinessKey)(NewBusinessKey(key, value)))
 }
 
 func (p *Product) AddHeader(header *I18nProductHeader) {

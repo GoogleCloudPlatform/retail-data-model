@@ -17,6 +17,7 @@ npm_package(
     srcs = [
         ":merchandise_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "merchandise_protos/api/merchandise": "",

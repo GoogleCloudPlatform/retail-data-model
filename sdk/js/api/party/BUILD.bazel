@@ -17,6 +17,7 @@ npm_package(
     srcs = [
         ":package.json",
         ":party_protos",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "party_protos/api/party": "",

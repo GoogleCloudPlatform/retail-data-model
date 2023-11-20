@@ -17,6 +17,7 @@ npm_package(
     srcs = [
         ":enterprise_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "enterprise_protos/api/enterprise": "",

@@ -117,7 +117,7 @@ message VersionID {
  */
 message BusinessKey {
   string name = 1 [json_name = 'name', (gen_bq_schema.bigquery).require = true];
-  repeated string values = 2 [json_name = 'values'];
+  string value = 2 [json_name = 'value',  (gen_bq_schema.bigquery).require = true];
 }
 
 
