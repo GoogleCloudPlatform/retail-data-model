@@ -13,6 +13,14 @@ BUILD_DEPS = [":node_modules/" + d for d in [
 ]]
 
 filegroup(
+    name = "ts_config_file",
+    srcs = [
+        "tsconfig.json",
+    ],
+    visibility = ["//sdk/js:__subpackages__"],
+)
+
+filegroup(
     name = "workspace_files",
     srcs = [
         "//sdk/js/api",

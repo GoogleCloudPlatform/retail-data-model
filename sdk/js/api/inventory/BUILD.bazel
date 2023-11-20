@@ -18,6 +18,7 @@ npm_package(
     srcs = [
         ":inventory_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "inventory_protos/api/inventory": "",

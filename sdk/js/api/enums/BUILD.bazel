@@ -17,6 +17,7 @@ npm_package(
     srcs = [
         ":enum_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "enum_protos/api/enums": "",

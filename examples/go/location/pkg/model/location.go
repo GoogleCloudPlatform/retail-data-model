@@ -21,8 +21,8 @@ func (loc *Location) AddLocationMeasure(measure *LocationMeasure) *Location {
 	return loc
 }
 
-func (loc *Location) AddMeta(key string, values ...string) *Location {
-	loc.Meta = append(loc.Meta, &common.BusinessKey{Name: key, Values: values})
+func (loc *Location) AddMeta(key string, value string) *Location {
+	loc.Meta = append(loc.Meta, &common.BusinessKey{Name: key, Value: value})
 	return loc
 }
 

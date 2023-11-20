@@ -11,6 +11,9 @@ importers:
       '@grpc/grpc-js':
         specifier: ^1.9.9
         version: 1.9.9
+      '@types/google-protobuf':
+        specifier: ^3.15.10
+        version: 3.15.10
       google-protobuf:
         specifier: ^3.21.2
         version: 3.21.2
@@ -126,6 +129,10 @@ packages:
 
   /@protobufjs/utf8@1.1.0:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
+    dev: false
+
+  /@types/google-protobuf@3.15.10:
+    resolution: {integrity: sha512-uiyKJCa8hbmPE4yxwjbkMOALaBAiOVcatW/yEGbjTqwAh4kzNgQPWRlJMNPXpB5CPUM66xsYufiSX9WKHZCE9g==}
     dev: false
 
   /@types/node@20.9.0:

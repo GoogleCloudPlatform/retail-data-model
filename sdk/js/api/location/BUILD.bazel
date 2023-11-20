@@ -18,6 +18,7 @@ npm_package(
     srcs = [
         ":location_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "location_protos/api/location": "",

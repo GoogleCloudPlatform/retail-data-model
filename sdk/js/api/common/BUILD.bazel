@@ -18,6 +18,7 @@ npm_package(
     srcs = [
         ":common_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "common_protos/api/common": "",

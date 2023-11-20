@@ -17,6 +17,7 @@ npm_package(
     srcs = [
         ":customer_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "customer_protos/api/customer": "",

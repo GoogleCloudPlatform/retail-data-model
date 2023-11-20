@@ -27,16 +27,10 @@ func NewVersionID() *VersionID {
 	}
 }
 
-func NewBusinessKey(name string, values []string) *BusinessKey {
+func NewBusinessKey(name string, value string) *BusinessKey {
 	out := &BusinessKey{
-		Name:   name,
-		Values: make([]string, 0),
+		Name:  name,
+		Value: value,
 	}
-	out.Values = append(out.Values, values...)
 	return out
-}
-
-func (b *BusinessKey) AddValue(value string) *BusinessKey {
-	b.Values = append(b.Values, value)
-	return b
 }

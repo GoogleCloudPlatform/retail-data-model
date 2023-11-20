@@ -18,6 +18,7 @@ npm_package(
     srcs = [
         ":events_protos",
         ":package.json",
+        ":tsconfig.json",
     ],
     replace_prefixes = {
         "events_protos/api/events": "",

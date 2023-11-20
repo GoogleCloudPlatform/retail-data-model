@@ -33,6 +33,7 @@ npm_package(
     srcs = [
         ":api_protos",
         ":package.json",
+        ":tsconfig.json",
         ":workspace_files",
     ],
     out = "api",

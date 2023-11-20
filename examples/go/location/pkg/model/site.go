@@ -66,7 +66,7 @@ func (site *Site) AddLocationId(locationId string) *Site {
 	return site
 }
 
-func (site *Site) AddMeta(key string, values ...string) *Site {
-	site.Meta = append(site.Meta, &common.BusinessKey{Name: key, Values: values})
+func (site *Site) AddMeta(key string, value string) *Site {
+	site.Meta = append(site.Meta, &common.BusinessKey{Name: key, Value: value})
 	return site
 }
