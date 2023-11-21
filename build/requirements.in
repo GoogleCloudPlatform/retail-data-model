@@ -1,17 +1,18 @@
+# Scipy and Numpy for examples
+
 wheel
 
-Cython
+cython
 
-coverage
-
-# Scipy and Numpy for examples
 scipy
 numpy
+
+
+grpclib==0.4.3; python_version > '3'
 
 # Required Google and Protobuf APIs
 google-api-python-client
 gcloud
 
-grpclib
 grpcio
 grpcio-tools

@@ -8,6 +8,12 @@
     "moduleResolution": "bundler",
   },
   "files": [
-    "package.json"
+    "package.json",
+    "*_pb.ts",
+    "*_pb.d.ts"
+  ],
+  "references": [
+    { "path": "../enums" },
+    { "path": "../common" }
   ]
 }

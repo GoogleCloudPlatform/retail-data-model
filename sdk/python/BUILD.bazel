@@ -14,7 +14,8 @@
 
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
-load("@rules_proto_grpc//python:defs.bzl", "python_grpc_library", "python_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_grpc_library")
 
 package(default_visibility = [
     "//visibility:public",
@@ -53,17 +54,17 @@ python_grpc_library(
     name = "python_grpc_library",
     protos = ENUMS + PROTOS + GRPCS,
 )
-
-# Create a tgz package
-pkg_tar(
-    name = "rdm_python_lib_tar",
-    srcs = [":python_grpc_library"],
-    package_file_name = "rdm_python_lib.tgz",
-)
-
-# Create a zip package
-pkg_zip(
-    name = "rdm_python_lib_zip",
-    srcs = [":python_grpc_library"],
-    package_file_name = "rdm_python_lib.zip",
-)
+#
+## Create a tgz package
+#pkg_tar(
+#    name = "rdm_python_lib_tar",
+#    srcs = [":python_grpc_library"],
+#    package_file_name = "rdm_python_lib.tgz",
+#)
+#
+## Create a zip package
+#pkg_zip(
+#    name = "rdm_python_lib_zip",
+#    srcs = [":python_grpc_library"],
+#    package_file_name = "rdm_python_lib.zip",
+#)

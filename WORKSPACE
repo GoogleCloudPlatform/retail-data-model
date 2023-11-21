@@ -12,13 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-workspace(name = "google_retail_data_model")
+workspace(name = "google_retail_gen_ai")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 ###############################################################################
 # Sky lib Tool Chain
 ###############################################################################
+
 http_archive(
     name = "bazel_skylib",
     sha256 = "66ffd9315665bfaafc96b52278f57c7e2dd09f5ede279ea6d39b2be471e7e3aa",
@@ -60,7 +62,7 @@ load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_languag
 
 switched_rules_by_language(
     name = "com_google_googleapis_imports",
-    cc = False,
+    cc = True,
     go = True,
     grpc = True,
     java = True,
@@ -95,6 +97,10 @@ load("@rules_proto_grpc//doc:repositories.bzl", rules_proto_grpc_doc_repos = "do
 
 rules_proto_grpc_doc_repos()
 
+load("@rules_proto_grpc//python:repositories.bzl", rules_proto_grpc_python_repos = "python_repos")
+
+rules_proto_grpc_python_repos()
+
 load("@rules_proto_grpc//js:repositories.bzl", rules_proto_grpc_js_repos = "js_repos")
 
 rules_proto_grpc_js_repos()
@@ -103,17 +109,13 @@ load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_d
 
 build_bazel_rules_nodejs_dependencies()
 
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
-
-yarn_install(
-    name = "npm",
-    package_json = "@rules_proto_grpc//js:requirements/package.json",  # This should be changed to your local package.json which should contain the dependencies required
-    yarn_lock = "@rules_proto_grpc//js:requirements/yarn.lock",
-)
-
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
 
 grpc_deps()
+
+#load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
+#
+#grpc_extra_deps()
 
 ###############################################################################
 # GO Tool Chain
@@ -157,8 +159,13 @@ load("//:build/go_deps.bzl", "go_dependencies")
 # gazelle:repository_macro build/go_deps.bzl%go_dependencies
 go_dependencies()
 
-# load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
-# grpc_extra_deps()
+###############################################################################
+# Gazelle Tool Chain (Do not move)
+###############################################################################
+
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+
+gazelle_dependencies()
 
 ###############################################################################
 # Java Tool Chain
@@ -192,31 +199,17 @@ rules_proto_grpc_java_repos()
 
 load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_ARTIFACTS", "IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS", "grpc_java_repositories")
 load("@rules_jvm_external//:defs.bzl", "maven_install")
+load("//:build/java_deps.bzl", "JAVA_DEPS", "TEST_DEPS")
 
 maven_install(
-    artifacts = [
-        "info.picocli:picocli:4.7.5",
-        "info.picocli:picocli-codegen:4.7.5",
-        "org.apache.commons:commons-lang3:3.13.0",
-        "com.google.protobuf:protobuf-java-util:3.24.4",
-        "io.grpc:grpc-core:1.59.0",
-        "io.grpc:grpc-googleapis:1.59.0",
-        "io.grpc:grpc-netty-shaded:1.59.0",
-        "io.grpc:grpc-protobuf:1.59.0",
-        "io.grpc:grpc-stub:1.59.0",
-        "io.grpc:grpc-testing:1.59.0",
-        "org.apache.tomcat:annotations-api:6.0.53",
-        "org.apache.logging.log4j:log4j-api:2.21.0",
-        "org.apache.logging.log4j:log4j-core:2.21.0",
-        "com.google.protobuf:protoc:3.24.4",
-        "io.netty:netty-all:4.1.100.Final",
-    ] + IO_GRPC_GRPC_JAVA_ARTIFACTS,
+    artifacts = JAVA_DEPS + IO_GRPC_GRPC_JAVA_ARTIFACTS + TEST_DEPS,
     fetch_sources = True,
     generate_compat_repositories = True,
     override_targets = IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS,
     repositories = [
         "https://maven.google.com",
         "https://repo1.maven.org/maven2",
+        "https://repository.jboss.org/nexus/content/groups/public/",
     ],
 )
 
@@ -229,15 +222,21 @@ grpc_java_repositories()
 ###############################################################################
 # JUnit 5 Tool Chain
 ###############################################################################
-load(
-    "//:build/junit.bzl",
-    "junit_jupiter_java_repositories",
-    "junit_platform_java_repositories",
+http_archive(
+    name = "contrib_rules_jvm",
+    sha256 = "4d62589dc6a55e74bbe33930b826d593367fc777449a410604b2ad7c6c625ef7",
+    strip_prefix = "rules_jvm-0.19.0",
+    url = "https://github.com/bazel-contrib/rules_jvm/releases/download/v0.19.0/rules_jvm-v0.19.0.tar.gz",
 )
 
-junit_jupiter_java_repositories()
+load("@contrib_rules_jvm//:repositories.bzl", "contrib_rules_jvm_deps")
 
-junit_platform_java_repositories()
+contrib_rules_jvm_deps()
+
+# Now ensure that the downloaded deps are properly configured
+load("@contrib_rules_jvm//:setup.bzl", "contrib_rules_jvm_setup")
+
+contrib_rules_jvm_setup()
 
 ###############################################################################
 # Python Tool Chain
@@ -273,19 +272,15 @@ python_register_toolchains(
 )
 
 load("@python311//:defs.bzl", "interpreter")
-load("@rules_proto_grpc//python:repositories.bzl", rules_proto_grpc_python_repos = "python_repos")
-
-rules_proto_grpc_python_repos()
-
 load("@rules_python//python:pip.bzl", "pip_parse")
 
 pip_parse(
-    name = "python_deps",
+    name = "rules_proto_grpc_py3_deps",
     python_interpreter_target = interpreter,
     requirements_lock = "//:build/requirements.txt",
 )
 
-load("@python_deps//:requirements.bzl", local_deps = "install_deps")
+load("@rules_proto_grpc_py3_deps//:requirements.bzl", local_deps = "install_deps")
 
 local_deps()
 
@@ -349,8 +344,16 @@ filegroup(
 )
 
 ###############################################################################
-# NodeJS tool chain
+# NodeJS Toolchain
 ###############################################################################
+load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+
+yarn_install(
+    name = "npm",
+    package_json = "@rules_proto_grpc//js:requirements/package.json",  # This should be changed to your local package.json which should contain the dependencies required
+    yarn_lock = "@rules_proto_grpc//js:requirements/yarn.lock",
+)
+
 http_archive(
     name = "rules_nodejs",
     sha256 = "162f4adfd719ba42b8a6f16030a20f434dc110c65dc608660ef7b3411c9873f9",
@@ -397,10 +400,29 @@ register_copy_directory_toolchains()
 register_copy_to_directory_toolchains()
 
 ###############################################################################
+# Jest Toolchain
+###############################################################################
+
+http_archive(
+    name = "aspect_rules_jest",
+    sha256 = "098186ffc450f2a604843d8ba14217088a0e259ea6a03294af5360a7f1bcd3e8",
+    strip_prefix = "rules_jest-0.19.5",
+    url = "https://github.com/aspect-build/rules_jest/releases/download/v0.19.5/rules_jest-v0.19.5.tar.gz",
+)
+
+load("@aspect_rules_jest//jest:dependencies.bzl", "rules_jest_dependencies")
+
+rules_jest_dependencies()
+
+###############################################################################
 # JS Dependencies Toolchain
 ###############################################################################
 
-load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
+load(
+    "@rules_nodejs//nodejs:repositories.bzl",
+    "DEFAULT_NODE_VERSION",
+    "nodejs_register_toolchains",
+)
 
 nodejs_register_toolchains(
     name = "nodejs",
@@ -412,23 +434,10 @@ load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 npm_translate_lock(
     name = "retail_data_model_npm",
     data = [
-        "//sdk/js:api/common/package.json",
-        "//sdk/js:api/customer/package.json",
-        "//sdk/js:api/enterprise/package.json",
-        "//sdk/js:api/enums/package.json",
-        "//sdk/js:api/events/package.json",
-        "//sdk/js:api/inventory/package.json",
-        "//sdk/js:api/location/package.json",
-        "//sdk/js:api/merchandise/package.json",
-        "//sdk/js:api/package.json",
-        "//sdk/js:api/party/package.json",
-        "//sdk/js:api/promotions/package.json",
         "//sdk/js:package.json",
-        "//sdk/js:pnpm-workspace.yaml",
     ],
     npm_package_lock = "//sdk/js:package-lock.json",
-    npm_package_target_name = "@google/rdm",
-    npmrc = "//sdk/js:.npmrc",
+    npmrc = "//:sdk/js/.npmrc",
     pnpm_lock = "//sdk/js:pnpm-lock.yaml",
     verify_node_modules_ignored = "//:sdk/js/.bazelignore",
 )
@@ -438,9 +447,15 @@ load("@retail_data_model_npm//:repositories.bzl", "npm_repositories")
 npm_repositories()
 
 ###############################################################################
-# Gazelle Tool Chain (Do not move)
+# Multirun - Allows running multiple targets in parallel
 ###############################################################################
 
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+git_repository(
+    name = "com_github_atlassian_bazel_tools",
+    commit = "8b69172a66e62060a628e13111ca8d9072c4978e",
+    remote = "https://github.com/atlassian/bazel-tools.git",
+)
 
-gazelle_dependencies()
+load("@com_github_atlassian_bazel_tools//multirun:deps.bzl", "multirun_dependencies")
+
+multirun_dependencies()
