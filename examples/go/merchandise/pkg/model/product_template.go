@@ -2,30 +2,30 @@ package model
 
 import (
 	common "github.com/GoogleCloudPlatform/retail-data-model/common/pb"
-	merchandise "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb"
+	merch "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb"
 )
 
-type CategoryTemplate merchandise.CategoryTemplate
+type Template merch.Template
 
-func NewCategoryTemplate(id *VersionID, name string, description string) *CategoryTemplate {
-	return &CategoryTemplate{
+func NewTemplate(id *VersionID, name string, description string) *Template {
+	return &Template{
 		Id:             (*common.VersionID)(id),
 		Name:           name,
 		Description:    description,
-		AttributeRules: make([]*merchandise.CategoryTemplateAttributeRule, 0),
+		AttributeRules: make([]*merch.TemplateAttributeRule, 0),
 	}
 }
 
-func (template *CategoryTemplate) addCategoryTemplateAttributeRule(attribute *CategoryTemplateAttributeRule) {
-	template.AttributeRules = append(template.AttributeRules, (*merchandise.CategoryTemplateAttributeRule)(attribute))
+func (template *Template) addTemplateAttributeRule(attribute *TemplateAttributeRule) {
+	template.AttributeRules = append(template.AttributeRules, (*merch.TemplateAttributeRule)(attribute))
 }
 
 // Template Attribute Rules
 
-type CategoryTemplateAttributeRule merchandise.CategoryTemplateAttributeRule
+type TemplateAttributeRule merch.TemplateAttributeRule
 
-func NewCategoryTemplateAttributeRule(t merchandise.CategoryTemplateAttributeRule_FieldType, ordinal int32, required bool, allowOverride bool, validationRegEx string) *CategoryTemplateAttributeRule {
-	return &CategoryTemplateAttributeRule{
+func NewTemplateAttributeRule(t merch.TemplateAttributeRule_FieldType, ordinal int32, required bool, allowOverride bool, validationRegEx string) *TemplateAttributeRule {
+	return &TemplateAttributeRule{
 		FieldType:       t,
 		Ordinal:         ordinal,
 		Required:        required,

@@ -27,9 +27,55 @@ option go_package = "github.com/GoogleCloudPlatform/retail-data-model/merchandis
 option java_package = "com.google.retail.merchandise.grpc";
 option java_multiple_files = true;
 
+import "google/protobuf/field_mask.proto";
 
-// import "api/common/model.proto";
+import "api/common/model.proto";
 
-// import "api/enterprise/model.proto";
+import "api/merchandise/category.proto";
 
-// import "api/merchandise/model.proto";
+import "google/api/annotations.proto";
+
+service Categories {
+  rpc Create(google.retail.merchandise.pb.Category)
+      returns (google.retail.merchandise.pb.Category) {
+    option (google.api.http) = {
+      post: "/categories"
+      body: "model"
+    };
+  }
+
+  rpc Update(google.retail.merchandise.pb.Category)
+      returns (google.retail.merchandise.pb.Category) {
+    option (google.api.http) = {
+      put: "/categories"
+      body: "merchandise_hierarchy"
+    };
+  }
+
+  /*
+   * List - Finds a hierarchy by id
+   */
+  rpc GetCategory(google.retail.common.pb.IDRequest)
+      returns (google.retail.merchandise.pb.Category) {
+    option (google.api.http) = {
+      get: "/categories/{id}"
+    };
+  }
+
+  /*
+   * List - Provides a stream / ordered list of hierarchies.
+   */
+  rpc List(google.protobuf.FieldMask)
+      returns (stream google.retail.merchandise.pb.Category) {
+    option (google.api.http) = {
+      get: "/categories"
+    };
+  }
+
+  rpc Delete(google.retail.common.pb.IDRequest)
+      returns (google.retail.common.pb.StatusResponse) {
+    option (google.api.http) = {
+      delete: "/categories/{id}"
+    };
+  }
+}

@@ -17,10 +17,10 @@
 load("@protoc_gen_bq_schema//:defs.bzl", "bq_schema_compile")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_proto_grpc//doc:defs.bzl", "doc_markdown_compile")
-load("//:build/go_deps.bzl", "COMMON_API_PROTOS", "BQ_PROTOS")
+load("//:build/go_deps.bzl", "BQ_PROTOS", "COMMON_API_PROTOS")
 
 package(default_visibility = [
-    "//visibility:public"
+    "//visibility:public",
 ])
 
 alias(
@@ -35,6 +35,7 @@ alias(
 proto_library(
     name = "model_proto",
     srcs = [
+        "category.proto",
         "model.proto",
     ],
     deps = [
@@ -51,6 +52,7 @@ proto_library(
     ],
     deps = [
         ":model_proto",
+        "//api/common:model_proto",
     ] + COMMON_API_PROTOS,
 )
 

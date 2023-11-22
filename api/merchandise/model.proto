@@ -29,6 +29,8 @@ option java_multiple_files = true;
 
 import "api/common/model.proto";
 
+import "api/merchandise/category.proto";
+
 import "api/enterprise/model.proto";
 
 import "api/enums/locale.proto";
@@ -40,45 +42,6 @@ import "api/bq_table.proto";
 message Supplier {
   google.retail.common.pb.VersionID id = 1;
   string general_ledger_code = 2;
-}
-
-// A product template is used to describe a line of products, such as
-// durable (appliances, furniture, etc), perishables (food), or soft (clothing)
-// Product templates are then used to import and validate data, as well as
-// create flat views of the data automatically. Product descriptions are
-// asymmetric in nature, meaning simply one size does not fit all.
-message CategoryTemplate {
-  option (gen_bq_schema.bigquery_opts).table_name = "tbl_category_template";
-  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
-  google.retail.enums.locale.Locale locale = 2 [json_name = 'locale'];
-  string name = 3 [json_name = 'name'];
-  string description = 4 [json_name = 'description'];
-  repeated CategoryTemplateAttributeRule attribute_rules = 6 [json_name = 'attribute_rules'];
-  repeated string category_ids = 7 [json_name = 'category_ids'];
-}
-
-// Product template attributes describe either a group of rules, or a single
-// rule used by the template.
-message CategoryTemplateAttributeRule {
-  enum FieldType {
-    RATIONAL = 0;
-    IRRATIONAL = 1;
-    STRING = 2;
-    DATE = 3;
-    TIMESTAMP = 4;
-  }
-  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
-  google.retail.enums.locale.Locale locale = 2 [json_name = 'locale'];
-  FieldType field_type = 3 [json_name = 'field_type'];
-  int32 ordinal = 4 [json_name = 'ordinal'];
-  // Is the field required
-  bool required = 5 [json_name = 'required'];
-  // If the rule is able to be overridden by a child rule
-  bool allow_override = 6 [json_name = 'allow_override'];
-  string name = 7 [json_name = 'name'];
-  // How should the field be verified
-  string validation_regex = 8 [json_name = 'validation_regex'];
-  string description = 9 [json_name = 'description'];
 }
 
 message ProductHeaderAttributeValue {
@@ -121,7 +84,7 @@ message Product {
   google.retail.enterprise.pb.TaxCode tax_code = 6 [json_name = "tax_code"];
 
   // The internal classification of a product.
-  repeated google.retail.common.pb.Category categories = 7 [json_name = "categories"];
+  repeated google.retail.merchandise.pb.Category categories = 7 [json_name = "categories"];
   
   // A numeric double rating
   double rating = 8;
