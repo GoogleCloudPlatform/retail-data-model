@@ -7,11 +7,11 @@ import (
 )
 
 type Product merchandise.Product
-type ProductAttribute merchandise.ProductAttribute
-type I18nProductHeader merchandise.I18NProductHeader
+type ProductHeaderAttributeValue merchandise.ProductHeaderAttributeValue
+type ProductHeader merchandise.ProductHeader
 
-func NewI18nProductHeader(locale Locale, brand string, name string, shortDescription string, longDescription string) *I18nProductHeader {
-	return &I18nProductHeader{
+func NewProductHeader(locale Locale, brand string, name string, shortDescription string, longDescription string) *ProductHeader {
+	return &ProductHeader{
 		Locale:           (enums.Locale)(locale),
 		Brand:            brand,
 		Name:             name,
@@ -19,23 +19,23 @@ func NewI18nProductHeader(locale Locale, brand string, name string, shortDescrip
 		LongDescription:  longDescription,
 		SearchTerms:      make([]string, 0),
 		Images:           make([]*common.Image, 0),
+		AttributeValues:  make([]*merchandise.ProductHeaderAttributeValue, 0),
 	}
 }
 
-func (n *I18nProductHeader) AddSearchTerm(val string) {
+func (n *ProductHeader) AddSearchTerm(val string) {
 	n.SearchTerms = append(n.SearchTerms, val)
 }
 
-func (n *I18nProductHeader) AddImage(image *Image) {
+func (n *ProductHeader) AddImage(image *Image) {
 	n.Images = append(n.Images, (*common.Image)(image))
 }
 
-func NewProduct(header *I18nProductHeader, rating float64) *Product {
+func NewProduct(header *ProductHeader, rating float64) *Product {
 	product := &Product{
 		Id:              (*common.VersionID)(NewVersionID()),
 		BusinessKeys:    make([]*common.BusinessKey, 0),
-		Headers:         make([]*merchandise.I18NProductHeader, 0),
-		Attributes:      make([]*merchandise.ProductAttribute, 0),
+		Headers:         make([]*merchandise.ProductHeader, 0),
 		Rating:          rating,
 		Measurements:    make([]*common.NamedMeasure, 0),
 		Variations:      make([]*common.VersionID, 0),
@@ -43,7 +43,7 @@ func NewProduct(header *I18nProductHeader, rating float64) *Product {
 		RelatedProducts: make([]*common.VersionID, 0),
 		Suppliers:       make([]*merchandise.Supplier, 0),
 	}
-	product.Headers = append(product.Headers, (*merchandise.I18NProductHeader)(header))
+	product.Headers = append(product.Headers, (*merchandise.ProductHeader)(header))
 	return product
 }
 
@@ -51,12 +51,8 @@ func (p *Product) AddBusinessKey(key string, value string) {
 	p.BusinessKeys = append(p.BusinessKeys, (*common.BusinessKey)(NewBusinessKey(key, value)))
 }
 
-func (p *Product) AddHeader(header *I18nProductHeader) {
-	p.Headers = append(p.Headers, (*merchandise.I18NProductHeader)(header))
-}
-
-func (p *Product) AddAttribute(attribute *ProductAttribute) {
-	p.Attributes = append(p.Attributes, (*merchandise.ProductAttribute)(attribute))
+func (p *Product) AddHeader(header *ProductHeader) {
+	p.Headers = append(p.Headers, (*merchandise.ProductHeader)(header))
 }
 
 func (p *Product) AddNamedMeasure(measure *NamedMeasure) {

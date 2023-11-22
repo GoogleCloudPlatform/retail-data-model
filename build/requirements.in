@@ -1,17 +1,9 @@
-wheel
-
-Cython
-
-coverage
-
-# Scipy and Numpy for examples
-scipy
-numpy
+# grpclib --no-binary=grpclib
+grpcio
+grpcio-tools
 
 # Required Google and Protobuf APIs
 google-api-python-client
 gcloud
 
-grpclib
-grpcio
-grpcio-tools
+

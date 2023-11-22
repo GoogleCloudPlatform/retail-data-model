@@ -275,9 +275,9 @@ message Location {
 
   // A merchandise group represents the intended use of the location to an
   // attributed merchandise hierarchy
-  message MerchGroup {
+  message CategoryGroup {
     // The merchandise hierarchy id
-    string merchandise_hierarchy_id = 1  [json_name = "merch_hrchy_id"];
+    string category_id = 1  [json_name = "category_id"];
     // The date merchandise from this group was used in this location
     google.protobuf.Timestamp effective_date = 2 [json_name = "eff_date"];
     // A performance perspective continually updated to evaluate how a
@@ -286,7 +286,7 @@ message Location {
   }
 
   // A list of historical merchandise hierarchies used in this location.
-  repeated MerchGroup merchandise_groups = 8 [json_name = "merch_grps"];
+  repeated CategoryGroup category_groups = 8 [json_name = "merch_grps"];
 
   // Coordinates of the location
   LocationCoordinate location_coordinate = 9 [json_name = 'loc_crd'];

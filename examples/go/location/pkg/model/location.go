@@ -11,8 +11,8 @@ import (
 type LocationMeasure location.LocationMeasure
 type Location location.Location
 
-func (loc *Location) AddMerchandiseGroup(merchGroup *MerchantGroup) *Location {
-	loc.MerchandiseGroups = append(loc.MerchandiseGroups, (*location.Location_MerchGroup)(merchGroup))
+func (loc *Location) AddMerchandiseGroup(merchGroup *CategoryGroup) *Location {
+	loc.CategoryGroups = append(loc.CategoryGroups, (*location.Location_CategoryGroup)(merchGroup))
 	return loc
 }
 
@@ -26,7 +26,7 @@ func (loc *Location) AddMeta(key string, value string) *Location {
 	return loc
 }
 
-type MerchantGroup location.Location_MerchGroup
+type CategoryGroup location.Location_CategoryGroup
 type LocationCoordinate location.LocationCoordinate
 
 func (lc *LocationCoordinate) AddVertexWithOrdinal(vertex *LocationVertex) *LocationCoordinate {
@@ -90,11 +90,11 @@ func NewWeigh(name string, weight *Weight, value float64) *LocationMeasure {
 	}
 }
 
-func NewMerchGroup(merchandiseHierarchyId string, effectiveDate time.Time, performanceScore float64) *MerchantGroup {
-	return &MerchantGroup{
-		MerchandiseHierarchyId: merchandiseHierarchyId,
-		EffectiveDate:          timestamppb.New(effectiveDate),
-		PerformanceScore:       performanceScore,
+func NewCategoryGroup(categoryId string, effectiveDate time.Time, performanceScore float64) *CategoryGroup {
+	return &CategoryGroup{
+		CategoryId:       categoryId,
+		EffectiveDate:    timestamppb.New(effectiveDate),
+		PerformanceScore: performanceScore,
 	}
 }
 
@@ -143,7 +143,7 @@ func NewLocation(
 		InventoryLocationSecurityType: inventoryLocationSecurityType,
 		StockLedgerControlFlag:        stockLedgerControlFlag,
 		LocationCoordinate:            (*location.LocationCoordinate)(locationCoordinate),
-		MerchandiseGroups:             make([]*location.Location_MerchGroup, 0),
+		CategoryGroups:                make([]*location.Location_CategoryGroup, 0),
 		Meta:                          make([]*common.BusinessKey, 0),
 	}
 }

@@ -1,8 +1,16 @@
 {
   "name": "api",
   "author": "Google, LLC",
-  "license": "Apache-2.0",
   "type": "module",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/GoogleCloudPlatform/retail-data-model",
+  "bugs": "https://github.com/GoogleCloudPlatform/retail-data-model/issues",
+  "keywords": [
+    "google",
+    "retail",
+    "data",
+    "model"
+  ],
   "workspaces": [
     "common",
     "customer",

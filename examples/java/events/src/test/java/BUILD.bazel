@@ -1,19 +1,23 @@
-load("//:build/junit.bzl", "java_junit5_test")
+load("@contrib_rules_jvm//java:defs.bzl", "JUNIT5_DEPS", "java_junit5_test")
+load("@rules_jvm_external//:defs.bzl", "artifact")
 
 package(
     default_visibility = ["//examples/java:__subpackages__"],
 )
 
+TEST_DEPS = [
+    artifact("org.junit.jupiter:junit-jupiter-api"),
+    "//examples/java/events/src/main/java:grpc_deps",
+    "//examples/java/events/src/main/java:java_events_service",
+    "//examples/java/events/src/main/java:pico_cli",
+    "//examples/java/events/src/main/java:rpc_deps",
+]
+
 java_junit5_test(
     name = "event_service_test",
-    srcs = glob([
+    srcs = [
         "com.google.retail.events.service/EventsServiceTest.java",
-    ]),
-    test_package = "com.google.retail.events.service",
-    deps = [
-        "//examples/java/events/src/main/java:grpc_deps",
-        "//examples/java/events/src/main/java:java_events_service",
-        "//examples/java/events/src/main/java:pico_cli",
-        "//examples/java/events/src/main/java:rpc_deps",
     ],
+    test_class = "com.google.retail.events.service/EventsServiceTest",
+    deps = TEST_DEPS,
 )

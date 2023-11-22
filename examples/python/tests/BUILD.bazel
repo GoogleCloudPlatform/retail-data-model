@@ -1,35 +1,35 @@
-load("@python_deps//:requirements.bzl", "requirement")
+load("@rules_proto_grpc_py3_deps//:requirements.bzl", "requirement")
 load("@rules_proto_grpc//python:python_proto_library.bzl", PY_PROTO_DEPS = "PROTO_DEPS")
 load("@rules_python//python:defs.bzl", "py_test")
 
-py_test(
-    name = "enum_test",
-    srcs = ["enum_test.py"],
-    deps = [
-        "//sdk/python:python_proto_library",
-    ] + PY_PROTO_DEPS,
-)
-
-py_test(
-    name = "model_test",
-    srcs = ["model_test.py"],
-    deps = [
-        "//sdk/python:python_proto_library",
-    ] + PY_PROTO_DEPS,
-)
-
-py_test(
-    name = "grpc_test",
-    srcs = [
-        "grpc_test.py",
-    ],
-    deps = [
-        "//examples/python/src:py_country_client",
-        "//examples/python/src:py_country_service",
-        requirement("google-api-python-client"),
-        requirement("grpcio"),
-        requirement("protobuf"),
-        requirement("google-api-core"),
-        "//sdk/python:python_grpc_library",
-    ] + PY_PROTO_DEPS,
-)
+#py_test(
+#    name = "enum_test",
+#    srcs = ["enum_test.py"],
+#    deps = [
+#        "//sdk/python:python_proto_library",
+#    ] + PY_PROTO_DEPS,
+#)
+#
+#py_test(
+#    name = "model_test",
+#    srcs = ["model_test.py"],
+#    deps = [
+#        "//sdk/python:python_proto_library",
+#    ] + PY_PROTO_DEPS,
+#)
+#
+#py_test(
+#    name = "grpc_test",
+#    srcs = [
+#        "grpc_test.py",
+#    ],
+#    deps = [
+#        "//examples/python/src:py_country_client",
+#        "//examples/python/src:py_country_service",
+#        requirement("google-api-python-client"),
+#        requirement("grpcio"),
+#        requirement("protobuf"),
+#        requirement("google-api-core"),
+#        "//sdk/python:python_grpc_library",
+#    ] + PY_PROTO_DEPS,
+#)

@@ -96,46 +96,6 @@ message BusinessUnit {
   }
 }
 
-
-/*
- * import "google/protobuf/timestamp.proto";
- *
- * An aggregation level for rolling ITEM sales and units for reporting purposes
- * and for mapping item-level activity into the retailer's merchandise
- * structure.
- */
-message MerchandiseHierarchy {
-  option (gen_bq_schema.bigquery_opts).table_name = "tbl_merch_hierarchy";
-  string id = 1 [json_name = 'id'];
-  string parent_id = 2 [json_name = 'parent_id'];
-  string name = 3 [json_name = 'name'];
-  string description = 4 [json_name = 'description'];
-  /*
-   * Code used to identify a collection of weather characteristics that are
-   * important to a retailer in tracking sales and operations.
-   */
-  string climate_id = 5 [json_name = 'client_id'];
-  /*
-   * A unique system assigned identifier for the ItemSellingPrices.
-   */
-  string selling_rule_id = 6 [json_name = 'selling_rule_id'];
-  /*
-   * The name ofr the Holiday instance
-   */
-  string occasion_name = 7 [json_name = 'occesion_name'];
-  /*
-   * A lookup value that designates a valid activity or interest code used to
-   * segment customers.
-   * The code list must be defined by the retailer.
-   */
-  string activity_interest_id = 8 [json_name = 'activity_interest_id'];
-
-  /*
-   * Child Hierarchies
-   */
-  repeated MerchandiseHierarchy children = 9 [json_name = 'children'];
-}
-
 /*
  * A tax code is a fundamental structure for defining tax for various
  * segments of the tax hierarchy. Example
@@ -157,7 +117,7 @@ message TaxCode {
     string description = 4 [json_name = 'description'];
     string municipality = 5 [json_name = 'municipality'];
     double rate = 6 [json_name = 'rate'];
-    repeated string merchandise_hierarchy_ids= 7 [json_name = 'merchandise_hierarchy_ids'];
+    repeated string category_ids= 7 [json_name = 'category_ids'];
   }
   google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
   google.protobuf.Timestamp deleted = 2 [json_name = 'deleted'];
