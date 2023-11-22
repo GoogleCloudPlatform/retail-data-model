@@ -1,0 +1,111 @@
+/* Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package google.retail.merchandise.pb;
+
+/*
+ * Go Lang Options
+ */
+option go_package = "github.com/GoogleCloudPlatform/retail-data-model/merchandise/pb";
+
+/*
+ * Java Options
+ */
+option java_package = "com.google.retail.merchandise.pb";
+option java_multiple_files = true;
+
+import "api/enums/locale.proto";
+
+import "api/bq_table.proto";
+
+import "api/common/model.proto";
+
+/*
+ *
+ * An aggregation level for rolling ITEM sales and units for reporting purposes
+ * and for mapping item-level activity into the retailer's merchandise
+ * structure.
+ */
+message Category {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_category";
+  string id = 1 [json_name = 'id'];
+  string parent_id = 2 [json_name = 'parent_id'];
+  string name = 3 [json_name = 'name'];
+  string description = 4 [json_name = 'description'];
+  /*
+   * Code used to identify a collection of weather characteristics that are
+   * important to a retailer in tracking sales and operations.
+   */
+  string climate_id = 5 [json_name = 'client_id'];
+  /*
+   * A unique system assigned identifier for the ItemSellingPrices.
+   */
+  string selling_rule_id = 6 [json_name = 'selling_rule_id'];
+  /*
+   * The name ofr the Holiday instance
+   */
+  string occasion_name = 7 [json_name = 'occasion_name'];
+  /*
+   * A lookup value that designates a valid activity or interest code used to
+   * segment customers.
+   * The code list must be defined by the retailer.
+   */
+  string activity_interest_id = 8 [json_name = 'activity_interest_id'];
+
+  /*
+   * Child Hierarchies
+   */
+  repeated Category children = 9 [json_name = 'children'];
+}
+
+// A product template is used to describe a line of products, such as
+// durable (appliances, furniture, etc), perishables (food), or soft (clothing)
+// Product templates are then used to import and validate data, as well as
+// create flat views of the data automatically. Product descriptions are
+// asymmetric in nature, meaning simply one size does not fit all.
+message Template {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_category_template";
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  google.retail.enums.locale.Locale locale = 2 [json_name = 'locale'];
+  string name = 3 [json_name = 'name'];
+  string description = 4 [json_name = 'description'];
+  repeated TemplateAttributeRule attribute_rules = 6 [json_name = 'attribute_rules'];
+  repeated string category_ids = 7 [json_name = 'category_ids'];
+}
+
+// Product template attributes describe either a group of rules, or a single
+// rule used by the template.
+message TemplateAttributeRule {
+  enum FieldType {
+    RATIONAL = 0;
+    IRRATIONAL = 1;
+    STRING = 2;
+    DATE = 3;
+    TIMESTAMP = 4;
+  }
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  google.retail.enums.locale.Locale locale = 2 [json_name = 'locale'];
+  FieldType field_type = 3 [json_name = 'field_type'];
+  int32 ordinal = 4 [json_name = 'ordinal'];
+  // Is the field required
+  bool required = 5 [json_name = 'required'];
+  // If the rule is able to be overridden by a child rule
+  bool allow_override = 6 [json_name = 'allow_override'];
+  string name = 7 [json_name = 'name'];
+  // How should the field be verified
+  string validation_regex = 8 [json_name = 'validation_regex'];
+  string description = 9 [json_name = 'description'];
+}
