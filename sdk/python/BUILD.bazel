@@ -12,10 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
-load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
 load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
-load("@rules_proto_grpc//python:defs.bzl", "python_grpc_library")
 
 package(default_visibility = [
     "//visibility:public",
@@ -38,24 +35,25 @@ PROTOS = [
     "//api/promotions:model_proto",
 ]
 
-GRPCS = [
-    "//api/common:service_proto",
-    "//api/events:service_proto",
-    "//api/inventory:service_proto",
-    "//api/location:service_proto",
-]
+# TODO - When I have a ton of time determine how to fix Python GRPC
+
+GRPCS = []
+#    "//api/common:service_proto",
+#    "//api/events:service_proto",
+#    "//api/inventory:service_proto",
+#    "//api/location:service_proto",
 
 python_proto_library(
     name = "python_proto_library",
     protos = ENUMS + PROTOS,
 )
 
-python_grpc_library(
-    name = "python_grpc_library",
-    protos = ENUMS + PROTOS + GRPCS,
-)
-#
-## Create a tgz package
+#python_grpc_library(
+#    name = "python_grpc_library",
+#    protos = ENUMS + PROTOS + GRPCS,
+#)
+
+# Create a tgz package
 #pkg_tar(
 #    name = "rdm_python_lib_tar",
 #    srcs = [":python_grpc_library"],

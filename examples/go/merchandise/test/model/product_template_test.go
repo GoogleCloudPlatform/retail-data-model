@@ -8,9 +8,9 @@ import (
 	"testing"
 )
 
-func NewRequireStringAttribute() *ProductTemplateAttributeRule {
-	return NewProductAttributeRule(
-		pb.ProductTemplateAttributeRule_STRING,
+func NewRequireStringAttribute() *CategoryTemplateAttributeRule {
+	return NewCategoryTemplateAttributeRule(
+		pb.CategoryTemplateAttributeRule_STRING,
 		0,
 		true,
 		false,
@@ -18,18 +18,9 @@ func NewRequireStringAttribute() *ProductTemplateAttributeRule {
 	)
 }
 
-func NewSafetyFeatures() *ProductTemplateAttributeRuleGroup {
-	rg := NewProductAttributeRuleGroup(NewVersionID(), "Materials", "Common safety features")
-
-	return rg
-}
 func TestProductTemplate(t *testing.T) {
-	template := NewProductTemplate(NewVersionID(), "Consumer Electronic", "Consumer electronics (CE) are electronic devices that are primarily used for entertainment, communication, or information processing.")
-	template.addTemplateAttribute(NewProductTemplateAttributeFromGroup(NewSafetyFeatures()))
-
+	template := NewCategoryTemplate(NewVersionID(), "Consumer Electronic", "Consumer electronics (CE) are electronic devices that are primarily used for entertainment, communication, or information processing.")
 	assert.NotNil(t, template)
-	assert.Equal(t, 3, len(template.Attributes))
-
 	b, _ := json.Marshal(template)
 	log.Printf(string(b))
 }

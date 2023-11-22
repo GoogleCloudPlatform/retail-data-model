@@ -84,68 +84,6 @@ service BusinessUnits {
   }
 }
 
-service MerchandiseHierarchies {
-  rpc Create(google.retail.enterprise.pb.MerchandiseHierarchy)
-    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
-    option (google.api.http) = {
-      post: "/merchandise_hierarchies"
-      body: "model"
-    };
-  }
-
-  rpc Update(google.retail.enterprise.pb.MerchandiseHierarchy)
-    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
-    option (google.api.http) = {
-      put: "/merchandise_hierarchies"
-      body: "merchandise_hierarchy"
-    };
-  }
-
-  rpc CreateChild(google.retail.enterprise.pb.MerchandiseHierarchy)
-    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
-    option (google.api.http) = {
-      post: "/merchandise_hierarchies/children"
-      body: "model"
-    };
-  }
-
-  rpc UpdateChild(google.retail.enterprise.pb.MerchandiseHierarchy)
-    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
-    option (google.api.http) = {
-      put: "/merchandise_hierarchies/children"
-      body: "model"
-    };
-  }
-
-  /*
-   * List - Finds a hierarchy by id
-   */
-  rpc GetMerchandiseHierarchy(google.retail.common.pb.IDRequest)
-    returns (google.retail.enterprise.pb.MerchandiseHierarchy) {
-    option (google.api.http) = {
-      get: "/merchandise_hierarchies/{id}"
-    };
-  }
-
-  /*
-   * List - Provides a stream / ordered list of hierarchies.
-   */
-  rpc FindMerchandiseHierarchy(google.protobuf.FieldMask)
-    returns (stream google.retail.enterprise.pb.MerchandiseHierarchy) {
-    option (google.api.http) = {
-      get: "/merchandise_hierarchies"
-    };
-  }
-
-  rpc Delete(google.retail.enterprise.pb.MerchandiseHierarchy)
-    returns (google.retail.common.pb.StatusResponse) {
-    option (google.api.http) = {
-      delete: "/merchandise_hierarchies"
-      body: "model"
-    };
-  }
-
-}
 
 service TaxCodes {
   /*

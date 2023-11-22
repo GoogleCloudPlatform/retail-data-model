@@ -47,38 +47,19 @@ message Supplier {
 // Product templates are then used to import and validate data, as well as
 // create flat views of the data automatically. Product descriptions are
 // asymmetric in nature, meaning simply one size does not fit all.
-message ProductTemplate {
-  option (gen_bq_schema.bigquery_opts).table_name = "tbl_product_template";
+message CategoryTemplate {
+  option (gen_bq_schema.bigquery_opts).table_name = "tbl_category_template";
   google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
   google.retail.enums.locale.Locale locale = 2 [json_name = 'locale'];
   string name = 3 [json_name = 'name'];
   string description = 4 [json_name = 'description'];
-  repeated ProductTemplateAttribute attributes = 6 [json_name = 'attributes'];
+  repeated CategoryTemplateAttributeRule attribute_rules = 6 [json_name = 'attribute_rules'];
   repeated string category_ids = 7 [json_name = 'category_ids'];
 }
 
 // Product template attributes describe either a group of rules, or a single
 // rule used by the template.
-message ProductTemplateAttribute {
-  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
-  google.retail.enums.locale.Locale locale = 2 [json_name = 'locale'];
-  string name = 3 [json_name = 'name'];
-  string description = 4 [json_name = 'description'];
-  int32 ordinal = 5 [json_name = 'ordinal'];
-  oneof value {
-    ProductTemplateAttributeRuleGroup rule_group = 6 [json_name = 'rule_group'];
-    ProductTemplateAttributeRule rule = 7 [json_name = 'rule'];
-  }
-}
-
-// Product Attribute Rule Groups provide a way to create reusable rule groups
-// for products. For example, a retailer specific header that includes
-// sku with the retailer SKU rules defined
-message ProductTemplateAttributeRuleGroup {
-  repeated ProductTemplateAttributeRule product_template_attribute_rules = 1 [json_name = 'product_template_attribute_rules'];
-}
-
-message ProductTemplateAttributeRule {
+message CategoryTemplateAttributeRule {
   enum FieldType {
     RATIONAL = 0;
     IRRATIONAL = 1;
@@ -86,56 +67,36 @@ message ProductTemplateAttributeRule {
     DATE = 3;
     TIMESTAMP = 4;
   }
-  // What type of field is this
-  // Is the order of the product field. It MUST not be repeated, and any changes
-  // to order should result in a new finalized ProductTemplate
+  google.retail.common.pb.VersionID id = 1 [json_name = 'id'];
+  google.retail.enums.locale.Locale locale = 2 [json_name = 'locale'];
+  FieldType field_type = 3 [json_name = 'field_type'];
   int32 ordinal = 4 [json_name = 'ordinal'];
-  // Default Name
-  FieldType field_type = 5 [json_name = 'field_type'];
   // Is the field required
-  bool required = 6 [json_name = 'required'];
+  bool required = 5 [json_name = 'required'];
   // If the rule is able to be overridden by a child rule
-  bool allow_override = 7 [json_name = 'allow_override'];
+  bool allow_override = 6 [json_name = 'allow_override'];
+  string name = 7 [json_name = 'name'];
   // How should the field be verified
   string validation_regex = 8 [json_name = 'validation_regex'];
+  string description = 9 [json_name = 'description'];
 }
 
-message ProductAttribute {
-  google.retail.enums.locale.Locale locale = 1 [json_name = 'locale'];
+message ProductHeaderAttributeValue {
+  string category_template_attribute_rule_id = 1 [json_name = 'category_template_attribute_rule_id'];
   oneof value {
-    ProductAttributeRuleGroupValue attribute_group = 2 [json_name = 'attribute_group'];
-    ProductAttributeRuleValue attribute = 3 [json_name = 'attribute'];
+    double number_value = 2 [json_name = 'number_value'];
+    string string_value = 3 [json_name = 'string_value'];
   }
 }
 
-message ProductAttributeRuleGroupValue {
-  string product_attribute_rule_group_id = 1 [json_name = 'product_attribute_rule_group_id'];
-  repeated ProductAttributeRuleValue values = 2 [json_name = 'values'];
-}
-
-message ProductAttributeRuleValue {
-  message Number {
-    repeated double value = 1 [json_name = 'value'];
-  }
-  // A repeatable string
-  message String {
-    repeated string value = 1 [json_name = 'value'];
-  }
-  string product_template_attribute_rule_id = 1 [json_name = 'product_template_attribute_rule_id'];
-  int32 field_ordinal = 2 [json_name = 'field_ordinal'];
-  oneof value {
-    Number number_value = 3 [json_name = 'number_value'];
-    String string_value = 4 [json_name = 'string_value'];
-  }
-}
-
-message I18nProductHeader {
+message ProductHeader {
   google.retail.enums.locale.Locale locale = 1 [json_name = 'locale'];
   string brand = 2 [json_name = 'brand'];
   string name = 3 [json_name = 'name'];
   string short_description = 4 [json_name = 'short_description'];
   string long_description = 5 [json_name = 'long_description'];
   repeated string search_terms = 6 [json_name = 'search_terms'];
+  repeated ProductHeaderAttributeValue attribute_values = 8 [json_name = 'attribute_values'];
   repeated google.retail.common.pb.Image images = 7 [json_name = 'images'];
 }
 
@@ -150,9 +111,7 @@ message Product {
 
   string product_template_id = 11 [json_name = 'product_template_id'];
 
-  repeated I18nProductHeader headers = 3 [json_name = "headers"];
-
-  repeated ProductAttribute attributes = 4 [json_name = "attributes"];
+  repeated ProductHeader headers = 3 [json_name = "headers"];
 
   // The base price represents the price the product should not be sold below,
   // if this occurs, this would be recorded as net loss.
@@ -162,7 +121,7 @@ message Product {
   google.retail.enterprise.pb.TaxCode tax_code = 6 [json_name = "tax_code"];
 
   // The internal classification of a product.
-  repeated google.retail.enterprise.pb.MerchandiseHierarchy hierarchy = 7 [json_name = "hierarchy"];
+  repeated google.retail.common.pb.Category categories = 7 [json_name = "categories"];
   
   // A numeric double rating
   double rating = 8;
