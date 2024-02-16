@@ -1,12 +1,11 @@
 load("@rules_jvm_external//:defs.bzl", "artifact")
-load("@contrib_rules_jvm//java:defs.bzl", "JUNIT5_DEPS", "java_junit5_test")
+load("//:build/junit5.bzl", "java_junit5_test")
 
 package(
     default_visibility = ["//examples/java/test:__subpackages__"],
 )
 
 TEST_DEPS = [
-    artifact("org.junit.jupiter:junit-jupiter-api"),
     "//sdk/java:common_java_grpc",
     "//sdk/java:common_java_proto",
     "//sdk/java:enums_java_proto",
@@ -19,21 +18,21 @@ java_junit5_test(
     srcs = [
         "com/google/retail/EnumTests.java",
     ],
-    test_class = "com/google/retail/EnumTests",
+    test_package = "com/google/retail",
     deps = TEST_DEPS,
 )
 
 java_junit5_test(
     name = "model_test",
     srcs = ["com/google/retail/ModelTests.java"],
-    test_class = "com/google/retail/ModelTests",
+    test_package = "com/google/retail",
     deps = TEST_DEPS,
 )
 
 java_junit5_test(
     name = "service_test",
     srcs = ["com/google/retail/ServiceTests.java"],
-    test_class = "com/google/retail/ServiceTests",
+    test_package = "com/google/retail",
     deps = [
         "//examples/java/src/main/java:java_sample_code",
     ] + TEST_DEPS,
