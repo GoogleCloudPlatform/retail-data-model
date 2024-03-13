@@ -13,7 +13,7 @@ require (
 	go.einride.tech/protobuf-bigquery v0.28.0
 	google.golang.org/api v0.147.0
 	google.golang.org/grpc v1.58.3
-	google.golang.org/protobuf v1.31.0
+	google.golang.org/protobuf v1.33.0
 )
 
 require (
