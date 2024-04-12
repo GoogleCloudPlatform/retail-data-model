@@ -39,7 +39,7 @@ httplib2==0.22.0
     #   google-api-python-client
     #   google-auth-httplib2
     #   oauth2client
-idna==3.4
+idna==3.7
     # via requests
 oauth2client==4.1.3
     # via gcloud
