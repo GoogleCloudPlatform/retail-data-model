@@ -244,9 +244,9 @@ contrib_rules_jvm_setup()
 
 http_archive(
     name = "rules_python",
-    sha256 = "9acc0944c94adb23fba1c9988b48768b1bacc6583b52a2586895c5b7491e2e31",
-    strip_prefix = "rules_python-0.27.0",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.27.0/rules_python-0.27.0.tar.gz",
+    sha256 = "4912ced70dc1a2a8e4b86cec233b192ca053e82bc72d877b98e126156e8f228d",
+    strip_prefix = "rules_python-0.32.2",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.32.2/rules_python-0.32.2.tar.gz",
 )
 
 load("@rules_python//python:repositories.bzl", "py_repositories")
@@ -257,7 +257,22 @@ load("@rules_python//python:repositories.bzl", "python_register_toolchains")
 
 python_register_toolchains(
     name = "python3",
-    python_version = "3.10",
+    tool_versions = {
+        "3.11.9": {
+        "url": "20240415/cpython-{python_version}+20240415-{platform}-{build}.tar.gz",
+        "sha256": {
+            "aarch64-apple-darwin": "7af7058f7c268b4d87ed7e08c2c7844ef8460863b3e679db3afdce8bb1eedfae",
+            "aarch64-unknown-linux-gnu": "b3a7199ac2615d75fb906e5ba556432efcf24baf8651fc70370d9f052d4069ee",
+            "ppc64le-unknown-linux-gnu": "03f62d1e2d400c9662cdd12ae33a6f328c34ae8e2b872f8563a144834742bd6a",
+            "s390x-unknown-linux-gnu": "3f7a0dd64fa292977c4da09e865ee504a48e55dbc2dbfd9ff4b991af891e4446",
+            "x86_64-apple-darwin": "9afd734f63a23783cf0257bef25c9231ffc80e7747486dc54cf72f325213fd15",
+            "x86_64-pc-windows-msvc": "368474c69f476e7de4adaf50b61d9fcf6ec8b4db88cc43c5f71c860b3cd29c69",
+            "x86_64-unknown-linux-gnu": "78b1c16a9fd032997ba92a60f46a64f795cd18ff335659dfdf6096df277b24d5",
+        },
+        "strip_prefix": "python",
+    },
+    },
+    python_version = "3.11.9",
 )
 
 load("@python3//:defs.bzl", "interpreter")
