@@ -60,7 +60,7 @@ pyasn1-modules==0.3.0
     #   oauth2client
 pyparsing==3.1.1
     # via httplib2
-requests==2.31.0
+requests==2.32.0
     # via google-api-core
 rsa==4.9
     # via
