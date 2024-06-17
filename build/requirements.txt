@@ -72,7 +72,7 @@ six==1.16.0
     #   oauth2client
 uritemplate==4.1.1
     # via google-api-python-client
-urllib3==2.1.0
+urllib3==2.2.2
     # via requests
 
 # The following packages are considered to be unsafe in a requirements file:
