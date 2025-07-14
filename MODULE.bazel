@@ -1,0 +1,248 @@
+module(
+    name = "retail_data_model",
+    version = "0.1.0",
+    compatibility_level = 1,
+)
+
+# --- Base & Language Rules ---
+bazel_dep(name = "bazel_skylib", version = "1.8.0")
+bazel_dep(name = "googleapis-java", version = "1.0.0")
+bazel_dep(name = "rules_java", version = "8.13.0")
+bazel_dep(name = "rules_jvm_external", version = "6.8")
+bazel_dep(name = "rules_go", version = "0.55.1", repo_name = "io_bazel_rules_go")
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "rules_python", version = "1.5.0")
+bazel_dep(name = "rules_python_gazelle_plugin", version = "1.5.0")
+bazel_dep(name = "rules_proto", version = "7.1.0")
+bazel_dep(name = "rules_proto_grpc", version = "5.3.1")
+bazel_dep(name = "rules_proto_grpc_java", version = "5.3.1")
+bazel_dep(name = "rules_proto_grpc_python", version = "5.3.1")
+bazel_dep(name = "rules_proto_grpc_js", version = "5.3.1")
+bazel_dep(name = "rules_proto_grpc_doc", version = "5.3.1")
+bazel_dep(name = "protobuf", version = "31.1", repo_name = "com_google_protobuf")
+bazel_dep(name = "googleapis", version = "0.0.0-20241220-5e258e33.bcr.1", repo_name = "com_google_googleapis")
+bazel_dep(name = "gazelle", version = "0.44.0", repo_name = "bazel_gazelle")
+bazel_dep(name = "grpc", version = "1.73.1")
+bazel_dep(name = "rules_nodejs", version = "6.4.0")
+bazel_dep(name = "aspect_rules_js", version = "2.3.8")
+bazel_dep(name = "aspect_rules_ts", version = "3.6.0")
+bazel_dep(name = "aspect_rules_swc", version = "2.4.3")
+bazel_dep(name = "aspect_bazel_lib", version = "2.19.4")
+bazel_dep(name = "aspect_rules_jest", version = "0.23.2")
+bazel_dep(name = "aspect_rules_rollup", version = "2.0.1")
+bazel_dep(name = "rules_tf", version = "0.0.9")
+bazel_dep(name = "contrib_rules_jvm", version = "0.27.0")
+bazel_dep(name = "rules_pkg", version = "1.0.1")
+bazel_dep(name = "rules_hugo_rmcguinness", version = "0.2.0")
+bazel_dep(name = "proto-gen-md-diagrams", version = "0.2.0")
+
+git_override(
+    module_name = "rules_hugo_rmcguinness",
+    commit = "33b23fc84107e9e35365ca0db6c73936e801a124",
+    remote = "git@github.com:rrmcguinness/rules_hugo.git",
+)
+
+git_override(
+    module_name = "proto-gen-md-diagrams",
+    commit = "a560024c6b75adc451193270cf859c8ea9145f77",
+    remote = "git@github.com:GoogleCloudPlatform/proto-gen-md-diagrams.git",
+)
+
+################################################################################
+# Go Lang Setup
+################################################################################
+go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
+
+# Download an SDK for the host OS & architecture as well as common remote execution platforms.
+go_sdk.download(version = "1.23.4")
+
+go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(go_mod = "//:go.mod")
+
+################################################################################
+# Java Setup
+################################################################################
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        "info.picocli:picocli:4.7.5",
+        "info.picocli:picocli-codegen:4.7.5",
+        "org.apache.commons:commons-lang3:3.13.0",
+        "com.google.protobuf:protobuf-java-util:3.25.3",
+        "io.grpc:grpc-core:1.61.0",
+        "io.grpc:grpc-googleapis:1.61.0",
+        "io.grpc:grpc-netty-shaded:1.61.0",
+        "io.grpc:grpc-protobuf:1.61.0",
+        "io.grpc:grpc-stub:1.61.0",
+        "io.grpc:grpc-testing:1.61.0",
+        "org.apache.tomcat:annotations-api:6.0.53",
+        "org.apache.logging.log4j:log4j-api:2.21.0",
+        "org.apache.logging.log4j:log4j-core:2.21.0",
+        "com.google.protobuf:protoc:3.25.3",
+        "io.netty:netty-all:4.1.100.Final",
+        "org.junit.platform:junit-platform-launcher:1.10.2",
+        "org.junit.platform:junit-platform-reporting:1.10.2",
+        "org.junit.platform:junit-platform-console:1.10.2",
+        "org.junit.jupiter:junit-jupiter-api:5.10.1",
+        "org.junit.jupiter:junit-jupiter-params:5.10.1",
+        "org.junit.jupiter:junit-jupiter-engine:5.10.1",
+        "io.javalin:javalin-testtools:5.6.3",
+        "org.jboss.weld:weld-junit5:4.0.1.Final",
+        "org.jboss.weld:weld-junit-common:4.0.1.Final",
+        " com.google.code.findbugs:jsr305",
+        "com.google.errorprone:error_prone_annotations",
+        "com.google.guava:guava:30.1.1-jre",
+    ],
+    fetch_sources = True,
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+        "https://repository.jboss.org/nexus/content/groups/public/",
+    ],
+)
+use_repo(maven, "maven")
+
+################################################################################
+# Python Setup
+################################################################################
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    configure_coverage_tool = True,
+    is_default = True,
+    python_version = "3.12",
+)
+use_repo(python, "python_3_12")
+
+# Python Language
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+
+# Parse the requirements.txt file to fetch Python dependencies.
+pip.parse(
+    hub_name = "pip_deps",
+    python_version = "3.12",
+    requirements_lock = "build/requirements.txt",
+)
+
+# Make the fetched dependencies available.
+use_repo(pip, "pip_deps")
+
+################################################################################
+# NodeJS Setup
+################################################################################
+
+node_dev = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)
+use_repo(node_dev, "nodejs_toolchains")
+
+node_dev.toolchain(
+    name = "nodejs",
+    node_version = "20.15.0",
+)
+
+pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm")
+pnpm.pnpm(
+    name = "pnpm",
+    pnpm_version = "8.15.9",
+)
+use_repo(pnpm, "pnpm", "pnpm__links")
+
+npm = use_extension(
+    "@aspect_rules_js//npm:extensions.bzl",
+    "npm",
+    dev_dependency = True,
+)
+npm.npm_translate_lock(
+    name = "npm",
+    data = [
+        "build/package.json",
+    ],
+    npmrc = "build/.npmrc",
+    pnpm_lock = "pnpm-lock.yaml",
+    update_pnpm_lock = True,
+    verify_node_modules_ignored = "//:.bazelignore",
+)
+use_repo(npm, "npm")
+
+rules_ts_ext = use_extension(
+    "@aspect_rules_ts//ts:extensions.bzl",
+    "ext",
+    dev_dependency = True,
+)
+rules_ts_ext.deps()
+use_repo(rules_ts_ext, "npm_typescript")
+
+################################################################################
+# Terraform Setup
+################################################################################
+
+tf = use_extension("@rules_tf//tf:extensions.bzl", "tf_repositories", dev_dependency = True)
+tf.download(
+    mirror = {
+        "random": "hashicorp/random:3.3.2",
+        "null": "hashicorp/null:3.1.1",
+    },
+    tfdoc_version = "0.19.0",
+    tflint_version = "0.53.0",
+    use_tofu = False,
+    version = "1.9.5",
+)
+use_repo(tf, "tf_toolchains")
+
+register_toolchains(
+    "@tf_toolchains//:all",
+    dev_dependency = True,
+)
+
+################################################################################
+# Non-Module Dependencies
+################################################################################
+# These dependencies are not available in the Bazel Central Registry
+# and need to be handled as non-module dependencies
+
+non_module_dependencies = use_extension("//:non_module_deps.bzl", "non_module_dependencies")
+use_repo(
+    non_module_dependencies,
+    "com_github_atlassian_bazel_tools",
+    "protoc_gen_bq_schema",
+)
+
+################################################################################
+# Hugo Dependencies
+################################################################################
+hugo_deps = use_extension("@rules_hugo_rmcguinness//hugo:extensions.bzl", "hugo_deps")
+
+# Configure Hugo repository
+hugo_deps.hugo_repository(
+    name = "hugo",
+    extended = True,
+    version = "0.148.1",
+)
+
+# Configure Hugo themes
+hugo_deps.http_archive(
+    name = "hugo_theme_book",
+    build_file_content = """
+filegroup(
+    name = "files",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"]
+)
+        """,
+    sha256 = "adf41c4282974dc7b42aa28762e34b704a0aad4ec8d648eb425484dbdfbbefc8",
+    strip_prefix = "hugo-book-11.0.0",
+    url = "https://github.com/alex-shpak/hugo-book/archive/refs/tags/v11.0.0.zip",
+)
+hugo_deps.http_archive(
+    name = "hugo_theme_geekdoc",
+    build_file_content = """
+filegroup(
+    name = "files",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"]
+)
+    """,
+    sha256 = "c8bfeb30f3a743afa5adbad9b7c19bd99de3e5e0f9ad5875b799dea54d79013d",
+    url = "https://github.com/thegeeklab/hugo-geekdoc/releases/download/v1.5.1/hugo-geekdoc.tar.gz",
+)
+use_repo(hugo_deps, "hugo", "hugo_theme_book", "hugo_theme_geekdoc")

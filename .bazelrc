@@ -14,7 +14,8 @@
 
 try-import %workspace%/user.bazelrc
 
-# common --enable_platform_specific_config
+common --enable_bzlmod --enable_platform_specific_config --incompatible_default_to_explicit_init_py
+common --@aspect_rules_ts//ts:skipLibCheck=always
 
 build --@aspect_rules_ts//ts:skipLibCheck=honor_tsconfig
 fetch --@aspect_rules_ts//ts:skipLibCheck=honor_tsconfig

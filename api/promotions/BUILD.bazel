@@ -15,10 +15,10 @@
 # limitations under the License.
 load("@protoc_gen_bq_schema//:defs.bzl", "bq_schema_compile")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_proto_grpc//doc:defs.bzl", "doc_markdown_compile")
+load("@rules_proto_grpc_doc//:defs.bzl", "doc_markdown_compile")
 
 package(default_visibility = [
-    "//visibility:public"
+    "//visibility:public",
 ])
 
 proto_library(
