@@ -1,6 +1,6 @@
 module github.com/GoogleCloudPlatform/retail-data-model/examples/go
 
-go 1.19
+go 1.25
 
 // THIS MODULE FILE IS ONLY USED TO GENERATE DEPENDENCIES
 
@@ -26,7 +26,7 @@ require (
 	cloud.google.com/go/storage v1.33.0 // indirect
 	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/apache/arrow/go/v12 v12.0.1 // indirect
-	github.com/apache/thrift v0.19.0 // indirect
+	github.com/apache/thrift v0.23.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
